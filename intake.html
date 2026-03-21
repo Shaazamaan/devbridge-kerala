@@ -343,6 +343,7 @@
             const display = document.querySelector('#timer');
             startTimer(fourHours, display);
             loadState();
+            checkLocks(); // <--- Ensure button state is synced on load
         };
 
         form.addEventListener('input', () => {
