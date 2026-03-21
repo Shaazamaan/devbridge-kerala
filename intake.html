@@ -6,6 +6,7 @@
     <title>Start Gate | DevBridge Kerala Intake</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
@@ -43,7 +44,9 @@
 
         <!-- Success Message (initially hidden) -->
         <div id="success-screen" class="hidden text-center py-16 bg-white rounded-3xl shadow-xl border border-slate-200 px-6">
-            <div class="text-6xl mb-6">🚀</div>
+            <div class="mb-6 flex justify-center">
+                <dotlottie-player id="lottie-success" src="https://lottie.host/80e3c158-5d2b-4d4b-a2ed-42b78b871981/76H6y6r58z.json" background="transparent" speed="1" style="width: 150px; height: 150px;" loop autoplay></dotlottie-player>
+            </div>
             <h2 class="text-3xl font-800 text-slate-900 mb-4 uppercase tracking-tight">Challenge Accepted!</h2>
             <p class="text-xl font-semibold text-blue-600 mb-6 uppercase tracking-wider">Timer Active.</p>
             <p class="text-slate-500 max-w-sm mx-auto mb-10 text-sm font-medium">I have received your strategic assets. The 24-hour build clock is now ticking.</p>
@@ -65,14 +68,20 @@
                 
                 <div class="space-y-6">
                     <div>
-                        <label class="block text-sm font-700 text-slate-700 mb-2">Business Name (Max 30 chars) *</label>
-                        <input type="text" name="business_name" maxlength="30" required 
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-sm font-700 text-slate-700">Business Name *</label>
+                            <span id="counter-name" class="text-[10px] font-bold text-slate-400 uppercase">0/30</span>
+                        </div>
+                        <input type="text" name="business_name" id="name-input" maxlength="30" required 
                                class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none transition-all"
                                placeholder="Enter Business Name">
                     </div>
                     <div>
-                        <label class="block text-sm font-700 text-slate-700 mb-2">Main Tagline (Max 60 chars) *</label>
-                        <input type="text" name="tagline" maxlength="60" required 
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-sm font-700 text-slate-700">Main Tagline *</label>
+                            <span id="counter-tagline" class="text-[10px] font-bold text-slate-400 uppercase">0/60</span>
+                        </div>
+                        <input type="text" name="tagline" id="tagline-input" maxlength="60" required 
                                class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none transition-all"
                                placeholder="e.g. We Build Products That Scale Worldwide">
                     </div>
@@ -291,13 +300,57 @@
             }, 1000);
         }
 
+        // 3. PERSISTENCE & COUNTERS
+        function saveState() {
+            const formData = {};
+            new FormData(form).forEach((value, key) => {
+                if (!(value instanceof File)) formData[key] = value;
+            });
+            localStorage.setItem('gate_intake_state', JSON.stringify(formData));
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem('gate_intake_state');
+            if (saved) {
+                const data = JSON.parse(saved);
+                Object.keys(data).forEach(key => {
+                    const input = form.querySelector(`[name="${key}"]`);
+                    if (input) {
+                        if (input.type === 'radio') {
+                            if (input.value === data[key]) input.checked = true;
+                        } else {
+                            input.value = data[key];
+                        }
+                    }
+                });
+                updateCounters();
+            }
+        }
+
+        function updateCounters() {
+            const nameLen = document.getElementById('name-input').value.length;
+            const taglineLen = document.getElementById('tagline-input').value.length;
+            document.getElementById('counter-name').innerText = `${nameLen}/30`;
+            document.getElementById('counter-tagline').innerText = `${taglineLen}/60`;
+            
+            // Highlight if near limit
+            document.getElementById('counter-name').className = nameLen > 25 ? "text-[10px] font-bold text-rose-500 uppercase" : "text-[10px] font-bold text-slate-400 uppercase";
+            document.getElementById('counter-tagline').className = taglineLen > 50 ? "text-[10px] font-bold text-rose-500 uppercase" : "text-[10px] font-bold text-slate-400 uppercase";
+        }
+
         window.onload = function () {
             const fourHours = 4 * 3600 + 22 * 60 + 15;
             const display = document.querySelector('#timer');
             startTimer(fourHours, display);
+            loadState();
         };
 
-        // 3. TRIPLE LOCK LOGIC
+        form.addEventListener('input', () => {
+            saveState();
+            updateCounters();
+        });
+
+        // 4. TRIPLE LOCK LOGIC
         const locks = [
             document.getElementById('lock-1'),
             document.getElementById('lock-2'),
@@ -311,7 +364,10 @@
             submitBtn.disabled = !allChecked || hasFileSizeError;
         }
 
-        locks.forEach(l => l.addEventListener('change', checkLocks));
+        locks.forEach(l => l.addEventListener('change', () => {
+            if (navigator.vibrate) navigator.vibrate(50);
+            checkLocks();
+        }));
 
         // 3. FILE SIZE VALIDATION (8MB LIMIT)
         const FILE_LIMIT = 8 * 1024 * 1024; // 8MB
