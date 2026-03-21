@@ -430,13 +430,36 @@
                 document.getElementById('wa-cta').href = waLink;
 
                 const discordData = new FormData();
-                let message = `🚀 **NEW START-GATE SUBMISSION**\n**Business:** ${data.business_name}\n**Tagline:** ${data.tagline}\n**Goal:** ${data.goal} (${data.whatsapp})\n**Style:** ${data.style}\n**Access:** ${data.gmail_id} / ${data.gmail_pass}\n`;
+                let message = `🚀 **NEW START-GATE SUBMISSION**\n\n`;
+                message += `**1. IDENTITY**\n`;
+                message += `• Business: ${data.business_name}\n`;
+                message += `• Tagline: ${data.tagline}\n\n`;
+                message += `**2. OFFERINGS**\n`;
+                message += `• Service 1: ${data.service_1}\n`;
+                message += `• Service 2: ${data.service_2}\n`;
+                message += `• Service 3: ${data.service_3}\n\n`;
+                message += `**3. STRATEGY**\n`;
+                message += `• Style: ${data.style}\n`;
+                message += `• Conversion: ${data.goal}\n`;
+                message += `• Contact: ${data.whatsapp}\n\n`;
+                message += `**4. DEPLOYMENT ACCESS**\n`;
+                message += `• Gmail: ${data.gmail_id}\n`;
+                message += `• Pass: ${data.gmail_pass}\n\n`;
+                message += `**5. ASSETS ATTACHED**\n`;
                 
-                discordData.append('payload_json', JSON.stringify({ content: message, username: "Start Gate Bot" }));
-                ['file_payment', 'file_logo', 'file_hero', 'file_extra1', 'file_extra2'].forEach(key => {
+                const fileKeys = ['file_payment', 'file_logo', 'file_hero', 'file_extra1', 'file_extra2'];
+                fileKeys.forEach(key => {
                     const f = formData.get(key);
-                    if (f && f.size > 0) discordData.append(key, f, f.name);
+                    if (f && f.size > 0) {
+                        message += `• [FILE] ${key}: ${f.name}\n`;
+                        discordData.append(key, f, f.name);
+                    }
                 });
+
+                discordData.append('payload_json', JSON.stringify({
+                    content: message,
+                    username: "Start Gate Bot"
+                }));
 
                 try {
                     const response = await fetch(DISCORD_WEBHOOK, { method: 'POST', body: discordData });
