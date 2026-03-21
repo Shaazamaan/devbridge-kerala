@@ -250,7 +250,33 @@
             banner.innerText = '✅ ACTIVE: 2 Slots remaining. 24-hour timer starts on submission.';
         }
 
-        // 2. TRIPLE LOCK LOGIC
+        // 2. LIVE COUNTDOWN TIMER
+        function startTimer(duration, display) {
+            let timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = hours + ":" + minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = duration; // Reset for demo purposes
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            const fourHours = 4 * 3600 + 22 * 60 + 15;
+            const display = document.querySelector('#timer');
+            startTimer(fourHours, display);
+        };
+
+        // 3. TRIPLE LOCK LOGIC
         const locks = [
             document.getElementById('lock-1'),
             document.getElementById('lock-2'),
