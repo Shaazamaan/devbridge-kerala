@@ -1,0 +1,61 @@
+﻿2026-03-20 09:24:18  === DevBridge Auto-Post Started ===
+2026-03-20 09:24:18  Marked post #1 as published in bank.
+2026-03-20 09:24:18  Appended post to posts.json: 'Why Cold Emailing Founders Still Works in 2025 (If You Do It Right)'
+2026-03-20 09:24:19  [main a615a49] auto-post: Why Cold Emailing Founders Still Works in 2025 (If You Do It
+2026-03-20 09:24:19   2 files changed, 672 insertions(+)
+2026-03-20 09:24:19   create mode 100644 posts.json
+2026-03-20 09:24:19   create mode 100644 posts_bank.json
+2026-03-20 09:55:35  === DevBridge Auto-Post Started ===
+2026-03-20 09:55:36  Posted [Candidate]: The Degree Is Becoming a Formality. The Skill Is the Visa.
+2026-03-20 09:55:36  Posted [Candidate]: Your Resume Has No Numbers. That's Why It Gets Ignored.
+2026-03-20 09:55:36  Posted [Candidate]: The Side Project That Gets You Hired Isn't About the Technol
+2026-03-20 09:55:36  Posted [Candidate]: The GTM Role Is the Most Underrated Career Path in Indian St
+2026-03-20 09:55:36  Posted [Candidate]: The GTM Role Is the Most Underrated Career Path in Indian St
+2026-03-20 09:55:36  Posted [Company]: Your Performance Review Process Is Creating Anxiety, Not Cla
+2026-03-20 09:55:36  Posted [Company]: The Way You Treat Candidates Who Don't Get the Offer Becomes
+2026-03-20 09:55:36  Posted [Company]: Every Rupee You Invest in Onboarding Returns 5x in Retention
+2026-03-20 09:55:36  Posted [Company]: Your Employer Brand Is Being Written By Your Past Employees.
+2026-03-20 09:55:36  Posted [Company]: Your Employer Brand Is Being Written By Your Past Employees.
+2026-03-20 09:55:39  SUCCESS: 10 posts pushed. Total live: 30
+2026-03-20 09:55:39  === Done ===
+2026-03-20 10:33:51  === Auto-Post Started ===
+2026-03-20 10:33:51  Posted []: Stop Applying to 'Easy Apply' Jobs Exclusively
+2026-03-20 10:33:51  Posted []: Your Portfolio is Your New Resume in 2025
+2026-03-20 10:33:51  Posted []: The 5-Minute Rule for Interview Prep
+2026-03-20 10:33:51  Posted []: Negotiating Salary? Never Give a Number First
+2026-03-20 10:33:51  Posted []: Remote Work isn't Just About Working from Home
+2026-03-20 10:33:51  Posted []: Stop Hiring for 'Experience'; Hire for 'Curiosity'
+2026-03-20 10:33:51  Posted []: Your Onboarding Process is Usually the Reason People Quit
+2026-03-20 10:33:51  Posted []: Remote Work is a Competitive Advantage for Startups
+2026-03-20 10:33:51  Posted []: Meetings are for Decisions, Not Status Updates
+2026-03-20 10:33:51  Posted []: Why You Should Pay a 'Success Fee' to Your Employees
+2026-03-20 10:33:54  SUCCESS: Deployed to live site.
+2026-03-20 10:33:54  === Auto-Post Finished ===
+2026-03-20 10:35:22  === Auto-Post Started ===
+2026-03-20 10:35:22  Posted [Candidate]: Stop Applying to 'Easy Apply' Jobs Exclusively
+2026-03-20 10:35:22  Posted [Candidate]: Your Portfolio is Your New Resume in 2025
+2026-03-20 10:35:22  Posted [Candidate]: The 5-Minute Rule for Interview Prep
+2026-03-20 10:35:22  Posted [Candidate]: Negotiating Salary? Never Give a Number First
+2026-03-20 10:35:22  Posted [Candidate]: Remote Work isn't Just About Working from Home
+2026-03-20 10:35:22  Posted [Company]: Stop Hiring for 'Experience'; Hire for 'Curiosity'
+2026-03-20 10:35:23  Posted [Company]: Your Onboarding Process is Usually the Reason People Quit
+2026-03-20 10:35:23  Posted [Company]: Remote Work is a Competitive Advantage for Startups
+2026-03-20 10:35:23  Posted [Company]: Meetings are for Decisions, Not Status Updates
+2026-03-20 10:35:23  Posted [Company]: Why You Should Pay a 'Success Fee' to Your Employees
+2026-03-20 10:35:25  SUCCESS: Deployed to live site.
+2026-03-20 10:35:25  === Auto-Post Finished ===
+2026-03-20 17:16:50  === Auto-Post Started ===
+2026-03-20 17:17:34  SUCCESS: Deployed to live site.
+2026-03-20 17:17:34  === Auto-Post Finished ===
+2026-03-21 10:02:13  === Auto-Post Started ===
+2026-03-21 10:03:21  SUCCESS: Deployed to live site.
+2026-03-21 10:03:21  === Auto-Post Finished ===
+2026-03-21 17:43:47  === Auto-Post Started ===
+2026-03-21 17:44:02  SUCCESS: Deployed to live site.
+2026-03-21 17:44:02  === Auto-Post Finished ===
+2026-03-21 20:06:16  === Auto-Post Started ===
+2026-03-21 20:06:26  SUCCESS: Deployed to live site.
+2026-03-21 20:06:26  === Auto-Post Finished ===
+2026-03-21 20:21:13  === Auto-Post Started ===
+2026-03-21 20:21:31  SUCCESS: Deployed to live site.
+2026-03-21 20:21:31  === Auto-Post Finished ===

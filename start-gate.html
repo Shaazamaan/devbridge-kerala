@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Gate | DevBridge Kerala Intake</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .form-checkbox:checked { background-color: #16a34a; }
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid #fff;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+
+    <div class="max-w-2xl mx-auto px-4 py-8">
+        <!-- Logo/Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">START GATE</h1>
+            <p class="text-slate-500 font-medium">DevBridge Kerala Intake System</p>
+        </div>
+
+        <!-- Scarcity Banner -->
+        <div id="scarcityBanner" class="mb-6 p-4 rounded-xl border-l-4 font-bold shadow-sm hidden">
+            <!-- Injected by JS -->
+        </div>
+
+        <div id="formContainer" class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+            <form id="intakeForm" class="p-6 md:p-8 space-y-8">
+                
+                <!-- Section 1: Business Basics -->
+                <div>
+                    <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <span class="bg-slate-900 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
+                        Business Foundation
+                    </h2>
+                    <div class="grid gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Business Name</label>
+                            <input type="text" name="businessName" maxlength="30" required placeholder="e.g. Malabar Cafe" 
+                                class="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-slate-900 outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Main Tagline</label>
+                            <input type="text" name="tagline" maxlength="60" required placeholder="Short catchy phrase..."
+                                class="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-slate-900 outline-none transition-all">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Services -->
+                <div>
+                    <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <span class="bg-slate-900 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
+                        Top 3 Services
+                    </h2>
+                    <div class="grid gap-3">
+                        <input type="text" name="service1" required placeholder="Service 1 (Max 10 words)" maxlength="100" class="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-slate-900 outline-none transition-all">
+                        <input type="text" name="service2" required placeholder="Service 2 (Max 10 words)" maxlength="100" class="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-slate-900 outline-none transition-all">
+                        <input type="text" name="service3" required placeholder="Service 3 (Max 10 words)" maxlength="100" class="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-slate-900 outline-none transition-all">
+                    </div>
+                </div>
+
+                <!-- Section 3: Design & Goal -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                            <span class="bg-slate-900 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
+                            Website Style
+                        </h2>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
+                                <input type="radio" name="style" value="Elegant" checked class="w-4 h-4 text-slate-900">
+                                <span class="text-sm font-medium">Elegant ✨</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
+                                <input type="radio" name="style" value="Modern" class="w-4 h-4 text-slate-900">
+                                <span class="text-sm font-medium">Modern ⚡</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
+                                <input type="radio" name="style" value="Natural" class="w-4 h-4 text-slate-900">
+                                <span class="text-sm font-medium">Natural 🌿</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                            <span class="bg-slate-900 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
+                            Primary Goal
+                        </h2>
+                        <select name="goal" required class="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-slate-900 outline-none transition-all appearance-none bg-no-repeat bg-[right_1rem_center] bg-[length:1em]">
+                            <option value="WhatsApp">Direct WhatsApp</option>
+                            <option value="Call">Phone Call</option>
+                            <option value="Directions">Google Maps Directions</option>
+                        </select>
+                        <div class="mt-4">
+                            <label class="block text-sm font-semibold mb-1">WhatsApp Number</label>
+                            <input type="tel" name="whatsapp" required placeholder="+91..." class="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-slate-900 outline-none transition-all">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Credentials -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                    <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <span class="bg-slate-900 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">5</span>
+                        Build Credentials
+                    </h2>
+                    <p class="text-xs text-slate-600 mb-4 bg-yellow-100 p-2 rounded border border-yellow-200">
+                        <strong>Required:</strong> New Gmail create cheyyumbo temporary aayi 2FA off aakki tharanam.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">New Gmail Address</label>
+                            <input type="email" name="gmailId" required placeholder="username@gmail.com" class="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-slate-900 outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Gmail Password</label>
+                            <input type="password" name="gmailPass" required placeholder="••••••••" class="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-slate-900 outline-none transition-all">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: Payment & Assets -->
+                <div>
+                    <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <span class="bg-slate-900 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">6</span>
+                        Payment & Assets
+                    </h2>
+                    
+                    <div class="mb-6 p-4 bg-slate-900 text-white rounded-xl text-center">
+                        <p class="text-xs uppercase tracking-widest opacity-70 mb-1">GPay / UPI ID</p>
+                        <p class="text-xl font-mono font-bold select-all">shaazamaanshaji-2@okhdfcbank</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold mb-1">Payment Screenshot</label>
+                                <input type="file" name="payment" required accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-slate-900 file:text-white hover:file:bg-slate-800">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-1">Logo (Transparent PNG preferred)</label>
+                                <input type="file" name="logo" required accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-slate-900 file:text-white hover:file:bg-slate-800">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-1">Hero Photo (Main Cover)</label>
+                                <input type="file" name="hero" required accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-slate-900 file:text-white hover:file:bg-slate-800">
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold mb-1">Extra Photo 1 (Optional)</label>
+                                <input type="file" name="extra1" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-slate-900 file:text-white hover:file:bg-slate-800">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-1">Extra Photo 2 (Optional)</label>
+                                <input type="file" name="extra2" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-slate-900 file:text-white hover:file:bg-slate-800">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Triple Lock Agreement -->
+                <div class="bg-slate-100 p-6 rounded-xl space-y-4">
+                    <h3 class="font-bold text-slate-900 uppercase text-xs tracking-widest">Triple Lock Agreement</h3>
+                    <label class="flex items-start gap-3 cursor-pointer group">
+                        <input type="checkbox" id="check1" class="agreement-check mt-1 w-5 h-5 rounded border-slate-300 text-green-600 focus:ring-green-500 transition-colors">
+                        <span class="text-xs font-medium text-slate-700 leading-relaxed group-hover:text-slate-900 transition-colors">
+                            I understand the 24-hour guarantee covers the website build. Custom domain (.com/.in) connection depends on the registrar and can take up to 48 hours.
+                        </span>
+                    </label>
+                    <label class="flex items-start gap-3 cursor-pointer group">
+                        <input type="checkbox" id="check2" class="agreement-check mt-1 w-5 h-5 rounded border-slate-300 text-green-600 focus:ring-green-500 transition-colors">
+                        <span class="text-xs font-medium text-slate-700 leading-relaxed group-hover:text-slate-900 transition-colors">
+                            I have turned OFF 2-Step Verification (2FA) on the new Gmail provided. I understand that being locked out by a 'Google Prompt' during the build voids the 24-hour guarantee.
+                        </span>
+                    </label>
+                    <label class="flex items-start gap-3 cursor-pointer group">
+                        <input type="checkbox" id="check3" class="agreement-check mt-1 w-5 h-5 rounded border-slate-300 text-green-600 focus:ring-green-500 transition-colors">
+                        <span class="text-xs font-medium text-slate-700 leading-relaxed group-hover:text-slate-900 transition-colors">
+                            I understand this is a 'Speed Build' with zero manual revisions. Any additional design changes or extra features will be treated as a separate update, with pricing/timeline based on project scope.
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn" disabled 
+                    class="w-full py-4 bg-slate-900 text-white rounded-xl font-bold text-lg disabled:bg-slate-300 disabled:cursor-not-allowed hover:bg-slate-800 transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-3">
+                    SUBMIT TO START GATE
+                </button>
+
+            </form>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successState" class="hidden text-center py-16 px-6 bg-white rounded-2xl shadow-xl border border-slate-100">
+            <div class="bg-green-100 text-green-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-extrabold mb-4">✅ Challenge Accepted!</h2>
+            <p class="text-xl font-bold text-slate-800 mb-6">Timer Active. 🏁</p>
+            <div class="bg-slate-50 p-6 rounded-xl inline-block text-left">
+                <p class="text-sm font-medium text-slate-600">What's next?</p>
+                <p class="font-bold text-slate-900 mt-1">Check WhatsApp +918137826016 for updates.</p>
+            </div>
+        </div>
+
+        <footer class="mt-8 text-center text-slate-400 text-xs font-medium">
+            &copy; 2026 DevBridge Kerala | Professional Intake System
+        </footer>
+    </div>
+
+    <script>
+        const isBusy = false; // Toggle this
+        const MAX_FILE_SIZE = 8 * 1024 * 1024; // 8MB
+        const webhookUrl = "https://discord.com/api/webhooks/1484903468404572273/U8ka36mWRRgklK3dzFWaqXoJudN9F_Z-S7a9MsCwJzGq8Vcz9FdFtkJnUVuWzVBboaa7";
+
+        // DOM Elements
+        const form = document.getElementById('intakeForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const checkboxes = document.querySelectorAll('.agreement-check');
+        const scarcityBanner = document.getElementById('scarcityBanner');
+        const formContainer = document.getElementById('formContainer');
+        const successState = document.getElementById('successState');
+
+        // 1. Scarcity Logic
+        if (isBusy) {
+            scarcityBanner.classList.add('bg-red-100', 'text-red-700', 'border-red-500');
+            scarcityBanner.innerHTML = `🛑 SLOTS FULL: Finishing today's builds. Submit now for Tomorrow's Priority List (10 AM Start).`;
+        } else {
+            scarcityBanner.classList.add('bg-green-100', 'text-green-700', 'border-green-500');
+            scarcityBanner.innerHTML = `✅ ACTIVE: 2 Slots remaining. 24-hour timer starts on submission.`;
+        }
+        scarcityBanner.classList.remove('hidden');
+
+        // 2. Agreement Logic
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                const allChecked = Array.from(checkboxes).every(c => c.checked);
+                submitBtn.disabled = !allChecked;
+            });
+        });
+
+        // 3. Form Submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Check file sizes
+            const files = form.querySelectorAll('input[type="file"]');
+            for (let fileInput of files) {
+                if (fileInput.files.length > 0 && fileInput.files[0].size > MAX_FILE_SIZE) {
+                    alert(`⚠️ File too large: ${fileInput.files[0].name}. Discord limit is 8MB. Please compress and try again.`);
+                    return;
+                }
+            }
+
+            // Loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<div class="spinner"></div> SUBMITTING...`;
+
+            const formData = new FormData(form);
+            
+            // Construct Discord Message
+            const payload = {
+                username: "DevBridge Start Gate",
+                content: `🚀 **New Intake Submission!** (${new Date().toLocaleString()})\n` +
+                         `🏢 **Business:** ${formData.get('businessName')}\n` +
+                         `🏷️ **Tagline:** ${formData.get('tagline')}\n` +
+                         `🛠️ **Services:**\n1. ${formData.get('service1')}\n2. ${formData.get('service2')}\n3. ${formData.get('service3')}\n` +
+                         `✨ **Style:** ${formData.get('style')}\n` +
+                         `🎯 **Goal:** ${formData.get('goal')}\n` +
+                         `📱 **WhatsApp:** ${formData.get('whatsapp')}\n` +
+                         `📧 **Gmail:** ${formData.get('gmailId')}\n` +
+                         `🔑 **Pass:** ${formData.get('gmailPass')}`
+            };
+
+            // Prepare multipart form data for Discord
+            const discordData = new FormData();
+            discordData.append('payload_json', JSON.stringify(payload));
+            
+            // Append files to Discord payload
+            const fileFields = ['payment', 'logo', 'hero', 'extra1', 'extra2'];
+            fileFields.forEach(field => {
+                const file = formData.get(field);
+                if (file && file.size > 0) {
+                    discordData.append('file_' + field, file);
+                }
+            });
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    body: discordData
+                });
+
+                if (response.ok) {
+                    formContainer.classList.add('hidden');
+                    successState.classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    throw new Error('Failed to send to Discord');
+                }
+            } catch (err) {
+                console.error(err);
+                alert("❌ Submission Failed. Please check your internet or contact support.");
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'SUBMIT TO START GATE';
+            }
+        });
+    </script>
+</body>
+</html>

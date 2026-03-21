@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | DevBridge Kerala</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .ty-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 24px;
+            background: var(--bg);
+        }
+        .ty-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+        }
+        .ty-icon svg { color: var(--primary); }
+        .ty-page h1 {
+            font-size: 2.5rem;
+            letter-spacing: -0.03em;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .ty-page > p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 520px;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+        .ty-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            text-align: left;
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto 48px;
+        }
+        .ty-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+        }
+        .ty-step-num {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .ty-step-text strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+        .ty-step-text span {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .ty-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ── Funny Pay-Me Card ── */
+        .pay-me-card {
+            display: none;
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto 40px;
+            background: var(--bg-alt);
+            border: 1.5px dashed var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 28px 28px 24px;
+            text-align: left;
+            transition: opacity 0.4s ease;
+        }
+        .pay-me-card.show { display: block; }
+        .pay-me-emoji {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .pay-me-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        .pay-me-card p {
+            font-size: 0.97rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: 0;
+        }
+        .gpay-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            background: #1a1a2e;
+            color: #fff;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            word-break: break-all;
+        }
+        .gpay-badge svg { flex-shrink: 0; }
+        .pay-me-disclaimer {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 12px;
+            font-style: italic;
+            opacity: 0.75;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="assets/logo.png" alt="DevBridge Kerala Logo" class="logo-img">
+                <span class="logo-text">DevBridge Kerala</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="ty-page">
+        <div class="ty-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6L9 17l-5-5"/>
+            </svg>
+        </div>
+        <span class="badge">Received</span>
+        <h1>You're in the pipeline.</h1>
+        <p>Your application has been received. Shaazamaan reviews every submission personally. Here's what happens next:</p>
+
+        <div class="ty-timeline">
+            <div class="ty-step">
+                <div class="ty-step-num">1</div>
+                <div class="ty-step-text">
+                    <strong>Personal Review</strong>
+                    <span>Every submission is reviewed manually, not by an algorithm.</span>
+                </div>
+            </div>
+            <div class="ty-step">
+                <div class="ty-step-num">2</div>
+                <div class="ty-step-text">
+                    <strong>Expect a response within 48 hours</strong>
+                    <span>If there's a strong match, you'll hear back directly via email or phone.</span>
+                </div>
+            </div>
+            <div class="ty-step">
+                <div class="ty-step-num">3</div>
+                <div class="ty-step-text">
+                    <strong>No ghosting. Ever.</strong>
+                    <span>Even if it's not the right fit right now, you'll get an honest reply.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CANDIDATE: Porotta & Beef -->
+        <div class="pay-me-card" id="pay-candidate">
+            <span class="pay-me-emoji">🫓🥩</span>
+            <h3>One small request, totally optional...</h3>
+            <p>
+                If I do get you placed and you're out there celebrating with a big fat plate of <strong>porotta and beef</strong> —
+                don't forget who connected the dots. You know what would make that plate taste even better?
+                Sending me the digital equivalent of one piece. 😌<br><br>
+                No invoice. No pressure. No awkward follow-up. Just good karma.
+            </p>
+            <div class="gpay-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <rect width="24" height="24" rx="4" fill="#4285F4"/>
+                    <text x="4" y="17" font-size="11" fill="white" font-weight="bold">G</text>
+                    <text x="11" y="17" font-size="11" fill="#34A853" font-weight="bold">P</text>
+                </svg>
+                shaazamaanshaji-2@okhdfcbank
+            </div>
+            <p class="pay-me-disclaimer">* Completely optional. But genuinely appreciated. 🙏</p>
+        </div>
+
+        <!-- COMPANY: Coffee -->
+        <div class="pay-me-card" id="pay-company">
+            <span class="pay-me-emoji">☕</span>
+            <h3>If the hire works out...</h3>
+            <p>
+                Seriously, if this person turns out to be a rockstar and you're sipping that celebratory flat white
+                in your startup office — <strong>buy me one too.</strong><br><br>
+                Not a retainer. Not a commission. Just a coffee. That's all I ask. ☕
+                It keeps the operation running and my morale dangerously high.
+            </p>
+            <div class="gpay-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <rect width="24" height="24" rx="4" fill="#4285F4"/>
+                    <text x="4" y="17" font-size="11" fill="white" font-weight="bold">G</text>
+                    <text x="11" y="17" font-size="11" fill="#34A853" font-weight="bold">P</text>
+                </svg>
+                shaazamaanshaji-2@okhdfcbank
+            </div>
+            <p class="pay-me-disclaimer">* Think of it as a success fee, but make it tiny and delicious. ☕</p>
+        </div>
+
+        <div class="ty-actions">
+            <a href="/" class="btn-secondary">Back to Home</a>
+            <a href="https://www.linkedin.com/in/shaazamaan-shaji/" target="_blank" class="btn-primary">Connect on LinkedIn</a>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type');
+        if (type === 'candidate') {
+            document.getElementById('pay-candidate').classList.add('show');
+        } else if (type === 'company') {
+            document.getElementById('pay-company').classList.add('show');
+        }
+    </script>
+</body>
+</html>
