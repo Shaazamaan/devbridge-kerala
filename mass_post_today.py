@@ -11,8 +11,8 @@ def mass_post_today():
         
     updated_count = 0
     for post in live['posts']:
-        # If the post date is in the future relative to today, set it to today
-        if post['date'] > today:
+        # Force all new migration posts (ID > 140) to today's date
+        if post['id'] > 140:
             post['date'] = today
             updated_count += 1
             
