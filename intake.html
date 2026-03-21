@@ -369,7 +369,21 @@
             checkLocks();
         }));
 
-        // 3. FILE SIZE VALIDATION (8MB LIMIT)
+        // 5. CUSTOM VALIDATION FEEDBACK
+        submitBtn.addEventListener('click', (e) => {
+            if (submitBtn.disabled) return;
+            
+            if (!form.checkValidity()) {
+                const firstInvalid = form.querySelector(':invalid');
+                if (firstInvalid) {
+                    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstInvalid.classList.add('ring-2', 'ring-rose-500', 'animate-pulse');
+                    setTimeout(() => firstInvalid.classList.remove('ring-2', 'ring-rose-500', 'animate-pulse'), 3000);
+                }
+            }
+        });
+
+        // 6. FILE SIZE VALIDATION (8MB LIMIT)
         const FILE_LIMIT = 8 * 1024 * 1024; // 8MB
         const fileInputs = document.querySelectorAll('input[type="file"]');
         const errorMsg = document.getElementById('error-msg');
