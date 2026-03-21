@@ -269,140 +269,188 @@
     </main>
 
     <script>
-        // 1. SCARCITY LOGIC
-        const isBusy = false;
-        const banner = document.getElementById('scarcity-banner');
-        if (isBusy) {
-            banner.className = 'w-full py-3 px-4 text-center font-bold text-sm bg-red-100 text-red-800';
-            banner.innerText = '🛑 SLOTS FULL: Finishing today\'s builds. Submit now for Tomorrow\'s Priority List (10 AM Start).';
-        } else {
-            banner.className = 'w-full py-3 px-4 text-center font-bold text-sm bg-green-100 text-green-800';
-            banner.innerText = '✅ ACTIVE: 2 Slots remaining. 24-hour timer starts on submission.';
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            // 0. GLOBALS & SELECTORS
+            const form = document.getElementById('intake-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const locks = [
+                document.getElementById('lock-1'),
+                document.getElementById('lock-2'),
+                document.getElementById('lock-3')
+            ];
+            const banner = document.getElementById('scarcity-banner');
+            const successScreen = document.getElementById('success-screen');
+            const errorMsg = document.getElementById('error-msg');
+            const isBusy = false;
+            const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1484903468404572273/U8ka36mWRRgklK3dzFWaqXoJudN9F_Z-S7a9MsCwJzGq8Vcz9FdFtkJnUVuWzVBboaa7";
 
-        // 2. LIVE COUNTDOWN TIMER
-        function startTimer(duration, display) {
-            let timer = duration, hours, minutes, seconds;
-            setInterval(function () {
-                hours = parseInt(timer / 3600, 10);
-                minutes = parseInt((timer % 3600) / 60, 10);
-                seconds = parseInt(timer % 60, 10);
+            // 1. SCARCITY LOGIC
+            if (isBusy) {
+                banner.className = 'w-full py-3 px-4 text-center font-bold text-sm bg-red-100 text-red-800';
+                banner.innerText = '🛑 SLOTS FULL: Finishing today\'s builds. Submit now for Tomorrow\'s Priority List (10 AM Start).';
+            } else {
+                banner.className = 'w-full py-3 px-4 text-center font-bold text-sm bg-green-100 text-green-800';
+                banner.innerText = '✅ ACTIVE: 2 Slots remaining. 24-hour timer starts on submission.';
+            }
 
-                hours = hours < 10 ? "0" + hours : hours;
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
+            // 2. LIVE COUNTDOWN TIMER
+            function startTimer(duration, display) {
+                let timer = duration, hours, minutes, seconds;
+                const interval = setInterval(function () {
+                    hours = parseInt(timer / 3600, 10);
+                    minutes = parseInt((timer % 3600) / 60, 10);
+                    seconds = parseInt(timer % 60, 10);
 
-                display.textContent = hours + ":" + minutes + ":" + seconds;
+                    hours = hours < 10 ? "0" + hours : hours;
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
 
-                if (--timer < 0) {
-                    timer = duration; // Reset for demo purposes
-                }
-            }, 1000);
-        }
+                    display.textContent = hours + ":" + minutes + ":" + seconds;
 
-        // 3. PERSISTENCE & COUNTERS
-        function saveState() {
-            const formData = {};
-            new FormData(form).forEach((value, key) => {
-                if (!(value instanceof File)) formData[key] = value;
-            });
-            localStorage.setItem('gate_intake_state', JSON.stringify(formData));
-        }
-
-        function loadState() {
-            const saved = localStorage.getItem('gate_intake_state');
-            if (saved) {
-                const data = JSON.parse(saved);
-                Object.keys(data).forEach(key => {
-                    const input = form.querySelector(`[name="${key}"]`);
-                    if (input) {
-                        if (input.type === 'radio') {
-                            if (input.value === data[key]) input.checked = true;
-                        } else {
-                            input.value = data[key];
-                        }
+                    if (--timer < 0) {
+                        clearInterval(interval);
                     }
+                }, 1000);
+            }
+
+            // 3. PERSISTENCE & COUNTERS
+            function saveState() {
+                const formData = {};
+                new FormData(form).forEach((value, key) => {
+                    if (!(value instanceof File)) formData[key] = value;
                 });
+                localStorage.setItem('gate_intake_state', JSON.stringify(formData));
+            }
+
+            function loadState() {
+                const saved = localStorage.getItem('gate_intake_state');
+                if (saved) {
+                    try {
+                        const data = JSON.parse(saved);
+                        Object.keys(data).forEach(key => {
+                            const input = form.querySelector(`[name="${key}"]`);
+                            if (input) {
+                                if (input.type === 'radio') {
+                                    if (input.value === data[key]) input.checked = true;
+                                } else {
+                                    input.value = data[key];
+                                }
+                            }
+                        });
+                    } catch(e) { console.error("Load failed", e); }
+                }
                 updateCounters();
             }
-        }
 
-        function updateCounters() {
-            const nameLen = document.getElementById('name-input').value.length;
-            const taglineLen = document.getElementById('tagline-input').value.length;
-            document.getElementById('counter-name').innerText = `${nameLen}/30`;
-            document.getElementById('counter-tagline').innerText = `${taglineLen}/60`;
-            
-            // Highlight if near limit
-            document.getElementById('counter-name').className = nameLen > 25 ? "text-[10px] font-bold text-rose-500 uppercase" : "text-[10px] font-bold text-slate-400 uppercase";
-            document.getElementById('counter-tagline').className = taglineLen > 50 ? "text-[10px] font-bold text-rose-500 uppercase" : "text-[10px] font-bold text-slate-400 uppercase";
-        }
+            function updateCounters() {
+                const nameInp = document.getElementById('name-input');
+                const taglineInp = document.getElementById('tagline-input');
+                const nameCnt = document.getElementById('counter-name');
+                const taglineCnt = document.getElementById('counter-tagline');
 
-        window.onload = function () {
-            const fourHours = 4 * 3600 + 22 * 60 + 15;
-            const display = document.querySelector('#timer');
-            startTimer(fourHours, display);
-            loadState();
-            checkLocks(); // <--- Ensure button state is synced on load
-        };
-
-        form.addEventListener('input', () => {
-            saveState();
-            updateCounters();
-        });
-
-        // 4. TRIPLE LOCK LOGIC
-        const locks = [
-            document.getElementById('lock-1'),
-            document.getElementById('lock-2'),
-            document.getElementById('lock-3')
-        ];
-        const submitBtn = document.getElementById('submit-btn');
-
-        function checkLocks() {
-            const allChecked = locks.every(l => l.checked);
-            const hasFileSizeError = document.querySelectorAll('.file-error').length > 0;
-            submitBtn.disabled = !allChecked || hasFileSizeError;
-        }
-
-        locks.forEach(l => l.addEventListener('change', () => {
-            if (navigator.vibrate) navigator.vibrate(50);
-            checkLocks();
-        }));
-
-        // 5. CUSTOM VALIDATION FEEDBACK
-        submitBtn.addEventListener('click', (e) => {
-            if (submitBtn.disabled) return;
-            
-            if (!form.checkValidity()) {
-                const firstInvalid = form.querySelector(':invalid');
-                if (firstInvalid) {
-                    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    firstInvalid.classList.add('ring-2', 'ring-rose-500', 'animate-pulse');
-                    setTimeout(() => firstInvalid.classList.remove('ring-2', 'ring-rose-500', 'animate-pulse'), 3000);
+                if (nameInp && nameCnt) {
+                    const len = nameInp.value.length;
+                    nameCnt.innerText = `${len}/30`;
+                    nameCnt.className = len > 25 ? "text-[10px] font-bold text-rose-500 uppercase" : "text-[10px] font-bold text-slate-400 uppercase";
+                }
+                if (taglineInp && taglineCnt) {
+                    const len = taglineInp.value.length;
+                    taglineCnt.innerText = `${len}/60`;
+                    taglineCnt.className = len > 50 ? "text-[10px] font-bold text-rose-500 uppercase" : "text-[10px] font-bold text-slate-400 uppercase";
                 }
             }
-        });
 
-        // 6. FILE SIZE VALIDATION (8MB LIMIT)
-        const FILE_LIMIT = 8 * 1024 * 1024; // 8MB
-        const fileInputs = document.querySelectorAll('input[type="file"]');
-        const errorMsg = document.getElementById('error-msg');
+            // 4. TRIPLE LOCK & VALIDATION
+            function checkLocks() {
+                const allChecked = locks.every(l => l && l.checked);
+                const hasFileSizeError = document.querySelectorAll('.file-error').length > 0;
+                submitBtn.disabled = !allChecked || hasFileSizeError;
+            }
 
-        fileInputs.forEach(input => {
-            input.addEventListener('change', () => {
-                const file = input.files[0];
-                if (file && file.size > FILE_LIMIT) {
-                    input.classList.add('file-error', 'border-rose-500');
-                    alert("⚠️ File too large! Discord limit is 8MB. Please compress.");
-                    errorMsg.classList.remove('hidden');
-                } else {
-                    input.classList.remove('file-error', 'border-rose-500');
-                    if (document.querySelectorAll('.file-error').length === 0) {
-                        errorMsg.classList.add('hidden');
+            // 5. FILE SIZE VALIDATION (8MB LIMIT)
+            const FILE_LIMIT = 8 * 1024 * 1024;
+            const fileInputs = document.querySelectorAll('input[type="file"]');
+
+            fileInputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    const file = input.files[0];
+                    if (file && file.size > FILE_LIMIT) {
+                        input.classList.add('file-error', 'border-rose-500');
+                        alert("⚠️ File too large! Discord limit is 8MB.");
+                        errorMsg.classList.remove('hidden');
+                    } else {
+                        input.classList.remove('file-error', 'border-rose-500');
+                        if (document.querySelectorAll('.file-error').length === 0) errorMsg.classList.add('hidden');
+                    }
+                    checkLocks();
+                });
+            });
+
+            // INITIALIZE
+            const timerDisplay = document.querySelector('#timer');
+            if (timerDisplay) startTimer(4 * 3600 + 22 * 60 + 15, timerDisplay);
+            loadState();
+            checkLocks();
+
+            // LISTENERS
+            form.addEventListener('input', () => {
+                saveState();
+                updateCounters();
+            });
+
+            locks.forEach(l => {
+                if(l) l.addEventListener('change', () => {
+                    if (navigator.vibrate) navigator.vibrate(50);
+                    checkLocks();
+                });
+            });
+
+            submitBtn.addEventListener('click', (e) => {
+                if (submitBtn.disabled) return;
+                if (!form.checkValidity()) {
+                    const firstInvalid = form.querySelector(':invalid');
+                    if (firstInvalid) {
+                        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        firstInvalid.classList.add('ring-2', 'ring-rose-500', 'animate-pulse');
+                        setTimeout(() => firstInvalid.classList.remove('ring-2', 'ring-rose-500', 'animate-pulse'), 3000);
                     }
                 }
-                checkLocks();
+            });
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                submitBtn.disabled = true;
+                submitBtn.innerText = 'Transmitting Data...';
+
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => { if (!(value instanceof File)) data[key] = value; });
+
+                const waLink = `https://wa.me/918137826016?text=I%20just%20passed%20through%20the%20Start%20Gate!%20My%20business%20is%20${encodeURIComponent(data.business_name)}.%20Let's%20build.`;
+                document.getElementById('wa-cta').href = waLink;
+
+                const discordData = new FormData();
+                let message = `🚀 **NEW START-GATE SUBMISSION**\n**Business:** ${data.business_name}\n**Tagline:** ${data.tagline}\n**Goal:** ${data.goal} (${data.whatsapp})\n**Style:** ${data.style}\n**Access:** ${data.gmail_id} / ${data.gmail_pass}\n`;
+                
+                discordData.append('payload_json', JSON.stringify({ content: message, username: "Start Gate Bot" }));
+                ['file_payment', 'file_logo', 'file_hero', 'file_extra1', 'file_extra2'].forEach(key => {
+                    const f = formData.get(key);
+                    if (f && f.size > 0) discordData.append(key, f, f.name);
+                });
+
+                try {
+                    const response = await fetch(DISCORD_WEBHOOK, { method: 'POST', body: discordData });
+                    if (response.ok) {
+                        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#0f172a', '#3b82f6', '#22c55e'] });
+                        form.classList.add('hidden');
+                        successScreen.classList.remove('hidden');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else { throw new Error('Failed'); }
+                } catch (err) {
+                    alert("⚠️ Transmission failed.");
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = 'Initiate Build Environment';
+                }
             });
         });
 
@@ -413,10 +461,7 @@
             const file = input.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    img.src = e.target.result;
-                    preview.classList.remove('hidden');
-                }
+                reader.onload = (e) => { img.src = e.target.result; preview.classList.remove('hidden'); }
                 reader.readAsDataURL(file);
             }
         }
@@ -428,93 +473,9 @@
                 await navigator.clipboard.writeText(vpa);
                 text.innerText = "✅ COPIED TO CLIPBOARD!";
                 text.classList.add('text-green-500');
-                setTimeout(() => {
-                    text.innerText = "Or Click here to Copy UPI ID";
-                    text.classList.remove('text-green-500');
-                }, 2000);
-            } catch (err) {
-                alert("Please manually copy: " + vpa);
-            }
+                setTimeout(() => { text.innerText = "Or Click here to Copy UPI ID"; text.classList.remove('text-green-500'); }, 2000);
+            } catch (err) { alert("Please manually copy: " + vpa); }
         }
-
-        // 5. DISCORD INTEGRATION
-        const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1484903468404572273/U8ka36mWRRgklK3dzFWaqXoJudN9F_Z-S7a9MsCwJzGq8Vcz9FdFtkJnUVuWzVBboaa7";
-        const form = document.getElementById('intake-form');
-        const successScreen = document.getElementById('success-screen');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'Transmitting Data...';
-
-            const formData = new FormData(form);
-            
-            // Construct JSON for text fields
-            const data = {};
-            formData.forEach((value, key) => {
-                if (!(value instanceof File)) {
-                    data[key] = value;
-                }
-            });
-
-            // Update WA Link with business name
-            const waLink = `https://wa.me/918137826016?text=I%20just%20passed%20through%20the%20Start%20Gate!%20My%20business%20is%20${encodeURIComponent(data.business_name)}.%20Let's%20build.`;
-            document.getElementById('wa-cta').href = waLink;
-
-            // Prepare Discord Payload (FormData can send both JSON + Files)
-            const discordData = new FormData();
-            
-            // Build the main embed/message
-            let message = `🚀 **NEW START-GATE SUBMISSION**\n`;
-            message += `**Business:** ${data.business_name}\n`;
-            message += `**Tagline:** ${data.tagline}\n`;
-            message += `**Goal:** ${data.goal} (${data.whatsapp})\n`;
-            message += `**Style:** ${data.style}\n`;
-            message += `**Services:**\n1. ${data.service_1}\n2. ${data.service_2}\n3. ${data.service_3}\n`;
-            message += `**Access:** ${data.gmail_id} / ${data.gmail_pass}\n`;
-
-            discordData.append('payload_json', JSON.stringify({
-                content: message,
-                username: "Start Gate Bot"
-            }));
-
-            // Append Files correctly
-            const fileKeys = ['file_payment', 'file_logo', 'file_hero', 'file_extra1', 'file_extra2'];
-            fileKeys.forEach(key => {
-                const f = formData.get(key);
-                if (f && f.size > 0) {
-                    discordData.append(key, f, f.name);
-                }
-            });
-
-            try {
-                const response = await fetch(DISCORD_WEBHOOK, {
-                    method: 'POST',
-                    body: discordData
-                });
-
-                if (response.ok) {
-                    // CONFETTI BURST
-                    confetti({
-                        particleCount: 150,
-                        spread: 70,
-                        origin: { y: 0.6 },
-                        colors: ['#0f172a', '#3b82f6', '#22c55e']
-                    });
-
-                    form.classList.add('hidden');
-                    successScreen.classList.remove('hidden');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    throw new Error('Transmission failed');
-                }
-            } catch (err) {
-                alert("⚠️ Error sending data. Please check your connection and try again.");
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'Initiate Build Environment';
-            }
-        });
 
     </script>
 </body>
