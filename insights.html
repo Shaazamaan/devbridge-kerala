@@ -289,7 +289,9 @@
         fetch('posts.json')
             .then(r => r.json())
             .then(data => {
-                allPosts = (data.posts || []).filter(p => p.published);
+                allPosts = (data.posts || [])
+                    .filter(p => p.published)
+                    .sort((a, b) => new Date(b.date) - new Date(a.date));
                 renderTagCloud(allPosts);
                 renderPosts(allPosts);
             })
