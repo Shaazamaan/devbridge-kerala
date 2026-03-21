@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Gate | DevBridge Kerala Intake</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hidden-form { display: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden min-h-screen">
+
+    <!-- Scarcity Header -->
+    <div id="scarcity-banner" class="w-full py-3 px-4 text-center font-bold text-sm transition-colors duration-300">
+        <!-- Content injected by JS -->
+    </div>
+
+    <main class="max-w-3xl mx-auto px-6 py-12">
+        <!-- Branding -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-800 tracking-tight text-slate-900 mb-2 uppercase italic">Start Gate</h1>
+            <p class="text-slate-500 font-medium">Professional Intake & Rapid Deployment Portal</p>
+        </div>
+
+        <!-- Success Message (initially hidden) -->
+        <div id="success-screen" class="hidden text-center py-16 bg-white rounded-3xl shadow-xl border border-slate-200">
+            <div class="text-6xl mb-6">✅</div>
+            <h2 class="text-3xl font-800 text-slate-900 mb-4">Challenge Accepted!</h2>
+            <p class="text-xl font-semibold text-green-600 mb-2 text-primary">Timer Active.</p>
+            <p class="text-slate-500 max-w-sm mx-auto">Check WhatsApp +918137826016 for real-time build updates.</p>
+        </div>
+
+        <!-- Main Form -->
+        <form id="intake-form" class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+            <!-- Form Section: Business Details -->
+            <div class="p-8 border-b border-slate-100">
+                <h3 class="text-lg font-700 mb-6 flex items-center gap-2">
+                    <span class="w-2 h-6 bg-slate-900 rounded-full"></span>
+                    1. Identity & Vision
+                </h3>
+                
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-700 text-slate-700 mb-2">Business Name (Max 30 chars) *</label>
+                        <input type="text" name="business_name" maxlength="30" required 
+                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none transition-all"
+                               placeholder="e.g. Blue Shell Cruise">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-700 text-slate-700 mb-2">Main Tagline (Max 60 chars) *</label>
+                        <input type="text" name="tagline" maxlength="60" required 
+                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none transition-all"
+                               placeholder="e.g. Experience the Serenity of Kerala Backwaters">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Section: Services -->
+            <div class="p-8 border-b border-slate-100 bg-slate-50/50">
+                <h3 class="text-lg font-700 mb-6 flex items-center gap-2">
+                    <span class="w-2 h-6 bg-slate-900 rounded-full"></span>
+                    2. Core Offerings
+                </h3>
+                <div class="space-y-4">
+                    <label class="block text-sm font-700 text-slate-700">Top 3 Services (Max 10 words each) *</label>
+                    <input type="text" name="service_1" required maxlength="100" 
+                           class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900" 
+                           placeholder="Service 1 (e.g. Luxury Day Cruises)">
+                    <input type="text" name="service_2" required maxlength="100" 
+                           class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900" 
+                           placeholder="Service 2 (e.g. Overnight Boat Stay)">
+                    <input type="text" name="service_3" required maxlength="100" 
+                           class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900" 
+                           placeholder="Service 3 (e.g. Traditional Onam Meals)">
+                </div>
+            </div>
+
+            <!-- Form Section: Design & Goal -->
+            <div class="p-8 border-b border-slate-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-sm font-700 text-slate-700 mb-4">Website Style *</label>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors">
+                                <input type="radio" name="style" value="Elegant" checked class="w-4 h-4 text-slate-900">
+                                <span class="text-sm font-semibold">Elegant ✨ (Classy, Minimal)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors">
+                                <input type="radio" name="style" value="Modern" class="w-4 h-4 text-slate-900">
+                                <span class="text-sm font-semibold">Modern ⚡ (Bold, Fast)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors">
+                                <input type="radio" name="style" value="Natural" class="w-4 h-4 text-slate-900">
+                                <span class="text-sm font-semibold">Natural 🌿 (Organic, Earthy)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-700 text-slate-700 mb-4">Primary Conversion Goal *</label>
+                        <select name="goal" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900">
+                            <option value="WhatsApp">WhatsApp Message</option>
+                            <option value="Call">Direct Phone Call</option>
+                            <option value="Directions">Google Maps Directions</option>
+                        </select>
+                        <div class="mt-6">
+                            <label class="block text-sm font-700 text-slate-700 mb-2">WhatsApp Number *</label>
+                            <input type="tel" name="whatsapp" required 
+                                   class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900"
+                                   placeholder="+91 ...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Section: Access -->
+            <div class="p-8 border-b border-slate-100 bg-slate-50/50">
+                <h3 class="text-lg font-700 mb-6 flex items-center gap-2">
+                    <span class="w-2 h-6 bg-slate-900 rounded-full"></span>
+                    3. Deployment Access
+                </h3>
+                <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl mb-6 flex gap-3 text-amber-800">
+                    <span class="text-xl">⚠️</span>
+                    <p class="text-xs leading-relaxed font-semibold">
+                        New Gmail create cheyyumbo temporary aayi **2FA off aakki tharanam**. 
+                        Build kazhinju pass change cheyyam.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-700 text-slate-700 mb-2">Build Gmail ID *</label>
+                        <input type="email" name="gmail_id" required 
+                               class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900"
+                               placeholder="yourbuilt@gmail.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-700 text-slate-700 mb-2">Gmail Password *</label>
+                        <input type="text" name="gmail_pass" required 
+                               class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900"
+                               placeholder="Password">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Section: Assets & Payment -->
+            <div class="p-8 border-b border-slate-100">
+                <h3 class="text-lg font-700 mb-6 flex items-center gap-2">
+                    <span class="w-2 h-6 bg-slate-900 rounded-full"></span>
+                    4. Strategic Assets
+                </h3>
+                
+                <div class="mb-8 p-6 bg-slate-900 text-white rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div>
+                        <p class="text-xs uppercase tracking-widest opacity-60 mb-1">UPI Payment Address</p>
+                        <p class="text-xl font-mono font-bold">shaazamaanshaji-2@okhdfcbank</p>
+                    </div>
+                    <div class="text-center md:text-right">
+                        <span class="bg-green-500/20 text-green-400 text-[10px] font-bold px-2 py-1 rounded-full uppercase">Verified Gateway</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Payment Screenshot *</label>
+                        <input type="file" name="file_payment" required accept="image/*" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Business Logo *</label>
+                        <input type="file" name="file_logo" required accept="image/*" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Hero Section Photo *</label>
+                        <input type="file" name="file_hero" required accept="image/*" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Extra Photo 1</label>
+                        <input type="file" name="file_extra1" accept="image/*" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Extra Photo 2</label>
+                        <input type="file" name="file_extra2" accept="image/*" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
+                    </div>
+                </div>
+                <p class="text-[10px] text-slate-400 italic">Max 8MB per file. High resolution preferred.</p>
+            </div>
+
+            <!-- Triple Lock Agreement -->
+            <div class="p-8 bg-slate-900 text-white">
+                <h3 class="text-sm font-800 uppercase tracking-widest mb-6 text-slate-400">Triple Lock Compliance</h3>
+                <div class="space-y-4">
+                    <label class="flex items-start gap-4 p-4 rounded-xl bg-slate-800 hover:bg-slate-800/80 cursor-pointer transition-colors border border-slate-700">
+                        <input type="checkbox" id="lock-1" class="mt-1 w-5 h-5 rounded border-slate-600 bg-slate-700 text-blue-500">
+                        <span class="text-sm font-medium leading-relaxed opacity-90">
+                            I understand the 24-hour guarantee covers the website build. Custom domain (.com/.in) connection depends on the registrar and can take up to 48 hours.
+                        </span>
+                    </label>
+                    <label class="flex items-start gap-4 p-4 rounded-xl bg-slate-800 hover:bg-slate-800/80 cursor-pointer transition-colors border border-slate-700">
+                        <input type="checkbox" id="lock-2" class="mt-1 w-5 h-5 rounded border-slate-600 bg-slate-700 text-blue-500">
+                        <span class="text-sm font-medium leading-relaxed opacity-90">
+                            I have turned OFF 2-Step Verification (2FA) on the new Gmail provided. I understand that being locked out by a "Google Prompt" during the build voids the 24-hour guarantee.
+                        </span>
+                    </label>
+                    <label class="flex items-start gap-4 p-4 rounded-xl bg-slate-800 hover:bg-slate-800/80 cursor-pointer transition-colors border border-slate-700">
+                        <input type="checkbox" id="lock-3" class="mt-1 w-5 h-5 rounded border-slate-600 bg-slate-700 text-blue-500">
+                        <span class="text-sm font-medium leading-relaxed opacity-90">
+                            I understand this is a "Speed Build" with zero manual revisions. Any additional design changes or extra features will be treated as a separate update, with pricing based on project scope.
+                        </span>
+                    </label>
+                </div>
+
+                <div class="mt-10">
+                    <button type="submit" id="submit-btn" disabled 
+                            class="w-full py-5 rounded-2xl bg-white text-slate-900 font-800 text-lg uppercase tracking-wide disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-[1.01] active:scale-[0.98]">
+                        Initiate Build Environment
+                    </button>
+                    <p id="error-msg" class="text-center mt-4 text-rose-400 text-xs font-bold uppercase hidden">⚠️ Please correct file sizes to continue</p>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        // 1. SCARCITY LOGIC
+        const isBusy = false;
+        const banner = document.getElementById('scarcity-banner');
+        if (isBusy) {
+            banner.className = 'w-full py-3 px-4 text-center font-bold text-sm bg-red-100 text-red-800';
+            banner.innerText = '🛑 SLOTS FULL: Finishing today\'s builds. Submit now for Tomorrow\'s Priority List (10 AM Start).';
+        } else {
+            banner.className = 'w-full py-3 px-4 text-center font-bold text-sm bg-green-100 text-green-800';
+            banner.innerText = '✅ ACTIVE: 2 Slots remaining. 24-hour timer starts on submission.';
+        }
+
+        // 2. TRIPLE LOCK LOGIC
+        const locks = [
+            document.getElementById('lock-1'),
+            document.getElementById('lock-2'),
+            document.getElementById('lock-3')
+        ];
+        const submitBtn = document.getElementById('submit-btn');
+
+        function checkLocks() {
+            const allChecked = locks.every(l => l.checked);
+            const hasFileSizeError = document.querySelectorAll('.file-error').length > 0;
+            submitBtn.disabled = !allChecked || hasFileSizeError;
+        }
+
+        locks.forEach(l => l.addEventListener('change', checkLocks));
+
+        // 3. FILE SIZE VALIDATION (8MB LIMIT)
+        const FILE_LIMIT = 8 * 1024 * 1024; // 8MB
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        const errorMsg = document.getElementById('error-msg');
+
+        fileInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                const file = input.files[0];
+                if (file && file.size > FILE_LIMIT) {
+                    input.classList.add('file-error', 'border-rose-500');
+                    alert("⚠️ File too large! Discord limit is 8MB. Please compress.");
+                    errorMsg.classList.remove('hidden');
+                } else {
+                    input.classList.remove('file-error', 'border-rose-500');
+                    if (document.querySelectorAll('.file-error').length === 0) {
+                        errorMsg.classList.add('hidden');
+                    }
+                }
+                checkLocks();
+            });
+        });
+
+        // 4. DISCORD INTEGRATION
+        const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1484903468404572273/U8ka36mWRRgklK3dzFWaqXoJudN9F_Z-S7a9MsCwJzGq8Vcz9FdFtkJnUVuWzVBboaa7";
+        const form = document.getElementById('intake-form');
+        const successScreen = document.getElementById('success-screen');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Transmitting Data...';
+
+            const formData = new FormData(form);
+            
+            // Construct JSON for text fields
+            const data = {};
+            formData.forEach((value, key) => {
+                if (!(value instanceof File)) {
+                    data[key] = value;
+                }
+            });
+
+            // Prepare Discord Payload (FormData can send both JSON + Files)
+            const discordData = new FormData();
+            
+            // Build the main embed/message
+            let message = `🚀 **NEW START-GATE SUBMISSION**\n`;
+            message += `**Business:** ${data.business_name}\n`;
+            message += `**Tagline:** ${data.tagline}\n`;
+            message += `**Goal:** ${data.goal} (${data.whatsapp})\n`;
+            message += `**Style:** ${data.style}\n`;
+            message += `**Services:**\n1. ${data.service_1}\n2. ${data.service_2}\n3. ${data.service_3}\n`;
+            message += `**Access:** ${data.gmail_id} / ${data.gmail_pass}\n`;
+
+            discordData.append('payload_json', JSON.stringify({
+                content: message,
+                username: "Start Gate Bot"
+            }));
+
+            // Append Files correctly
+            const fileKeys = ['file_payment', 'file_logo', 'file_hero', 'file_extra1', 'file_extra2'];
+            fileKeys.forEach(key => {
+                const f = formData.get(key);
+                if (f && f.size > 0) {
+                    discordData.append(key, f, f.name);
+                }
+            });
+
+            try {
+                const response = await fetch(DISCORD_WEBHOOK, {
+                    method: 'POST',
+                    body: discordData
+                });
+
+                if (response.ok) {
+                    form.classList.add('hidden');
+                    successScreen.classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    throw new Error('Transmission failed');
+                }
+            } catch (err) {
+                alert("⚠️ Error sending data. Please check your connection and try again.");
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Initiate Build Environment';
+            }
+        });
+
+    </script>
+</body>
+</html>
