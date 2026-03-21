@@ -6,7 +6,7 @@ def mass_post_today():
     live_path = 'posts.json'
     today = datetime.now().strftime('%Y-%m-%d')
     
-    with open(live_path, 'r', encoding='utf-8') as f:
+    with open(live_path, 'r', encoding='utf-8-sig') as f:
         live = json.load(f)
         
     updated_count = 0
