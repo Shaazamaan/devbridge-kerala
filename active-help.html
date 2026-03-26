@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Help | DevBridge Kerala</title>
+    <meta name="description" content="Whom I am helping right now. Tracking the progress of high-grit professionals and projects securing global roles and investment.">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .active-help-hero {
+            padding: 120px 24px 60px;
+            text-align: center;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+        }
+        .active-help-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-bottom: 16px;
+        }
+        .active-help-hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cases-section {
+            padding: 80px 24px;
+            background: var(--bg-alt);
+        }
+        .case-container {
+            max-width: 1100px;
+            margin: 0 auto 80px;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 60px;
+            align-items: start;
+            padding-bottom: 80px;
+            border-bottom: 1px solid var(--border);
+        }
+        .case-container:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .profile-card {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            position: sticky;
+            top: 100px;
+        }
+        .profile-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        .profile-card .role {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            display: block;
+        }
+        .profile-card .goal {
+            background: #FFFBEB;
+            color: #B45309;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            border: 1px solid #FEF3C7;
+            margin-bottom: 12px;
+        }
+
+        .progress-content h3 {
+            font-size: 2rem;
+            margin-bottom: 32px;
+            font-weight: 700;
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 48px;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -32px;
+            top: 6px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--border);
+            z-index: 1;
+        }
+        .timeline-item.completed .timeline-dot {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        .timeline-item.in-progress .timeline-dot {
+            background: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-light);
+        }
+        .timeline-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .timeline-item p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .status-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+        .status-completed { background: #DCFCE7; color: #166534; }
+        .status-active { background: #DBEAFE; color: #1E40AF; animation: pulse 2s infinite; }
+        .status-upcoming { background: #F3F4F6; color: #4B5563; }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .pitch-card {
+            background: #0B1120;
+            color: white;
+            padding: 24px;
+            border-radius: var(--radius);
+            margin-top: 24px;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--primary);
+        }
+        .pitch-card h5 {
+            color: var(--primary-light);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 850px) {
+            .case-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .profile-card {
+                position: static;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo.png" alt="DevBridge Kerala Logo" class="logo-img">
+                <span class="logo-text">DevBridge Kerala</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#global">Beyond Borders</a>
+                <a href="active-help.html" class="active">Active Help</a>
+                <a href="insights.html">Insights</a>
+                <a href="index.html#apply" class="btn-primary-outline">Apply as Talent</a>
+                <a href="index.html#hire" class="btn-primary">Hire Talent</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="active-help-hero">
+        <span class="badge">Direct Bridges. No Middlemen.</span>
+        <h1>Whom I am helping <span class="highlight">right now</span></h1>
+        <p>A transparent look at the progress of high-grit professionals and high-impact projects currently being supported by DevBridge Kerala.</p>
+    </header>
+
+    <section class="cases-section">
+        <div class="container">
+            <!-- Case 1: Arlin Jose -->
+            <div class="case-container">
+                <div class="profile-card fade-in">
+                    <div style="width: 140px; height: 140px; border-radius: 50%; background: var(--primary-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 3rem; color: var(--primary); font-weight: 800;">
+                        AJ
+                    </div>
+                    <h2>Arlin Jose</h2>
+                    <span class="role">Admin & HR Executive</span>
+                    <span class="goal">Target: UAE (Emirates)</span>
+                    
+                    <div style="margin-top: 24px; text-align: left; font-size: 0.9rem;">
+                        <p style="margin-bottom: 12px;"><strong>Overview:</strong> Dedicated HR professional with an MBA and strong experience in office management and accounting.</p>
+                        <p><strong>Status:</strong> Relocation & Opportunity Sourcing.</p>
+                    </div>
+                </div>
+
+                <div class="progress-content">
+                    <h3>Progress: UAE Career Bridge</h3>
+                    <div class="timeline">
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <h4>Initial Vetting & Alignment <span class="status-badge status-completed">Done</span></h4>
+                            <p>Verified background, identified core strengths in HR operations and financial bookkeeping.</p>
+                        </div>
+
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <h4>Resume & Narrative Optimization <span class="status-badge status-completed">Done</span></h4>
+                            <p>Rebuilt the professional profile to highlight high-grit operational experience for the UAE market.</p>
+                        </div>
+
+                        <div class="timeline-item in-progress">
+                            <div class="timeline-dot"></div>
+                            <h4>Direct Outreach & Network Referral <span class="status-badge status-active">Active</span></h4>
+                            <p>Initiating contact with UAE-based firms and leveraging the DevBridge network for direct intros.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <h4>Interview & Technical Prep <span class="status-badge status-upcoming">Upcoming</span></h4>
+                            <p>Simulating UAE-specific interview scenarios for HR/Admin roles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 2: Shibu Thomas / Cloud Kitchen -->
+            <div class="case-container">
+                <div class="profile-card fade-in">
+                    <div style="width: 140px; height: 140px; border-radius: 50%; background: #0B1120; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 3rem; color: white; font-weight: 800;">
+                        ST
+                    </div>
+                    <h2>Shibu Thomas</h2>
+                    <span class="role">Founder, Cloud Kitchen Project</span>
+                    <span class="goal">Target: VC/Angel Investment</span>
+                    
+                    <div style="margin-top: 24px; text-align: left; font-size: 0.9rem;">
+                        <p style="margin-bottom: 12px;"><strong>Overview:</strong> NRI Keralite (London) launching a scalable Cloud Kitchen + Cafe model in London and India.</p>
+                        <p><strong>Status:</strong> Investment Pitching & Partnership Sourcing.</p>
+                    </div>
+                    <div class="pitch-card">
+                        <h5>The "Crazy" Pitch</h5>
+                        <p>"10% equity offer - ZERO Investment Upfront. Watch me for 12 months. If I fail, you walk away. If I hit £1.5M, we partner."</p>
+                    </div>
+                </div>
+
+                <div class="progress-content">
+                    <h3>Progress: Investment & Scale Bridge</h3>
+                    <div class="timeline">
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <h4>Project Alignment & Pitch Refining <span class="status-badge status-completed">Done</span></h4>
+                            <p>Aligned on the high-grit, aggressive equity model and mapped out the 5-year roadmap to 100+ kitchens.</p>
+                        </div>
+
+                        <div class="timeline-item in-progress">
+                            <div class="timeline-dot"></div>
+                            <h4>Investor Outreach & Networking <span class="status-badge status-active">Active</span></h4>
+                            <p>Exploring probable VC/Angel options that resonate with the "performance-first" equity sharing model.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <h4>Partnership & Pilot Phase <span class="status-badge status-upcoming">Upcoming</span></h4>
+                            <p>Finalizing operating partners for the initial units in London and India (Pilot starting May 2026).</p>
+                        </div>
+                    </div>
+
+                    <div class="jf-warning" style="margin-top: 40px;">
+                        <strong>Note:</strong> DevBridge Kerala assists on an equity-sharing basis for high-conviction projects like this one.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="DevBridge Logo" width="30">
+                <span>DevBridge Kerala</span>
+            </div>
+            <p>&copy; 2026 Shaazamaan Shaji. A personal trust-based initiative.</p>
+            <div class="footer-links mt-2">
+                <a href="index.html">Home</a> | <a href="index.html#about">About</a> | <a href="index.html#how-it-works">Process</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.timeline-item, .profile-card').forEach(el => {
+            el.classList.add('scroll-trigger');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
