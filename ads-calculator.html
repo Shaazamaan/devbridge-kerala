@@ -254,6 +254,34 @@
                         <input type="number" class="dash-input" id="input-saas-lifetime" value="12">
                     </div>
                 </div>
+
+                <!-- NEW: Goal Planner Card -->
+                <div class="dash-card" style="background: #f0fdf4; border-color: #bbf7d0;">
+                    <span class="card-title" style="color: #166534;">Goal Planner</span>
+                    <div class="dash-form-group">
+                        <label>Target Conversions (Leads/Sales)</label>
+                        <input type="number" class="dash-input" id="input-target-conversions" placeholder="0">
+                        <small style="font-size: 0.75rem; color: #166534; display: block; margin-top: 4px;">I need this many results...</small>
+                    </div>
+                </div>
+
+                <!-- Scaling Simulator Card -->
+                <div class="dash-card" style="background: #f1f5f9; border-color: #cbd5e1;">
+                    <span class="card-title" style="color: #475569;">Scaling Simulator</span>
+                    <div class="dash-form-group">
+                        <label>Target Scaling Budget</label>
+                        <input type="number" class="dash-input" id="input-scaling-budget" placeholder="0">
+                        <small style="font-size: 0.75rem; color: #64748b; display: block; margin-top: 4px;">What-if we spent this much?</small>
+                    </div>
+                    <div class="dash-form-group">
+                        <label style="display: flex; justify-content: space-between;">
+                            <span>Scale Friction</span>
+                            <span id="label-friction">20%</span>
+                        </label>
+                        <input type="range" id="input-friction" min="0" max="100" value="20" style="width: 100%; cursor: pointer;">
+                        <small style="font-size: 0.7rem; color: #64748b; display: block; margin-top: 4px;">Projected CPA increase as you scale.</small>
+                    </div>
+                </div>
             </div>
 
             <!-- Dashboard Result Area -->
@@ -310,6 +338,70 @@
                         <span class="card-title">YouTube Projection</span>
                         <div id="comp-yt-metrics" style="line-height: 1.8; font-size: 0.875rem;"></div>
                     </div>
+                </div>
+
+                <!-- NEW: Scaling Projection Results -->
+                <div id="scaling-results-card" class="dash-card" style="display: none; border: 2px solid var(--primary); background: linear-gradient(to bottom right, #ffffff, #f0f9ff);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem;">
+                        <span class="card-title" style="color: var(--primary); margin-bottom: 0;">Scaling Projection Analysis</span>
+                        <span class="metric-badge badge-good" id="scaling-status" style="margin-top:0">SCALABLE</span>
+                    </div>
+                    <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+                        <div class="metric-card" style="background:transparent; border: 1px solid #bae6fd;">
+                            <div class="metric-label">Proj. Conversions</div>
+                            <div class="metric-value" id="proj-conversions">0</div>
+                            <div class="metric-badge" id="proj-cpa-badge" style="background:#f1f5f9; color:#475569;">CPA: $0.00</div>
+                        </div>
+                        <div class="metric-card" style="background:transparent; border: 1px solid #bae6fd;">
+                            <div class="metric-label">Proj. Revenue</div>
+                            <div class="metric-value" id="proj-revenue">$0.00</div>
+                        </div>
+                        <div class="metric-card" style="background:transparent; border: 1px solid #bae6fd;">
+                            <div class="metric-label">Proj. Net Profit</div>
+                            <div class="metric-value" id="proj-profit" style="color:var(--primary);">$0.00</div>
+                        </div>
+                        <div class="metric-card" style="background:transparent; border: 1px solid #bae6fd;">
+                            <div class="metric-label">Efficiency Delta</div>
+                            <div class="metric-value" id="proj-roas">0.00x</div>
+                            <div class="metric-badge" id="proj-friction-badge" style="background:#fee2e2; color:#991b1b;">-20% EFF</div>
+                        </div>
+                    </div>
+                    <p id="scaling-summary" style="margin-top: 1.5rem; font-size: 0.875rem; color: var(--text-muted); padding: 1rem; background: #fff; border-radius: var(--radius); border: 1px solid #e0f2fe;">
+                        Enter a target budget to see how your efficiency might hold up at scale.
+                    </p>
+                </div>
+
+                <!-- NEW: Goal Planner Results -->
+                <div id="goal-results-card" class="dash-card" style="display: none; border: 2px solid #22c55e; background: linear-gradient(to bottom right, #ffffff, #f0fdf4);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem;">
+                        <span class="card-title" style="color: #166534; margin-bottom: 0;">Goal Strategy: Reverse-Engineered</span>
+                        <span class="metric-badge badge-good" style="margin-top:0; background:#dcfce7; color:#166534;">TARGETING PLAN</span>
+                    </div>
+                    <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+                        <div class="metric-card" style="background:transparent; border: 1px solid #bbf7d0;">
+                            <div class="metric-label">Minimum Budget</div>
+                            <div class="metric-value" id="goal-budget" style="color:#166534;">$0.00</div>
+                            <div class="metric-badge" style="background:#f1f5f9; color:#475569;">BASED ON CPA</div>
+                        </div>
+                        <div class="metric-card" style="background:transparent; border: 1px solid #bbf7d0;">
+                            <div class="metric-label">Required Clicks</div>
+                            <div class="metric-value" id="goal-clicks">0</div>
+                            <div class="metric-badge" style="background:#f1f5f9; color:#475569;" id="goal-cvr">0.00% CVR</div>
+                        </div>
+                        <div class="metric-card" style="background:transparent; border: 1px solid #bbf7d0;">
+                            <div class="metric-label">Required Traffic</div>
+                            <div class="metric-value" id="goal-impressions">0</div>
+                            <div class="metric-badge" style="background:#f1f5f9; color:#475569;" id="goal-ctr">0.00% CTR</div>
+                        </div>
+                        <div class="metric-card" style="background:transparent; border: 1px solid #bbf7d0;">
+                            <div class="metric-label">Est. Revenue</div>
+                            <div class="metric-value" id="goal-revenue">$0.00</div>
+                            <div class="metric-badge" style="background:#f1f5f9; color:#475569;">TOP LINE</div>
+                        </div>
+                    </div>
+                    <p id="goal-summary" style="margin-top: 1.5rem; font-size: 0.875rem; color: var(--text-muted); padding: 1rem; background: #fff; border-radius: var(--radius); border: 1px solid #dcfce7;">
+                        Enter your target conversions to see the roadmap to get there.
+                    </p>
                 </div>
 
                 <div class="dash-card" style="margin-top: 1.5rem;">
@@ -374,7 +466,9 @@
             inputs: {
                 budget: 0, spend: 0, impressions: 0, clicks: 0, linkClicks: 0, reach: 0, conversions: 0,
                 revenue: 0, ytViews: 0, margin: 30, dealValue: 0, closeRate: 10, saasTicket: 0,
-                saasLifetime: 12, ytFormat: 'skippable'
+                saasLifetime: 12, ytFormat: 'skippable',
+                scalingBudget: 0, friction: 20,
+                targetConversions: 0
             },
             results: {}
         };
@@ -408,6 +502,10 @@
                     if (id.startsWith('input-')) {
                         const key = id.replace('input-', '').replace(/-([a-z])/g, (g) => g[1].toUpperCase());
                         dashState.inputs[key] = parseFloat(e.target.value) || 0;
+                    }
+                    if (id === 'input-friction') {
+                        dashState.inputs.friction = parseInt(e.target.value);
+                        document.getElementById('label-friction').textContent = e.target.value + '%';
                     }
                     if (id === 'platform-select') dashState.platform = e.target.value;
                     if (id === 'model-select') dashState.model = e.target.value;
@@ -473,6 +571,40 @@
             if (dashState.model === 'ecommerce' || dashState.model === 'service') r.breakEvenRoas = i.margin > 0 ? (100 / i.margin) : 0;
             else if (dashState.model === 'saas') r.breakEvenRoas = i.margin > 0 ? (100 / i.margin) : 0;
             else r.breakEvenRoas = 1.0;
+
+            // SCALING PROJECTION LOGIC
+            if (i.scalingBudget > 0 && i.spend > 0) {
+                const multiplier = i.scalingBudget / i.spend;
+                // Efficiency drop: Pro-rata increase in CPA
+                const efficiencyPenalty = 1 + (i.friction / 100) * (multiplier - 1);
+                r.scalingCpa = r.cpa * efficiencyPenalty;
+                r.scalingConversions = i.scalingBudget / r.scalingCpa;
+                r.scalingRevenue = r.scalingConversions * (i.revenue / (i.conversions || 1));
+                r.scalingRoas = r.scalingRevenue / i.scalingBudget;
+                r.scalingProfit = (r.scalingRevenue * (i.margin / 100)) - i.scalingBudget;
+                if (dashState.model === 'leadgen') {
+                    const deals = r.scalingConversions * (i.closeRate / 100);
+                    r.scalingRevenue = deals * i.dealValue;
+                    r.scalingProfit = r.scalingRevenue - i.scalingBudget;
+                    r.scalingRoas = r.scalingRevenue / i.scalingBudget;
+                }
+            }
+
+            // GOAL PLANNER LOGIC
+            if (i.targetConversions > 0) {
+                // Use current performance or safe benchmarks
+                const planCpa = (r.cpa > 0) ? r.cpa : (dashState.model === 'leadgen' ? 25 : 45);
+                const planCvr = (r.cvr > 0) ? r.cvr : 2.5;
+                const planCtr = (r.ctr > 0) ? r.ctr : 1.2;
+
+                r.goalBudget = i.targetConversions * planCpa;
+                r.goalClicks = i.targetConversions / (planCvr / 100);
+                r.goalImpressions = r.goalClicks / (planCtr / 100);
+                r.goalRevenue = i.targetConversions * (i.revenue / (i.conversions || 1));
+                if (dashState.model === 'leadgen') {
+                    r.goalRevenue = i.targetConversions * (i.closeRate / 100) * i.dealValue;
+                }
+            }
         }
 
         function formatC(val) { return dashState.currencySymbol + val.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
@@ -520,6 +652,54 @@
             if (cv > 2) { bC.textContent = 'GOOD'; bC.className = 'metric-badge badge-good'; }
             else if (cv >= 1) { bC.textContent = 'AVG'; bC.className = 'metric-badge badge-average'; }
             else { bC.textContent = 'POOR'; bC.className = 'metric-badge badge-poor'; }
+
+            // RENDER SCALING CARD
+            const sCard = document.getElementById('scaling-results-card');
+            if (i.scalingBudget > 0 && i.spend > 0) {
+                sCard.style.display = 'block';
+                document.getElementById('proj-conversions').textContent = Math.floor(r.scalingConversions || 0);
+                document.getElementById('proj-revenue').textContent = formatC(r.scalingRevenue || 0);
+                document.getElementById('proj-profit').textContent = formatC(r.scalingProfit || 0);
+                document.getElementById('proj-roas').textContent = (r.scalingRoas || 0).toFixed(2) + 'x';
+                document.getElementById('proj-cpa-badge').textContent = `CPA: ${formatC(r.scalingCpa)}`;
+                document.getElementById('proj-friction-badge').textContent = `-${i.friction}% EFF`;
+                
+                const sStatus = document.getElementById('scaling-status');
+                const sSummary = document.getElementById('scaling-summary');
+                if (r.scalingProfit <= 0) {
+                    sStatus.textContent = 'CAUTION'; sStatus.className = 'metric-badge badge-poor';
+                    sSummary.textContent = `At a ${formatC(i.scalingBudget)} budget, your projected profits vanish due to the efficiency drop. Scale slower or improve unit economics first.`;
+                } else if (r.scalingRoas < r.breakEvenRoas) {
+                    sStatus.textContent = 'THIN MARGIN'; sStatus.className = 'metric-badge badge-average';
+                    sSummary.textContent = `You remain profitable in absolute terms, but your ROAS slips below your target. Watch your cash flow carefully.`;
+                } else {
+                    sStatus.textContent = 'SCALABLE'; sStatus.className = 'metric-badge badge-good';
+                    sSummary.textContent = `Efficiency is projected to hold up well. Scaling to ${formatC(i.scalingBudget)} could yield ${formatC(r.scalingProfit)} in net profit.`;
+                }
+            } else {
+                sCard.style.display = 'none';
+            }
+
+            // RENDER GOAL CARD
+            const gCard = document.getElementById('goal-results-card');
+            if (i.targetConversions > 0) {
+                gCard.style.display = 'block';
+                document.getElementById('goal-budget').textContent = formatC(r.goalBudget);
+                document.getElementById('goal-clicks').textContent = Math.floor(r.goalClicks).toLocaleString();
+                document.getElementById('goal-impressions').textContent = Math.floor(r.goalImpressions).toLocaleString();
+                document.getElementById('goal-revenue').textContent = formatC(r.goalRevenue || 0);
+                document.getElementById('goal-cvr').textContent = (r.cvr > 0 ? r.cvr : 2.5).toFixed(2) + '% CVR';
+                document.getElementById('goal-ctr').textContent = (r.ctr > 0 ? r.ctr : 1.2).toFixed(2) + '% CTR';
+                
+                const gSummary = document.getElementById('goal-summary');
+                if (r.cpa > 0) {
+                    gSummary.textContent = `To hit ${i.targetConversions} conversions based on your actual performance, you'll need to generate ~${Math.floor(r.goalClicks).toLocaleString()} clicks. Prepare a minimum budget of ${formatC(r.goalBudget)}.`;
+                } else {
+                    gSummary.textContent = `Since no spend data is present, we've used industry benchmarks for your business model. You'll need roughly ${formatC(r.goalBudget)} to acquire ${i.targetConversions} customers/leads.`;
+                }
+            } else {
+                gCard.style.display = 'none';
+            }
         }
 
         function generateInsights() {
