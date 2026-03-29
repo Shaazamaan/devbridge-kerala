@@ -226,7 +226,7 @@
     <div id="loading-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-white/80 hidden">
         <div class="text-center">
             <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-            <p class="font-800 text-slate-900 uppercase tracking-widest text-xs">Uploading Strategic Assets...</p>
+            <p id="loading-text" class="font-800 text-slate-900 uppercase tracking-widest text-xs">Uploading Strategic Assets...</p>
         </div>
     </div>
 
@@ -281,27 +281,21 @@
             // 4. Submission Handler
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                loadingOverlay.classList.remove('hidden');
-                submitBtn.innerText = "UPLOADING ASSETS... CLOCK STARTING";
+                const loader = document.getElementById('loading-overlay');
+                const loaderText = document.getElementById('loading-text');
+                
+                loader.classList.remove('hidden');
+                submitBtn.innerText = "TRANSMITTING...";
+                loaderText.innerText = "Compressing Strategic Assets...";
 
                 const formData = new FormData(form);
                 const payload = {};
                 formData.forEach((value, key) => { if (!(value instanceof File)) payload[key] = value; });
 
-                // --- 4.1 DRIVE PERSISTENCE (JSON w/ Base64) ---
+                // --- 4.1 DATA PREPARATION ---
                 const fileFields = ['file_payment', 'file_logo', 'file_hero', 'file_extra1', 'file_extra2'];
-                const driveFiles = [];
-                for(let field of fileFields) {
-                    const f = formData.get(field);
-                    if(f && f.size > 0) {
-                        const b64 = await toBase64(f);
-                        driveFiles.push({ name: f.name, type: f.type, base64: b64 });
-                    }
-                }
                 
-                const drivePayload = { ...payload, files: driveFiles };
-
-                // --- 4.2 DISCORD MESSAGE ---
+                // Discord Message
                 let msg = `🚀 **NEW START-GATE SUBMISSION**\n\n`;
                 msg += `**1. IDENTITY**\n• Business: ${payload.businessName}\n• Tagline: ${payload.tagline}\n\n`;
                 msg += `**2. SERVICES**\n• ${payload.service1}\n• ${payload.service2}\n• ${payload.service3}\n\n`;
@@ -317,24 +311,41 @@
                 });
 
                 try {
-                    // Send to Drive & Discord parallely
-                    const [resDrive, resDiscord] = await Promise.all([
-                        fetch(DRIVE_SCRIPT_URL, { 
-                            method: 'POST', 
-                            mode: 'no-cors', // Apps Script requires no-cors + POST 
-                            body: JSON.stringify(drivePayload) 
-                        }),
-                        fetch(DISCORD_WEBHOOK, { method: 'POST', body: discordBody })
-                    ]);
+                    // STEP 1: DISCORD (Fastest path to verification)
+                    loaderText.innerText = "Step 1/2: Notifying Strategic Command (Discord)...";
+                    const resDiscord = await fetch(DISCORD_WEBHOOK, { method: 'POST', body: discordBody });
+                    
+                    if (!resDiscord.ok) throw new Error("Discord Fail");
 
-                    // Success Handlers
-                    loadingOverlay.classList.add('hidden');
+                    // OPTIMISTIC SUCCESS: Show confetti and success modal immediately
+                    loader.classList.add('hidden');
                     successModal.classList.remove('hidden');
                     confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#3b82f6', '#0f172a', '#10b981'] });
+
+                    // STEP 2: GOOGLE DRIVE (Archival in background)
+                    // We don't await this so the user can see their success screen immediately
+                    (async () => {
+                        try {
+                            const driveFiles = [];
+                            for(let field of fileFields) {
+                                const f = formData.get(field);
+                                if(f && f.size > 0) {
+                                    const b64 = await toBase64(f);
+                                    driveFiles.push({ name: f.name, type: f.type, base64: b64 });
+                                }
+                            }
+                            await fetch(DRIVE_SCRIPT_URL, { 
+                                method: 'POST', 
+                                mode: 'no-cors', 
+                                body: JSON.stringify({ ...payload, files: driveFiles }) 
+                            });
+                        } catch (e) { console.error("Background archival failed", e); }
+                    })();
+
                 } catch (err) {
                     console.error(err);
                     alert("⚠️ Transmission Interference. Please check your signal and retry.");
-                    loadingOverlay.classList.add('hidden');
+                    loader.classList.add('hidden');
                     submitBtn.innerText = "INITIATE BUILD ENVIRONMENT";
                 }
             });
