@@ -3,503 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Start Gate | DevBridge Kerala Intake</title>
+    <title>START GATE | DevBridge Kerala intake</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .hidden-form { display: none; }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); }
+        @keyframes pulse-slow { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        .pulse { animation: pulse-slow 2s infinite; }
+        input[type="file"]::file-selector-button {
+            background-color: #0f172a; color: white; border: none; padding: 8px 16px; 
+            border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.75rem; 
+            margin-right: 12px; transition: all 0.2s;
+        }
+        input[type="file"]::file-selector-button:hover { background-color: #1e293b; }
+        .custom-check:checked { background-color: #3b82f6; border-color: #3b82f6; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 overflow-x-hidden min-h-screen">
+<body class="bg-slate-50 text-slate-900 min-h-screen">
 
-    <!-- Scarcity Header -->
-    <div id="scarcity-banner" class="w-full py-3 px-4 text-center font-bold text-sm transition-colors duration-300">
-        <!-- Content injected by JS -->
-    </div>
+    <!-- Header -->
+    <header class="glass sticky top-0 z-40 border-b border-slate-200 py-6 px-6">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-left">
+                <h1 class="text-2xl font-800 tracking-tight text-slate-900 uppercase italic">Start Gate</h1>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Professional Intake & Rapid Deployment Portal</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="bg-slate-900 text-white px-4 py-2 rounded-xl text-center shadow-lg">
+                    <p class="text-[9px] font-bold opacity-60 uppercase">Clock ticking</p>
+                    <p class="text-xl font-800 font-mono" id="timer">04:22:04</p>
+                </div>
+                <div class="bg-amber-100 text-amber-800 px-4 py-2 rounded-xl text-center border border-amber-200">
+                    <p class="text-[9px] font-bold uppercase">Priority Status</p>
+                    <p class="text-xs font-800 pulse">Waitlist: 2 Slots Remaining</p>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <main class="max-w-3xl mx-auto px-6 py-12">
-        <!-- Branding -->
-        <div class="text-center mb-10">
-            <h1 class="text-4xl font-800 tracking-tight text-slate-900 mb-2 uppercase italic">Start Gate</h1>
-            <p class="text-slate-500 font-medium mb-2">Professional Intake & Rapid Deployment Portal</p>
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">
-                An initiative by <a href="https://hashcovet.com" target="_blank" class="text-slate-900 border-b border-slate-900 hover:text-blue-600 hover:border-blue-600 transition-all">Hashcovet.com</a>
-            </p>
-        </div>
-
-        <!-- Waitlist Status -->
-        <div class="grid grid-cols-2 gap-4 mb-8">
-            <div class="bg-white p-4 rounded-2xl border border-slate-200 text-center shadow-sm">
-                <p class="text-[10px] font-bold text-slate-400 uppercase">Waitlist List</p>
-                <p class="text-2xl font-800 text-slate-900">14 <span class="text-sm font-medium opacity-50">Units</span></p>
-            </div>
-            <div id="countdown-card" class="bg-slate-900 p-4 rounded-2xl text-center shadow-lg text-white">
-                <p class="text-[10px] font-bold opacity-60 uppercase">Expiring In</p>
-                <p class="text-2xl font-800" id="timer">04:22:15</p>
-            </div>
-        </div>
-
-        <!-- Success Message (initially hidden) -->
-        <div id="success-screen" class="hidden text-center py-16 bg-white rounded-3xl shadow-xl border border-slate-200 px-6">
-            <div class="mb-6 flex justify-center">
-                <dotlottie-player id="lottie-success" src="https://lottie.host/80e3c158-5d2b-4d4b-a2ed-42b78b871981/76H6y6r58z.json" background="transparent" speed="1" style="width: 150px; height: 150px;" loop autoplay></dotlottie-player>
-            </div>
-            <h2 class="text-3xl font-800 text-slate-900 mb-4 uppercase tracking-tight">Challenge Accepted!</h2>
-            <p class="text-xl font-semibold text-blue-600 mb-6 uppercase tracking-wider">Timer Active.</p>
-            <p class="text-slate-500 max-w-sm mx-auto mb-10 text-sm font-medium">I have received your strategic assets. The 24-hour build clock is now ticking.</p>
+        <form id="intake-form" class="space-y-8">
             
-            <a id="wa-cta" href="#" target="_blank" class="inline-flex items-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-2xl font-800 text-lg hover:scale-105 transition-all shadow-lg hover:shadow-[#25D366]/30">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.938 3.659 1.434 5.632 1.434h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Confirm via WhatsApp
-            </a>
-        </div>
-
-        <!-- Main Form -->
-        <form id="intake-form" class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
-            <!-- Form Section: Business Details -->
-            <div class="p-8 border-b border-slate-100">
-                <h3 class="text-lg font-700 mb-6 flex items-center gap-2">
-                    <span class="w-2 h-6 bg-slate-900 rounded-full"></span>
+            <!-- Section 1: Identity -->
+            <section class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
+                <h3 class="text-sm font-800 uppercase tracking-widest text-blue-600 mb-6 flex items-center gap-2">
+                    <span class="w-2 h-4 bg-blue-600 rounded-full"></span>
                     1. Identity & Vision
                 </h3>
-                
-                <div class="space-y-6">
+                <div class="grid gap-6">
                     <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <label class="block text-sm font-700 text-slate-700">Business Name *</label>
-                            <span id="counter-name" class="text-[10px] font-bold text-slate-400 uppercase">0/30</span>
-                        </div>
-                        <input type="text" name="business_name" id="name-input" maxlength="30" required 
-                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none transition-all"
-                               placeholder="Enter Business Name">
+                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Business Name *</label>
+                        <input type="text" name="businessName" required 
+                               class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium"
+                               placeholder="e.g. Nexus Digital">
                     </div>
                     <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <label class="block text-sm font-700 text-slate-700">Main Tagline *</label>
-                            <span id="counter-tagline" class="text-[10px] font-bold text-slate-400 uppercase">0/60</span>
-                        </div>
-                        <input type="text" name="tagline" id="tagline-input" maxlength="60" required 
-                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none transition-all"
-                               placeholder="e.g. We Build Products That Scale Worldwide">
+                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Main Tagline / Slogan *</label>
+                        <input type="text" name="tagline" required 
+                               class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium"
+                               placeholder="e.g. Scaling Commerce Globally">
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Form Section: Services -->
-            <div class="p-8 border-b border-slate-100 bg-slate-50/50">
-                <h3 class="text-lg font-700 mb-6 flex items-center gap-2">
-                    <span class="w-2 h-6 bg-slate-900 rounded-full"></span>
+            <!-- Section 2: Core Offerings -->
+            <section class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
+                <h3 class="text-sm font-800 uppercase tracking-widest text-blue-600 mb-6 flex items-center gap-2">
+                    <span class="w-2 h-4 bg-blue-600 rounded-full"></span>
                     2. Core Offerings
                 </h3>
-                <div class="space-y-4">
-                    <label class="block text-sm font-700 text-slate-700">Top 3 Services (Max 10 words each) *</label>
-                    <input type="text" name="service_1" required maxlength="100" 
-                           class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900" 
-                           placeholder="Service 1 (e.g. Custom Software Development)">
-                    <input type="text" name="service_2" required maxlength="100" 
-                           class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900" 
-                           placeholder="Service 2 (e.g. Strategic Brand Consulting)">
-                    <input type="text" name="service_3" required maxlength="100" 
-                           class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900" 
-                           placeholder="Service 3 (e.g. Managed Cloud Infrastructure)">
-                </div>
-            </div>
-
-            <!-- Form Section: Design & Goal -->
-            <div class="p-8 border-b border-slate-100">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <label class="block text-sm font-700 text-slate-700 mb-4">Website Style *</label>
-                        <div class="space-y-3">
-                            <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors">
-                                <input type="radio" name="style" value="Elegant" checked class="w-4 h-4 text-slate-900">
-                                <span class="text-sm font-semibold">Elegant ✨ (Classy, Minimal)</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors">
-                                <input type="radio" name="style" value="Modern" class="w-4 h-4 text-slate-900">
-                                <span class="text-sm font-semibold">Modern ⚡ (Bold, Fast)</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors">
-                                <input type="radio" name="style" value="Natural" class="w-4 h-4 text-slate-900">
-                                <span class="text-sm font-semibold">Natural 🌿 (Organic, Earthy)</span>
-                            </label>
-                        </div>
+                <div class="space-y-6">
+                    <div class="grid gap-3">
+                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider">Top 3 Services (Max 10 words each) *</label>
+                        <input type="text" name="service1" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="Service 1">
+                        <input type="text" name="service2" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="Service 2">
+                        <input type="text" name="service3" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="Service 3">
                     </div>
-                    <div>
-                        <label class="block text-sm font-700 text-slate-700 mb-4">Primary Conversion Goal *</label>
-                        <select name="goal" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900">
-                            <option value="WhatsApp">WhatsApp Message</option>
-                            <option value="Call">Direct Phone Call</option>
-                            <option value="Directions">Google Maps Directions</option>
-                        </select>
-                        <div class="mt-6">
-                            <label class="block text-sm font-700 text-slate-700 mb-2">WhatsApp Number *</label>
-                            <input type="tel" name="whatsapp" required 
-                                   class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900"
-                                   placeholder="+91 ...">
+
+                    <div class="grid md:grid-cols-2 gap-8 pt-4">
+                        <div>
+                            <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-4">Website Style *</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
+                                    <input type="radio" name="style" value="Elegant" checked class="w-4 h-4 text-blue-600">
+                                    <span class="text-sm font-semibold">Elegant 💅</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
+                                    <input type="radio" name="style" value="Modern" class="w-4 h-4 text-blue-600">
+                                    <span class="text-sm font-semibold">Modern ⚡</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
+                                    <input type="radio" name="style" value="Natural" class="w-4 h-4 text-blue-600">
+                                    <span class="text-sm font-semibold">Natural 🌿</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-4">Primary Conversion Goal *</label>
+                            <select name="goal" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium appearance-none bg-slate-50">
+                                <option value="WhatsApp">WhatsApp Message</option>
+                                <option value="Call">Phone Call</option>
+                                <option value="Form">Form Fill</option>
+                            </select>
+                            <div class="mt-6">
+                                <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">WhatsApp Number *</label>
+                                <input type="tel" name="whatsapp" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="+91 ...">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Form Section: Access -->
-            <div class="p-8 border-b border-slate-100 bg-slate-50/50">
-                <h3 class="text-lg font-700 mb-6 flex items-center gap-2">
-                    <span class="w-2 h-6 bg-slate-900 rounded-full"></span>
-                    3. Deployment Access
+            <!-- Section 3: Deployment Access -->
+            <section class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
+                <h3 class="text-sm font-800 uppercase tracking-widest text-blue-600 mb-6 flex items-center gap-2">
+                    <span class="w-2 h-4 bg-blue-600 rounded-full"></span>
+                    3. Deployment & Handover Access
                 </h3>
-                <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl mb-6 flex gap-3 text-amber-800">
-                    <span class="text-xl">⚠️</span>
+                <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl mb-6 flex gap-3 text-blue-800">
+                    <span class="text-xl">ℹ️</span>
                     <p class="text-xs leading-relaxed font-semibold">
-                        Please **CREATE A NEW GMAIL ACCOUNT** specifically for this build. 
-                        Temporary aayi **2FA off aakki tharanam**. 
-                        Build kazhinju pass change cheyyam.
+                        Phase 1 Build: Your site will first be deployed to our high-speed staging servers for review.
                     </p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-700 text-slate-700 mb-2">Build Gmail ID *</label>
-                        <input type="email" name="gmail_id" required 
-                               class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900"
-                               placeholder="yourbuilt@gmail.com">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-700 text-slate-700 mb-2">Gmail Password *</label>
-                        <input type="text" name="gmail_pass" required 
-                               class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900"
-                               placeholder="Password">
+                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Primary Email Address *</label>
+                        <input type="email" name="email" id="email-input" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="name@company.com">
+                        <p class="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-tight">We will use this email to coordinate the final code handover and custom domain setup AFTER the remaining ₹900 balance is paid.</p>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Form Section: Assets & Payment -->
-            <div class="p-8 border-b border-slate-100">
-                <h3 class="text-lg font-700 mb-6 flex items-center gap-2">
-                    <span class="w-2 h-6 bg-slate-900 rounded-full"></span>
-                    4. Strategic Assets
+            <!-- Section 4: Assets & Payment -->
+            <section class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
+                <h3 class="text-sm font-800 uppercase tracking-widest text-blue-600 mb-6 flex items-center gap-2">
+                    <span class="w-2 h-4 bg-blue-600 rounded-full"></span>
+                    4. Strategic Assets & Payment
                 </h3>
                 
-                <div class="mb-4">
-                    <a href="upi://pay?pa=shaazamaanshaji-2@okhdfcbank&pn=DevBridge%20Kerala&cu=INR&am=100" 
-                       class="p-6 bg-slate-900 text-white rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 hover:bg-slate-800 transition-colors group">
-                        <div>
-                            <p class="text-xs uppercase tracking-widest opacity-60 mb-1">UPI Payment Address (Pay ₹100 Advance)</p>
-                            <p class="text-xl font-mono font-bold group-hover:text-blue-400">shaazamaanshaji-2@okhdfcbank</p>
-                        </div>
-                        <div class="text-center md:text-right">
-                            <span class="bg-green-500/20 text-green-400 text-[10px] font-bold px-3 py-1.5 rounded-full uppercase border border-green-500/30">Tap to Pay ₹100 ✨</span>
-                        </div>
-                    </a>
-                    <button type="button" onclick="copyUPI()" class="mt-2 w-full text-center text-[10px] font-bold uppercase text-slate-400 hover:text-slate-900 transition-colors tracking-widest py-2">
-                        <span id="copy-text">Or Click here to Copy UPI ID</span>
+                <div class="mb-8 p-6 bg-slate-900 text-white rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 border-l-4 border-blue-500 group">
+                    <div class="text-center md:text-left">
+                        <p class="text-[10px] uppercase tracking-widest opacity-60 mb-1 font-bold">Secure Your 24-Hour Slot</p>
+                        <p class="text-lg font-mono font-bold text-blue-400 select-all">shaazamaanshaji-2@okhdfcbank</p>
+                        <p class="text-[9px] uppercase font-bold mt-1 text-slate-400 italic">Pay ₹100 Advance to start gate</p>
+                    </div>
+                    <button type="button" onclick="copyUPI()" class="bg-blue-500 hover:bg-blue-600 text-white text-[11px] font-800 px-6 py-3 rounded-xl transition-all uppercase shadow-lg shadow-blue-500/30 active:scale-95 whitespace-nowrap">
+                        <span id="copy-text">Copy UPI ID</span>
                     </button>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4 mt-8">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Payment Screenshot *</label>
-                        <input type="file" name="file_payment" required accept="image/*" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Business Logo *</label>
-                        <div class="flex items-center gap-4">
-                            <input type="file" name="file_logo" required accept="image/*" onchange="previewFile(this, 'preview-logo')" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
-                            <div id="preview-logo" class="w-10 h-10 rounded-lg bg-slate-100 hidden overflow-hidden border border-slate-200">
-                                <img src="" class="w-full h-full object-cover">
-                            </div>
+                <div class="grid gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                            <label class="block text-xs font-800 text-slate-500 uppercase mb-3">Payment Screenshot *</label>
+                            <input type="file" name="file_payment" required accept="image/*" class="w-full text-xs">
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                            <label class="block text-xs font-800 text-slate-500 uppercase mb-3">Business Logo *</label>
+                            <input type="file" name="file_logo" required accept="image/*" class="w-full text-xs">
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Hero Section Photo *</label>
-                        <div class="flex items-center gap-4">
-                            <input type="file" name="file_hero" required accept="image/*" onchange="previewFile(this, 'preview-hero')" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
-                            <div id="preview-hero" class="w-10 h-10 rounded-lg bg-slate-100 hidden overflow-hidden border border-slate-200">
-                                <img src="" class="w-full h-full object-cover">
-                            </div>
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                        <label class="block text-xs font-800 text-slate-500 uppercase mb-3">Hero Section Photo *</label>
+                        <input type="file" name="file_hero" required accept="image/*" class="w-full text-xs">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                            <label class="block text-xs font-800 text-slate-400 uppercase mb-3">Extra Photo 1 (Optional)</label>
+                            <input type="file" name="file_extra1" accept="image/*" class="w-full text-xs">
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                            <label class="block text-xs font-800 text-slate-400 uppercase mb-3">Extra Photo 2 (Optional)</label>
+                            <input type="file" name="file_extra2" accept="image/*" class="w-full text-xs">
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Extra Photo 1</label>
-                        <input type="file" name="file_extra1" accept="image/*" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Extra Photo 2</label>
-                        <input type="file" name="file_extra2" accept="image/*" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200">
-                    </div>
                 </div>
-                <p class="text-[10px] text-slate-400 italic">Max 8MB per file. High resolution preferred.</p>
-            </div>
+            </section>
 
-            <!-- Triple Lock Agreement -->
-            <div class="p-8 bg-slate-900 text-white">
-                <h3 class="text-sm font-800 uppercase tracking-widest mb-6 text-slate-400">Triple Lock Compliance</h3>
-                <div class="space-y-4">
-                    <label class="flex items-start gap-4 p-4 rounded-xl bg-slate-800 hover:bg-slate-800/80 cursor-pointer transition-colors border border-slate-700">
-                        <input type="checkbox" id="lock-1" class="mt-1 w-5 h-5 rounded border-slate-600 bg-slate-700 text-blue-500">
-                        <span class="text-sm font-medium leading-relaxed opacity-90">
-                            I understand the 24-hour guarantee covers the website build. Custom domain (.com/.in) connection depends on the registrar and can take up to 48 hours.
-                        </span>
-                    </label>
-                    <label class="flex items-start gap-4 p-4 rounded-xl bg-slate-800 hover:bg-slate-800/80 cursor-pointer transition-colors border border-slate-700">
-                        <input type="checkbox" id="lock-2" class="mt-1 w-5 h-5 rounded border-slate-600 bg-slate-700 text-blue-500">
-                        <span class="text-sm font-medium leading-relaxed opacity-90">
-                            I have turned OFF 2-Step Verification (2FA) on the new Gmail provided. I understand that being locked out by a "Google Prompt" during the build voids the 24-hour guarantee.
-                        </span>
-                    </label>
-                    <label class="flex items-start gap-4 p-4 rounded-xl bg-slate-800 hover:bg-slate-800/80 cursor-pointer transition-colors border border-slate-700">
-                        <input type="checkbox" id="lock-3" class="mt-1 w-5 h-5 rounded border-slate-600 bg-slate-700 text-blue-500">
-                        <span class="text-sm font-medium leading-relaxed opacity-90">
-                            I understand this is a "Speed Build" with zero manual revisions. Any additional design changes or extra features will be treated as a separate update, with pricing based on project scope.
-                        </span>
-                    </label>
-                </div>
+            <!-- Section 5: Compliance -->
+            <section class="bg-slate-900 text-white p-8 rounded-3xl shadow-2xl space-y-5">
+                <h3 class="text-xs font-800 uppercase tracking-widest text-slate-400 mb-2">Triple Lock Compliance</h3>
+                <label class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors">
+                    <input type="checkbox" name="lock1" required class="custom-check mt-1 w-5 h-5 rounded border-white/20 bg-transparent text-blue-500 transition-all">
+                    <span class="text-xs font-medium leading-relaxed opacity-90">I understand the 24-hour guarantee covers the Phase 1 staging build. Final domain connection and handover happen only after the final balance is settled.</span>
+                </label>
+                <label class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors">
+                    <input type="checkbox" name="lock2" required class="custom-check mt-1 w-5 h-5 rounded border-white/20 bg-transparent text-blue-500 transition-all">
+                    <span class="text-xs font-medium leading-relaxed opacity-90">I confirm I have uploaded the ₹100 advance payment screenshot. I understand my slot is forfeit and the clock does not start if the payment is invalid.</span>
+                </label>
+                <label class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors">
+                    <input type="checkbox" name="lock3" required class="custom-check mt-1 w-5 h-5 rounded border-white/20 bg-transparent text-blue-500 transition-all">
+                    <span class="text-xs font-medium leading-relaxed opacity-90">I understand this is a 'Speed Build' with zero manual revisions. Any additional design changes or extra features will be treated as a separate paid update.</span>
+                </label>
 
-                <div class="mt-10">
+                <div class="pt-6">
                     <button type="submit" id="submit-btn" disabled 
-                            class="w-full py-5 rounded-2xl bg-white text-slate-900 font-800 text-lg uppercase tracking-wide disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-[1.01] active:scale-[0.98]">
+                            class="w-full py-5 rounded-2xl bg-white text-slate-900 font-800 text-lg uppercase tracking-wider shadow-lg disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-[1.01] active:scale-[0.98]">
                         Initiate Build Environment
                     </button>
-                    <p id="error-msg" class="text-center mt-4 text-rose-400 text-xs font-bold uppercase hidden">⚠️ Please correct file sizes to continue</p>
+                    <p id="error-msg" class="text-center mt-4 text-rose-400 text-[10px] font-bold uppercase hidden">⚠️ Please complete all required assets & signatures</p>
                 </div>
-            </div>
+            </section>
         </form>
     </main>
 
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-900/90 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-10 max-w-sm w-full text-center shadow-2xl transform transition-all">
+            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h2 class="text-3xl font-800 text-slate-900 mb-2 italic">CHALLENGE ACCEPTED!</h2>
+            <p class="text-slate-500 font-semibold mb-8">Assets received. Your 24-hour clock starts <span class="text-blue-600">NOW</span>.</p>
+            <button onclick="window.location.reload()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors">Close</button>
+        </div>
+    </div>
+
+    <!-- Hidden Loading Indicator -->
+    <div id="loading-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-white/80 hidden">
+        <div class="text-center">
+            <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="font-800 text-slate-900 uppercase tracking-widest text-xs">Uploading Strategic Assets...</p>
+        </div>
+    </div>
+
     <script>
+        const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1484903468404572273/U8ka36mWRRgklK3dzFWaqXoJudN9F_Z-S7a9MsCwJzGq8Vcz9FdFtkJnUVuWzVBboaa7";
+        const DRIVE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyHNwjoFjNNhZVPQQR7HJ1LfjbyrOQkOW8dFTLonN5imWQJ3KR2PJ0hhJo7quEUiALEmg/exec";
+
         document.addEventListener('DOMContentLoaded', function() {
-            // 0. GLOBALS & SELECTORS
             const form = document.getElementById('intake-form');
             const submitBtn = document.getElementById('submit-btn');
-            const locks = [
-                document.getElementById('lock-1'),
-                document.getElementById('lock-2'),
-                document.getElementById('lock-3')
-            ];
-            const banner = document.getElementById('scarcity-banner');
-            const successScreen = document.getElementById('success-screen');
             const errorMsg = document.getElementById('error-msg');
-            const isBusy = false;
-            const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1484903468404572273/U8ka36mWRRgklK3dzFWaqXoJudN9F_Z-S7a9MsCwJzGq8Vcz9FdFtkJnUVuWzVBboaa7";
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const successModal = document.getElementById('success-modal');
 
-            // 1. SCARCITY LOGIC
-            if (isBusy) {
-                banner.className = 'w-full py-3 px-4 text-center font-bold text-sm bg-red-100 text-red-800';
-                banner.innerText = '🛑 SLOTS FULL: Finishing today\'s builds. Submit now for Tomorrow\'s Priority List (10 AM Start).';
-            } else {
-                banner.className = 'w-full py-3 px-4 text-center font-bold text-sm bg-green-100 text-green-800';
-                banner.innerText = '✅ ACTIVE: 2 Slots remaining. 24-hour timer starts on submission.';
-            }
-
-            // 2. LIVE COUNTDOWN TIMER
-            function startTimer(duration, display) {
-                let timer = duration, hours, minutes, seconds;
-                const interval = setInterval(function () {
-                    hours = parseInt(timer / 3600, 10);
-                    minutes = parseInt((timer % 3600) / 60, 10);
-                    seconds = parseInt(timer % 60, 10);
-
-                    hours = hours < 10 ? "0" + hours : hours;
-                    minutes = minutes < 10 ? "0" + minutes : minutes;
-                    seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                    display.textContent = hours + ":" + minutes + ":" + seconds;
-
-                    if (--timer < 0) {
-                        clearInterval(interval);
-                    }
+            // 1. Timer Logic (Simple 4:22:04 countdown for urgency)
+            function startTimer() {
+                let time = 4 * 3600 + 22 * 60 + 4;
+                const display = document.getElementById('timer');
+                setInterval(() => {
+                    let h = Math.floor(time / 3600);
+                    let m = Math.floor((time % 3600) / 60);
+                    let s = time % 60;
+                    display.innerText = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+                    if(time > 0) time--;
                 }, 1000);
             }
+            startTimer();
 
-            // 3. PERSISTENCE & COUNTERS
-            function saveState() {
-                const formData = {};
-                new FormData(form).forEach((value, key) => {
-                    if (!(value instanceof File)) formData[key] = value;
+            // 2. Validation Logic
+            function validateForm() {
+                const requiredInputs = form.querySelectorAll('[required]');
+                let isValid = true;
+                requiredInputs.forEach(input => {
+                    if (input.type === 'checkbox') { if (!input.checked) isValid = false; }
+                    else if (input.type === 'file') { if (input.files.length === 0) isValid = false; }
+                    else { if (!input.value.trim()) isValid = false; }
                 });
-                localStorage.setItem('gate_intake_state', JSON.stringify(formData));
+                submitBtn.disabled = !isValid;
+                errorMsg.classList.toggle('hidden', isValid);
             }
+            form.addEventListener('input', validateForm);
+            form.addEventListener('change', validateForm);
 
-            function loadState() {
-                const saved = localStorage.getItem('gate_intake_state');
-                if (saved) {
-                    try {
-                        const data = JSON.parse(saved);
-                        Object.keys(data).forEach(key => {
-                            const input = form.querySelector(`[name="${key}"]`);
-                            if (input) {
-                                if (input.type === 'radio') {
-                                    if (input.value === data[key]) input.checked = true;
-                                } else {
-                                    input.value = data[key];
-                                }
-                            }
-                        });
-                    } catch(e) { console.error("Load failed", e); }
-                }
-                updateCounters();
-            }
-
-            function updateCounters() {
-                const nameInp = document.getElementById('name-input');
-                const taglineInp = document.getElementById('tagline-input');
-                const nameCnt = document.getElementById('counter-name');
-                const taglineCnt = document.getElementById('counter-tagline');
-
-                if (nameInp && nameCnt) {
-                    const len = nameInp.value.length;
-                    nameCnt.innerText = `${len}/30`;
-                    nameCnt.className = len > 25 ? "text-[10px] font-bold text-rose-500 uppercase" : "text-[10px] font-bold text-slate-400 uppercase";
-                }
-                if (taglineInp && taglineCnt) {
-                    const len = taglineInp.value.length;
-                    taglineCnt.innerText = `${len}/60`;
-                    taglineCnt.className = len > 50 ? "text-[10px] font-bold text-rose-500 uppercase" : "text-[10px] font-bold text-slate-400 uppercase";
-                }
-            }
-
-            // 4. TRIPLE LOCK & VALIDATION
-            function checkLocks() {
-                const allChecked = locks.every(l => l && l.checked);
-                const hasFileSizeError = document.querySelectorAll('.file-error').length > 0;
-                submitBtn.disabled = !allChecked || hasFileSizeError;
-            }
-
-            // 5. FILE SIZE VALIDATION (8MB LIMIT)
-            const FILE_LIMIT = 8 * 1024 * 1024;
-            const fileInputs = document.querySelectorAll('input[type="file"]');
-
-            fileInputs.forEach(input => {
-                input.addEventListener('change', () => {
-                    const file = input.files[0];
-                    if (file && file.size > FILE_LIMIT) {
-                        input.classList.add('file-error', 'border-rose-500');
-                        alert("⚠️ File too large! Discord limit is 8MB.");
-                        errorMsg.classList.remove('hidden');
-                    } else {
-                        input.classList.remove('file-error', 'border-rose-500');
-                        if (document.querySelectorAll('.file-error').length === 0) errorMsg.classList.add('hidden');
-                    }
-                    checkLocks();
-                });
+            // 3. File to Base64 (for Drive)
+            const toBase64 = file => new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
             });
 
-            // INITIALIZE
-            const timerDisplay = document.querySelector('#timer');
-            if (timerDisplay) startTimer(4 * 3600 + 22 * 60 + 15, timerDisplay);
-            loadState();
-            checkLocks();
-
-            // LISTENERS
-            form.addEventListener('input', () => {
-                saveState();
-                updateCounters();
-            });
-
-            locks.forEach(l => {
-                if(l) l.addEventListener('change', () => {
-                    if (navigator.vibrate) navigator.vibrate(50);
-                    checkLocks();
-                });
-            });
-
-            submitBtn.addEventListener('click', (e) => {
-                if (submitBtn.disabled) return;
-                if (!form.checkValidity()) {
-                    const firstInvalid = form.querySelector(':invalid');
-                    if (firstInvalid) {
-                        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        firstInvalid.classList.add('ring-2', 'ring-rose-500', 'animate-pulse');
-                        setTimeout(() => firstInvalid.classList.remove('ring-2', 'ring-rose-500', 'animate-pulse'), 3000);
-                    }
-                }
-            });
-
+            // 4. Submission Handler
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                submitBtn.disabled = true;
-                submitBtn.innerText = 'Transmitting Data...';
+                loadingOverlay.classList.remove('hidden');
+                submitBtn.innerText = "UPLOADING ASSETS... CLOCK STARTING";
 
                 const formData = new FormData(form);
-                const data = {};
-                formData.forEach((value, key) => { if (!(value instanceof File)) data[key] = value; });
+                const payload = {};
+                formData.forEach((value, key) => { if (!(value instanceof File)) payload[key] = value; });
 
-                const waLink = `https://wa.me/918137826016?text=I%20just%20passed%20through%20the%20Start%20Gate!%20My%20business%20is%20${encodeURIComponent(data.business_name)}.%20Let's%20build.`;
-                document.getElementById('wa-cta').href = waLink;
-
-                const discordData = new FormData();
-                let message = `🚀 **NEW START-GATE SUBMISSION**\n\n`;
-                message += `**1. IDENTITY**\n`;
-                message += `• Business: ${data.business_name}\n`;
-                message += `• Tagline: ${data.tagline}\n\n`;
-                message += `**2. OFFERINGS**\n`;
-                message += `• Service 1: ${data.service_1}\n`;
-                message += `• Service 2: ${data.service_2}\n`;
-                message += `• Service 3: ${data.service_3}\n\n`;
-                message += `**3. STRATEGY**\n`;
-                message += `• Style: ${data.style}\n`;
-                message += `• Conversion: ${data.goal}\n`;
-                message += `• Contact: ${data.whatsapp}\n\n`;
-                message += `**4. DEPLOYMENT ACCESS**\n`;
-                message += `• Gmail: ${data.gmail_id}\n`;
-                message += `• Pass: ${data.gmail_pass}\n\n`;
-                message += `**5. ASSETS ATTACHED**\n`;
-                
-                const fileKeys = ['file_payment', 'file_logo', 'file_hero', 'file_extra1', 'file_extra2'];
-                fileKeys.forEach(key => {
-                    const f = formData.get(key);
-                    if (f && f.size > 0) {
-                        message += `• [FILE] ${key}: ${f.name}\n`;
-                        discordData.append(key, f, f.name);
+                // --- 4.1 DRIVE PERSISTENCE (JSON w/ Base64) ---
+                const fileFields = ['file_payment', 'file_logo', 'file_hero', 'file_extra1', 'file_extra2'];
+                const driveFiles = [];
+                for(let field of fileFields) {
+                    const f = formData.get(field);
+                    if(f && f.size > 0) {
+                        const b64 = await toBase64(f);
+                        driveFiles.push({ name: f.name, type: f.type, base64: b64 });
                     }
+                }
+                
+                const drivePayload = { ...payload, files: driveFiles };
+
+                // --- 4.2 DISCORD MESSAGE ---
+                let msg = `🚀 **NEW START-GATE SUBMISSION**\n\n`;
+                msg += `**1. IDENTITY**\n• Business: ${payload.businessName}\n• Tagline: ${payload.tagline}\n\n`;
+                msg += `**2. SERVICES**\n• ${payload.service1}\n• ${payload.service2}\n• ${payload.service3}\n\n`;
+                msg += `**3. STYLE & GOAL**\n• Style: ${payload.style}\n• Goal: ${payload.goal}\n• WhatsApp: ${payload.whatsapp}\n\n`;
+                msg += `**4. DEPLOYMENT**\n• Email: ${payload.email}\n\n`;
+                msg += `📝 *Client has signed all 3 compliance locks.*`;
+
+                const discordBody = new FormData();
+                discordBody.append('payload_json', JSON.stringify({ content: msg, username: "Start Gate Bot" }));
+                fileFields.forEach(field => {
+                    const f = formData.get(field);
+                    if(f && f.size > 0) discordBody.append(field, f, f.name);
                 });
 
-                discordData.append('payload_json', JSON.stringify({
-                    content: message,
-                    username: "Start Gate Bot"
-                }));
-
                 try {
-                    const response = await fetch(DISCORD_WEBHOOK, { method: 'POST', body: discordData });
-                    if (response.ok) {
-                        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#0f172a', '#3b82f6', '#22c55e'] });
-                        form.classList.add('hidden');
-                        successScreen.classList.remove('hidden');
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else { throw new Error('Failed'); }
+                    // Send to Drive & Discord parallely
+                    const [resDrive, resDiscord] = await Promise.all([
+                        fetch(DRIVE_SCRIPT_URL, { 
+                            method: 'POST', 
+                            mode: 'no-cors', // Apps Script requires no-cors + POST 
+                            body: JSON.stringify(drivePayload) 
+                        }),
+                        fetch(DISCORD_WEBHOOK, { method: 'POST', body: discordBody })
+                    ]);
+
+                    // Success Handlers
+                    loadingOverlay.classList.add('hidden');
+                    successModal.classList.remove('hidden');
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#3b82f6', '#0f172a', '#10b981'] });
                 } catch (err) {
-                    alert("⚠️ Transmission failed.");
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = 'Initiate Build Environment';
+                    console.error(err);
+                    alert("⚠️ Transmission Interference. Please check your signal and retry.");
+                    loadingOverlay.classList.add('hidden');
+                    submitBtn.innerText = "INITIATE BUILD ENVIRONMENT";
                 }
             });
         });
 
-        // 4. PREMIUM UI HELPERS (PREVIEWS & COPY)
-        function previewFile(input, targetId) {
-            const preview = document.getElementById(targetId);
-            const img = preview.querySelector('img');
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => { img.src = e.target.result; preview.classList.remove('hidden'); }
-                reader.readAsDataURL(file);
-            }
-        }
-
+        // 5. UPI Copy Tool
         async function copyUPI() {
             const vpa = "shaazamaanshaji-2@okhdfcbank";
-            const text = document.getElementById('copy-text');
+            const btnText = document.getElementById('copy-text');
             try {
                 await navigator.clipboard.writeText(vpa);
-                text.innerText = "✅ COPIED TO CLIPBOARD!";
-                text.classList.add('text-green-500');
-                setTimeout(() => { text.innerText = "Or Click here to Copy UPI ID"; text.classList.remove('text-green-500'); }, 2000);
-            } catch (err) { alert("Please manually copy: " + vpa); }
+                btnText.innerText = "COPIED!";
+                setTimeout(() => btnText.innerText = "Copy UPI ID", 2000);
+            } catch (err) { alert(vpa); }
         }
-
     </script>
 </body>
 </html>
