@@ -105,14 +105,7 @@
                             <select name="goal" id="goal-select" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium appearance-none bg-slate-50">
                                 <option value="WhatsApp">WhatsApp Message</option>
                                 <option value="Call">Phone Call</option>
-                                <option value="Form">Form Fill</option>
                             </select>
-
-                            <!-- NEW: Dynamic Form Requirements (Slide-out) -->
-                            <div id="form-req-container" class="hidden mt-4 space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                                <label class="block text-[10px] font-800 text-blue-600 uppercase tracking-widest">Lead Form Architecture (Specify Fields)</label>
-                                <textarea name="formRequirements" class="w-full px-4 py-3 rounded-xl border border-blue-200 bg-blue-50/50 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs font-medium" rows="3" placeholder="e.g., Name, Business Email, Service Type, Project Budget..."></textarea>
-                            </div>
 
                             <div class="mt-6">
                                 <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">WhatsApp Number *</label>
@@ -255,16 +248,7 @@
             const formReqContainer = document.getElementById('form-req-container');
             const successModal = document.getElementById('success-modal');
 
-            // 1. Goal Toggle Logic
-            goalSelect.addEventListener('change', () => {
-                if (goalSelect.value === 'Form') {
-                    formReqContainer.classList.remove('hidden');
-                } else {
-                    formReqContainer.classList.add('hidden');
-                }
-            });
-
-            // 2. Timer Logic
+            // 1. Timer Logic
             function startTimer() {
                 let time = 4 * 3600 + 22 * 60 + 4;
                 const display = document.getElementById('timer');
@@ -338,7 +322,6 @@
                     msg += `**1. IDENTITY**\n• Business: ${payload.businessName}\n• Tagline: ${payload.tagline}\n\n`;
                     msg += `**2. SERVICES**\n• ${payload.service1}\n• ${payload.service2}\n• ${payload.service3}\n\n`;
                     msg += `**3. STYLE & GOAL**\n• Style: ${payload.style}\n• Goal: ${payload.goal}\n`;
-                    if(payload.formRequirements) msg += `• Form Req: ${payload.formRequirements}\n`;
                     msg += `• WhatsApp: ${payload.whatsapp}\n\n`;
                     msg += `**4. DEPLOYMENT**\n• Email: ${payload.email}\n`;
                     if(payload.specialInstructions) msg += `• Notes: ${payload.specialInstructions}\n`;
