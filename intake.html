@@ -102,11 +102,18 @@
                         </div>
                         <div>
                             <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-4">Primary Conversion Goal *</label>
-                            <select name="goal" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium appearance-none bg-slate-50">
+                            <select name="goal" id="goal-select" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium appearance-none bg-slate-50">
                                 <option value="WhatsApp">WhatsApp Message</option>
                                 <option value="Call">Phone Call</option>
                                 <option value="Form">Form Fill</option>
                             </select>
+
+                            <!-- NEW: Dynamic Form Requirements (Slide-out) -->
+                            <div id="form-req-container" class="hidden mt-4 space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                                <label class="block text-[10px] font-800 text-blue-600 uppercase tracking-widest">Lead Form Architecture (Specify Fields)</label>
+                                <textarea name="formRequirements" class="w-full px-4 py-3 rounded-xl border border-blue-200 bg-blue-50/50 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs font-medium" rows="3" placeholder="e.g., Name, Business Email, Service Type, Project Budget..."></textarea>
+                            </div>
+
                             <div class="mt-6">
                                 <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">WhatsApp Number *</label>
                                 <input type="tel" name="whatsapp" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="+91 ...">
@@ -133,6 +140,12 @@
                         <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Primary Email Address *</label>
                         <input type="email" name="email" id="email-input" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="name@company.com">
                         <p class="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-tight">We will use this email to coordinate the final code handover and custom domain setup AFTER the remaining ₹900 balance is paid.</p>
+                    </div>
+                    
+                    <!-- NEW: Special Instructions -->
+                    <div class="pt-4 border-t border-slate-100">
+                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Extra Instructions / Custom Notes (Optional)</label>
+                        <textarea name="specialInstructions" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs font-medium italic" rows="2" placeholder="e.g. 'Use specific hex codes #FF0000' or 'Add a custom map in the footer'"></textarea>
                     </div>
                 </div>
             </section>
@@ -238,10 +251,20 @@
             const form = document.getElementById('intake-form');
             const submitBtn = document.getElementById('submit-btn');
             const errorMsg = document.getElementById('error-msg');
-            const loadingOverlay = document.getElementById('loading-overlay');
+            const goalSelect = document.getElementById('goal-select');
+            const formReqContainer = document.getElementById('form-req-container');
             const successModal = document.getElementById('success-modal');
 
-            // 1. Timer Logic (Simple 4:22:04 countdown for urgency)
+            // 1. Goal Toggle Logic
+            goalSelect.addEventListener('change', () => {
+                if (goalSelect.value === 'Form') {
+                    formReqContainer.classList.remove('hidden');
+                } else {
+                    formReqContainer.classList.add('hidden');
+                }
+            });
+
+            // 2. Timer Logic
             function startTimer() {
                 let time = 4 * 3600 + 22 * 60 + 4;
                 const display = document.getElementById('timer');
@@ -253,9 +276,9 @@
                     if(time > 0) time--;
                 }, 1000);
             }
-            startTimer();
+            // startTimer(); // Uncomment if timer element exists
 
-            // 2. Validation Logic
+            // 3. Validation Logic
             function validateForm() {
                 const requiredInputs = form.querySelectorAll('[required]');
                 let isValid = true;
@@ -270,7 +293,7 @@
             form.addEventListener('input', validateForm);
             form.addEventListener('change', validateForm);
 
-            // 3. File to Base64 (for Drive)
+            // 4. File to Base64
             const toBase64 = file => new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
@@ -278,7 +301,7 @@
                 reader.onerror = error => reject(error);
             });
 
-            // 4. Submission Handler
+            // 5. Submission Handler
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const loader = document.getElementById('loading-overlay');
@@ -294,16 +317,13 @@
 
                 const fileFields = ['file_payment', 'file_logo', 'file_hero', 'file_extra1', 'file_extra2'];
 
-                // Explicitly add filenames to payload for Drive Summary
+                // Explicitly add filenames for Drive
                 fileFields.forEach(field => {
                     const f = formData.get(field);
-                    if(f && f.size > 0) {
-                        payload[`${field.toUpperCase()}_NAME`] = f.name;
-                    }
+                    if(f && f.size > 0) payload[`${field.toUpperCase()}_NAME`] = f.name;
                 });
 
                 try {
-                    // STEP 1: PREPARE DATA (Base64 conversion)
                     const driveFiles = [];
                     for(let field of fileFields) {
                         const f = formData.get(field);
@@ -313,15 +333,16 @@
                         }
                     }
 
-                    // STEP 2: NOTIFY DISCORD
-                    loaderText.innerText = "Step 2/3: Notifying Strategic Command (Discord)...";
-                    
+                    loaderText.innerText = "Step 2/3: Notifying Command (Discord)...";
                     let msg = `🚀 **NEW START-GATE SUBMISSION**\n\n`;
                     msg += `**1. IDENTITY**\n• Business: ${payload.businessName}\n• Tagline: ${payload.tagline}\n\n`;
                     msg += `**2. SERVICES**\n• ${payload.service1}\n• ${payload.service2}\n• ${payload.service3}\n\n`;
-                    msg += `**3. STYLE & GOAL**\n• Style: ${payload.style}\n• Goal: ${payload.goal}\n• WhatsApp: ${payload.whatsapp}\n\n`;
-                    msg += `**4. DEPLOYMENT**\n• Email: ${payload.email}\n\n`;
-                    msg += `📝 *Client signed all 3 compliance locks.*`;
+                    msg += `**3. STYLE & GOAL**\n• Style: ${payload.style}\n• Goal: ${payload.goal}\n`;
+                    if(payload.formRequirements) msg += `• Form Req: ${payload.formRequirements}\n`;
+                    msg += `• WhatsApp: ${payload.whatsapp}\n\n`;
+                    msg += `**4. DEPLOYMENT**\n• Email: ${payload.email}\n`;
+                    if(payload.specialInstructions) msg += `• Notes: ${payload.specialInstructions}\n`;
+                    msg += `\n📝 *Client signed all 3 compliance locks.*`;
 
                     const discordBody = new FormData();
                     discordBody.append('payload_json', JSON.stringify({ content: msg, username: "Start Gate Bot" }));
@@ -331,22 +352,18 @@
                     });
 
                     const resDiscord = await fetch(DISCORD_WEBHOOK, { method: 'POST', body: discordBody });
-                    if (!resDiscord.ok) throw new Error("Discord transmission failure");
+                    if (!resDiscord.ok) throw new Error("Discord Fail");
 
-                    // STEP 3: ARCHIVE TO GOOGLE DRIVE
-                    loaderText.innerText = "Step 3/3: Archiving to Global HQ (Google Drive)...";
-                    
-                    // We await this to ensure the reload "Close" button doesn't cut off the connection
+                    loaderText.innerText = "Step 3/3: Archiving to Global HQ (Drive)...";
                     await fetch(DRIVE_SCRIPT_URL, { 
                         method: 'POST', 
                         mode: 'no-cors', 
                         body: JSON.stringify({ ...payload, files: driveFiles }) 
                     });
 
-                    // FINAL SUCCESS
                     loader.classList.add('hidden');
                     successModal.classList.remove('hidden');
-                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#3b82f6', '#0f172a', '#10b981'] });
+                    // confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#3b82f6', '#0f172a', '#10b981'] });
 
                 } catch (err) {
                     console.error(err);
