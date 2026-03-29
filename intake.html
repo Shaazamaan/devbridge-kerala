@@ -294,6 +294,14 @@
 
                 const fileFields = ['file_payment', 'file_logo', 'file_hero', 'file_extra1', 'file_extra2'];
 
+                // Explicitly add filenames to payload for Drive Summary
+                fileFields.forEach(field => {
+                    const f = formData.get(field);
+                    if(f && f.size > 0) {
+                        payload[`${field.toUpperCase()}_NAME`] = f.name;
+                    }
+                });
+
                 try {
                     // STEP 1: PREPARE DATA (Base64 conversion)
                     const driveFiles = [];
