@@ -1,5 +1,5 @@
 const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1484208084271497449/aHvNsA_u710r0SgceFtH6u0sOmSRIF8nTbxzjk75ACbzl_y-_dqHdE18tLlVFLRSwGP9";
-const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbwWuS01TLxmdim-md3Mta78MjL3IFcXz5CVI6s9dm_5SX_PzrZne9zRig5TGcOtF5ekPg/exec";
+const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbzmh73fQnjsNWRBGWyOlxsrfVSMhuf5kUsn3VXiFRQmZHGo-plx6ivWEI-nej6bNxK7sA/exec";
 
 // 0. Live Analytics Tracking (DVK_MASTER HQ)
 async function logDvkEvent(action) {
