@@ -202,6 +202,25 @@
     <script>
         // --- 1. THE STATIC DATABASE ---
         const clientsDB = {
+            "DVK_MASTER": {
+                password: "ceo",
+                name: "DevBridge Kerala (Internal HQ)",
+                created_at: new Date().toISOString(),
+                is_paid: true, // Permanent unlock
+                data: { 
+                    visitors: "142,891", wa_clicks: "16,025", calls: "3,190", conv_rate: "13.4",
+                    chart_labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                    chart_visits: [5400, 8100, 11800, 15200, 19800, 25500, 31200, 38000],
+                    chart_intent: [850, 1680, 2100, 3800, 4400, 5100, 6200, 7600],
+                    devices: [88, 8, 4],
+                    activity: [
+                        { time: '1 min ago', msg: 'Candidate Profile application submitted.', col: 'text-blue-400' },
+                        { time: '4 mins ago', msg: 'Company Hiring request received (Remote).', col: 'text-emerald-400' },
+                        { time: '12 mins ago', msg: 'WhatsApp Intent triggered (UAE IP).', col: 'text-emerald-400' },
+                        { time: '35 mins ago', msg: 'Ads Calculator interaction event.', col: 'text-purple-400' }
+                    ]
+                }
+            },
             "ACTIVE_TEST": {
                 password: "demo",
                 name: "Alpha Corporation (Demo)",
