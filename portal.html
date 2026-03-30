@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Portal | DevBridge Kerala</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0F172A; color: white; }
+        .glass-panel { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+        .blur-lock { filter: blur(8px); pointer-events: none; user-select: none; }
+
+        /* Floating WhatsApp Button */
+        .wa-float {
+            position: fixed; width: 50px; height: 50px; bottom: 30px; right: 30px;
+            background-color: #25D366; color: #FFF; border-radius: 50px; text-align: center;
+            font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.5); z-index: 100;
+            display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
+        }
+        .wa-float:hover { transform: scale(1.1); }
+        .wa-icon { width: 28px; fill: currentColor; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col pt-12 px-4 relative pb-20">
+
+    <!-- Header -->
+    <header class="max-w-4xl mx-auto w-full mb-10 text-center">
+        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent uppercase">Data Gateway</h1>
+        <p class="text-slate-400 text-sm mt-2 font-medium tracking-wide">DevBridge Kerala Micro-SaaS Portal</p>
+    </header>
+
+    <!-- 1. LOGIN SCREEN -->
+    <main id="loginScreen" class="flex-grow flex items-center justify-center max-w-md mx-auto w-full relative z-10 transition-opacity duration-300">
+        <div class="glass-panel p-8 rounded-2xl w-full shadow-2xl">
+            <h2 class="text-xl font-bold mb-6 text-white text-center">Client Authorization</h2>
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1 font-semibold">Client ID</label>
+                    <input type="text" id="clientId" required placeholder="e.g. BAKERY_001" class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white placeholder-slate-600 focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1 font-semibold">Password</label>
+                    <input type="password" id="clientPass" required placeholder="••••••••" class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white placeholder-slate-600 focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                </div>
+                <p id="loginError" class="text-red-400 text-xs text-center hidden font-medium">Invalid Credentials. Try Again.</p>
+                <button type="submit" class="w-full mt-2 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold tracking-wide uppercase transition-colors shadow-lg shadow-blue-500/30">
+                    Access Dashboard
+                </button>
+            </form>
+            
+            <div class="mt-8 text-center bg-slate-800/50 p-4 rounded-xl border border-slate-700">
+                <p class="text-xs text-slate-400 font-semibold mb-2 uppercase tracking-wide">Quick Demo Access</p>
+                <div class="flex justify-center flex-col gap-2 text-xs">
+                    <button type="button" onclick="fillDemo('ACTIVE_TEST')" class="text-emerald-400 hover:text-emerald-300">Auto-fill: <span class="underline">Active Trial Demo</span></button>
+                    <button type="button" onclick="fillDemo('TEST')" class="text-red-400 hover:text-red-300">Auto-fill: <span class="underline">Expired Trial (Paywall)</span></button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 2. DASHBOARD WRAPPER (Hidden Initially) -->
+    <main id="dashboardScreen" class="flex-grow max-w-4xl mx-auto w-full relative hidden transition-opacity duration-300">
+        
+        <!-- Trial Banner -->
+        <div id="trialBanner" class="mb-6 p-4 rounded-xl border-l-4 font-bold shadow-sm hidden bg-emerald-900/40 text-emerald-400 border-emerald-500 flex justify-between items-center text-sm">
+            <span>Free Trial Active. Dashboard fully unlocked.</span>
+            <span id="trialDaysLeft" class="px-3 py-1 bg-emerald-500/20 rounded-md">-- days left</span>
+        </div>
+
+        <!-- Logout & Client Info -->
+        <div class="flex justify-between items-end mb-6">
+            <div>
+                <h2 id="dashClientName" class="text-2xl font-bold tracking-tight">Client Name</h2>
+                <p class="text-slate-400 text-sm">Real-time Intent Analytics</p>
+            </div>
+            <button onclick="logout()" class="text-xs text-slate-400 hover:text-white uppercase font-bold tracking-wider">Log Out</button>
+        </div>
+
+        <!-- Analytics Grid (Gets Blurred if locked) -->
+        <div id="analyticsContent" class="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500">
+            <!-- Card 1 -->
+            <div class="glass-panel p-6 rounded-2xl text-center">
+                <p class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Total Visitors</p>
+                <p id="statVisitors" class="text-4xl font-extrabold text-white">--</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="glass-panel p-6 rounded-2xl text-center border-t-2 md:border-t-0 md:border-b-2 border-emerald-500">
+                <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">WhatsApp Clicks</p>
+                <p id="statWa" class="text-4xl font-extrabold text-emerald-400">--</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="glass-panel p-6 rounded-2xl text-center bg-blue-900/20 md:border-t-0 md:border-b-2 border-blue-500">
+                <p class="text-blue-400 text-xs font-bold uppercase tracking-wider mb-2">Call Intent</p>
+                <p id="statCalls" class="text-4xl font-extrabold text-blue-400">--</p>
+            </div>
+        </div>
+
+        <!-- 3. PAYWALL OVERLAY (Injected over analytics if locked) -->
+        <div id="paywallOverlay" class="absolute top-24 left-0 w-full h-full flex items-center justify-center z-20 hidden backdrop-blur-sm bg-slate-900/60 p-4">
+            <div class="glass-panel p-8 rounded-2xl shadow-2xl border border-slate-700 bg-slate-900 w-full max-w-sm text-center">
+                <div class="w-16 h-16 bg-red-500/10 text-red-500 border-2 border-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-white">Trial Expired</h3>
+                <p class="text-xs text-slate-400 mb-6 leading-relaxed">Your 1-Month free analytics trial has ended. Unlock your data portal to track active leads.</p>
+                
+                <div class="bg-white p-3 rounded-xl inline-block mb-6 shadow-xl relative group">
+                    <!-- Dynamic UPI QR Code via API -->
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=shaazamaanshaji-2@okhdfcbank&pn=DevBridge&am=100&cu=INR" alt="UPI QR Code" class="rounded w-full h-auto">
+                    <p class="text-slate-900 font-extrabold mt-2 font-mono text-sm tracking-tighter">Pay ₹100 / month</p>
+                    <p class="text-slate-500 text-[10px] font-mono leading-tight">shaazamaanshaji-2@okhdfcbank</p>
+                </div>
+
+                <form id="utrForm" class="text-left space-y-3">
+                    <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1 font-bold text-center">Already Paid? Provide Reference</label>
+                    <input type="text" id="utrInput" required placeholder="Transaction Ref No. (UTR)" class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:ring-2 focus:ring-emerald-500 outline-none text-center font-mono">
+                    <button type="submit" id="utrBtn" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold uppercase tracking-wide transition-all active:scale-95 shadow-lg shadow-emerald-500/20">
+                        Unlock Analytics
+                    </button>
+                    <p id="utrSuccess" class="text-emerald-400 text-xs text-center hidden mt-2 font-medium">✅ Request sent! Verifying transaction...</p>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Support Bubble -->
+    <a href="https://wa.me/918137826016" class="wa-float" target="_blank" title="Contact Support">
+        <svg class="wa-icon" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.412 0 12.048c0 2.112.554 4.171 1.605 6.005L0 24l6.117-1.605a11.803 11.803 0 005.925 1.588h.005c6.632 0 12.042-5.412 12.046-12.049a11.776 11.776 0 00-3.414-8.474z"/>
+        </svg>
+    </a>
+
+    <footer class="mt-auto text-center text-slate-500 text-[10px] uppercase tracking-widest pb-4">
+        Engineered by <a href="https://devbridgekerala.com" class="text-slate-400 hover:text-white" target="_blank" rel="noopener">DevBridge Kerala</a> &times; <a href="https://hashcovet.com" class="text-slate-400 hover:text-white" target="_blank" rel="noopener">Hashcovet</a>
+    </footer>
+
+    <!-- LOGIC SCRIPT -->
+    <script>
+        // --- 1. THE STATIC DATABASE ---
+        // When you give an intake summary, I will append the new client here automatically.
+        const clientsDB = {
+            "ACTIVE_TEST": {
+                password: "demo",
+                name: "Alpha Corp (Active)",
+                created_at: new Date().toISOString(), // Created today = active trial
+                is_paid: false,
+                data: { visitors: 154, wa_clicks: 42, calls: 8 }
+            },
+            "TEST": {
+                password: "demo",
+                name: "Beta Logistics (Expired)",
+                created_at: "2024-01-01T00:00:00Z", // Way past 30 days = locked paywall
+                is_paid: false,
+                data: { visitors: 3450, wa_clicks: 852, calls: 140 }
+            }
+        };
+
+        const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1488133194632007720/s6Nl6d-W-iRr69FdM2lUAy7a0p4dJ4PWOrWZsYLMSX8at8EHCKa92sugK_qyLilc9rML";
+        
+        let loggedInClient = null;
+
+        // --- DOM Elements ---
+        const loginForm = document.getElementById('loginForm');
+        const loginScreen = document.getElementById('loginScreen');
+        const dashboardScreen = document.getElementById('dashboardScreen');
+        const loginError = document.getElementById('loginError');
+        const analyticsContent = document.getElementById('analyticsContent');
+        const paywallOverlay = document.getElementById('paywallOverlay');
+        const utrForm = document.getElementById('utrForm');
+        const utrBtn = document.getElementById('utrBtn');
+        const utrSuccess = document.getElementById('utrSuccess');
+        const trialBanner = document.getElementById('trialBanner');
+
+        // Helper for Demo Buttons
+        function fillDemo(id) {
+            document.getElementById('clientId').value = id;
+            document.getElementById('clientPass').value = "demo";
+        }
+
+        // --- 2. AUTHENTICATION LOGIC ---
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const id = document.getElementById('clientId').value.trim();
+            const pass = document.getElementById('clientPass').value;
+
+            if (clientsDB[id] && clientsDB[id].password === pass) {
+                loggedInClient = { id: id, ...clientsDB[id] };
+                loginError.classList.add('hidden');
+                
+                // Transition
+                loginScreen.classList.add('hidden');
+                dashboardScreen.classList.remove('hidden');
+                
+                renderDashboard();
+            } else {
+                loginError.classList.remove('hidden');
+            }
+        });
+
+        function logout() {
+            loggedInClient = null;
+            dashboardScreen.classList.add('hidden');
+            loginScreen.classList.remove('hidden');
+            paywallOverlay.classList.add('hidden');
+            analyticsContent.classList.remove('blur-lock');
+            trialBanner.classList.add('hidden');
+            document.getElementById('clientId').value = '';
+            document.getElementById('clientPass').value = '';
+            
+            // Reset UTR form
+            utrSuccess.classList.add('hidden');
+            utrBtn.classList.remove('hidden');
+            document.getElementById('utrInput').classList.remove('hidden');
+            utrBtn.disabled = false;
+        }
+
+        // --- 3. DASHBOARD RENDER LOGIC ---
+        function renderDashboard() {
+            document.getElementById('dashClientName').innerText = loggedInClient.name;
+            document.getElementById('statVisitors').innerText = loggedInClient.data.visitors;
+            document.getElementById('statWa').innerText = loggedInClient.data.wa_clicks;
+            document.getElementById('statCalls').innerText = loggedInClient.data.calls;
+
+            // Date validation (30 days logic)
+            const createdDate = new Date(loggedInClient.created_at);
+            const now = new Date();
+            const diffTime = Math.abs(now - createdDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const isExpired = diffDays > 30;
+
+            if (!isExpired || loggedInClient.is_paid) {
+                // UNLOCKED
+                analyticsContent.classList.remove('blur-lock');
+                paywallOverlay.classList.add('hidden');
+                
+                if (!loggedInClient.is_paid) {
+                    trialBanner.classList.remove('hidden');
+                    document.getElementById('trialDaysLeft').innerText = `${30 - diffDays} days left`;
+                } else {
+                    trialBanner.classList.add('hidden');
+                }
+            } else {
+                // LOCKED PAYWALL
+                trialBanner.classList.add('hidden');
+                analyticsContent.classList.add('blur-lock');
+                paywallOverlay.classList.remove('hidden');
+            }
+        }
+
+        // --- 4. UTR PAYMENT LOGIC (DISCORD PING) ---
+        utrForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const utrString = document.getElementById('utrInput').value.trim();
+            
+            utrBtn.disabled = true;
+            let originalText = utrBtn.innerText;
+            utrBtn.innerText = "TRANSMITTING...";
+
+            const payload = {
+                username: "DevBridge Gateway",
+                content: `🚀 **PAYWALL UNLOCK CLAIM** 🚀\n**Client:** ${loggedInClient.name} (\`${loggedInClient.id}\`)\n**UTR Code:** \`${utrString}\`\n\n📌 *Verify this in your HDFC/GPay app!*`
+            };
+
+            try {
+                await fetch(DISCORD_WEBHOOK, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                // Show success message and immediately unlock the dashboard 
+                utrSuccess.classList.remove('hidden');
+                utrBtn.classList.add('hidden');
+                document.getElementById('utrInput').classList.add('hidden');
+                
+                // Temporary unlock for the client session
+                setTimeout(() => {
+                    analyticsContent.classList.remove('blur-lock');
+                    paywallOverlay.classList.add('hidden');
+                    loggedInClient.is_paid = true;
+                }, 1500);
+
+            } catch(e) {
+                alert("Network error. Please try again.");
+                utrBtn.disabled = false;
+                utrBtn.innerText = originalText;
+            }
+        });
+    </script>
+</body>
+</html>
