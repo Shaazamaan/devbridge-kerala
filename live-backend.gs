@@ -8,12 +8,22 @@ function doGet(e) {
 }
 
 function doPost(e) {
-  return handleRequest(e);
+  // 3. Intake Form Submissions (JSON format from intake.html)
+  try {
+    const postData = JSON.parse(e.postData.contents);
+    if (postData.businessName) {
+      return handleIntake(postData);
+    }
+  } catch(err) {
+    // If it's not JSON, fallback to standard request logging
+    return handleRequest(e);
+  }
 }
 
-// ---- 1. EXISTING LOGGING SYSTEM (Untouched) ----
+// ---- 1. EXISTING LOGGING SYSTEM ----
 function handleRequest(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0]; // the first tab
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheets()[0]; 
   var clientName = e.parameter.client || 'Unknown Client';
   var action = e.parameter.action || 'Unknown Action';
   var timestamp = new Date();
@@ -23,7 +33,49 @@ function handleRequest(e) {
   return ContentService.createTextOutput(JSON.stringify({"status": "logged"})).setMimeType(ContentService.MimeType.JSON);
 }
 
-// ---- 2. ENTERPRISE DASHBOARD ANALYTICS API WITH AUTH ----
+// ---- 2. AUTOMATED CLIENT INTAKE REGISTRATION ----
+function handleIntake(data) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let clientsSheet = ss.getSheetByName("Clients");
+  
+  // Auto-create Clients tab if it doesnt exist
+  if (!clientsSheet) {
+    clientsSheet = ss.insertSheet("Clients");
+    clientsSheet.appendRow(["Client ID", "Passkey", "Is Paid (TRUE/FALSE)", "Account Created"]);
+    clientsSheet.appendRow(["DVK_MASTER", "ceo", true, new Date().toISOString()]);
+  }
+  
+  // Clean the business name to create a Client ID (Removing spaces/special chars)
+  const clientId = data.businessName.toString().toUpperCase().replace(/[^A-Z0-9]/g, "_").slice(0, 15);
+  // Generate a random 4-digit Passkey
+  const passkey = Math.floor(1000 + Math.random() * 9000).toString();
+  
+  // Check if client already exists (to avoid duplicates)
+  const existingIds = clientsSheet.getRange("A:A").getValues().flat();
+  if (existingIds.includes(clientId)) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: true, 
+      status: "re-registered", 
+      clientId: clientId, 
+      error: "Client ID already exists. Credentials preserved." 
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // Register the new client row
+  clientsSheet.appendRow([clientId, passkey, false, new Date().toISOString()]);
+
+  // Log the "Start Gate" intake event to Sheet1 too
+  ss.getSheets()[0].appendRow([new Date(), clientId, "Intake Submitted (Start Gate)"]);
+
+  return ContentService.createTextOutput(JSON.stringify({
+    success: true,
+    clientId: clientId,
+    passkey: passkey,
+    status: "registered"
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ---- 3. ENTERPRISE DASHBOARD ANALYTICS API ----
 function handleAnalytics(e) {
   try {
     const targetClient = e.parameter.clientId;
@@ -34,18 +86,16 @@ function handleAnalytics(e) {
     }
 
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    
-    // Auto-create Clients tab if it doesnt exist
     let clientsSheet = ss.getSheetByName("Clients");
+    
     if (!clientsSheet) {
+        // Init if missing
         clientsSheet = ss.insertSheet("Clients");
         clientsSheet.appendRow(["Client ID", "Passkey", "Is Paid (TRUE/FALSE)", "Account Created"]);
-        // Hardcode the master account
         clientsSheet.appendRow(["DVK_MASTER", "ceo", true, new Date().toISOString()]);
-        return ContentService.createTextOutput(JSON.stringify({success: false, error: "Clients Database Initialized. Try logging in again."})).setMimeType(ContentService.MimeType.JSON);
+        return ContentService.createTextOutput(JSON.stringify({success: false, error: "Database Initializing..."})).setMimeType(ContentService.MimeType.JSON);
     }
     
-    // AUTHENTICATE
     const clientData = clientsSheet.getDataRange().getValues();
     let authSuccess = false;
     let is_paid = false;
@@ -53,7 +103,6 @@ function handleAnalytics(e) {
     let clientNameRaw = "Unknown Client";
 
     for (let c = 1; c < clientData.length; c++) {
-        // [0] Client ID, [1] Passkey, [2] IsPaid, [3] CreatedAt
         if (clientData[c][0].toString().trim() === targetClient.trim() && 
             clientData[c][1].toString().trim() === targetPass.trim()) {
             
@@ -66,19 +115,16 @@ function handleAnalytics(e) {
     }
 
     if (!authSuccess) {
-        return ContentService.createTextOutput(JSON.stringify({success: false, error: "Invalid ID or Passkey."})).setMimeType(ContentService.MimeType.JSON);
+        return ContentService.createTextOutput(JSON.stringify({success: false, error: "Invalid Credentials."})).setMimeType(ContentService.MimeType.JSON);
     }
 
-    // GATHER ANALYTICS
-    const trackingSheet = ss.getSheets()[0]; // your first active tracking tab
+    const trackingSheet = ss.getSheets()[0]; 
     const data = trackingSheet.getDataRange().getValues();
     
     let visitors = 0; let wa_clicks = 0; let calls = 0;
     let recent_activity = [];
 
-    // Loop through your 3 columns: Timestamp | ClientName | Action
     for (let i = 1; i < data.length; i++) {
-        // Matching by exact strings in the tracking sheet
         if (data[i][1] === targetClient) {
             const evType = (data[i][2] || "").toString().toLowerCase();
             const timeRaw = data[i][0];
@@ -96,10 +142,7 @@ function handleAnalytics(e) {
         }
     }
 
-    // Sort backwards
     recent_activity.sort((a, b) => new Date(b.timeRaw) - new Date(a.timeRaw));
-    
-    // Filter to last 4
     const final_activity = recent_activity.slice(0, 4).map(act => {
         const diffMs = new Date() - new Date(act.timeRaw);
         const mins = Math.floor(diffMs / 60000); const hrs = Math.floor(mins / 60);

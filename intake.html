@@ -250,7 +250,7 @@
 
     <script>
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1484903468404572273/U8ka36mWRRgklK3dzFWaqXoJudN9F_Z-S7a9MsCwJzGq8Vcz9FdFtkJnUVuWzVBboaa7";
-        const DRIVE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxqtQcN_cFcRwjzq0zn4FLftbeB31pUI6MK3Xb_uvR9Bp6pMQ3Yh-sOttOhoVUcgEPl/exec';
+        const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbwWuS01TLxmdim-md3Mta78MjL3IFcXz5CVI6s9dm_5SX_PzrZne9zRig5TGcOtF5ekPg/exec";
 
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('intake-form');
@@ -329,9 +329,26 @@
                         }
                     }
 
-                    loaderText.innerText = "Step 2/3: Notifying Command (Discord)...";
+                    loaderText.innerText = "Step 2/3: Archiving to Global HQ (Database)...";
+                    let registrationData = null;
+                    try {
+                        const resReg = await fetch(GOOGLE_API_URL, { 
+                            method: 'POST', 
+                            mode: 'no-cors', 
+                            body: JSON.stringify({ ...payload, files: driveFiles }) 
+                        });
+                        // Note: mode 'no-cors' wont let us read JSON, but the script will still execute row appending.
+                        // For a smoother experience, we will derive the expected ID locally to show in Discord.
+                        registrationData = {
+                            clientId: payload.businessName.toString().toUpperCase().replace(/[^A-Z0-9]/g, "_").slice(0, 15)
+                        };
+                    } catch(err) { console.error("Database sync failed, continuing to Discord."); }
+
+                    loaderText.innerText = "Step 3/3: Notifying Command (Discord)...";
                     let msg = `🚀 **NEW START-GATE SUBMISSION**\n\n`;
-                    msg += `**1. IDENTITY**\n• Business: ${payload.businessName}\n• Tagline: ${payload.tagline}\n\n`;
+                    msg += `**1. IDENTITY**\n• Business: ${payload.businessName}\n• Tagline: ${payload.tagline}\n`;
+                    if(registrationData) msg += `• **Assigned ClientID:** \`${registrationData.clientId}\`\n\n`;
+                    
                     msg += `**2. SERVICES**\n• ${payload.service1}\n• ${payload.service2}\n• ${payload.service3}\n\n`;
                     msg += `**3. STYLE & GOAL**\n• Style: ${payload.style}\n• Goal: ${payload.goal}\n`;
                     msg += `• WhatsApp: ${payload.whatsapp}\n\n`;
@@ -348,13 +365,6 @@
 
                     const resDiscord = await fetch(DISCORD_WEBHOOK, { method: 'POST', body: discordBody });
                     if (!resDiscord.ok) throw new Error("Discord Fail");
-
-                    loaderText.innerText = "Step 3/3: Archiving to Global HQ (Drive)...";
-                    await fetch(DRIVE_SCRIPT_URL, { 
-                        method: 'POST', 
-                        mode: 'no-cors', 
-                        body: JSON.stringify({ ...payload, files: driveFiles }) 
-                    });
 
                     loader.classList.add('hidden');
                     successModal.classList.remove('hidden');
