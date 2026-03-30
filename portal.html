@@ -290,7 +290,7 @@
                     btn.disabled = true;
                     
                     try {
-                        const response = await fetch(GOOGLE_API_URL + "?clientId=" + encodeURIComponent(id));
+                        const response = await fetch(GOOGLE_API_URL + "?fetchAnalytics=true&clientId=" + encodeURIComponent(id));
                         const result = await response.json();
                         if (result.success && result.data) {
                             // Dynamically overwrite static placeholder data with the 100% REAL live data from the sheet.
