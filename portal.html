@@ -252,6 +252,8 @@
         };
 
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1488133194632007720/s6Nl6d-W-iRr69FdM2lUAy7a0p4dJ4PWOrWZsYLMSX8at8EHCKa92sugK_qyLilc9rML";
+        const GOOGLE_API_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE"; // ⚠️ PASTE YOUR GOOGLE SHEET APP SCRIPT URL HERE TO ENABLE LIVE FETCH
+
         let loggedInClient = null;
         let chartInstance1 = null;
         let chartInstance2 = null;
@@ -271,14 +273,39 @@
         }
 
         // --- 2. AUTHENTICATE ---
-        loginForm.addEventListener('submit', (e) => {
+        loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const id = document.getElementById('clientId').value.trim();
             const pass = document.getElementById('clientPass').value;
 
             if (clientsDB[id] && clientsDB[id].password === pass) {
-                loggedInClient = { id: id, ...clientsDB[id] };
                 document.getElementById('loginError').classList.add('hidden');
+                loggedInClient = { id: id, ...clientsDB[id] };
+
+                // --- LIVE API FETCH INJECTION ---
+                if (GOOGLE_API_URL.startsWith("https://script.google.com")) {
+                    const btn = document.querySelector('#loginForm button');
+                    const origTxt = btn.innerText;
+                    btn.innerText = "SYNCING LIVE DATASTREAM...";
+                    btn.disabled = true;
+                    
+                    try {
+                        const response = await fetch(GOOGLE_API_URL + "?clientId=" + encodeURIComponent(id));
+                        const result = await response.json();
+                        if (result.success && result.data) {
+                            // Dynamically overwrite static placeholder data with the 100% REAL live data from the sheet.
+                            loggedInClient.data = result.data;
+                        } else {
+                            console.warn("Live API responded, but data was invalid or empty.");
+                        }
+                    } catch(err) {
+                        console.error("Live fetch intercept failed. Reverting to local cache buffer.", err);
+                        // Network error triggers graceful failure; stays on default static data.
+                    }
+                    
+                    btn.innerText = origTxt;
+                    btn.disabled = false;
+                }
                 
                 loginScreen.classList.add('hidden');
                 dashboardScreen.classList.remove('hidden');
