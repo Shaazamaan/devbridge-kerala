@@ -1,10 +1,12 @@
 const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1484208084271497449/aHvNsA_u710r0SgceFtH6u0sOmSRIF8nTbxzjk75ACbzl_y-_dqHdE18tLlVFLRSwGP9";
-const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbzmh73fQnjsNWRBGWyOlxsrfVSMhuf5kUsn3VXiFRQmZHGo-plx6ivWEI-nej6bNxK7sA/exec";
+const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbxpNtE2slEFe5vVFQrvozzTwExw-eiBAOTCkHf8GvUEysVqovw-QBHWvMk0-Mvj0vMYAw/exec";
 
 // 0. Live Analytics Tracking (DVK_MASTER HQ)
 async function logDvkEvent(action) {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const device = isMobile ? "Mobile" : "Desktop";
     try {
-        await fetch(`${GOOGLE_API_URL}?client=DVK_MASTER&action=${encodeURIComponent(action)}`, { mode: 'no-cors' });
+        await fetch(`${GOOGLE_API_URL}?client=DVK_MASTER&action=${encodeURIComponent(action)}&device=${device}`, { mode: 'no-cors' });
     } catch(e) { console.warn("Analytics ping failed."); }
 }
 // Log initial visit
