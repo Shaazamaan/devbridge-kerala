@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /index.html
+Allow: /active-help.html
+Allow: /insights.html
+Allow: /ads-calculator.html
+Allow: /assets/
+Disallow: /portal.html
+Disallow: /intake.html
+Disallow: /start-gate.html
+Disallow: /thank-you.html
+
+# Privacy: Client landing pages on the primary domain are hidden from search engines by default.
+# Once moved to their own domain, they can be indexed normally.
+Disallow: /*.html$
+Allow: /index.html
+Allow: /active-help.html
+Allow: /insights.html
+Allow: /ads-calculator.html
