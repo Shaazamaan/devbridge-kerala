@@ -195,61 +195,7 @@
 
     <script>
         // --- 1. THE STATIC DATABASE ---
-        const clientsDB = {
-            "DVK_MASTER": {
-                password: "ceo",
-                name: "DevBridge Kerala (Internal HQ)",
-                created_at: new Date().toISOString(),
-                is_paid: true, // Permanent unlock
-                data: { 
-                    visitors: "142,891", wa_clicks: "16,025", calls: "3,190", conv_rate: "13.4",
-                    chart_labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-                    chart_visits: [5400, 8100, 11800, 15200, 19800, 25500, 31200, 38000],
-                    chart_intent: [850, 1680, 2100, 3800, 4400, 5100, 6200, 7600],
-                    devices: [88, 8, 4],
-                    activity: [
-                        { time: '1 min ago', msg: 'Candidate Profile application submitted.', col: 'text-blue-400' },
-                        { time: '4 mins ago', msg: 'Company Hiring request received (Remote).', col: 'text-emerald-400' },
-                        { time: '12 mins ago', msg: 'WhatsApp Intent triggered (UAE IP).', col: 'text-emerald-400' },
-                        { time: '35 mins ago', msg: 'Ads Calculator interaction event.', col: 'text-purple-400' }
-                    ]
-                }
-            },
-            "ACTIVE_TEST": {
-                password: "demo",
-                name: "Alpha Corporation (Demo)",
-                created_at: new Date().toISOString(),
-                is_paid: false,
-                data: { 
-                    visitors: "14,520", wa_clicks: "1,245", calls: "348", conv_rate: "10.9",
-                    chart_labels: ['Wk 1', 'Wk 2', 'Wk 3', 'Wk 4', 'Wk 5', 'Wk 6', 'Wk 7', 'Wk 8'],
-                    chart_visits: [500, 800, 1200, 1500, 2100, 3400, 4100, 5200],
-                    chart_intent: [20, 45, 80, 120, 200, 310, 450, 680],
-                    devices: [68, 25, 7],
-                    activity: [
-                        { time: '4 mins ago', msg: 'Lead triggered WhatsApp routine.', col: 'text-emerald-400' },
-                        { time: '18 mins ago', msg: 'Organic search query matched.', col: 'text-blue-400' },
-                        { time: '1 hr ago', msg: 'Phone intent initiated (iOS).', col: 'text-purple-400' }
-                    ]
-                }
-            },
-            "TEST": {
-                password: "demo",
-                name: "Beta Logistics (Expired)",
-                created_at: "2024-01-01T00:00:00Z",
-                is_paid: false,
-                data: { 
-                    visitors: "82,109", wa_clicks: "8,940", calls: "1,120", conv_rate: "12.2",
-                    chart_labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                    chart_visits: [8000, 12000, 15000, 21000, 29000, 34000],
-                    chart_intent: [400, 700, 1100, 1800, 2400, 3200],
-                    devices: [85, 10, 5],
-                    activity: [
-                        { time: 'Locked', msg: 'Real-time data suspended. Paywall active.', col: 'text-red-400' }
-                    ]
-                }
-            }
-        };
+        // Database has been structurally removed. Passkeys are now verified exclusively via server-side Google Apps Script.
 
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1488133194632007720/s6Nl6d-W-iRr69FdM2lUAy7a0p4dJ4PWOrWZsYLMSX8at8EHCKa92sugK_qyLilc9rML";
         const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbw_xse2hzRzNTab1kJgcB-4Je_c3gav2g8np8n5UJwEBSGN_7oNihllbhbJStKPUL84-A/exec";
@@ -267,54 +213,58 @@
         const analyticsContent = document.getElementById('analyticsContent');
         const utrForm = document.getElementById('utrForm');
 
-        function fillDemo(id) {
-            document.getElementById('clientId').value = id;
-            document.getElementById('clientPass').value = "demo";
-        }
-
-        // --- 2. AUTHENTICATE ---
+        // --- 2. AUTHENTICATE VIA LIVE API ---
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const id = document.getElementById('clientId').value.trim();
-            const pass = document.getElementById('clientPass').value;
+            const pass = document.getElementById('clientPass').value.trim();
 
-            if (clientsDB[id] && clientsDB[id].password === pass) {
-                document.getElementById('loginError').classList.add('hidden');
-                loggedInClient = { id: id, ...clientsDB[id] };
+            const btn = document.querySelector('#loginForm button');
+            const origTxt = btn.innerText;
+            btn.innerText = "AUTHENTICATING...";
+            btn.disabled = true;
+            document.getElementById('loginError').classList.add('hidden');
 
-                // --- LIVE API FETCH INJECTION ---
-                if (GOOGLE_API_URL.startsWith("https://script.google.com")) {
-                    const btn = document.querySelector('#loginForm button');
-                    const origTxt = btn.innerText;
-                    btn.innerText = "SYNCING LIVE DATASTREAM...";
-                    btn.disabled = true;
-                    
-                    try {
-                        const response = await fetch(GOOGLE_API_URL + "?fetchAnalytics=true&clientId=" + encodeURIComponent(id));
-                        const result = await response.json();
-                        if (result.success && result.data) {
-                            // Dynamically overwrite static placeholder data with the 100% REAL live data from the sheet.
-                            loggedInClient.data = result.data;
-                        } else {
-                            console.warn("Live API responded, but data was invalid or empty.");
-                        }
-                    } catch(err) {
-                        console.error("Live fetch intercept failed. Reverting to local cache buffer.", err);
-                        // Network error triggers graceful failure; stays on default static data.
-                    }
-                    
+            try {
+                if (GOOGLE_API_URL.includes("YOUR_GOOGLE_SCRIPT")) {
+                    alert("System Offline: Google API URL has not been configured in portal.html");
                     btn.innerText = origTxt;
                     btn.disabled = false;
+                    return;
                 }
+
+                const response = await fetch(GOOGLE_API_URL + "?fetchAnalytics=true&clientId=" + encodeURIComponent(id) + "&clientPass=" + encodeURIComponent(pass));
+                const result = await response.json();
                 
-                loginScreen.classList.add('hidden');
-                dashboardScreen.classList.remove('hidden');
-                logoutBtnWrapper.classList.remove('hidden');
-                
-                renderDashboard();
-            } else {
-                document.getElementById('loginError').classList.remove('hidden');
+                if (result.success && result.data) {
+                    loggedInClient = { 
+                        id: id, 
+                        name: result.name || id,
+                        created_at: result.created_at || new Date().toISOString(),
+                        is_paid: result.is_paid,
+                        data: result.data 
+                    };
+                    
+                    loginScreen.classList.add('hidden');
+                    dashboardScreen.classList.remove('hidden');
+                    logoutBtnWrapper.classList.remove('hidden');
+                    
+                    renderDashboard();
+                } else {
+                    console.error("Auth Failed:", result.error);
+                    const errEl = document.getElementById('loginError');
+                    errEl.innerText = result.error || "Invalid Credentials.";
+                    errEl.classList.remove('hidden');
+                }
+            } catch(err) {
+                console.error("Network or API Error.", err);
+                const errEl = document.getElementById('loginError');
+                errEl.innerText = "Network Error connecting to DevBridge Servers.";
+                errEl.classList.remove('hidden');
             }
+            
+            btn.innerText = origTxt;
+            btn.disabled = false;
         });
 
         function logout() {
