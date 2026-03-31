@@ -129,6 +129,7 @@ function handleIntake(data) {
     if (data.FILE_EXTRA2_NAME) summary += "• Gallery Media 2: " + data.FILE_EXTRA2_NAME + "\n";
     if (data.extra_desc2) summary += "• Gallery 2 Visual Intent: " + data.extra_desc2 + "\n";
     if (data.extra2_embed) summary += "• Gallery 2 Embed: " + data.extra2_embed + "\n";
+    if (data.signature) summary += "• Master Signature: " + data.signature + "\n";
     if (data.TESTI1_PHOTO_NAME) summary += "• Review #1 Media: " + data.TESTI1_PHOTO_NAME + "\n";
     if (data.testi1_embed) summary += "• Review #1 Embed: " + data.testi1_embed + "\n";
     if (data.TESTI2_PHOTO_NAME) summary += "• Review #2 Media: " + data.TESTI2_PHOTO_NAME + "\n";
