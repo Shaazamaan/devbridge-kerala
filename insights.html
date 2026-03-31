@@ -345,7 +345,13 @@
             .then(data => {
                 allPosts = (data.posts || [])
                     .filter(p => p.published)
-                    .sort((a, b) => new Date(b.date) - new Date(a.date));
+                    .sort((a, b) => {
+                        // 1. Pillar posts always first
+                        if (a.is_pillar && !b.is_pillar) return -1;
+                        if (!a.is_pillar && b.is_pillar) return 1;
+                        // 2. Otherwise sort by date descending
+                        return new Date(b.date) - new Date(a.date);
+                    });
                 renderTagCloud(allPosts);
                 renderPosts(allPosts);
             })
@@ -426,7 +432,8 @@
             }
 
             grid.innerHTML = filtered.map(post => `
-                <article class="post-card" data-id="${post.id}" role="button" tabindex="0">
+                <article class="post-card ${post.is_pillar ? 'pillar' : ''}" data-id="${post.id}" role="button" tabindex="0">
+                    ${post.is_pillar ? '<div class="pillar-badge">MUST READ: PILLAR CONTENT</div>' : ''}
                     <div class="post-tags">${(post.tags || []).map(t => `<span class="post-tag ${tagClass(t)}">${t}</span>`).join('')}</div>
                     <time class="post-date">${formatDate(post.date)}</time>
                     <h2>${escHtml(post.title)}</h2>
@@ -462,7 +469,13 @@
             const post = allPosts.find(p => p.id === id);
             if (!post) return;
             document.getElementById('modal-title').textContent = post.title;
-            document.getElementById('modal-body').textContent = post.body;
+            document.getElementById('modal-body').innerHTML = `
+                <p style=\"line-height: 1.8; margin-bottom: 24px;\">${escHtml(post.body)}</p>
+                <div class=\"modal-footer-ctas\">
+                    <a href=\"index.html#apply\" class=\"btn-modal talent\" onclick=\"closeModal()\">Apply as Talent</a>
+                    <a href=\"index.html#hire\" class=\"btn-modal client\" onclick=\"closeModal()\">Hire Talent</a>
+                </div>
+            `;
             document.getElementById('modal-date').textContent = formatDate(post.date);
             document.getElementById('modal-tags').innerHTML = (post.tags || []).map(t => `<span class="post-tag ${tagClass(t)}">${t}</span>`).join('');
             document.getElementById('modal-overlay').classList.add('open');

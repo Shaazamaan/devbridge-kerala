@@ -1,6 +1,21 @@
 {
     "posts": [
         {
+            "id": 999,
+            "published": true,
+            "is_pillar": true,
+            "title": "The Founder's Guide to Hiring from Kerala (2026 Edition)",
+            "body": "The ultimate tactical roadmap for global founders. Learn the exact arbitrage of hiring from South India, how to filter for 10x grit, and why traditional LinkedIn sourcing is failing your startup. This is the DevBridge manifest.",
+            "date": "2026-04-01",
+            "tags": [
+                "Company",
+                "Strategy",
+                "Grit",
+                "Pillar"
+            ],
+            "seo_keywords": "hire from Kerala, startup hiring 2026, founder guide talent, south india developer arbitrage"
+        },
+        {
             "id": 1,
             "published": true,
             "concept_hash": "u-c-001",
