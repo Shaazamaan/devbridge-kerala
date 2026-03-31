@@ -242,3 +242,15 @@ footer { text-align: center; padding: 40px 0; background: white; border-top: 1px
 /* Pillar Content Highlighting (Cycle 2) */
 .post-card.pillar { border: 2px solid var(--primary); background: linear-gradient(to bottom right, #ffffff, #f8fafc); transform: scale(1.02); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
 .pillar-badge { background: var(--primary); color: white; font-size: 0.7rem; font-weight: 800; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
+
+/* FAQ Section (Cycle 3) */
+.faq-section { padding: 80px 24px; border-top: 1px solid var(--border); }
+.narrow-container { max-width: 700px; margin: 0 auto; }
+.faq-accordion { margin-top: 40px; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-question { width: 100%; text-align: left; padding: 24px 0; background: none; border: none; font-size: 1.15rem; font-weight: 700; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.faq-question::after { content: " +\; font-size: 1.5rem; color: var(--text-muted); }
+.faq-item.active .faq-question::after { content: \-\; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+.faq-answer p { padding-bottom: 24px; color: var(--text-muted); line-height: 1.7; }
+.faq-item.active .faq-answer { max-height: 200px; }

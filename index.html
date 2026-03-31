@@ -400,6 +400,32 @@
         </div>
     </section>
 
+    <section id="faq" class="faq-section">
+        <div class="container narrow-container">
+            <h2 class="text-center">Common Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">What is DevBridge Kerala?</button>
+                    <div class="faq-answer">
+                        <p>It's a personal initiative to connect high-grit talent from Kerala with global startup opportunities. We bypass the agencies and focus on direct, honest connectivity.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Is this a recruitment agency?</button>
+                    <div class="faq-answer">
+                        <p>No. We don't take agency fees from candidates, and we don't act as a middleman. We are a "Bridge" that facilitates direct hires and ensures both sides are high-signal builders.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Why the 1-month unpaid probation?</button>
+                    <div class="faq-answer">
+                        <p>To eliminate risk. Startups need execution, not CVs. A one-month trial ensures the candidate is a cultural and technical match without the weight of an early-stage hiring error.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container footer-content">
             <div class="footer-logo">
@@ -418,6 +444,17 @@
 
     <script>
         document.getElementById('sync-date').textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const wasActive = item.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!wasActive) item.classList.add('active');
+            });
+        });
     </script>
     <script src="script.js"></script>
     <a href="https://wa.me/918137826016" class="wa-float" target="_blank">
