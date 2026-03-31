@@ -45,6 +45,19 @@
         </div>
     </header>
 
+    <!-- Voice Control Entry -->
+    <div class="max-w-3xl mx-auto px-6 mb-4">
+        <button type="button" id="start-voice-btn" class="w-full bg-emerald-50 text-emerald-700 border border-emerald-200 p-4 rounded-2xl flex items-center justify-center gap-3 hover:bg-emerald-100 transition-all group active:scale-95 shadow-sm">
+            <div class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-emerald-500/30">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </div>
+            <div class="text-left">
+                <p class="text-xs font-800 uppercase tracking-widest">Malayalam Voice Mode</p>
+                <p class="text-[10px] font-semibold text-emerald-600/70">മലയാളത്തിൽ സംസാരിച്ച് വിവരങ്ങൾ നൽകാം (AI Guided)</p>
+            </div>
+        </button>
+    </div>
+
     <main class="max-w-3xl mx-auto px-6 py-12">
         <form id="intake-form" class="space-y-8">
             
@@ -143,6 +156,23 @@
                                     <span class="text-sm font-semibold">Natural 🌿</span>
                                 </label>
                             </div>
+                            <div class="mt-5">
+                                <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-3">Site Animation Level</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
+                                        <input type="radio" name="animationLevel" value="Subtle" checked class="w-4 h-4 text-blue-600">
+                                        <span class="text-sm font-semibold">Subtle ✨ <span class="text-xs text-slate-400 font-normal">(smooth fades &amp; micro-interactions)</span></span>
+                                    </label>
+                                    <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
+                                        <input type="radio" name="animationLevel" value="Rich" class="w-4 h-4 text-blue-600">
+                                        <span class="text-sm font-semibold">Rich 🌟 <span class="text-xs text-slate-400 font-normal">(bold reveals, parallax, scroll effects)</span></span>
+                                    </label>
+                                    <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
+                                        <input type="radio" name="animationLevel" value="None" class="w-4 h-4 text-blue-600">
+                                        <span class="text-sm font-semibold">None ⚡ <span class="text-xs text-slate-400 font-normal">(static, fastest load)</span></span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-4">Primary Conversion Goal *</label>
@@ -233,8 +263,9 @@
                         <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Their Quote</label>
                         <textarea name="testi1_quote" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm" placeholder="What did they say about your work?"></textarea>
                         <div class="mt-3">
-                            <label class="block text-xs font-700 text-slate-400 uppercase tracking-wider mb-2">Their Photo <span class="font-normal normal-case">(Optional)</span></label>
-                            <input type="file" name="testi1_photo" accept="image/*" class="w-full text-xs">
+                            <label class="block text-xs font-700 text-slate-400 uppercase tracking-wider mb-1">Their Photo / GIF / Video <span class="font-normal normal-case">(Optional)</span></label>
+                            <input type="file" name="testi1_photo" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
+                            <input type="url" name="testi1_embed" placeholder="Or paste a video testimonial link (YouTube / Vimeo)" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
                         </div>
                     </div>
                     <!-- Testimonial 2 -->
@@ -253,8 +284,9 @@
                         <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Their Quote</label>
                         <textarea name="testi2_quote" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm" placeholder="What did they say about your work?"></textarea>
                         <div class="mt-3">
-                            <label class="block text-xs font-700 text-slate-400 uppercase tracking-wider mb-2">Their Photo <span class="font-normal normal-case">(Optional)</span></label>
-                            <input type="file" name="testi2_photo" accept="image/*" class="w-full text-xs">
+                            <label class="block text-xs font-700 text-slate-400 uppercase tracking-wider mb-1">Their Photo / GIF / Video <span class="font-normal normal-case">(Optional)</span></label>
+                            <input type="file" name="testi2_photo" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
+                            <input type="url" name="testi2_embed" placeholder="Or paste a video testimonial link (YouTube / Vimeo)" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
                         </div>
                     </div>
                     <!-- Testimonial 3 -->
@@ -273,8 +305,9 @@
                         <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Their Quote</label>
                         <textarea name="testi3_quote" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm" placeholder="What did they say about your work?"></textarea>
                         <div class="mt-3">
-                            <label class="block text-xs font-700 text-slate-400 uppercase tracking-wider mb-2">Their Photo <span class="font-normal normal-case">(Optional)</span></label>
-                            <input type="file" name="testi3_photo" accept="image/*" class="w-full text-xs">
+                            <label class="block text-xs font-700 text-slate-400 uppercase tracking-wider mb-1">Their Photo / GIF / Video <span class="font-normal normal-case">(Optional)</span></label>
+                            <input type="file" name="testi3_photo" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
+                            <input type="url" name="testi3_embed" placeholder="Or paste a video testimonial link (YouTube / Vimeo)" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
                         </div>
                     </div>
                 </div>
@@ -307,22 +340,27 @@
                         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
                             <label class="block text-xs font-800 text-slate-500 uppercase mb-1">Business Logo <span class="text-slate-400 font-normal normal-case">(Optional)</span></label>
                             <p class="text-[10px] text-slate-400 mb-3">No logo? We'll auto-generate a branded monogram from your initials.</p>
-                            <input type="file" name="file_logo" accept="image/*" class="w-full text-xs">
+                            <input type="file" name="file_logo" accept="image/*,video/mp4,video/webm" class="w-full text-xs">
+                            <p class="text-[9px] text-slate-400 mt-1">Image, GIF, or short video accepted</p>
                         </div>
                     </div>
                     <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                        <label class="block text-xs font-800 text-slate-500 uppercase mb-1">Hero Section Photo <span class="text-slate-400 font-normal normal-case">(Optional)</span></label>
-                        <p class="text-[10px] text-slate-400 mb-3">No photo? We'll select a curated, relevant stock image that matches your business and style.</p>
-                        <input type="file" name="file_hero" accept="image/*" class="w-full text-xs">
+                        <label class="block text-xs font-800 text-slate-500 uppercase mb-1">Hero Media <span class="text-slate-400 font-normal normal-case">(Optional)</span></label>
+                        <p class="text-[10px] text-slate-400 mb-3">No photo? We'll select a curated stock image that matches your business.</p>
+                        <input type="file" name="file_hero" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
+                        <p class="text-[9px] text-slate-400 mb-2">Image / GIF / Video — or paste an embed link below</p>
+                        <input type="url" name="hero_embed" placeholder="YouTube / Vimeo / direct video URL (optional)" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                            <label class="block text-xs font-800 text-slate-400 uppercase mb-3">Extra Photo 1 (Optional)</label>
-                            <input type="file" name="file_extra1" accept="image/*" class="w-full text-xs">
+                            <label class="block text-xs font-800 text-slate-400 uppercase mb-1">Gallery Media 1 <span class="font-normal normal-case">(Optional)</span></label>
+                            <input type="file" name="file_extra1" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
+                            <input type="url" name="extra1_embed" placeholder="Or paste video/GIF embed link" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
                         </div>
                         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                            <label class="block text-xs font-800 text-slate-400 uppercase mb-3">Extra Photo 2 (Optional)</label>
-                            <input type="file" name="file_extra2" accept="image/*" class="w-full text-xs">
+                            <label class="block text-xs font-800 text-slate-400 uppercase mb-1">Gallery Media 2 <span class="font-normal normal-case">(Optional)</span></label>
+                            <input type="file" name="file_extra2" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
+                            <input type="url" name="extra2_embed" placeholder="Or paste video/GIF embed link" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
                         </div>
                     </div>
                 </div>
@@ -386,9 +424,156 @@
         </div>
     </div>
 
+    <!-- Voice Assistant Overlay -->
+    <div id="voice-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/95 hidden backdrop-blur-md p-6">
+        <div class="max-w-md w-full bg-white rounded-[2rem] p-10 text-center shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500" id="voice-progress"></div>
+            
+            <button id="close-voice-btn" class="absolute top-4 right-4 text-slate-300 hover:text-slate-600 transition-colors">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <div class="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 relative">
+                <div class="absolute inset-0 bg-emerald-400/20 rounded-full animate-ping" id="voice-pulse"></div>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </div>
+
+            <h2 id="voice-question" class="text-xl font-800 text-slate-900 mb-4 leading-tight italic">...</h2>
+            <div class="min-h-[60px] flex items-center justify-center px-4 py-3 bg-slate-50 rounded-2xl border border-slate-100 mb-8">
+                <p id="voice-transcript" class="text-sm font-semibold text-emerald-600 italic">Listening...</p>
+            </div>
+
+            <div class="flex gap-4">
+                <button id="voice-skip-btn" class="flex-1 py-4 bg-slate-100 text-slate-500 rounded-2xl font-800 uppercase text-[10px] tracking-widest hover:bg-slate-200 transition-all">Skip</button>
+                <button id="voice-retry-btn" class="flex-1 py-4 bg-slate-100 text-slate-500 rounded-2xl font-800 uppercase text-[10px] tracking-widest hover:bg-slate-200 transition-all">Retry</button>
+            </div>
+            
+            <p class="mt-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed">
+                Malayalam AI Guided Intake<br>
+                <span class="text-blue-500">DevBridge Kerala Engine v1.0</span>
+            </p>
+        </div>
+    </div>
+
+    <script src="malayalam-voice-map.js"></script>
     <script>
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1484903468404572273/U8ka36mWRRgklK3dzFWaqXoJudN9F_Z-S7a9MsCwJzGq8Vcz9FdFtkJnUVuWzVBboaa7";
         const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbzRMsjt0SPmViIhNtR_6GVj81Es65zI71A7uwmUOmsUTxnQKQOktAWWLYY0MdbjxDYPvg/exec";
+
+        // Voice Assistant Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const voiceOverlay = document.getElementById('voice-overlay');
+            const startVoiceBtn = document.getElementById('start-voice-btn');
+            const closeVoiceBtn = document.getElementById('close-voice-btn');
+            const voiceQuestion = document.getElementById('voice-question');
+            const voiceTranscript = document.getElementById('voice-transcript');
+            const voicePulse = document.getElementById('voice-pulse');
+            const voiceProgress = document.getElementById('voice-progress');
+            
+            let currentStep = 0;
+            const steps = [
+                { id: 'businessName', field: 'businessName' },
+                { id: 'tagline', field: 'tagline' },
+                { id: 'city', field: 'city' },
+                { id: 'category', field: 'businessCategory' },
+                { id: 'description', field: 'businessDescription' },
+                { id: 'service1', field: 'service1' },
+                { id: 'service2', field: 'service2' },
+                { id: 'service3', field: 'service3' },
+                { id: 'style', field: 'style_radio' },
+                { id: 'goal', field: 'goal_radio' },
+                { id: 'whatsapp', field: 'whatsapp' },
+                { id: 'email', field: 'email' }
+            ];
+
+            const recognition = 'webkitSpeechRecognition' in window ? new webkitSpeechRecognition() : null;
+            if (recognition) {
+                recognition.lang = 'ml-IN';
+                recognition.continuous = false;
+                recognition.interimResults = true;
+            }
+
+            function speak(text, callback) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ml-IN';
+                utterance.onend = callback;
+                speechSynthesis.speak(utterance);
+            }
+
+            function startStep(index) {
+                if (index >= steps.length) {
+                    voiceQuestion.innerText = MALAYALAM_VOICE_MAP.confirmation;
+                    voiceTranscript.innerText = "All items captured.";
+                    voicePulse.classList.add('hidden');
+                    setTimeout(() => {
+                        voiceOverlay.classList.add('hidden');
+                        document.querySelector('button[type="submit"]').scrollIntoView({ behavior: 'smooth' });
+                    }, 2000);
+                    return;
+                }
+
+                currentStep = index;
+                const step = steps[index];
+                voiceQuestion.innerText = MALAYALAM_VOICE_MAP[step.id];
+                voiceTranscript.innerText = "Listening...";
+                voiceProgress.style.width = `${((index + 1) / steps.length) * 100}%`;
+
+                speak(MALAYALAM_VOICE_MAP[step.id], () => {
+                    if (recognition) recognition.start();
+                });
+            }
+
+            if (recognition) {
+                recognition.onresult = (event) => {
+                    const result = event.results[event.results.length - 1][0].transcript;
+                    voiceTranscript.innerText = result;
+                    const step = steps[currentStep];
+                    
+                    // Simple radio mapping
+                    if (step.field === 'style_radio') {
+                        const styleVal = result.toLowerCase().includes('modern') ? 'Modern' : (result.toLowerCase().includes('natural') ? 'Natural' : 'Elegant');
+                        document.querySelector(`input[name="style"][value="${styleVal}"]`).checked = true;
+                    } else if (step.field === 'goal_radio') {
+                        const goalVal = result.toLowerCase().includes('call') ? 'Call' : 'WhatsApp';
+                        document.querySelector(`input[name="goal"][value="${goalVal}"]`).checked = true;
+                        if (window.updateGoalFields) window.updateGoalFields();
+                    } else {
+                        const input = document.getElementsByName(step.field)[0];
+                        if (input) input.value = result;
+                    }
+
+                    if (event.results[event.results.length - 1].isFinal) {
+                        recognition.stop();
+                        setTimeout(() => startStep(currentStep + 1), 1000);
+                    }
+                };
+
+                recognition.onerror = () => {
+                    voiceTranscript.innerText = MALAYALAM_VOICE_MAP.retry;
+                    recognition.stop();
+                };
+            }
+
+            startVoiceBtn.addEventListener('click', () => {
+                voiceOverlay.classList.remove('hidden');
+                startStep(0);
+            });
+
+            closeVoiceBtn.addEventListener('click', () => {
+                voiceOverlay.classList.add('hidden');
+                if (recognition) recognition.stop();
+            });
+
+            document.getElementById('voice-skip-btn').addEventListener('click', () => {
+                recognition.stop();
+                startStep(currentStep + 1);
+            });
+
+            document.getElementById('voice-retry-btn').addEventListener('click', () => {
+                recognition.stop();
+                startStep(currentStep);
+            });
+        });
 
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('intake-form');
@@ -423,6 +608,7 @@
                     inputPhone.required = true;
                 }
             }
+            window.updateGoalFields = updateGoalFields;
             document.querySelectorAll('input[name="goal"]').forEach(r => r.addEventListener('change', updateGoalFields));
             updateGoalFields();
 
