@@ -43,6 +43,9 @@ const UNIVERSAL_VOICE_ENGINE = {
             assetCheck: "Do you have a {type} file? Please say Yes or No.",
             assetNarrate: "Ok, I have highlighted the {type} upload button. Please click it to select your file, or ask someone to help you. Say Next when you are ready.",
             assetDescribe: "No problem. Please describe what you want for your {type}, or say 'You choose' if you want us to pick the best one for you.",
+            resumePrompt: "I found your previous progress. Would you like to resume where you left off?",
+            invalidField: "I'm sorry, I heard an invalid format. Let's try that again.",
+            fileTooLarge: "Your file is too large. For direct uploads, we recommend and keep it under 40 MB. Please use an embed link instead, or I can help you compress it.",
             confirmValue: "I heard {value}. Is this correct?",
             retry: "I'm sorry, I didn't catch that. Could you please repeat?",
             success: "Great! All details are captured. I'm now scrolling you to the final review."
@@ -67,6 +70,9 @@ const UNIVERSAL_VOICE_ENGINE = {
             assetCheck: "നിങ്ങളുടെ കയ്യിൽ {type} ഫയൽ ഉണ്ടോ? ഉണ്ടെങ്കിൽ 'ഉണ്ട്' എന്നും ഇല്ലെങ്കിൽ 'ഇല്ല' എന്നും പറയുക.",
             assetNarrate: "ശരി, ഞാൻ {type} അപ്‌ലോഡ് ബട്ടൺ ഹൈലൈറ്റ് ചെയ്തിട്ടുണ്ട്. അത് ക്ലിക്ക് ചെയ്ത് ഫയൽ സെലക്ട് ചെയ്യുക. അല്ലെങ്കിൽ മറ്റാരെയെങ്കിലും സഹായിക്കാൻ ആവശ്യപ്പെടുക. കഴിഞ്ഞാൽ 'നെക്സ്റ്റ്' എന്ന് പറയുക.",
             assetDescribe: "സാരമില്ല. നിങ്ങളുടെ {type} എങ്ങനെയായിരിക്കണമെന്ന് വിശദീകരിക്കാമോ? അല്ലെങ്കിൽ നിങ്ങൾക്ക് വേണ്ടി ഞങ്ങൾ തിരഞ്ഞെടുക്കണമെങ്കിൽ 'നിങ്ങൾ തിരഞ്ഞെടുക്കൂ' എന്ന് പറയുക.",
+            resumePrompt: "നിങ്ങൾ നേരത്തെ പൂരിപ്പിച്ച വിവരങ്ങൾ ഞാൻ കണ്ടെത്തി. അവിടെ നിന്ന് തന്നെ തുടരണോ?",
+            invalidField: "ക്ഷമിക്കണം, നിങ്ങൾ പറഞ്ഞത് എനിക്ക് മനസ്സിലായില്ല. ഒന്നുകൂടി വ്യക്തമാക്കാമോ?",
+            fileTooLarge: "നിങ്ങൾ തിരഞ്ഞെടുത്ത ഫയൽ വളരെ വലുതാണ്. 40 എം ബി യിൽ താഴെയുള്ള ഫയലുകൾ മാത്രമേ അപ്‌ലോഡ് ചെയ്യാൻ കഴിയൂ. ദയവായി ലിങ്ക് ഉപയോഗിക്കുയോ വേറെ ഫയൽ തിരഞ്ഞെടുക്കുകയോ ചെയ്യുക.",
             confirmValue: "ഞാൻ കേട്ടത് {value}. ഇത് ശരിയാണോ?",
             retry: "ക്ഷമിക്കണം, എനിക്ക് അത് മനസ്സിലായില്ല. ഒന്നുകൂടി പറയാമോ?",
             success: "നന്ദി! എല്ലാ വിവരങ്ങളും റെക്കോർഡ് ചെയ്തു."

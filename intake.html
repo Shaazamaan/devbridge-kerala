@@ -518,12 +518,30 @@
                 recognition.interimResults = true;
             }
 
-            // High-Precision Audio Context Analyzer
+            // Persistence Logic
+            function saveDraft(index) {
+                const data = {};
+                steps.forEach(s => {
+                    const el = document.getElementsByName(s.field)[0] || document.getElementById(s.field);
+                    if(el) data[s.field] = el.value || el.checked;
+                });
+                localStorage.setItem('dbk_intake_draft', JSON.stringify({ index, data, timestamp: Date.now() }));
+            }
+
+            function loadDraft() {
+                const draft = JSON.parse(localStorage.getItem('dbk_intake_draft'));
+                if (!draft || (Date.now() - draft.timestamp > 24 * 60 * 60 * 1000)) return null;
+                return draft;
+            }
+
+            // High-Precision Audio Context Analyzer & Tones
             let audioContext, analyzer, dataArray, source;
             function startAudioTracking() {
-                if (audioContext) return;
+                if (audioContext && audioContext.state !== 'suspended') return;
+                if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioContext.state === 'suspended') audioContext.resume();
+
                 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
                     analyzer = audioContext.createAnalyser();
                     source = audioContext.createMediaStreamSource(stream);
                     source.connect(analyzer);
@@ -537,15 +555,46 @@
                         let sum = 0;
                         for(let i=0; i < bufferLength; i++) sum += dataArray[i];
                         const vol = Math.min(100, (sum / bufferLength) * 1.5);
-                        document.getElementById('voice-volume-meter').style.height = vol + '%';
+                        const volMeter = document.getElementById('voice-volume-meter');
+                        if (volMeter) volMeter.style.height = vol + '%';
                         requestAnimationFrame(updateVol);
                     }
                     updateVol();
                 }).catch(e => console.error("Mic Error:", e));
             }
 
+            function playTone(type) {
+                if (!audioContext) return;
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                if (type === 'success') {
+                    osc.frequency.setValueAtTime(880, audioContext.currentTime);
+                    gain.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                } else {
+                    osc.frequency.setValueAtTime(220, audioContext.currentTime);
+                    gain.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                }
+                osc.start();
+                osc.stop(audioContext.currentTime + 0.3);
+            }
+
+            // File Size Guard
+            document.querySelectorAll('input[type="file"]').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    if (e.target.files[0] && e.target.files[0].size > 40 * 1024 * 1024) {
+                        playTone('error');
+                        speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].fileTooLarge);
+                        e.target.value = '';
+                    }
+                });
+            });
+
             function speak(text, callback) {
-                speechSynthesis.cancel(); // Clear any zombie speech
+                speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = UNIVERSAL_VOICE_ENGINE.locales[selectedLang] || 'en-IN';
                 utterance.onstart = () => {
@@ -553,22 +602,31 @@
                     voicePulse.classList.add('hidden');
                 };
                 utterance.onend = () => {
-                    setTimeout(callback, 500); // Pneumatic Buffer for stability
+                    setTimeout(callback, 500);
                 };
                 speechSynthesis.speak(utterance);
             }
 
             function startStep(index) {
                 if (recognition) {
-                    try { recognition.stop(); } catch(e) {} // Ensure clean start
+                    try { recognition.stop(); } catch(e) {}
                 }
                 
-                if (index === -2) { // Permission Narration
+                if (index === -2) {
+                    const draft = loadDraft();
                     voiceQuestion.innerText = "Microphone Access Required";
                     speak(UNIVERSAL_VOICE_ENGINE.prompts.ml.micPermission, () => {
-                        startAudioTracking(); // Start visual volume meter
-                        recognition.lang = 'ml-IN';
-                        recognition.start();
+                        startAudioTracking();
+                        if (draft) {
+                            speak(UNIVERSAL_VOICE_ENGINE.prompts.ml.resumePrompt, () => {
+                                currentStep = -3; 
+                                recognition.lang = 'ml-IN';
+                                recognition.start();
+                            });
+                        } else {
+                            recognition.lang = 'ml-IN';
+                            recognition.start();
+                        }
                     });
                     return;
                 }
@@ -578,7 +636,6 @@
                     speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].success, () => {
                         voiceOverlay.classList.add('hidden');
                         document.querySelector('button[type="submit"]').scrollIntoView({ behavior: 'smooth' });
-                        speak("All items captured. Don't forget to upload any remaining photos before submitting.");
                     });
                     return;
                 }
@@ -587,8 +644,6 @@
                 isConfirming = false;
                 const step = steps[index];
                 let promptText = UNIVERSAL_VOICE_ENGINE.prompts[selectedLang][step.id];
-                
-                // Handle branching prompt replacement
                 if (step.id === 'assetCheck') promptText = promptText.replace('{type}', step.type);
                 if (step.id === 'assetNarrate') promptText = promptText.replace('{type}', step.type);
                 if (step.id === 'assetDescribe') promptText = promptText.replace('{type}', step.type);
@@ -607,25 +662,19 @@
                 recognition.onstart = () => {
                     voicePulse.classList.remove('hidden');
                     voiceTranscript.innerText = "Listening now...";
-                    if (currentStep === -2) {
-                        setTimeout(() => startStep(0), 100); // Skip Language Gate, go to first question
-                    }
+                    if (currentStep === -2) setTimeout(() => startStep(0), 100);
                 };
 
-                 recognition.onend = () => {
+                recognition.onend = () => {
                     voicePulse.classList.add('hidden');
                 };
 
                 recognition.onresult = (event) => {
                     let interimTranscript = '';
                     let finalTranscript = '';
-
                     for (let i = event.resultIndex; i < event.results.length; ++i) {
-                        if (event.results[i].isFinal) {
-                            finalTranscript += event.results[i][0].transcript;
-                        } else {
-                            interimTranscript += event.results[i][0].transcript;
-                        }
+                        if (event.results[i].isFinal) finalTranscript += event.results[i][0].transcript;
+                        else interimTranscript += event.results[i][0].transcript;
                     }
 
                     if (interimTranscript) {
@@ -637,8 +686,29 @@
                         voiceTranscript.innerText = finalTranscript;
                         voiceTranscript.style.opacity = '1';
                         const result = finalTranscript.trim();
+
+                        if (currentStep === -3) {
+                            const isYes = UNIVERSAL_VOICE_ENGINE.resolveIntent(result, 'yes', selectedLang);
+                            if (isYes) {
+                                const draft = loadDraft();
+                                Object.keys(draft.data).forEach(key => {
+                                    const el = document.getElementsByName(key)[0] || document.getElementById(key);
+                                    if(el) {
+                                        if (el.type === 'radio') {
+                                            const radio = document.querySelector(`input[name="${key}"][value="${draft.data[key]}"]`);
+                                            if (radio) radio.checked = true;
+                                        } else el.value = draft.data[key];
+                                    }
+                                });
+                                playTone('success');
+                                startStep(draft.index);
+                            } else {
+                                localStorage.removeItem('dbk_intake_draft');
+                                startStep(0);
+                            }
+                            return;
+                        }
                         
-                        // Handling Asset Branching (Yes/No for files)
                         const step = steps[currentStep] || {id: 'none'};
                         if (step.id === 'assetCheck') {
                             const isYes = UNIVERSAL_VOICE_ENGINE.resolveIntent(result, 'yes', selectedLang);
@@ -657,28 +727,25 @@
                             tempValue = result;
                             const confirmText = UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].confirmValue.replace('{value}', tempValue);
                             isConfirming = true;
-                            speak(confirmText, () => {
-                                // Mic stays on in continuous mode
-                            });
+                            speak(confirmText, () => {});
                         } else {
                             const isYes = UNIVERSAL_VOICE_ENGINE.resolveIntent(result, 'yes', selectedLang);
                             if (isYes) {
-                                // Map value to form
+                                playTone('success');
                                 if (step.field === 'style_radio') {
                                     const styleVal = UNIVERSAL_VOICE_ENGINE.resolveIntent(tempValue, 'elegant', selectedLang) ? 'Elegant' : (UNIVERSAL_VOICE_ENGINE.resolveIntent(tempValue, 'natural', selectedLang) ? 'Natural' : 'Modern');
                                     const radio = document.querySelector(`input[name="style"][value="${styleVal}"]`);
-                                    if(radio) {
-                                        radio.checked = true;
-                                        radio.dispatchEvent(new Event('change'));
-                                    }
+                                    if(radio) { radio.checked = true; radio.dispatchEvent(new Event('change')); }
                                 } else if (step.field === 'goal_radio') {
                                     const goalVal = UNIVERSAL_VOICE_ENGINE.resolveIntent(tempValue, 'call', selectedLang) ? 'Call' : 'WhatsApp';
                                     const radio = document.querySelector(`input[name="goal"][value="${goalVal}"]`);
-                                    if(radio) {
-                                        radio.checked = true;
-                                        if (window.updateGoalFields) window.updateGoalFields();
-                                    }
+                                    if(radio) { radio.checked = true; if (window.updateGoalFields) window.updateGoalFields(); }
                                 } else if (step.field === 'email') {
+                                    if (!tempValue.includes('@')) {
+                                        playTone('error');
+                                        speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].invalidField, () => {});
+                                        isConfirming = false; return;
+                                    }
                                     const input = document.getElementsByName(step.field)[0];
                                     if(input) input.value = UNIVERSAL_VOICE_ENGINE.formatters.email(tempValue);
                                 } else if (step.field === 'whatsapp') {
@@ -692,12 +759,12 @@
                                     const input = document.getElementsByName(step.field)[0];
                                     if(input) input.value = tempValue;
                                 }
+                                saveDraft(currentStep + 1);
                                 startStep(currentStep + 1);
                             } else {
+                                playTone('error');
                                 isConfirming = false;
-                                speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].retry, () => {
-                                    // Mic stays on
-                                });
+                                speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].retry, () => {});
                             }
                         }
                     }
@@ -708,12 +775,7 @@
                     if (event.error === 'not-allowed') {
                         speak(UNIVERSAL_VOICE_ENGINE.prompts.en.micDenied);
                         voiceQuestion.innerText = "Access Denied";
-                        voiceTranscript.innerText = "Enable mic in settings.";
-                    } else {
-                        speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].retry, () => {
-                            recognition.start();
-                        });
-                    }
+                    } else speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].retry, () => recognition.start());
                 };
             }
 
