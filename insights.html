@@ -48,12 +48,35 @@
             margin-bottom: 16px;
             line-height: 1.15;
         }
-        .insights-hero p {
-            font-size: 1.1rem;
+        /* Topical Clusters (Cycle 1) */
+        .topical-clusters {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .cluster-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
             color: var(--text-muted);
-            max-width: 560px;
-            margin: 0 auto 20px;
-            line-height: 1.7;
+            letter-spacing: 0.05em;
+        }
+        .cluster-link {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+        .cluster-link:hover {
+            background: var(--primary-light);
+            border-bottom-color: var(--primary);
         }
         .update-note {
             font-size: 0.82rem;
@@ -252,6 +275,12 @@
             <svg style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted);" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </div>
 
+        <div class="topical-clusters">
+            <span class="cluster-label">Pillars:</span>
+            <a href="#" onclick="setCategory('Candidate')" class="cluster-link">Candidate Grit</a>
+            <a href="#" onclick="setCategory('Company')" class="cluster-link">Company Strategy</a>
+            <a href="#" onclick="setCategory('Growth')" class="cluster-link">Scaling & AI</a>
+        </div>
         <div class="filter-bar">
             <button class="filter-btn active" data-filter="all">All Posts</button>
             <button class="filter-btn" data-filter="Candidate">For Candidates</button>
@@ -290,11 +319,18 @@
                 <span>DevBridge Kerala</span>
             </div>
             <p>&copy; 2026 Shaazamaan Shaji. A personal trust-based initiative.</p>
-            <div class="footer-links mt-2">
-                <a href="/">Home</a> | <a href="/#about">About</a> | <a href="/#how-it-works">Process</a>
+             <div class="footer-links mt-2">
+                <a href="index.html#about">About</a> | <a href="index.html#how-it-works">Process</a>
             </div>
+            <p class="update-note" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; opacity: 0.8;">
+                Last Platform Sync: <span id="sync-date"></span> (April Content Active)
+            </p>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('sync-date').textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    </script>
 
     <script src="script.js"></script>
     <script>
@@ -354,6 +390,17 @@
             });
         }
 
+        function setCategory(cat) {
+            activeFilter = cat;
+            // Sync the filter buttons
+            document.querySelectorAll('.filter-bar .filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === cat) btn.classList.add('active');
+            });
+            renderPosts(allPosts);
+            // Scroll to grid if needed
+            document.getElementById('posts-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
         function renderPosts(posts) {
             const grid = document.getElementById('posts-grid');
             

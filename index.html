@@ -44,6 +44,12 @@
       "name": "DevBridge Kerala",
       "url": "https://devbridgekerala.com",
       "logo": "https://devbridgekerala.com/assets/logo.png",
+      "knowsAbout": ["High-Grit Hiring", "Startup Scaling", "Career Relocation Strategy", "Kerala Talent Ecosystem", "Venture Investment Narrative"],
+      "brand": {
+        "@type": "Brand",
+        "name": "DevBridge",
+        "description": "The bridge between local high-grit talent and global startup standards."
+      },
       "founder": {
         "@type": "Person",
         "name": "Shaazamaan Shaji",
@@ -78,6 +84,10 @@
 
     <header class="hero">
         <div class="hero-content fade-in">
+            <div class="live-status-badge">
+                <span class="dot"></span>
+                <strong>Live Help:</strong> 85% Progress on UAE Bridge • 45% on Global VC Pitch
+            </div>
             <span class="badge">Kerala ↔ Global</span>
             <h1>Connecting Talent from Kerala to <span class="highlight">Opportunities Worldwide</span></h1>
             <p>Helping skilled individuals secure high-impact roles, startup founding positions, and cross-border opportunities across India and globally. Giving companies worldwide direct access to highly capable, reliable talent without agency friction.</p>
@@ -333,6 +343,58 @@
                     <label>Brief Requirements *</label>
                     <textarea name="requirements" required rows="3" placeholder="What exactly does success look like for this hire in 90 days?"></textarea>
                 </div>
+    <section id="hire" class="form-section bg-light">
+        <div class="container form-container scroll-trigger">
+            <div class="form-header">
+                <h2>Company Hiring Request</h2>
+                <p>Skip the agencies. Get direct access to strong builders.</p>
+            </div>
+            <form name="company" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="custom-form">
+                <input type="hidden" name="form-name" value="company" />
+                <p class="hidden" style="display:none">
+                    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                </p>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Company Name *</label>
+                        <input type="text" name="company_name" required placeholder="Company">
+                    </div>
+                    <div class="form-group">
+                        <label>Key Contact Email *</label>
+                        <input type="email" name="contact_email" required placeholder="founder@company.com">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" name="phone" required placeholder="+91 ...">
+                    </div>
+                    <div class="form-group">
+                        <label>Role Hiring For *</label>
+                        <input type="text" name="role_hiring" required placeholder="e.g. Head of Growth / React Native Dev">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Job Location/Type *</label>
+                        <select name="job_type" required>
+                            <option value="">Select Type</option>
+                            <option value="Onsite Kerala">On-site / Hybrid (Kerala)</option>
+                            <option value="Onsite India">On-site / Hybrid (Pan India)</option>
+                            <option value="Global Relocation">Global Relocation</option>
+                            <option value="Remote / Distributed">Remote / Distributed</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Expected Budget/Range</label>
+                        <input type="text" name="budget" placeholder="$ USD / ₹ INR">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Brief Requirements *</label>
+                    <textarea name="requirements" required rows="3" placeholder="What exactly does success look like for this hire in 90 days?"></textarea>
+                </div>
                 <button type="submit" class="btn-primary form-submit">Initiate Search</button>
             </form>
         </div>
@@ -348,9 +410,15 @@
             <div class="footer-links mt-2">
                 <a href="#about">About</a> | <a href="#how-it-works">Process</a>
             </div>
+            <p class="update-note" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; opacity: 0.8;">
+                Last Platform Sync: <span id="sync-date"></span> (April Content Active)
+            </p>
         </div>
     </footer>
 
+    <script>
+        document.getElementById('sync-date').textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    </script>
     <script src="script.js"></script>
     <a href="https://wa.me/918137826016" class="wa-float" target="_blank">
         <svg class="wa-icon" viewBox="0 0 24 24">
@@ -358,6 +426,3 @@
         </svg>
     </a>
 </body>
-</html>
-   
- 
