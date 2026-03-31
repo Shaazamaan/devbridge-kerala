@@ -340,27 +340,31 @@
                         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
                             <label class="block text-xs font-800 text-slate-500 uppercase mb-1">Business Logo <span class="text-slate-400 font-normal normal-case">(Optional)</span></label>
                             <p class="text-[10px] text-slate-400 mb-3">No logo? We'll auto-generate a branded monogram from your initials.</p>
-                            <input type="file" name="file_logo" accept="image/*,video/mp4,video/webm" class="w-full text-xs">
+                            <input type="file" name="file_logo" id="file_logo" aria-label="Business Logo Upload Slot" accept="image/*,video/mp4,video/webm" class="w-full text-xs">
+                            <input type="hidden" name="logo_desc" id="logo_desc">
                             <p class="text-[9px] text-slate-400 mt-1">Image, GIF, or short video accepted</p>
                         </div>
                     </div>
                     <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
                         <label class="block text-xs font-800 text-slate-500 uppercase mb-1">Hero Media <span class="text-slate-400 font-normal normal-case">(Optional)</span></label>
                         <p class="text-[10px] text-slate-400 mb-3">No photo? We'll select a curated stock image that matches your business.</p>
-                        <input type="file" name="file_hero" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
+                        <input type="file" name="file_hero" id="file_hero" aria-label="Hero Media Upload Slot" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
+                        <input type="hidden" name="hero_desc" id="hero_desc">
                         <p class="text-[9px] text-slate-400 mb-2">Image / GIF / Video — or paste an embed link below</p>
-                        <input type="url" name="hero_embed" placeholder="YouTube / Vimeo / direct video URL (optional)" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
+                        <input type="url" name="hero_embed" id="hero_embed" aria-label="Hero Embed Link Slot" placeholder="YouTube / Vimeo / direct video URL (optional)" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
                             <label class="block text-xs font-800 text-slate-400 uppercase mb-1">Gallery Media 1 <span class="font-normal normal-case">(Optional)</span></label>
-                            <input type="file" name="file_extra1" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
-                            <input type="url" name="extra1_embed" placeholder="Or paste video/GIF embed link" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
+                            <input type="file" name="file_extra1" id="file_extra1" aria-label="Gallery Image 1 Upload Slot" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
+                            <input type="hidden" name="extra_desc1" id="extra_desc1">
+                            <input type="url" name="extra1_embed" id="extra1_embed" aria-label="Gallery 1 Embed Link Slot" placeholder="Or paste video/GIF embed link" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
                         </div>
                         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
                             <label class="block text-xs font-800 text-slate-400 uppercase mb-1">Gallery Media 2 <span class="font-normal normal-case">(Optional)</span></label>
-                            <input type="file" name="file_extra2" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
-                            <input type="url" name="extra2_embed" placeholder="Or paste video/GIF embed link" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
+                            <input type="file" name="file_extra2" id="file_extra2" aria-label="Gallery Image 2 Upload Slot" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
+                            <input type="hidden" name="extra_desc2" id="extra_desc2">
+                            <input type="url" name="extra2_embed" id="extra2_embed" aria-label="Gallery 2 Embed Link Slot" placeholder="Or paste video/GIF embed link" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
                         </div>
                     </div>
                 </div>
@@ -486,7 +490,10 @@
                 { id: 'style', field: 'style_radio' },
                 { id: 'goal', field: 'goal_radio' },
                 { id: 'whatsapp', field: 'whatsapp' },
-                { id: 'email', field: 'email' }
+                { id: 'email', field: 'email' },
+                { id: 'assetCheck', type: 'Logo', field: 'file_logo' },
+                { id: 'assetCheck', type: 'Hero', field: 'file_hero' },
+                { id: 'assetCheck', type: 'Gallery', field: 'file_extra1' }
             ];
 
             const recognition = 'webkitSpeechRecognition' in window ? new webkitSpeechRecognition() : null;
@@ -528,7 +535,7 @@
                     speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].success, () => {
                         voiceOverlay.classList.add('hidden');
                         document.querySelector('button[type="submit"]').scrollIntoView({ behavior: 'smooth' });
-                        speak("All data captured, you can now submit the form.");
+                        speak("All items captured. Don't forget to upload any remaining photos before submitting.");
                     });
                     return;
                 }
@@ -536,7 +543,13 @@
                 currentStep = index;
                 isConfirming = false;
                 const step = steps[index];
-                const promptText = UNIVERSAL_VOICE_ENGINE.prompts[selectedLang][step.id];
+                let promptText = UNIVERSAL_VOICE_ENGINE.prompts[selectedLang][step.id];
+                
+                // Handle branching prompt replacement
+                if (step.id === 'assetCheck') promptText = promptText.replace('{type}', step.type);
+                if (step.id === 'assetNarrate') promptText = promptText.replace('{type}', step.type);
+                if (step.id === 'assetDescribe') promptText = promptText.replace('{type}', step.type);
+
                 voiceQuestion.innerText = promptText;
                 voiceTranscript.innerText = "Listening...";
                 voiceProgress.style.width = `${((index + 1) / steps.length) * 100}%`;
@@ -574,6 +587,28 @@
 
                         if (!isConfirming) {
                             tempValue = result;
+                            const step = steps[currentStep];
+                            
+                            // Handling Asset Branching (Yes/No for files)
+                            if (step.id === 'assetCheck') {
+                                const isYes = result.toLowerCase().includes('yes') || result.toLowerCase().includes('അതെ') || result.toLowerCase().includes('ഉണ്ട്');
+                                if (isYes) {
+                                    // Switch current step to Narration
+                                    steps[currentStep].id = 'assetNarrate';
+                                } else {
+                                    // Switch current step to Description
+                                    steps[currentStep].id = 'assetDescribe';
+                                }
+                                startStep(currentStep); // Re-run the step with new sub-id
+                                return;
+                            }
+
+                            if (step.id === 'assetNarrate') {
+                                // Just listening for "Next" or "Ready"
+                                startStep(currentStep + 1);
+                                return;
+                            }
+
                             const confirmText = UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].confirmValue.replace('{value}', tempValue);
                             isConfirming = true;
                             speak(confirmText, () => {
@@ -602,6 +637,10 @@
                                 } else if (step.field === 'whatsapp') {
                                     const input = document.getElementsByName(step.field)[0];
                                     if(input) input.value = UNIVERSAL_VOICE_ENGINE.formatters.number(tempValue);
+                                } else if (step.id === 'assetDescribe') {
+                                    const descID = step.type.toLowerCase() === 'gallery' ? 'extra_desc1' : (step.type.toLowerCase() + '_desc');
+                                    const input = document.getElementById(descID);
+                                    if(input) input.value = tempValue;
                                 } else {
                                     const input = document.getElementsByName(step.field)[0];
                                     if(input) input.value = tempValue;

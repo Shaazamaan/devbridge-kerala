@@ -91,6 +91,7 @@ function handleIntake(data) {
     
     summary += "SECTION 3: STYLE & GOAL\n";
     summary += "• Visual Style: " + (data.style || "N/A") + "\n";
+    summary += "• Animation Level: " + (data.animationLevel || "Subtle") + "\n";
     summary += "• Conversion Goal: " + (data.goal || "N/A") + "\n";
     var goal = data.goal || 'WhatsApp';
     if (goal === 'WhatsApp' || goal === 'Both') {
@@ -117,13 +118,23 @@ function handleIntake(data) {
     summary += "\nSECTION 6: STRATEGIC ASSET LOG\n";
     summary += "--------------------\n";
     if (data.FILE_LOGO_NAME) summary += "• Business Logo: " + data.FILE_LOGO_NAME + "\n";
-    if (data.FILE_HERO_NAME) summary += "• Hero/Banner Photo: " + data.FILE_HERO_NAME + "\n";
+    if (data.logo_desc) summary += "• Logo Visual Intent: " + data.logo_desc + "\n";
+    if (data.FILE_HERO_NAME) summary += "• Hero Media: " + data.FILE_HERO_NAME + "\n";
+    if (data.hero_desc) summary += "• Hero Visual Intent: " + data.hero_desc + "\n";
+    if (data.hero_embed) summary += "• Hero Embed Link: " + data.hero_embed + "\n";
     if (data.FILE_PAYMENT_NAME) summary += "• Payment Proof: " + data.FILE_PAYMENT_NAME + "\n";
-    if (data.FILE_EXTRA1_NAME) summary += "• Extra Asset 1: " + data.FILE_EXTRA1_NAME + "\n";
-    if (data.FILE_EXTRA2_NAME) summary += "• Extra Asset 2: " + data.FILE_EXTRA2_NAME + "\n";
-    if (data.TESTI1_PHOTO_NAME) summary += "• Review #1 Photo: " + data.TESTI1_PHOTO_NAME + "\n";
-    if (data.TESTI2_PHOTO_NAME) summary += "• Review #2 Photo: " + data.TESTI2_PHOTO_NAME + "\n";
-    if (data.TESTI3_PHOTO_NAME) summary += "• Review #3 Photo: " + data.TESTI3_PHOTO_NAME + "\n";
+    if (data.FILE_EXTRA1_NAME) summary += "• Gallery Media 1: " + data.FILE_EXTRA1_NAME + "\n";
+    if (data.extra_desc1) summary += "• Gallery 1 Visual Intent: " + data.extra_desc1 + "\n";
+    if (data.extra1_embed) summary += "• Gallery 1 Embed: " + data.extra1_embed + "\n";
+    if (data.FILE_EXTRA2_NAME) summary += "• Gallery Media 2: " + data.FILE_EXTRA2_NAME + "\n";
+    if (data.extra_desc2) summary += "• Gallery 2 Visual Intent: " + data.extra_desc2 + "\n";
+    if (data.extra2_embed) summary += "• Gallery 2 Embed: " + data.extra2_embed + "\n";
+    if (data.TESTI1_PHOTO_NAME) summary += "• Review #1 Media: " + data.TESTI1_PHOTO_NAME + "\n";
+    if (data.testi1_embed) summary += "• Review #1 Embed: " + data.testi1_embed + "\n";
+    if (data.TESTI2_PHOTO_NAME) summary += "• Review #2 Media: " + data.TESTI2_PHOTO_NAME + "\n";
+    if (data.testi2_embed) summary += "• Review #2 Embed: " + data.testi2_embed + "\n";
+    if (data.TESTI3_PHOTO_NAME) summary += "• Review #3 Media: " + data.TESTI3_PHOTO_NAME + "\n";
+    if (data.testi3_embed) summary += "• Review #3 Embed: " + data.testi3_embed + "\n";
 
     var hasTestimonials = (data.testi1_name && data.testi1_quote) || (data.testi2_name && data.testi2_quote) || (data.testi3_name && data.testi3_quote);
     if (hasTestimonials) {

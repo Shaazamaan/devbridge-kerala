@@ -22,6 +22,9 @@ const UNIVERSAL_VOICE_ENGINE = {
             whatsapp: "Please say your WhatsApp number.",
             phone: "Please say your Phone number.",
             email: "What is your email address?",
+            assetCheck: "Do you have a {type} file? Please say Yes or No.",
+            assetNarrate: "Ok, I have highlighted the {type} upload button. Please click it to select your file, or ask someone to help you. Say Next when you are ready.",
+            assetDescribe: "No problem. Please describe what you want for your {type}, or say 'You choose' if you want us to pick the best one for you.",
             confirmValue: "I heard {value}. Is this correct?",
             retry: "I'm sorry, I didn't catch that. Could you please repeat?",
             success: "Great! All details are captured. I'm now scrolling you to the final review."
@@ -43,6 +46,9 @@ const UNIVERSAL_VOICE_ENGINE = {
             whatsapp: "നിങ്ങളുടെ വാട്സ്ആപ്പ് നമ്പർ പറയുക.",
             phone: "നിങ്ങളുടെ ഫോൺ നമ്പർ പറയുക.",
             email: "നിങ്ങളുടെ ഇമെയിൽ അഡ്രസ്സ് എന്താണ്?",
+            assetCheck: "നിങ്ങളുടെ കയ്യിൽ {type} ഫയൽ ഉണ്ടോ? ഉണ്ടെങ്കിൽ 'ഉണ്ട്' എന്നും ഇല്ലെങ്കിൽ 'ഇല്ല' എന്നും പറയുക.",
+            assetNarrate: "ശരി, ഞാൻ {type} അപ്‌ലോഡ് ബട്ടൺ ഹൈലൈറ്റ് ചെയ്തിട്ടുണ്ട്. അത് ക്ലിക്ക് ചെയ്ത് ഫയൽ സെലക്ട് ചെയ്യുക. അല്ലെങ്കിൽ മറ്റാരെയെങ്കിലും സഹായിക്കാൻ ആവശ്യപ്പെടുക. കഴിഞ്ഞാൽ 'നെക്സ്റ്റ്' എന്ന് പറയുക.",
+            assetDescribe: "സാരമില്ല. നിങ്ങളുടെ {type} എങ്ങനെയായിരിക്കണമെന്ന് വിശദീകരിക്കാമോ? അല്ലെങ്കിൽ നിങ്ങൾക്ക് വേണ്ടി ഞങ്ങൾ തിരഞ്ഞെടുക്കണമെങ്കിൽ 'നിങ്ങൾ തിരഞ്ഞെടുക്കൂ' എന്ന് പറയുക.",
             confirmValue: "ഞാൻ കേട്ടത് {value}. ഇത് ശരിയാണോ?",
             retry: "ക്ഷമിക്കണം, എനിക്ക് അത് മനസ്സിലായില്ല. ഒന്നുകൂടി പറയാമോ?",
             success: "നന്ദി! എല്ലാ വിവരങ്ങളും റെക്കോർഡ് ചെയ്തു."
