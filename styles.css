@@ -18,7 +18,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; letter-spacing: -0.01em; width: 100%; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; letter-spacing: -0.01em; width: 100%; }
 a { text-decoration: none; color: inherit; }
 .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 .text-center { text-align: center; }
@@ -343,7 +343,7 @@ footer { text-align: center; padding: 40px 0; background: white; border-top: 1px
   color: var(--text-muted);
 }
 @keyframes tickerSlide {
-  0% { transform: translateX(100%); }
+  0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
 }
 
@@ -403,3 +403,47 @@ footer { text-align: center; padding: 40px 0; background: white; border-top: 1px
 .mb-2 { margin-bottom: 0.5rem; }
 .inline-block { display: inline-block; }
 .mr-2 { margin-right: 0.5rem; }
+
+/* Timeline & Mobile Overlap (Cycle 21) */
+.timeline {
+    list-style: none;
+    position: relative;
+    padding-left: 2rem;
+    margin-top: 2rem;
+}
+
+.timeline li {
+    margin-bottom: 2.5rem;
+    position: relative;
+    padding-left: 0.5rem;
+}
+
+.timeline li::before {
+    content: '';
+    position: absolute;
+    left: -1.75rem;
+    top: 0.35rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
+}
+
+.status-badge {
+    display: inline-block;
+    background: #dcfce7;
+    color: #166534;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 1px solid #86efac;
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .timeline { padding-left: 1.5rem; }
+    .timeline li::before { left: -1.25rem; }
+    .workflow-col { margin-bottom: 40px; }
+}
