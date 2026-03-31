@@ -1,8 +1,26 @@
 const UNIVERSAL_VOICE_ENGINE = {
     locales: {
-        'ml': 'ml-IN',
         'en': 'en-IN',
+        'ml': 'ml-IN',
         'hi': 'hi-IN'
+    },
+    fuzzyCommands: {
+        en: {
+            yes: ['yes', 'yeah', 'yup', 'correct', 'ok', 'okay', 'sure', 'fine'],
+            no: ['no', 'nope', 'incorrect', 'wrong', 'dont', 'stop', 'back'],
+            next: ['next', 'ready', 'skip', 'done', 'go']
+        },
+        ml: {
+            yes: ['അതെ', 'ശരി', 'സമ്മതം', 'ഓക്കേ', 'അതെ അതെ', 'നോക്കാം'],
+            no: ['അല്ല', 'വേണ്ട', 'ശരിയല്ല', 'ഇല്ല', 'തെറ്റാണ്'],
+            next: ['ശരി', 'കഴിഞ്ഞു', 'അടുത്തത്', 'അടുത്ത', 'അടുത്തെ']
+        }
+    },
+    resolveIntent: (text, type, lang) => {
+        if (!text) return false;
+        const normalized = text.toLowerCase().trim();
+        const commands = UNIVERSAL_VOICE_ENGINE.fuzzyCommands[lang] ? UNIVERSAL_VOICE_ENGINE.fuzzyCommands[lang][type] || [] : [];
+        return commands.some(cmd => normalized.includes(cmd));
     },
     prompts: {
         'en': {

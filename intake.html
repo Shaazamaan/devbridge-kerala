@@ -14,6 +14,7 @@
         .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); }
         .mesh-gradient { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: #f8fafc; }
         .mesh-ball { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 10s infinite ease-in-out; background: radial-gradient(circle, #3b82f6, #8b5cf6); }
+        #voice-volume-meter { width: 4px; height: 100%; height: 0%; background: #3b82f6; transition: height 0.05s ease; border-radius: 2px; }
         @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(20px, -20px); } }
         @keyframes pulse-slow { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
         .pulse { animation: pulse-slow 2s infinite; }
@@ -444,9 +445,17 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
 
-            <div class="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 relative">
-                <div class="absolute inset-0 bg-emerald-400/20 rounded-full animate-ping" id="voice-pulse"></div>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            <div class="relative w-24 h-24 mb-6 mx-auto">
+                <div id="voice-pulse" class="absolute inset-0 bg-blue-500/20 rounded-full pulse hidden"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-xl">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                    </div>
+                </div>
+                <!-- Volume Meter -->
+                <div class="absolute -right-4 top-0 bottom-0 w-1 bg-slate-200 rounded-full overflow-hidden">
+                    <div id="voice-volume-meter" class="w-full bg-blue-500 transition-all duration-75" style="height: 0%"></div>
+                </div>
             </div>
 
             <h2 id="voice-question" class="text-xl font-800 text-slate-900 mb-4 leading-tight italic">...</h2>
@@ -481,8 +490,8 @@
             const voicePulse = document.getElementById('voice-pulse');
             const voiceProgress = document.getElementById('voice-progress');
             
-            let selectedLang = 'ml'; // Hard-set to Malayalam for local focus
-            let currentStep = -2; // -2 for Permission Instruction, skip -1
+            let selectedLang = 'ml'; 
+            let currentStep = -2; 
             let isConfirming = false;
             let tempValue = '';
 
@@ -505,8 +514,34 @@
 
             const recognition = 'webkitSpeechRecognition' in window ? new webkitSpeechRecognition() : null;
             if (recognition) {
-                recognition.continuous = false;
+                recognition.continuous = true;
                 recognition.interimResults = true;
+            }
+
+            // High-Precision Audio Context Analyzer
+            let audioContext, analyzer, dataArray, source;
+            function startAudioTracking() {
+                if (audioContext) return;
+                navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    analyzer = audioContext.createAnalyser();
+                    source = audioContext.createMediaStreamSource(stream);
+                    source.connect(analyzer);
+                    analyzer.fftSize = 256;
+                    const bufferLength = analyzer.frequencyBinCount;
+                    dataArray = new Uint8Array(bufferLength);
+                    
+                    function updateVol() {
+                        if (!audioContext) return;
+                        analyzer.getByteFrequencyData(dataArray);
+                        let sum = 0;
+                        for(let i=0; i < bufferLength; i++) sum += dataArray[i];
+                        const vol = Math.min(100, (sum / bufferLength) * 1.5);
+                        document.getElementById('voice-volume-meter').style.height = vol + '%';
+                        requestAnimationFrame(updateVol);
+                    }
+                    updateVol();
+                }).catch(e => console.error("Mic Error:", e));
             }
 
             function speak(text, callback) {
@@ -531,6 +566,7 @@
                 if (index === -2) { // Permission Narration
                     voiceQuestion.innerText = "Microphone Access Required";
                     speak(UNIVERSAL_VOICE_ENGINE.prompts.ml.micPermission, () => {
+                        startAudioTracking(); // Start visual volume meter
                         recognition.lang = 'ml-IN';
                         recognition.start();
                     });
@@ -581,68 +617,62 @@
                 };
 
                 recognition.onresult = (event) => {
-                    const result = event.results[event.results.length - 1][0].transcript;
-                    if (!result) return;
-                    voiceTranscript.innerText = result;
+                    let interimTranscript = '';
+                    let finalTranscript = '';
 
-                    if (event.results[event.results.length - 1].isFinal) {
-                        recognition.stop();
+                    for (let i = event.resultIndex; i < event.results.length; ++i) {
+                        if (event.results[i].isFinal) {
+                            finalTranscript += event.results[i][0].transcript;
+                        } else {
+                            interimTranscript += event.results[i][0].transcript;
+                        }
+                    }
+
+                    if (interimTranscript) {
+                        voiceTranscript.innerText = interimTranscript;
+                        voiceTranscript.style.opacity = '0.5';
+                    }
+
+                    if (finalTranscript) {
+                        voiceTranscript.innerText = finalTranscript;
+                        voiceTranscript.style.opacity = '1';
+                        const result = finalTranscript.trim();
                         
-                        if (currentStep === -1) { // Language Gate Result
-                            if (result.toLowerCase().includes('മലയാളം') || result.toLowerCase().includes('malayalam')) {
-                                selectedLang = 'ml';
-                            } else {
-                                selectedLang = 'en';
-                            }
-                            speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].confirmLanguage, () => startStep(0));
+                        // Handling Asset Branching (Yes/No for files)
+                        const step = steps[currentStep] || {id: 'none'};
+                        if (step.id === 'assetCheck') {
+                            const isYes = UNIVERSAL_VOICE_ENGINE.resolveIntent(result, 'yes', selectedLang);
+                            if (isYes) steps[currentStep].id = 'assetNarrate';
+                            else steps[currentStep].id = 'assetDescribe';
+                            startStep(currentStep);
+                            return;
+                        }
+
+                        if (step.id === 'assetNarrate') {
+                            if (UNIVERSAL_VOICE_ENGINE.resolveIntent(result, 'next', selectedLang)) startStep(currentStep + 1);
                             return;
                         }
 
                         if (!isConfirming) {
                             tempValue = result;
-                            const step = steps[currentStep];
-                            
-                            // Handling Asset Branching (Yes/No for files)
-                            if (step.id === 'assetCheck') {
-                                const isYes = result.toLowerCase().includes('yes') || result.toLowerCase().includes('അതെ') || result.toLowerCase().includes('ഉണ്ട്');
-                                if (isYes) {
-                                    // Switch current step to Narration
-                                    steps[currentStep].id = 'assetNarrate';
-                                } else {
-                                    // Switch current step to Description
-                                    steps[currentStep].id = 'assetDescribe';
-                                }
-                                startStep(currentStep); // Re-run the step with new sub-id
-                                return;
-                            }
-
-                            if (step.id === 'assetNarrate') {
-                                // Listening for "Next" or "Ready" (Malayalam: അടുത്തെ അല്ലെങ്കിൽ തയ്യാർ)
-                                const isNext = result.toLowerCase().includes('next') || result.toLowerCase().includes('അടുത്തെ') || result.toLowerCase().includes('അടുത്ത');
-                                if (isNext) startStep(currentStep + 1);
-                                else {
-                                    recognition.start(); // Keep listening
-                                }
-                                return;
-                            }
-
                             const confirmText = UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].confirmValue.replace('{value}', tempValue);
                             isConfirming = true;
                             speak(confirmText, () => {
-                                recognition.start();
+                                // Mic stays on in continuous mode
                             });
                         } else {
-                            // Listening for Yes or No (Malayalam: അതെ or അല്ല)
-                            const isYes = result.toLowerCase().includes('yes') || result.toLowerCase().includes('അതെ') || result.toLowerCase().includes('ശരി');
+                            const isYes = UNIVERSAL_VOICE_ENGINE.resolveIntent(result, 'yes', selectedLang);
                             if (isYes) {
-                                const step = steps[currentStep];
                                 // Map value to form
                                 if (step.field === 'style_radio') {
-                                    const styleVal = tempValue.toLowerCase().includes('elegant') ? 'Elegant' : (tempValue.toLowerCase().includes('natural') ? 'Natural' : 'Modern');
+                                    const styleVal = UNIVERSAL_VOICE_ENGINE.resolveIntent(tempValue, 'elegant', selectedLang) ? 'Elegant' : (UNIVERSAL_VOICE_ENGINE.resolveIntent(tempValue, 'natural', selectedLang) ? 'Natural' : 'Modern');
                                     const radio = document.querySelector(`input[name="style"][value="${styleVal}"]`);
-                                    if(radio) radio.checked = true;
+                                    if(radio) {
+                                        radio.checked = true;
+                                        radio.dispatchEvent(new Event('change'));
+                                    }
                                 } else if (step.field === 'goal_radio') {
-                                    const goalVal = tempValue.toLowerCase().includes('call') ? 'Call' : 'WhatsApp';
+                                    const goalVal = UNIVERSAL_VOICE_ENGINE.resolveIntent(tempValue, 'call', selectedLang) ? 'Call' : 'WhatsApp';
                                     const radio = document.querySelector(`input[name="goal"][value="${goalVal}"]`);
                                     if(radio) {
                                         radio.checked = true;
@@ -665,7 +695,9 @@
                                 startStep(currentStep + 1);
                             } else {
                                 isConfirming = false;
-                                speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].retry, () => startStep(currentStep));
+                                speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].retry, () => {
+                                    // Mic stays on
+                                });
                             }
                         }
                     }
