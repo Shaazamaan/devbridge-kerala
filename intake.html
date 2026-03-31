@@ -481,8 +481,8 @@
             const voicePulse = document.getElementById('voice-pulse');
             const voiceProgress = document.getElementById('voice-progress');
             
-            let selectedLang = 'en'; // Default to English for the Initial Narration
-            let currentStep = -2; // -2 for Permission Instruction, -1 for Language Gate
+            let selectedLang = 'ml'; // Hard-set to Malayalam for local focus
+            let currentStep = -2; // -2 for Permission Instruction, skip -1
             let isConfirming = false;
             let tempValue = '';
 
@@ -530,18 +530,8 @@
                 
                 if (index === -2) { // Permission Narration
                     voiceQuestion.innerText = "Microphone Access Required";
-                    speak(UNIVERSAL_VOICE_ENGINE.prompts.en.micPermission, () => {
-                        recognition.lang = 'en-IN';
-                        recognition.start();
-                    });
-                    return;
-                }
-
-                if (index === -1) { // Language Gate
-                    selectedLang = 'en';
-                    voiceQuestion.innerText = "Language Preference?";
-                    speak(UNIVERSAL_VOICE_ENGINE.prompts.en.welcome, () => {
-                        recognition.lang = 'en-IN';
+                    speak(UNIVERSAL_VOICE_ENGINE.prompts.ml.micPermission, () => {
+                        recognition.lang = 'ml-IN';
                         recognition.start();
                     });
                     return;
@@ -582,7 +572,7 @@
                     voicePulse.classList.remove('hidden');
                     voiceTranscript.innerText = "Listening now...";
                     if (currentStep === -2) {
-                        setTimeout(() => startStep(-1), 100);
+                        setTimeout(() => startStep(0), 100); // Skip Language Gate, go to first question
                     }
                 };
 
