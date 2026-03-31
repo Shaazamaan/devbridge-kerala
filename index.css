@@ -2,26 +2,28 @@
 
 :root {
     /* Color Palette - Modern HSL */
-    --primary: 221 83% 53%; /* #2563EB */
+    --primary: 211 96% 45%; /* Bespoke Signal Blue */
     --primary-foreground: 0 0% 100%;
+    --primary-deep: 211 96% 32%; /* Matches Logo #034ea1 */
+    --primary-light: 211 96% 65%;
     
-    --secondary: 217 33% 17%; /* #1E293B */
+    --secondary: 222 47% 11%; /* Match background slate */
     --secondary-foreground: 210 40% 98%;
     
-    --accent: 199 89% 48%; /* #0EA5E9 */
+    --accent: 199 89% 48%; /* Keep for small highlights */
     --accent-foreground: 222 47% 11%;
     
-    --background: 222 47% 11%; /* Deep Dark */
+    --background: 222 47% 6%; /* Even deeper dark */
     --foreground: 210 40% 98%;
     
-    --card: 222 47% 13%;
+    --card: 222 47% 10%;
     --card-foreground: 210 40% 98%;
     
-    --muted: 217 33% 20%;
+    --muted: 217 33% 15%;
     --muted-foreground: 215 20% 65%;
     
-    --border: 217 33% 18%;
-    --input: 217 33% 18%;
+    --border: 217 33% 15%;
+    --input: 217 33% 12%;
     
     --success: 142 71% 45%;
     --warning: 38 92% 50%;
@@ -40,8 +42,21 @@
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --glass: rgba(15, 23, 42, 0.75);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass: rgba(10, 15, 25, 0.85); /* Darker/More solid */
+    --glass-border: rgba(255, 255, 255, 0.05); /* Sharper border */
+}
+
+/* Custom Bespoke Utilities */
+.tech-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted-foreground);
+    border-left: 2px solid hsl(var(--primary));
+    padding-left: 0.5rem;
+    margin-bottom: 0.75rem;
+    display: inline-block;
 }
 
 * {
@@ -188,12 +203,13 @@ h3 { font-size: 1.75rem; }
     border: 1px solid hsl(var(--primary) / 0.2);
 }
 
-/* Glassmorphism */
+/* Glassmorphism Refined */
 .glass {
     background: var(--glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border-bottom: 1px solid var(--glass-border);
+    /* Removed generic AI-style outer-glow shadow from header */
 }
 
 /* Animations */
@@ -292,7 +308,7 @@ h3 { font-size: 1.75rem; }
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem; /* Tighter/More technical */
     align-items: center;
 }
 
@@ -402,6 +418,24 @@ h3 { font-size: 1.75rem; }
 .ml-4 { margin-left: 1rem; }
 .ml-8 { margin-left: 2rem; }
 .w-full { width: 100%; }
+
+/* Bespoke Footer Gap Fixes */
+footer ul {
+    gap: 1.25rem !important; /* Forces Gap on AI-smashed links */
+}
+
+footer .nav-logo {
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .wa-float {
+        bottom: 20px !important;
+        right: 20px !important;
+        transform: scale(0.85); /* Slightly smaller for mobile */
+        z-index: 2000; /* Ensure it stays above everything */
+    }
+}
 
 .glow-highlight {
     animation: glow 2s ease-in-out infinite;
