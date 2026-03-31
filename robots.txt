@@ -16,3 +16,5 @@ Allow: /index.html
 Allow: /active-help.html
 Allow: /insights.html
 Allow: /ads-calculator.html
+
+Sitemap: https://devbridgekerala.com/sitemap.xml
