@@ -6,7 +6,9 @@ const UNIVERSAL_VOICE_ENGINE = {
     },
     prompts: {
         'en': {
-            welcome: "Welcome to DevBridge. Which language do you prefer? Malayalam, English, or Hindi?",
+            micPermission: "I am starting your voice assistant. To continue, please click the 'Allow' button on the microphone prompt at the top of your browser so I can hear you.",
+            micDenied: "I'm sorry, I don't have permission to use your microphone. Please enable it in your browser settings to use voice mode.",
+            welcome: "Thank you. I can hear you now. Welcome to DevBridge. Which language do you prefer? Malayalam, English, or Hindi?",
             confirmLanguage: "Ok, I will continue in English. Let's start. What is your business name?",
             businessName: "What is your business name?",
             tagline: "Do you have a tagline? If yes, please say it.",
@@ -25,7 +27,9 @@ const UNIVERSAL_VOICE_ENGINE = {
             success: "Great! All details are captured. I'm now scrolling you to the final review."
         },
         'ml': {
-            welcome: "ദേവ്ബ്രിഡ്ജിലേക്ക് സ്വാഗതം. നിങ്ങൾക്ക് ഏത് ഭാഷയാണ് വേണ്ടത്? മലയാളം, ഇംഗ്ലീഷ്, അതോ ഹിന്ദിയോ?",
+            micPermission: "നിങ്ങളുടെ വോയ്‌സ് അസിസ്റ്റന്റ് തുടങ്ങുകയാണ്. തുടരുന്നതിനായി, നിങ്ങളുടെ ബ്രൗസറിന് മുകളിലുള്ള മൈക്രോഫോൺ പെർമിഷനിൽ 'Allow' ബട്ടൺ അമർത്തുക.",
+            micDenied: "ക്ഷമിക്കണം, മൈക്രോഫോൺ ഉപയോഗിക്കാൻ എനിക്ക് അനുവാദമില്ല. വോയ്‌സ് മോഡ് ഉപയോഗിക്കുന്നതിന് നിങ്ങളുടെ ബ്രൗസർ സെറ്റിംഗ്‌സിൽ ഇത് അനുവദിക്കുക.",
+            welcome: "നന്ദി. എനിക്ക് ഇപ്പോൾ നിങ്ങളെ കേൾക്കാം. ദേവ്ബ്രിഡ്ജിലേക്ക് സ്വാഗതം. നിങ്ങൾക്ക് ഏത് ഭാഷയാണ് വേണ്ടത്? മലയാളം, ഇംഗ്ലീഷ്, അതോ ഹിന്ദിയോ?",
             confirmLanguage: "ശരി, ഞാൻ മലയാളത്തിൽ തുടരാം. നമുക്ക് തുടങ്ങാം. നിങ്ങളുടെ ബിസിനസ്സിന്റെ പേര് എന്താണ്?",
             businessName: "നിങ്ങളുടെ ബിസിനസ്സിന്റെ പേര് എന്താണ്?",
             tagline: "ബിസിനസ്സിന് ഒരു ടാഗ്ലൈൻ ഉണ്ടോ? ഉണ്ടെങ്കിൽ അത് പറയുക.",

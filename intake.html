@@ -470,8 +470,8 @@
             const voicePulse = document.getElementById('voice-pulse');
             const voiceProgress = document.getElementById('voice-progress');
             
-            let selectedLang = 'en'; // Default to English for the Language Gate
-            let currentStep = -1; // -1 for the Language Gate
+            let selectedLang = 'en'; // Default to English for the Initial Narration
+            let currentStep = -2; // -2 for Permission Instruction, -1 for Language Gate
             let isConfirming = false;
             let tempValue = '';
 
@@ -503,13 +503,22 @@
             }
 
             function startStep(index) {
-                if (index < 0) { // Language Gate
-                    selectedLang = 'en';
-                    voiceQuestion.innerText = "Language Preference?";
-                    voiceTranscript.innerText = "Listening for English or Malayalam...";
-                    speak(UNIVERSAL_VOICE_ENGINE.prompts.en.welcome, () => {
+                if (index === -2) { // Permission Narration
+                    voiceQuestion.innerText = "Microphone Access Required";
+                    voiceTranscript.innerText = "Please click 'Allow'...";
+                    speak(UNIVERSAL_VOICE_ENGINE.prompts.en.micPermission, () => {
                         recognition.lang = 'en-IN';
                         recognition.start();
+                    });
+                    return;
+                }
+
+                if (index === -1) { // Language Gate
+                    selectedLang = 'en';
+                    voiceQuestion.innerText = "Language Preference?";
+                    voiceTranscript.innerText = "Choose English, മലയാളം, or Hindi";
+                    speak(UNIVERSAL_VOICE_ENGINE.prompts.en.welcome, () => {
+                        // Mic is already active from onstart
                     });
                     return;
                 }
@@ -539,6 +548,13 @@
             }
 
             if (recognition) {
+                recognition.onstart = () => {
+                    voicePulse.classList.remove('hidden');
+                    if (currentStep === -2) {
+                        setTimeout(() => startStep(-1), 500);
+                    }
+                };
+
                 recognition.onresult = (event) => {
                     const result = event.results[event.results.length - 1][0].transcript;
                     voiceTranscript.innerText = result;
@@ -599,17 +615,23 @@
                     }
                 };
 
-                recognition.onerror = () => {
+                recognition.onerror = (event) => {
                     recognition.stop();
-                    speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].retry, () => {
-                        recognition.start();
-                    });
+                    if (event.error === 'not-allowed') {
+                        speak(UNIVERSAL_VOICE_ENGINE.prompts.en.micDenied);
+                        voiceQuestion.innerText = "Access Denied";
+                        voiceTranscript.innerText = "Enable mic in settings.";
+                    } else {
+                        speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].retry, () => {
+                            recognition.start();
+                        });
+                    }
                 };
             }
 
             startVoiceBtn.addEventListener('click', () => {
                 voiceOverlay.classList.remove('hidden');
-                startStep(-1);
+                startStep(-2);
             });
 
             closeVoiceBtn.addEventListener('click', () => {
