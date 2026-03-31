@@ -64,41 +64,50 @@ function handleIntake(data) {
     const clientFolderName = clientId + " - " + timestamp.toLocaleString();
     const clientFolder = mainFolder.createFolder(clientFolderName);
     
-    // Create Submission Summary (v7.1 - Master Format)
-    var summary = "DEVBRIDGE KERALA: HQ INTAKE SUMMARY (v7.1)\n";
+    // Create Submission Summary (v7.3 - Master Format)
+    var contactLabel = (data.goal === 'Call') ? 'Phone' : 'WhatsApp';
+    var summary = "DEVBRIDGE KERALA: HQ INTAKE SUMMARY (v7.3)\n";
     summary += "=============================================\n\n";
     
-    summary += "IDENTITY\n";
+    summary += "SECTION 1: IDENTITY\n";
     summary += "• Business: " + (data.businessName || "N/A") + "\n";
     summary += "• Tagline: " + (data.tagline || "N/A") + "\n";
+    summary += "• City / Locality: " + (data.city || "N/A") + "\n";
+    summary += "• Business Category: " + (data.businessCategory || "N/A") + "\n";
     summary += "• Assigned ClientID: " + clientId + "\n";
     summary += "• Secure Passkey: " + passkey + "\n\n";
     
-    summary += "SERVICES\n";
-    summary += "• " + (data.service1 || "N/A") + "\n";
-    summary += "• " + (data.service2 || "N/A") + "\n";
-    summary += "• " + (data.service3 || "N/A") + "\n\n";
+    summary += "SECTION 2: SERVICES\n";
+    summary += "• Service 1: " + (data.service1 || "N/A") + "\n";
+    summary += "• Service 2: " + (data.service2 || "N/A") + "\n";
+    summary += "• Service 3: " + (data.service3 || "N/A") + "\n\n";
     
-    summary += "STYLE & GOAL\n";
-    summary += "• Style: " + (data.style || "N/A") + "\n";
-    summary += "• Goal: " + (data.goal || "N/A") + "\n";
-    summary += "• WhatsApp: " + (data.whatsapp || "N/A") + "\n\n";
+    summary += "SECTION 3: STYLE & GOAL\n";
+    summary += "• Visual Style: " + (data.style || "N/A") + "\n";
+    summary += "• Conversion Goal: " + (data.goal || "N/A") + "\n";
+    summary += "• " + contactLabel + ": " + (data.whatsapp || "N/A") + "\n\n";
     
-    summary += "DEPLOYMENT\n";
-    summary += "• Email: " + (data.email || "N/A") + "\n";
+    summary += "SECTION 4: DEPLOYMENT & NOTES\n";
+    summary += "• Admin Email: " + (data.email || "N/A") + "\n";
     if (data.specialInstructions) {
-      summary += "• Notes: " + data.specialInstructions + "\n";
+      summary += "• Special Instructions: " + data.specialInstructions + "\n";
     }
     
-    summary += "\nASSET LOG\n";
+    summary += "\nSECTION 5: COMPLIANCE LOCKS\n";
+    summary += "• Lock 1 (24h Guarantee): SIGNED [YES]\n";
+    summary += "• Lock 2 (Payment Valid): SIGNED [YES]\n";
+    summary += "• Lock 3 (Zero Revision): SIGNED [YES]\n";
+    summary += "• Lock 4 (Static Site): SIGNED [YES]\n";
+
+    summary += "\nSECTION 6: STRATEGIC ASSET LOG\n";
     summary += "--------------------\n";
-    if (data.FILE_LOGO_NAME) summary += "• Logo Asset: " + data.FILE_LOGO_NAME + "\n";
-    if (data.FILE_HERO_NAME) summary += "• Hero/Banner Asset: " + data.FILE_HERO_NAME + "\n";
+    if (data.FILE_LOGO_NAME) summary += "• Business Logo: " + data.FILE_LOGO_NAME + "\n";
+    if (data.FILE_HERO_NAME) summary += "• Hero/Banner Photo: " + data.FILE_HERO_NAME + "\n";
     if (data.FILE_PAYMENT_NAME) summary += "• Payment Proof: " + data.FILE_PAYMENT_NAME + "\n";
     if (data.FILE_EXTRA1_NAME) summary += "• Extra Asset 1: " + data.FILE_EXTRA1_NAME + "\n";
     if (data.FILE_EXTRA2_NAME) summary += "• Extra Asset 2: " + data.FILE_EXTRA2_NAME + "\n";
     
-    summary += "\nSubmitted: " + timestamp.toLocaleString() + "\n";
+    summary += "\nTransmission Timestamp: " + timestamp.toLocaleString() + "\n";
     
     clientFolder.createFile("Submission_Summary.txt", summary);
     
