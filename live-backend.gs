@@ -73,7 +73,14 @@ function handleIntake(data) {
     summary += "• Business: " + (data.businessName || "N/A") + "\n";
     summary += "• Tagline: " + (data.tagline || "N/A") + "\n";
     summary += "• City / Locality: " + (data.city || "N/A") + "\n";
-    summary += "• Business Category: " + (data.businessCategory || "N/A") + "\n";
+    var categoryDisplay = data.businessCategory || "N/A";
+    if (data.businessCategory === 'Other' && data.otherCategory) {
+      categoryDisplay = "Other — " + data.otherCategory;
+    }
+    summary += "• Business Category: " + categoryDisplay + "\n";
+    if (data.businessDescription) {
+      summary += "• About the Business: " + data.businessDescription + "\n";
+    }
     summary += "• Assigned ClientID: " + clientId + "\n";
     summary += "• Secure Passkey: " + passkey + "\n\n";
     
