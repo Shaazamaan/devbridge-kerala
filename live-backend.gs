@@ -121,19 +121,22 @@ function handleIntake(data) {
     if (data.FILE_PAYMENT_NAME) summary += "• Payment Proof: " + data.FILE_PAYMENT_NAME + "\n";
     if (data.FILE_EXTRA1_NAME) summary += "• Extra Asset 1: " + data.FILE_EXTRA1_NAME + "\n";
     if (data.FILE_EXTRA2_NAME) summary += "• Extra Asset 2: " + data.FILE_EXTRA2_NAME + "\n";
+    if (data.TESTI1_PHOTO_NAME) summary += "• Review #1 Photo: " + data.TESTI1_PHOTO_NAME + "\n";
+    if (data.TESTI2_PHOTO_NAME) summary += "• Review #2 Photo: " + data.TESTI2_PHOTO_NAME + "\n";
+    if (data.TESTI3_PHOTO_NAME) summary += "• Review #3 Photo: " + data.TESTI3_PHOTO_NAME + "\n";
 
     var hasTestimonials = (data.testi1_name && data.testi1_quote) || (data.testi2_name && data.testi2_quote) || (data.testi3_name && data.testi3_quote);
     if (hasTestimonials) {
       summary += "\nSECTION 7: REAL TESTIMONIALS\n";
       summary += "--------------------\n";
       if (data.testi1_name && data.testi1_quote) {
-        summary += "• \"" + data.testi1_quote + "\" — " + data.testi1_name + (data.testi1_role ? ", " + data.testi1_role : "") + "\n";
+        summary += "• \"" + data.testi1_quote + "\" — " + data.testi1_name + (data.testi1_role ? ", " + data.testi1_role : "") + (data.TESTI1_PHOTO_NAME ? " [Photo: " + data.TESTI1_PHOTO_NAME + "]" : "") + "\n";
       }
       if (data.testi2_name && data.testi2_quote) {
-        summary += "• \"" + data.testi2_quote + "\" — " + data.testi2_name + (data.testi2_role ? ", " + data.testi2_role : "") + "\n";
+        summary += "• \"" + data.testi2_quote + "\" — " + data.testi2_name + (data.testi2_role ? ", " + data.testi2_role : "") + (data.TESTI2_PHOTO_NAME ? " [Photo: " + data.TESTI2_PHOTO_NAME + "]" : "") + "\n";
       }
       if (data.testi3_name && data.testi3_quote) {
-        summary += "• \"" + data.testi3_quote + "\" — " + data.testi3_name + (data.testi3_role ? ", " + data.testi3_role : "") + "\n";
+        summary += "• \"" + data.testi3_quote + "\" — " + data.testi3_name + (data.testi3_role ? ", " + data.testi3_role : "") + (data.TESTI3_PHOTO_NAME ? " [Photo: " + data.TESTI3_PHOTO_NAME + "]" : "") + "\n";
       }
     }
     
