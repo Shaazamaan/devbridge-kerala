@@ -103,11 +103,68 @@
         @media (max-width: 640px) { .metrics-grid { grid-template-columns: 1fr 1fr; } .insights-section { grid-template-columns: 1fr; } }
         
         @media print {
-            .navbar, .sidebar, .action-bar, .csv-upload-btn, footer { display: none !important; }
+            .navbar, .sidebar, .action-bar, .csv-upload-btn, footer, .lead-gen-section { display: none !important; }
             .dashboard-wrapper { padding: 0; background: none; }
             .app-container { display: block; }
             .dash-card { page-break-inside: avoid; border: none; box-shadow: none; }
             .metric-card { border: 1px solid #eee; }
+        }
+
+        /* Lead Gen Styling */
+        .lead-gen-section {
+            margin-top: 3rem;
+            padding: 3rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: var(--radius-lg);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .lead-gen-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .lead-gen-form {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            text-align: left;
+        }
+        .lead-gen-form input, .lead-gen-form textarea {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            width: 100%;
+        }
+        .lead-gen-form .full-width { grid-column: span 2; }
+        .lead-gen-form button {
+            grid-column: span 2;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .lead-gen-form button:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37,99,235,0.3);
         }
     </style>
 </head>
@@ -439,6 +496,29 @@
 
                 <div id="case-study-output" class="case-study-output"></div>
 
+                <div class="lead-gen-section">
+                    <span class="badge" style="background: rgba(37,99,235,0.2); color: #60a5fa; border: 1px solid rgba(37,99,235,0.3);">Strategist Access</span>
+                    <h2 class="text-white" style="margin-top: 1rem;">Get Your Custom 90-Day Roadmap</h2>
+                    <p style="opacity: 0.8; max-width: 500px; margin: 1rem auto;">I'll personally review these numbers and send you a tactical execution plan to scale your ROAS by 20% or more.</p>
+                    
+                    <form name="roadmap-request" method="POST" data-netlify="true" class="lead-gen-form">
+                        <input type="hidden" name="form-name" value="roadmap-request" />
+                        <div class="form-group">
+                            <label style="font-size: 0.7rem; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.4rem; display: block;">Name</label>
+                            <input type="text" name="name" required placeholder="Founder Name">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 0.7rem; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.4rem; display: block;">Email</label>
+                            <input type="email" name="email" required placeholder="founder@company.com">
+                        </div>
+                        <div class="form-group full-width">
+                            <label style="font-size: 0.7rem; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.4rem; display: block;">Current Bottleneck</label>
+                            <textarea name="bottleneck" rows="2" placeholder="What's stopping you from scaling right now?"></textarea>
+                        </div>
+                        <button type="submit">Email My Roadmap</button>
+                    </form>
+                </div>
+
                 <div style="margin-top: 3rem; padding: 2.5rem; background: #fff; border-radius: var(--radius-lg); border: 1px solid var(--border); text-align: center;">
                     <h3>Want a deep-dive audit?</h3>
                     <p style="color: var(--text-muted); margin: 1rem 0 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
@@ -750,9 +830,28 @@
         }
 
         function shareLink() {
+            const r = dashState.results;
             const data = btoa(JSON.stringify({ inputs: dashState.inputs, platform: dashState.platform, model: dashState.model }));
             const url = window.location.origin + window.location.pathname + '?data=' + data;
-            navigator.clipboard.writeText(url).then(() => alert("Link Copied!"));
+            
+            const shareText = `📊 Ads Audit Report (${dashState.platform.toUpperCase()})\n` +
+                              `Proj. ROAS: ${r.roas.toFixed(2)}x\n` +
+                              `Status: ${r.roas >= r.breakEvenRoas ? 'PROFITABLE' : 'UNPROFITABLE'}\n\n` +
+                              `View full breakdown: ${url}\n` +
+                              `Verified via DevBridge Kerala`;
+            
+            navigator.clipboard.writeText(shareText).then(() => {
+                const btn = document.getElementById('btn-share');
+                const originalText = btn.textContent;
+                btn.textContent = "Copied to Clipboard!";
+                btn.style.background = "#22c55e";
+                btn.style.color = "white";
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = "";
+                    btn.style.color = "";
+                }, 2000);
+            });
         }
 
         function generateCaseStudy() {

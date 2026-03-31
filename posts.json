@@ -1,6 +1,36 @@
 {
     "posts": [
         {
+            "id": 1001,
+            "published": true,
+            "is_pillar": true,
+            "title": "The Global Remote Arbitrage Manifest: Why Kerala is the New Frontier",
+            "body": "Why are top-tier US and EU startups pivoting their hiring focus to South India? It's not just cost\u2014it's the 'Grit-to-Ego' ratio. In this deep dive, we explore how Kerala's unique cultural emphasis on education and execution has created a pool of professionals who outperform their global counterparts in distributed environments. We break down the exact math of the 'Kerala Arbitrage' and why 2026 is the year of the South Indian Builder.",
+            "date": "2026-04-01",
+            "tags": [
+                "Company",
+                "Strategy",
+                "Global",
+                "Pillar"
+            ],
+            "seo_keywords": "remote hiring arbitrage, hire from Kerala 2026, global startup talent, south india developer pool"
+        },
+        {
+            "id": 1002,
+            "published": true,
+            "is_pillar": true,
+            "title": "The AI-Augmented Professional: How to Out-Execute Traditional Teams in 2026",
+            "body": "The new baseline isn't knowing how to code or sell; it's knowing how to engineer outcomes with AI. We provide a tactical roadmap for the 'High-Grit' professional: how to use a stack of Claude, Cursor, and n8n to do the work of a 5-person team. If you aren't augmenting your execution with autonomous agents, you are artificially anchoring your career growth. This is the playbook for the modern builder.",
+            "date": "2026-04-01",
+            "tags": [
+                "Candidate",
+                "AI",
+                "Growth",
+                "Pillar"
+            ],
+            "seo_keywords": "AI augmented professional, career growth 2026, modern builder stack, Claude for business"
+        },
+        {
             "id": 999,
             "published": true,
             "is_pillar": true,
@@ -18,8 +48,8 @@
         {
             "id": 888,
             "published": true,
-            "title": "Case Study: Filtering 1,000+ Candidates for \u20b9500 (Venture Navigator)",
-            "body": "How do you find elite talent on a micro-budget? We ran a 'Negative Marketing' campaign for Venture Navigator, explicitly highlighting a 1-month unpaid probation in the ad copy. By combining this with conditional knockout questions (laptop/WiFi verification), we filtered for grit before a single rupee was spent. The result: high-signal leads only.",
+            "title": "Case Study: Filtering 1,000+ Candidates for \u20b9500 (Grit-First Approach)",
+            "body": "How do you find elite talent on a micro-budget? We ran a 'Negative Marketing' campaign using the Grit-First approach, explicitly highlighting a 1-month unpaid probation in the ad copy. By combining this with conditional knockout questions (laptop/WiFi verification), we filtered for grit before a single rupee was spent. The result: high-signal leads only.",
             "date": "2026-03-31",
             "tags": [
                 "Company",
@@ -27,37 +57,37 @@
                 "Hiring",
                 "Grit"
             ],
-            "seo_keywords": "venture navigator case study, hiring on a budget, negative marketing Kerala, recruitment grit, startup hiring India"
+            "seo_keywords": "grit-first case study, hiring on a budget, negative marketing Kerala, recruitment grit, startup hiring India"
         },
         {
             "id": 1,
             "published": true,
             "concept_hash": "u-c-001",
-            "title": "Why Your 'Personal Brand' is Your Best Sales Tool",
-            "date": "2026-03-20",
+            "title": "Why Your 'Digital Leverage' is Your Best Sales Tool in 2026",
+            "date": "2026-03-31",
             "tags": [
                 "Candidate",
                 "Sales",
                 "Branding",
-                "Networking"
+                "AI"
             ],
-            "seo_keywords": "personal branding Kerala, sales strategy, career growth professional",
-            "body": "In the modern Kerala professional landscape, you are the product. Whether you are in Sales, Marketing, or HR, your digital footprint acts as a pre-vetted trust layer. Sharing value-driven content on LinkedIn or participating in local business forums isn't just vanity; it's a strategic move to build 'inbound' opportunities. When potential clients or employers see you as a thought leader, the conversation shifts from 'What can you do?' to 'How can we work together?'"
+            "seo_keywords": "personal branding Kerala 2026, digital leverage, career growth AI era",
+            "body": "In 2026, a resume is just a PDF. Your 'Digital Leverage'\u2014the aggregate of your public proof of work, AI-augmented projects, and value-driven network\u2014is the real currency. Whether you're in Sales or Ops, your digital footprint acts as a pre-vetted trust layer. Sharing your execution process on LinkedIn or contributing to open-source business frameworks isn't just vanity; it's a strategic move to build 'inbound' opportunities that bypass the ATS filters."
         },
         {
             "id": 2,
             "published": true,
             "concept_hash": "u-co-001",
-            "title": "Stop Hiring for Resume Keywords; Hire for Business Acumen",
-            "date": "2026-03-20",
+            "title": "Stop Hiring for Resume Keywords; Hire for 'Prompt-to-Outcome' Velocity",
+            "date": "2026-03-31",
             "tags": [
                 "Company",
                 "Hiring",
                 "Strategy",
-                "Management"
+                "AI"
             ],
-            "seo_keywords": "hiring strategy Kerala, business growth, talent acquisition tips",
-            "body": "A candidate might have every certification in the book, but do they understand how your company actually makes money? Smart Kerala businesses are shifting their interview focus from technical check-boxes to 'Business Empathy.' Ask candidates how they would solve a real-world revenue bottleneck or an internal communications friction point. A professional who understands the 'Bottom Line' will always out-perform a specialist who only sees their silo."
+            "seo_keywords": "hiring strategy Kerala 2026, AI productivity hiring, talent acquisition tips",
+            "body": "Technical checklists are obsolete. In 2026, smart Kerala businesses are hiring for 'Outcome Velocity.' Can a candidate take a vague business problem and use AI/Automation to ship a solution in 4 hours? This 'Business Empathy' combined with technical agency is what separates 10x builders from traditional role-players. Ask candidates to solve a live revenue bottleneck during the trial month to see their real-world grit."
         },
         {
             "id": 3,
