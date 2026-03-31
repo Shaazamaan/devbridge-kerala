@@ -22,14 +22,22 @@ document.getElementById('mobile-toggle')?.addEventListener('click', () => {
 });
 
 // 2. Scroll Animation (Frontend SEO perception + UX)
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, { threshold: 0.1 });
-document.querySelectorAll('.scroll-trigger').forEach(el => observer.observe(el));
+const initObservers = () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.scroll-trigger').forEach(el => observer.observe(el));
+};
+if (window.requestIdleCallback) {
+    requestIdleCallback(initObservers);
+} else {
+    setTimeout(initObservers, 200);
+}
+
 
 // 3. Form Handling (Discord + Netlify)
 async function handleFormSubmit(e, type) {
@@ -60,10 +68,76 @@ async function handleFormSubmit(e, type) {
 
     } catch(err) {
         alert("Submission failed. Re-try or email directly.");
-    } finally {
         btn.innerText = 'Submit';
         btn.disabled = false;
     }
+}
+
+// 4. Scroll Depth Tracking (High-Signal Conversion)
+
+const trackedDepths = new Set();
+window.addEventListener('scroll', () => {
+    const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+    [0.25, 0.5, 0.75, 1.0].forEach(depth => {
+        if (scrollPercent >= depth && !trackedDepths.has(depth)) {
+            trackedDepths.add(depth);
+            logDvkEvent(`Scroll Depth: ${depth * 100}%`);
+        }
+    });
+}, { passive: true });
+// 5. Grit Terminal Logic (Cycle 7)
+const terminalBody = document.getElementById('terminal-body');
+const hiddenInput = document.getElementById('terminal-hidden-input');
+const inputDisplay = document.getElementById('terminal-input-display');
+
+if (terminalBody && hiddenInput) {
+    terminalBody.addEventListener('click', () => hiddenInput.focus());
+    
+    hiddenInput.addEventListener('input', (e) => {
+        inputDisplay.textContent = e.target.value;
+    });
+
+    hiddenInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const cmd = hiddenInput.value.trim().toLowerCase();
+            processCommand(cmd);
+            hiddenInput.value = '';
+            inputDisplay.textContent = '';
+        }
+    });
+}
+
+function processCommand(cmd) {
+    appendLine(`<span class="prompt">guest@dvk:~#</span> ${cmd}`);
+    
+    if (cmd === 'help') {
+        appendLine('Available commands: <span class="terminal-highlight">help</span>, <span class="terminal-highlight">verify</span>, <span class="terminal-highlight">ls</span>, <span class="terminal-highlight">clear</span>');
+    } else if (cmd === 'ls') {
+        appendLine('Active Modules: <br> - grit_engine_v2 <br> - bridge_mena_v1 <br> - aeo_snapshot_mgr');
+    } else if (cmd.startsWith('verify')) {
+        appendLine('[SYSTEM] Initiating Deep-Dive Vetting...');
+        setTimeout(() => {
+            appendLine('<span class="terminal-success">[SUCCESS] </span> Talent Verified. Resilience Index: 98%.');
+            appendLine('<span class="terminal-highlight">[ACTION] </span> High-Grit match detected. Standardizing application...');
+            logDvkEvent('Terminal Successful Verification');
+            setTimeout(() => {
+                document.querySelector('#apply')?.scrollIntoView({ behavior: 'smooth' });
+                document.querySelector('#apply .container')?.classList.add('glow-highlight');
+            }, 1500);
+        }, 1000);
+    } else if (cmd === 'clear') {
+        terminalBody.innerHTML = '';
+    } else if (cmd) {
+        appendLine(`<span class="terminal-error">Command not found: ${cmd}</span>`);
+    }
+}
+
+function appendLine(html) {
+    const div = document.createElement('div');
+    div.className = 'terminal-line';
+    div.innerHTML = html;
+    terminalBody.insertBefore(div, terminalBody.lastElementChild);
+    terminalBody.scrollTop = terminalBody.scrollHeight;
 }
 
 document.forms['candidate']?.addEventListener('submit', e => handleFormSubmit(e, 'candidate'));

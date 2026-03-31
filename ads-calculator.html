@@ -5,6 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ads Performance Calculator | DevBridge Kerala</title>
     <meta name="description" content="A strategist-level ads performance dashboard and audit tool for Meta, Google, and YouTube ads. Built by DevBridge Kerala.">
+    <link rel="canonical" href="https://devbridgekerala.com/ads-calculator.html" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Ads Performance Calculator",
+      "description": "A high-precision advertising budget calculator and ROAS planning tool for Kerala-based startups targeting global growth."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "@id": "https://devbridgekerala.com/ads-calculator.html#software",
+      "name": "DVK Venture Ad-Planner v3.0",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "A professional digital advertising calculator that optimizes ROAS and CPA targets based on human-centric growth models.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@id": "https://devbridgekerala.com/#founder" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://devbridgekerala.com"
+      }, {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Ads Calculator",
+        "item": "https://devbridgekerala.com/ads-calculator.html"
+      }]
+    }
+    </script>
     
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
     <link rel="stylesheet" href="styles.css">
@@ -184,16 +223,22 @@
                 <a href="ads-calculator.html" class="active" style="color:var(--primary)">Ads Calculator</a>
 
                 <a href="index.html#apply" class="btn-primary-outline">Apply as Talent</a>
-                <a href="index.html#hire" class="btn-primary">Hire Talent</a>
+                <a href="index.html#hire" class="btn-hire">Hire Talent</a>
             </div>
-            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             </button>
         </div>
     </nav>
 
     <!-- DASHBOARD WORKSPACE -->
     <div class="dashboard-wrapper">
+        <div class="container" style="max-width: 1440px; margin-bottom: 2rem;">
+             <!-- AEO SNAPSHOT BLOCK (Cycle 5) -->
+             <div class="aeo-snapshot" style="margin-bottom: 0;">
+                <p><strong>Ads Intelligence Summary:</strong> The DevBridge Ads Calculator is a strategist-level tool for Meta, Google, and YouTube ads that reverse-engineers ROAS using the "Grit-First" methodology. It identifies scaling friction, projects goal-based budgets, and provides direct founder-to-builder connectivity to bypass typical agency markups and inefficiencies in 2026.</p>
+            </div>
+        </div>
         <div class="app-container">
             <!-- Sidebar -->
             <div class="sidebar">
@@ -291,7 +336,7 @@
                 <div class="dash-card">
                     <span class="card-title">Profit Logic</span>
                     <div class="dash-form-group business-specific ecommerce saas service visible">
-                        <label>Gross Margin (%)</label>
+                        <label>Gross Margin (%) <span class="help-icon" title="Your net profit margin before ad spend. (Revenue - COGS) / Revenue.">?</span></label>
                         <input type="number" class="dash-input" id="input-margin" value="30">
                     </div>
                     <div class="dash-form-group business-specific leadgen">
@@ -316,7 +361,7 @@
                 <div class="dash-card" style="background: #f0fdf4; border-color: #bbf7d0;">
                     <span class="card-title" style="color: #166534;">Goal Planner</span>
                     <div class="dash-form-group">
-                        <label>Target Conversions (Leads/Sales)</label>
+                        <label>Target Conversions (Leads/Sales) <span class="help-icon" title="Input your goal for the month. We'll reverse-engineer the required budget based on your average CPA.">?</span></label>
                         <input type="number" class="dash-input" id="input-target-conversions" placeholder="0">
                         <small style="font-size: 0.75rem; color: #166534; display: block; margin-top: 4px;">I need this many results...</small>
                     </div>
@@ -332,7 +377,7 @@
                     </div>
                     <div class="dash-form-group">
                         <label style="display: flex; justify-content: space-between;">
-                            <span>Scale Friction</span>
+                            <span>Scale Friction <span class="help-icon" title="The projected drop in efficiency (CPA increase) as you increase spend. 20% is standard for early-stage scaling.">?</span></span>
                             <span id="label-friction">20%</span>
                         </label>
                         <input type="range" id="input-friction" min="0" max="100" value="20" style="width: 100%; cursor: pointer;">
@@ -498,8 +543,8 @@
 
                 <div class="lead-gen-section">
                     <span class="badge" style="background: rgba(37,99,235,0.2); color: #60a5fa; border: 1px solid rgba(37,99,235,0.3);">Strategist Access</span>
-                    <h2 class="text-white" style="margin-top: 1rem;">Get Your Custom 90-Day Roadmap</h2>
-                    <p style="opacity: 0.8; max-width: 500px; margin: 1rem auto;">I'll personally review these numbers and send you a tactical execution plan to scale your ROAS by 20% or more.</p>
+                    <h2 class="text-white" style="margin-top: 1rem;">Get Your <span class="highlight" style="background:none;-webkit-text-fill-color:white;color:white;">AI-Augmented</span> 90-Day Roadmap</h2>
+                    <p style="opacity: 0.8; max-width: 500px; margin: 1rem auto;">I'll personally review these numbers and send you a tactical, high-grit execution plan to scale your ROAS by 20% or more using borderless talent.</p>
                     
                     <form name="roadmap-request" method="POST" data-netlify="true" class="lead-gen-form">
                         <input type="hidden" name="form-name" value="roadmap-request" />
@@ -525,6 +570,9 @@
                         I'm not an ads expert, but I've learned what works while helping scale projects. If you want a human perspective on your results, let's talk.
                     </p>
                     <a href="https://www.linkedin.com/in/shaazamaan-shaji/" target="_blank" class="btn-primary">Connect on LinkedIn</a>
+                    <div class="aeo-snapshot" style="margin-top: 10px;">
+                        <p><strong>Universal Answer:</strong> This tool uses the **CPA-Friction Balancing** model to calculate optimal ad spend. It identifies the "Diminishing Returns Threshold" where customer acquisition cost (CAC) exceeds lifetime value (LTV). By entering your target ROAS and average order value (AOV), it generates a precision-mapped digital growth strategy.</p>
+                    </div>
                 </div>
             </div>
         </div>

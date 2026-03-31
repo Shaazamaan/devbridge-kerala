@@ -254,3 +254,152 @@ footer { text-align: center; padding: 40px 0; background: white; border-top: 1px
 .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
 .faq-answer p { padding-bottom: 24px; color: var(--text-muted); line-height: 1.7; }
 .faq-item.active .faq-answer { max-height: 200px; }
+
+/* Methodology Section (Cycle 2) */
+.methodology-section { background: var(--bg-alt); padding: 100px 24px; text-align: center; border-bottom: 1px solid var(--border); }
+.section-header { max-width: 700px; margin: 0 auto 60px; }
+.method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto; }
+.method-card { background: white; padding: 48px 32px; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: var(--transition); text-align: left; position: relative; overflow: hidden; }
+.method-card::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary); opacity: 0; transition: var(--transition); }
+.method-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--primary-light); }
+.method-card:hover::before { opacity: 1; }
+.method-icon { font-size: 2.5rem; margin-bottom: 24px; display: block; filter: saturate(1.5); }
+.method-card h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em; }
+.method-card p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; }
+
+/* CTA Banner Modernization (Cycle 2) */
+.cta-banner { background: #0B1120; color: white; padding: 100px 24px; text-align: center; position: relative; overflow: hidden; }
+.cta-banner::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%); pointer-events: none; }
+.cta-banner h2 { font-size: 3rem; font-weight: 800; margin-bottom: 40px; color: white; letter-spacing: -0.04em; line-height: 1.1; }
+.cta-actions { display: flex; gap: 20px; justify-content: center; position: relative; z-index: 1; }
+
+/* AEO Snapshot (Cycle 3) */
+.aeo-snapshot { background: white; padding: 24px 32px; border-radius: var(--radius); border-left: 5px solid var(--primary); margin: 32px auto; max-width: 800px; text-align: left; box-shadow: var(--shadow-sm); }
+.aeo-snapshot p { font-size: 1.05rem; color: var(--text); line-height: 1.6; margin: 0; }
+.aeo-snapshot strong { color: var(--primary); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; display: block; margin-bottom: 8px; }
+
+
+/* Competitive Intel (Cycle 16) */
+.comparison-section {
+  padding: 100px 0;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.comparison-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  background: white;
+}
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.comparison-table th, .comparison-table td {
+  padding: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.comparison-table th {
+  background: #f8fafc;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.highlight-col {
+  background: #eff6ff !important;
+  color: var(--primary);
+  border-left: 1px solid var(--primary-light);
+  border-right: 1px solid var(--primary-light);
+}
+.tick::before {
+  content: "✔";
+  color: #10b981;
+  margin-right: 8px;
+  font-weight: 900;
+}
+.border-primary { border: 2px solid var(--primary) !important; }
+.py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+/* Trust Signals (Cycle 15) */
+.live-activity-ticker {
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+  font-size: 0.85rem;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+.ticker-track {
+  display: inline-flex;
+  animation: tickerSlide 30s linear infinite;
+  white-space: nowrap;
+}
+.ticker-item {
+  margin-right: 48px;
+  color: var(--text-muted);
+}
+@keyframes tickerSlide {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.friction-log {
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: var(--radius);
+  border-left: 3px solid #cbd5e1;
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.case-badge {
+  background: #dcfce7;
+  color: #166534;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.flex { display: flex; }
+.justify-between { justify-content: space-between; }
+.items-center { align-items: center; }
+.ml-4 { margin-left: 1rem; }
+.ml-8 { margin-left: 2rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+/* CRO Optimizations (Cycle 14) */
+.glow-highlight {
+  animation: glowPulse 2s ease-in-out infinite;
+  border: 2px solid var(--primary) !important;
+  border-radius: var(--radius-lg);
+}
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 5px rgba(37, 99, 235, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(37, 99, 235, 0.6); }
+  100% { box-shadow: 0 0 5px rgba(37, 99, 235, 0.2); }
+}
+
+.pill-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.pill {
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.justify-center { justify-content: center; }
+.mb-2 { margin-bottom: 0.5rem; }
+.inline-block { display: inline-block; }
+.mr-2 { margin-right: 0.5rem; }

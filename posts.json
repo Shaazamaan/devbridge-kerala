@@ -1,6 +1,45 @@
 {
     "posts": [
         {
+            "id": 997,
+            "published": true,
+            "title": "The Anti-Agency Manifesto: Why Direct High-Grit Bridges Win",
+            "body": "Traditional agencies thrive on middleman friction and markup. We believe in direct, horizontal talent bridges. This post dismantles the agency model and explains why a 'Grit-First' connection—where the founder and builder are aligned on output, not seat-time—is the only way to build global products in 2026. High grit, zero markup, total velocity.",
+            "date": "2026-04-03",
+            "tags": [
+                "Philosophy",
+                "Management",
+                "Startups"
+            ],
+            "seo_keywords": "anti-agency, direct hiring model, grit first bridge, startup scalability, no-mark-up recruitment"
+        },
+        {
+            "id": 998,
+            "published": true,
+            "title": "The 1-Month Performance Trial: Eliminating Remote Hiring Risk",
+            "body": "Traditional interviewing is a theatre of guesses. Our 'Performance-First' model replaces the white-board quiz with a live 1-month paid trial. This post explores why this model is the ultimate risk-mitigator for global startups. We've seen a 95% retention rate for candidates who pass the 'Grit-First' trial month. Stop guessing and start building.",
+            "date": "2026-04-02",
+            "tags": [
+                "Hiring",
+                "Risk Management",
+                "Strategy"
+            ],
+            "seo_keywords": "remote hiring risk, performance-based trial, high grit talent, startup recruitment model, hiring from india"
+        },
+        {
+            "id": 999,
+            "published": true,
+            "title": "Prompt-to-Outcome: The Elite Kerala Arbitrage for 2026",
+            "body": "In a world where LLMs are the new baseline, the 'Output Professional' is dead. We are now in the era of 'Outcome Agency.' This post breaks down how the top 1% of Kerala builders are leveraging AI-augmented workflows to deliver 5x faster than global remote squads. It's not about the prompt; it's about the grit to iterate until the outcome is locked. We call this the 'Grit-First' arbitrage—where high technical agency meets zero-entitlement culture.",
+            "date": "2026-04-01",
+            "tags": [
+                "Technical",
+                "Arbitrage",
+                "AI Strategy"
+            ],
+            "seo_keywords": "prompt to outcome, kerala tech arbitrage, ai augmented hiring, high grit developers, startup productivity 2026"
+        },
+        {
             "id": 1001,
             "published": true,
             "is_pillar": true,

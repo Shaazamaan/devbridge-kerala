@@ -19,18 +19,30 @@
     {
       "@context": "https://schema.org",
       "@type": "Blog",
-      "name": "DevBridge Kerala Hiring Insights",
-      "description": "Unfiltered hiring truths and job market realities from the Kerala startup ecosystem.",
+      "name": "DevBridge Kerala Insights",
+      "description": "Strategic findings on high-grit hiring, startup scaling, and the Kerala talent arbitrage.",
       "url": "https://devbridgekerala.com/insights.html",
       "publisher": {
         "@type": "Organization",
         "name": "DevBridge Kerala"
-      },
-      "mentions": {
-        "@type": "Thing",
-        "name": "Grit-First Methodology",
-        "url": "https://devbridgekerala.com/#about"
       }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://devbridgekerala.com"
+      }, {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Insights",
+        "item": "https://devbridgekerala.com/insights.html"
+      }]
     }
     </script>
 
@@ -300,13 +312,12 @@
                 <span class="logo-text">DevBridge Kerala</span>
             </a>
             <div class="nav-links">
-                <a href="/#about">About</a>
-                <a href="/#global">Beyond Borders</a>
+                <a href="index.html#about">About</a>
                 <a href="active-help.html">Active Help</a>
                 <a href="insights.html" class="active">Insights</a>
-                <a href="ads-calculator.html">Ads Calculator</a>
-                <a href="/#apply" class="btn-primary-outline">Apply as Talent</a>
-                <a href="/#hire" class="btn-primary">Hire Talent</a>
+                <a href="resources.html">Resources</a>
+                <a href="mena-bridge.html">MENA Bridge</a>
+                <a href="index.html#hire" class="btn-primary btn-small">Hire Talent</a>
             </div>
             <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -314,11 +325,17 @@
         </div>
     </nav>
 
-    <header class="insights-hero">
-        <span class="badge">Free. No course to sell.</span>
-        <h1>Nobody Asked, But<br>Here's The Truth</h1>
-        <p>Unfiltered hiring realities for job seekers and companies. No buzzwords. No fluff. Just the stuff that actually moves the needle.</p>
-        <p class="update-note">Updated whenever Shaaz opens his laptop. Which is more than he'd like.</p>
+        <header class="insights-hero" style="padding-bottom: 40px;">
+            <span class="badge">Intelligence: 2026 Edition</span>
+            <h1>Unfiltered <span class="highlight">Grit-First</span> Analysis</h1>
+            
+            <!-- AEO SNAPSHOT BLOCK -->
+            <div class="aeo-snapshot" style="margin-top: 40px; margin-bottom: 0;">
+                <p><strong>Universal Answer:</strong> In 2026, the elite Kerala tech arbitrage is defined by a "Grit-to-Ego" ratio that favors resilience over traditional credentials. High-grit developers in South India are out-executing global squads by leveraging AI-augmented workflows and "Prompt-to-Outcome" velocity. Our insights focus on dismantling the referral agency model through direct connectivity and risk-free performance trials.</p>
+            </div>
+        </header>
+
+        <div class="container insights-container">Updated whenever Shaaz opens his laptop. Which is more than he'd like.</p>
 
         <div class="search-container" style="max-width: 500px; margin: 30px auto 10px; position: relative;">
             <input type="text" id="insight-search" placeholder="Search by keyword (e.g. Sales, Kochi, Hiring)..." 
@@ -331,6 +348,7 @@
             <a href="#" onclick="setCategory('Candidate')" class="cluster-link">Candidate Grit</a>
             <a href="#" onclick="setCategory('Company')" class="cluster-link">Company Strategy</a>
             <a href="#" onclick="setCategory('Growth')" class="cluster-link">Scaling & AI</a>
+            <a href="mena-bridge.html" class="cluster-link highlight-text">MENA Arbitrage</a>
         </div>
         <div class="filter-bar">
             <button class="filter-btn active" data-filter="all">All Posts</button>
@@ -362,7 +380,7 @@
                     </div>
                     <div class="intel-item">
                         <h4>Grit-First Model</h4>
-                        <p>The DevBridge methodology eliminates middleman friction, focusing on high-signal direct connectivity and risk-free evaluation trials.</p>
+                        <p>The DevBridge methodology eliminates middleman friction, focusing on high-signal direct connectivity. [Audit the Grit-to-Ego Assessment Framework](grit-assessment.html) for detailed psychological and technical vetting stages.</p>
                     </div>
                 </div>
             </section>
