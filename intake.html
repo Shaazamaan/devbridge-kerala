@@ -726,7 +726,8 @@
             document.querySelectorAll('input[name="style"]').forEach(radio => {
                 radio.addEventListener('change', (e) => {
                     const theme = e.target.value.toLowerCase();
-                    document.body.className = `bg-slate-50 font-sans text-slate-900 theme-${theme}`;
+                    document.body.classList.remove('theme-modern', 'theme-elegant', 'theme-natural');
+                    document.body.classList.add('theme-' + theme);
                 });
             });
 
