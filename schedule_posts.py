@@ -6,9 +6,9 @@ def schedule_posts():
     bank_path = 'posts_bank.json'
     live_path = 'posts.json'
     
-    with open(bank_path, 'r', encoding='utf-8') as f:
+    with open(bank_path, 'r', encoding='utf-8-sig') as f:
         bank = json.load(f)
-    with open(live_path, 'r', encoding='utf-8') as f:
+    with open(live_path, 'r', encoding='utf-8-sig') as f:
         live = json.load(f)
         
     candidate_pool = [p for p in bank['candidate'] if not p.get('published', False)]
@@ -19,7 +19,7 @@ def schedule_posts():
     num_days = min(30, len(candidate_pool), len(company_pool))
     
     next_id = max([p['id'] for p in live['posts']]) + 1 if live['posts'] else 1
-    today = datetime.now()
+    today = datetime.now() + timedelta(days=1)
     
     new_posts = []
     
