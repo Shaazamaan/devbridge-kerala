@@ -510,16 +510,26 @@
             }
 
             function speak(text, callback) {
+                speechSynthesis.cancel(); // Clear any zombie speech
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = UNIVERSAL_VOICE_ENGINE.locales[selectedLang] || 'en-IN';
-                utterance.onend = callback;
+                utterance.onstart = () => {
+                    voiceTranscript.innerText = "AI is speaking...";
+                    voicePulse.classList.add('hidden');
+                };
+                utterance.onend = () => {
+                    setTimeout(callback, 500); // Pneumatic Buffer for stability
+                };
                 speechSynthesis.speak(utterance);
             }
 
             function startStep(index) {
+                if (recognition) {
+                    try { recognition.stop(); } catch(e) {} // Ensure clean start
+                }
+                
                 if (index === -2) { // Permission Narration
                     voiceQuestion.innerText = "Microphone Access Required";
-                    voiceTranscript.innerText = "Please click 'Allow'...";
                     speak(UNIVERSAL_VOICE_ENGINE.prompts.en.micPermission, () => {
                         recognition.lang = 'en-IN';
                         recognition.start();
@@ -530,9 +540,9 @@
                 if (index === -1) { // Language Gate
                     selectedLang = 'en';
                     voiceQuestion.innerText = "Language Preference?";
-                    voiceTranscript.innerText = "Choose English, മലയാളം, or Hindi";
                     speak(UNIVERSAL_VOICE_ENGINE.prompts.en.welcome, () => {
-                        // Mic is already active from onstart
+                        recognition.lang = 'en-IN';
+                        recognition.start();
                     });
                     return;
                 }
@@ -570,13 +580,19 @@
             if (recognition) {
                 recognition.onstart = () => {
                     voicePulse.classList.remove('hidden');
+                    voiceTranscript.innerText = "Listening now...";
                     if (currentStep === -2) {
-                        setTimeout(() => startStep(-1), 500);
+                        setTimeout(() => startStep(-1), 100);
                     }
+                };
+
+                 recognition.onend = () => {
+                    voicePulse.classList.add('hidden');
                 };
 
                 recognition.onresult = (event) => {
                     const result = event.results[event.results.length - 1][0].transcript;
+                    if (!result) return;
                     voiceTranscript.innerText = result;
 
                     if (event.results[event.results.length - 1].isFinal) {
@@ -611,8 +627,12 @@
                             }
 
                             if (step.id === 'assetNarrate') {
-                                // Just listening for "Next" or "Ready"
-                                startStep(currentStep + 1);
+                                // Listening for "Next" or "Ready" (Malayalam: അടുത്തെ അല്ലെങ്കിൽ തയ്യാർ)
+                                const isNext = result.toLowerCase().includes('next') || result.toLowerCase().includes('അടുത്തെ') || result.toLowerCase().includes('അടുത്ത');
+                                if (isNext) startStep(currentStep + 1);
+                                else {
+                                    recognition.start(); // Keep listening
+                                }
                                 return;
                             }
 
@@ -623,12 +643,12 @@
                             });
                         } else {
                             // Listening for Yes or No (Malayalam: അതെ or അല്ല)
-                            const isYes = result.toLowerCase().includes('yes') || result.toLowerCase().includes('അതെ');
+                            const isYes = result.toLowerCase().includes('yes') || result.toLowerCase().includes('അതെ') || result.toLowerCase().includes('ശരി');
                             if (isYes) {
                                 const step = steps[currentStep];
                                 // Map value to form
                                 if (step.field === 'style_radio') {
-                                    const styleVal = tempValue.toLowerCase().includes('modern') ? 'Modern' : (tempValue.toLowerCase().includes('natural') ? 'Natural' : 'Elegant');
+                                    const styleVal = tempValue.toLowerCase().includes('elegant') ? 'Elegant' : (tempValue.toLowerCase().includes('natural') ? 'Natural' : 'Modern');
                                     const radio = document.querySelector(`input[name="style"][value="${styleVal}"]`);
                                     if(radio) radio.checked = true;
                                 } else if (step.field === 'goal_radio') {
