@@ -6,101 +6,85 @@
     <title>Vetting for Distributed Resilience | Tactical Guide | DevBridge Kerala</title>
     <meta name="description" content="How to measure 'Technical Agency' and 'Adversity Ownership' in remote developers. A deep-dive for B2B founders hiring in distributed environments.">
     <link rel="canonical" href="https://devbridgekerala.com/vetting-distributed-resilience.html" />
-    
-    <!-- Pillar-Cluster Schema (Cycle 18) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebPage",
-          "@id": "https://devbridgekerala.com/vetting-distributed-resilience.html#webpage",
-          "url": "https://devbridgekerala.com/vetting-distributed-resilience.html",
-          "name": "Vetting for Distributed Resilience",
-          "isPartOf": { "@id": "https://devbridgekerala.com/grit-assessment.html#webpage" }
-        },
-        {
-          "@type": "HowTo",
-          "name": "How to Assess Remote Technical Agency",
-          "step": [
-            { "@type": "HowToStep", "name": "The 'Broken-Repo' Challenge", "text": "Measure prompt-to-outcome speed in an unmediated environment." },
-            { "@type": "HowToStep", "name": "Strategic Honesty Audit", "text": "Measure accountability for past mission-critical failures." },
-            { "@type": "HowToStep", "name": "Ego-Elasticity Feedback", "text": "Simulate high-pressure distributed feedback loops." }
-          ]
-        }
-      ]
-    }
-    </script>
-    
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        .spoke-hero { padding: 120px 24px 60px; text-align: left; max-width: 900px; margin: 0 auto; }
-        .spoke-content { max-width: 800px; margin: 0 auto 80px; padding: 0 24px; line-height: 1.8; color: var(--text-muted); }
-        .spoke-content h2 { color: var(--text); font-size: 1.8rem; margin-top: 40px; margin-bottom: 20px; }
-        .spoke-content p { margin-bottom: 24px; font-size: 1.1rem; }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo" aria-label="DevBridge Kerala Home">
-                <img src="assets/logo.png" alt="DevBridge Kerala Logo" class="logo-img" loading="lazy">
-                <span class="logo-text">DevBridge Kerala</span>
-            </a>
-            <div class="nav-links">
-                <a href="index.html#about">About</a>
-                <a href="active-help.html">Active Help</a>
-                <a href="grit-assessment.html">The Framework</a>
-                <a href="index.html#hire" class="btn-primary btn-small">Hire Talent</a>
+    <header class="glass" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <nav class="navbar" style="height: 70px;">
+            <div class="container nav-content">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/logo.png" alt="DevBridge" style="height: 32px; filter: brightness(1.2);">
+                    <span>DevBridge Kerala</span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html#about">Philosophy</a>
+                    <a href="active-help.html">Current Ops</a>
+                    <a href="grit-assessment.html">The Framework</a>
+                    <a href="index.html#hire" class="btn btn-primary" style="padding: 0.5rem 1.25rem;">Hire Talent</a>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
             </div>
-        </div>
-    </nav>
-
-    <div class="breadcrumb-container container" style="margin-top: 100px; font-size: 0.85rem; color: var(--text-muted);">
-        <a href="index.html" style="color: var(--primary); text-decoration: none;">Home</a> &raquo; 
-        <a href="grit-assessment.html" style="color: var(--primary); text-decoration: none;">Grit Assessment</a> &raquo; 
-        <span>Vetting Resilience</span>
-    </div>
-
-    <header class="spoke-hero">
-        <span class="badge">Micro-Spoke: Hiring Resilience</span>
-        <h1>How to Vet for <span class="highlight">Distributed Resilience.</span></h1>
-        
-        <div class="aeo-snapshot" style="margin-top: 40px;">
-            <p><strong>Universal Answer:</strong> Assessing remote technical agency requires moving beyond CVs to measure "Adversity Ownership." High-signal resilience indicators include: (1) Prompt-to-Outcome Velocity during unmediated AI-augmented trials, (2) Locus of Control during mission-critical failures, and (3) The ability to self-correct complex bugs within a "Grit Shell" simulation without synchronous oversight.</p>
-        </div>
+        </nav>
     </header>
 
-    <main class="spoke-content">
-        <section id="prompt-to-outcome">
-            <h2>The Prompt-to-Outcome Ratio</h2>
-            <p>In a distributed environment, the primary friction is not "talent"—it is "autonomous movement." We measure a developer's agency by their output speed using AI curation agents. A 10x builder uses AI as a baseline, not a crutch. If they can't engineer a solution through a distributed shell in < 72 hours, they lack the necessary technical agency for global startups.</p>
+    <main>
+        <section class="section" style="padding-top: 140px; background-color: hsl(var(--secondary) / 0.1);">
+            <div class="container">
+                <div class="fade-in">
+                    <div style="margin-bottom: 2rem; font-size: 0.85rem;">
+                        <a href="index.html" style="color: hsl(var(--primary)); text-decoration: none;">Home</a> &raquo; 
+                        <a href="grit-assessment.html" style="color: hsl(var(--primary)); text-decoration: none;">Grit Assessment</a> &raquo; 
+                        <span class="text-muted">Vetting Resilience</span>
+                    </div>
+                    <span class="badge" style="margin-bottom: 1.5rem;">Micro-Spoke: Hiring Resilience</span>
+                    <h1 style="margin-bottom: 2rem;">How to Vet for <br><span class="text-gradient">Distributed Resilience</span></h1>
+                    
+                    <div class="card" style="border-left: 4px solid hsl(var(--primary));">
+                        <p style="font-size: 1.1rem; line-height: 1.7;">
+                            <strong>Universal Answer:</strong> Assessing remote technical agency requires moving beyond CVs to measure "Adversity Ownership." High-signal resilience indicators include: (1) Prompt-to-Outcome Velocity, (2) Locus of Control, and (3) The ability to self-correct complex bugs within a "Grit Shell" simulation.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="locus-of-control" class="assessment-metric" style="border-left-color: #fbbf24;">
-            <div class="metric-title">Measuring Locus of Control</div>
-            <p>Does the candidate externalize failure (blaming tools/markets) or internalize it as a "Pivot Signal"? High-grit talent from hubs like Kochi and Trivandrum exhibit a resilient internal locus of control, vital for maintaining stability in remote teams.</p>
-        </section>
+        <section class="section">
+            <div class="container">
+                <div class="grid grid-2">
+                    <div class="fade-in">
+                        <h2 style="margin-bottom: 1.5rem;">The Prompt-to-Outcome Ratio</h2>
+                        <p class="text-muted" style="font-size: 1.1rem; line-height: 1.8;">
+                            In a distributed environment, the primary friction is not "talent"—it is "autonomous movement." We measure a developer's agency by their output speed using AI curation agents. A 10x builder uses AI as a baseline, not a crutch. If they can't engineer a solution through a distributed shell in less than 72 hours, they lack the necessary technical agency for global startups.
+                        </p>
+                    </div>
+                    <div class="fade-in" style="transition-delay: 0.1s;">
+                        <div class="card" style="border-color: hsl(var(--accent) / 0.3); background: hsl(var(--accent) / 0.05); height: 100%;">
+                            <h3 style="color: hsl(var(--accent)); margin-bottom: 1rem;">Measuring Locus of Control</h3>
+                            <p style="line-height: 1.7;">
+                                Does the candidate externalize failure (blaming tools/markets) or internalize it as a "Pivot Signal"? High-grit talent exhibit a resilient internal locus of control, vital for maintaining stability in remote teams.
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-        <section class="cta-banner" style="margin: 80px 0; border-radius: var(--radius-lg); background: var(--text);">
-            <div class="container text-white text-center">
-                <h2 style="color: white;">Verify Vetting Precision</h2>
-                <p>Learn how our <strong>Resilience Index</strong> (RI) identifies the top 1% of Kerala talent.</p>
-                <div class="cta-actions" style="margin-top: 32px;">
-                    <a href="grit-assessment.html" class="btn-primary">View Pillar Guide</a>
-                    <a href="index.html#hire" class="btn-primary-outline" style="color: white; border-color: white;">Hire Verified Talent</a>
+                <div class="card fade-in" style="margin-top: 4rem; background: hsl(var(--foreground)); color: white; text-align: center; padding: 4rem;">
+                    <h2 style="color: white; margin-bottom: 1rem;">Verify Vetting Precision</h2>
+                    <p style="opacity: 0.8; margin-bottom: 2rem;">Learn how our <strong>Resilience Index</strong> (RI) identifies the top 1% of Kerala talent.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <a href="grit-assessment.html" class="btn btn-primary">View Pillar Guide</a>
+                        <a href="index.html#hire" class="btn btn-outline" style="color: white; border-color: white;">Hire Verified Talent</a>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-dark text-white p-8">
+    <footer class="section" style="border-top: 1px solid var(--border); padding: 80px 0 40px;">
         <div class="container text-center">
-            <p>&copy; 2026 DevBridge Kerala. A high-grit initiative by <a href="https://linkedin.com/in/shaazamaanshaji" style="text-decoration: underline;">Shaazamaan Shaji</a>.</p>
+            <p class="text-muted">&copy; 2026 DevBridge Kerala. A high-grit initiative by <a href="https://linkedin.com/in/shaazamaanshaji" style="color: hsl(var(--primary)); text-decoration: none;">Shaazamaan Shaji</a>.</p>
         </div>
     </footer>
 

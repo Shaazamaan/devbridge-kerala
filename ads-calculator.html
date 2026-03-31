@@ -46,190 +46,96 @@
     </script>
     
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="index.css">
     <style>
-        /* Dashboard Specific Overrides & scoping */
-        :root {
-            /* Dashboard Variable Overrides (if needed) */
-            --dash-bg: #f8fafc;
-            --dash-card-bg: #ffffff;
-            --dash-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        }
-
         .dashboard-wrapper {
-            background-color: var(--dash-bg);
-            min-height: calc(100vh - 70px);
-            padding: 2rem 1rem;
-            color: var(--text);
+            background-color: hsl(var(--secondary) / 0.05);
+            min-height: 100vh;
+            padding: 120px 1rem 4rem;
         }
-
         .app-container {
             max-width: 1440px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 380px 1fr;
+            grid-template-columns: 350px 1fr;
             gap: 2rem;
         }
-
         .dash-card {
-            background: var(--dash-card-bg);
+            background: white;
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            box-shadow: var(--dash-shadow);
-            margin-bottom: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
         }
-
         .card-title {
-            font-size: 0.875rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            margin-bottom: 1.25rem;
+            letter-spacing: 0.1em;
+            color: hsl(var(--primary));
+            margin-bottom: 1.5rem;
             display: block;
         }
-
-        /* Forms in Dashboard */
-        .dash-form-group { margin-bottom: 1.25rem; }
-        .dash-form-group label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; }
+        .dash-form-group { margin-bottom: 1.5rem; }
+        .dash-form-group label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; }
         .dash-input, .dash-select {
-            width: 100%; padding: 0.625rem 0.875rem; border: 1px solid var(--border);
-            border-radius: var(--radius); font-size: 0.875rem; transition: all 0.2s;
+            width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border);
+            border-radius: var(--radius-md); font-size: 0.875rem; transition: border-color 0.2s;
+            background: hsl(var(--background));
         }
-        .dash-input:focus, .dash-select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
-
-        /* Metrics Grid */
-        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .dash-input:focus, .dash-select:focus { outline: none; border-color: hsl(var(--primary)); }
+        
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
         .metric-card {
-            background: white; padding: 1.5rem; border-radius: var(--radius-lg);
+            background: white; padding: 2rem; border-radius: var(--radius-lg);
             border: 1px solid var(--border); text-align: center; transition: transform 0.2s;
         }
-        .metric-card:hover { transform: translateY(-2px); }
-        .metric-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem; }
-        .metric-value { font-size: 1.75rem; font-weight: 800; color: var(--text); }
-        .metric-badge { display: inline-block; padding: 0.125rem 0.6rem; font-size: 0.625rem; border-radius: 9999px; margin-top: 0.5rem; font-weight: 700; }
-        .badge-good { background: #dcfce7; color: #166534; }
-        .badge-average { background: #fef9c3; color: #854d0e; }
-        .badge-poor { background: #fee2e2; color: #991b1b; }
+        .metric-label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.75rem; }
+        .metric-value { font-size: 2rem; font-weight: 800; color: var(--text); }
+        
+        .status-banner { width: 100%; padding: 1.5rem 2rem; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: space-between; font-weight: 800; margin-bottom: 2rem; }
+        .status-banner.profitable { background-color: hsl(var(--success) / 0.1); color: hsl(var(--success)); border: 1px solid hsl(var(--success) / 0.2); }
+        .status-banner.losing { background-color: hsl(var(--danger) / 0.1); color: hsl(var(--danger)); border: 1px solid hsl(var(--danger) / 0.2); }
 
-        .status-banner { width: 100%; padding: 1rem 1.5rem; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: space-between; font-weight: 700; margin-bottom: 1.5rem; }
-        .status-banner.profitable { background-color: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
-        .status-banner.losing { background-color: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
-
-        .insights-section { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .insight-block { padding: 1.25rem; border-radius: var(--radius); background: #f8fafc; border-left: 4px solid var(--primary); }
-        .insight-block h4 { font-size: 0.9375rem; margin-bottom: 0.5rem; }
-        .insight-block p { font-size: 0.8125rem; color: var(--text-muted); }
-
-        .action-bar { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
-
-        /* Helpers */
-        .help-icon { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; background: #e2e8f0; font-size: 10px; margin-left: 4px; cursor: help; }
         .platform-specific, .business-specific { display: none; }
         .visible { display: block !important; }
-        .csv-upload-btn { position: relative; overflow: hidden; }
-        .csv-upload-btn input[type=file] { position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; height: 100%; width: 100%; }
-        .case-study-output { display: none; background: #fff; border: 2px dashed var(--border); padding: 2rem; border-radius: var(--radius-lg); margin-top: 2rem; white-space: pre-wrap; font-family: monospace; }
         
-        .comparison-view { display: none; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-
-        @media (max-width: 1024px) { .app-container { grid-template-columns: 1fr; } }
-        @media (max-width: 640px) { .metrics-grid { grid-template-columns: 1fr 1fr; } .insights-section { grid-template-columns: 1fr; } }
-        
-        @media print {
-            .navbar, .sidebar, .action-bar, .csv-upload-btn, footer, .lead-gen-section { display: none !important; }
-            .dashboard-wrapper { padding: 0; background: none; }
-            .app-container { display: block; }
-            .dash-card { page-break-inside: avoid; border: none; box-shadow: none; }
-            .metric-card { border: 1px solid #eee; }
-        }
-
-        /* Lead Gen Styling */
         .lead-gen-section {
-            margin-top: 3rem;
-            padding: 3rem;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            margin-top: 4rem;
+            padding: 4rem;
+            background: hsl(var(--secondary));
             border-radius: var(--radius-lg);
             color: white;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-        .lead-gen-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .lead-gen-form {
-            max-width: 600px;
-            margin: 2rem auto 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            text-align: left;
-        }
-        .lead-gen-form input, .lead-gen-form textarea {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: white;
-            padding: 0.75rem 1rem;
-            border-radius: var(--radius);
-            width: 100%;
-        }
-        .lead-gen-form .full-width { grid-column: span 2; }
-        .lead-gen-form button {
-            grid-column: span 2;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .lead-gen-form button:hover {
-            background: #3b82f6;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37,99,235,0.3);
+        
+        @media (max-width: 1024px) { 
+            .app-container { grid-template-columns: 1fr; }
+            .dashboard-wrapper { padding-top: 100px; }
         }
     </style>
 </head>
 <body>
-    <!-- SITE NAVBAR -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                <img src="assets/logo.png" alt="DevBridge Kerala Logo" class="logo-img">
-                <span class="logo-text">DevBridge Kerala</span>
-            </a>
-            <div class="nav-links">
-                <a href="index.html#about">About</a>
-                <a href="index.html#global">Beyond Borders</a>
-                <a href="active-help.html">Active Help</a>
-                <a href="insights.html">Insights</a>
-                <a href="ads-calculator.html" class="active" style="color:var(--primary)">Ads Calculator</a>
-
-                <a href="index.html#apply" class="btn-primary-outline">Apply as Talent</a>
-                <a href="index.html#hire" class="btn-hire">Hire Talent</a>
+    <header class="glass" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <nav class="navbar" style="height: 70px;">
+            <div class="container nav-content">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/logo.png" alt="DevBridge" style="height: 32px; filter: brightness(1.2);">
+                    <span>DevBridge Kerala</span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html#about">Philosophy</a>
+                    <a href="active-help.html">Current Ops</a>
+                    <a href="ai-engineering-kerala.html">AI Engineering</a>
+                    <a href="index.html#hire" class="btn btn-primary" style="padding: 0.5rem 1.25rem;">Hire Talent</a>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
             </div>
-            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <!-- DASHBOARD WORKSPACE -->
     <div class="dashboard-wrapper">

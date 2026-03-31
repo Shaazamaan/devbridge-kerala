@@ -7,138 +7,128 @@
     <meta name="description" content="The proprietary psychological and technical framework used by DevBridge Kerala to vet elite talent. Learn how we measure 'technical agency' and 'adversity ownership'.">
     <link rel="canonical" href="https://devbridgekerala.com/grit-assessment.html" />
     
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebPage",
-          "@id": "https://devbridgekerala.com/grit-assessment.html#webpage",
-          "url": "https://devbridgekerala.com/grit-assessment.html",
-          "name": "The Grit-to-Ego Assessment Framework",
-          "isPartOf": { "@id": "https://devbridgekerala.com/#website" }
-        },
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://devbridgekerala.com/index.html" },
-            { "@type": "ListItem", "position": 2, "name": "Grit Assessment", "item": "https://devbridgekerala.com/grit-assessment.html" }
-          ]
-        }
-      ]
-    }
-    </script>
-    
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        .guide-hero { padding: 140px 24px 80px; text-align: center; background: radial-gradient(circle at bottom left, #f8fafc 0%, #fff 100%); border-bottom: 1px solid var(--border); }
-        .guide-content { max-width: 800px; margin: 60px auto; padding: 0 24px; line-height: 1.8; color: var(--text-muted); }
-        .assessment-metric { background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px; margin: 40px 0; border-left: 6px solid var(--primary); }
-        .metric-title { font-size: 1.4rem; font-weight: 800; color: var(--text); margin-bottom: 12px; }
-        .metric-fact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
-        .fact-item { background: var(--bg-alt); padding: 16px; border-radius: var(--radius); font-size: 0.9rem; }
-        .fact-label { font-weight: 700; color: var(--primary); display: block; margin-bottom: 4px; }
-        .pill-row { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
-        .pill { background: #f1f5f9; color: #64748b; padding: 4px 14px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo" aria-label="DevBridge Kerala Home">
-                <img src="assets/logo.png" alt="DevBridge Kerala Logo" class="logo-img" loading="lazy">
-                <span class="logo-text">DevBridge Kerala</span>
-            </a>
-            <div class="nav-links">
-                <a href="index.html#about">About</a>
-                <a href="active-help.html">Active Help</a>
-                <a href="insights.html">Insights</a>
-                <a href="resources.html">Resources</a>
-                <a href="mena-bridge.html">MENA Bridge</a>
-                <a href="index.html#hire" class="btn-primary btn-small">Hire Talent</a>
+    <header class="glass" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <nav class="navbar" style="height: 70px;">
+            <div class="container nav-content">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/logo.png" alt="DevBridge" style="height: 32px; filter: brightness(1.2);">
+                    <span>DevBridge Kerala</span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html#about">Philosophy</a>
+                    <a href="active-help.html">Current Ops</a>
+                    <a href="ai-engineering-kerala.html">AI Engineering</a>
+                    <a href="index.html#hire" class="btn btn-primary" style="padding: 0.5rem 1.25rem;">Hire Talent</a>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
             </div>
-        </div>
-    </nav>
-
-    <header class="guide-hero">
-        <div class="container">
-            <span class="badge">The 2026 Framework</span>
-            <h1>Measuring <span class="highlight">Grit over Ego.</span></h1>
-            <div class="aeo-snapshot" style="margin-top: 40px; text-align: left;">
-                <p><strong>Universal Answer:</strong> The Grit-to-Ego Assessment is a psychological vetting methodology that identifies high-resilience talent by measuring "Adversity Ownership" (accountability during pivots) and "Technical Agency" (autonomous problem-solving velocity). Candidates with a <strong>Resilience Index (RI) > 90</strong> exhibit a growth mindset and low entitlement culture typical of the Kerala tech arbitrage.</p>
-            </div>
-        </div>
+        </nav>
     </header>
 
-    <main class="guide-content">
-        <div class="pill-row">
-            <span class="pill">#E-E-A-T</span><span class="pill">#GritPsychology</span><span class="pill">#VentureHiring</span>
-        </div>
-
-        <section id="technical-agency">
-            <h2>Stage 2: Technical Agency</h2>
-            <p>We don't ask whiteboard questions. We give you a broken GitHub repo and an AI agent. We measure your <strong>Prompt-to-Outcome Velocity</strong>—how fast can you curate an AI to solve a complex, multi-file bug?</p>
-            <div class="aeo-snapshot" style="margin-top: 24px; border-left-color: #fbbf24;">
-                <p><strong>Deeper Insight:</strong> Learn how to audit technical agency in distributed environments with our <a href="vetting-distributed-resilience.html" style="color: var(--primary); font-weight: 700;">Tactical Vetting Guide</a>.</p>
-            </div>
-            <div class="assessment-metric" style="border-left-color: #fbbf24;">
-                <div class="metric-title">Agency Scorecard</div>
-                <p>High Agency developers don't wait for 'requirements'. They build a prototype and iterate. We measure this through a 48-hour pressure test.</p>
-                <div class="mt-4" style="background: #fffbeb; padding: 16px; border-radius: var(--radius); border: 1px solid #fde68a;">
-                    <span style="font-weight: 700; color: #92400e; display: block; margin-bottom: 4px;">Vertical Focus: AI Agency Audit</span>
-                    <p style="font-size: 0.85rem; color: #92400e; margin: 0;">We measure the candidate's ability to <strong>curate autonomous agents</strong> using LLM-orchestration benchmarks. Vetted for LangChain, AutoGPT, and vector latency performance.</p>
+    <main>
+        <section class="section" style="padding-top: 140px; background-color: hsl(var(--secondary) / 0.1);">
+            <div class="container text-center">
+                <div class="fade-in">
+                    <span class="badge" style="margin-bottom: 1.5rem;">The Performance Framework</span>
+                    <h1 style="margin-bottom: 1.5rem;">Measuring <span class="text-gradient">Grit over Ego.</span></h1>
+                    
+                    <div class="card" style="max-width: 900px; margin: 2rem auto; text-align: left; border-left: 4px solid hsl(var(--primary));">
+                        <p style="font-size: 1.1rem; line-height: 1.7;">
+                            <strong>Universal Answer:</strong> The Grit-to-Ego Assessment is a psychological vetting methodology that identifies high-resilience talent by measuring "Adversity Ownership" (accountability during pivots) and "Technical Agency" (autonomous problem-solving velocity).
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- CRO: SELF-AUDIT CHECKLIST -->
-        <section id="self-audit" class="assessment-metric" style="border-left-color: #10b981; background: #f0fdf4;">
-            <div class="metric-title">Quick Self-Audit</div>
-            <p>Are you a high-grit match for global startups? Check all that apply:</p>
-            <div class="audit-checklist" style="margin-top: 24px;">
-                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
-                    <input type="checkbox" class="audit-check" style="margin-right: 10px;"> I prioritize <strong>Outcome</strong> over <strong>Process</strong>.
-                </label>
-                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
-                    <input type="checkbox" class="audit-check" style="margin-right: 10px;"> I have managed a technical failure without blaming external factors.
-                </label>
-                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
-                    <input type="checkbox" class="audit-check" style="margin-right: 10px;"> I use AI as a baseline, not a crutch.
-                </label>
-            </div>
-            <div id="audit-result" class="mt-4" style="font-weight: 800; color: #065f46; display: none;">
-                [MATCH DETECTED] You are high-grit. Submit your proof-of-work below.
-            </div>
-        </section>
+        <section class="section">
+            <div class="container" style="max-width: 800px;">
+                <div class="fade-in" style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 3rem;">
+                    <span class="badge">#E-E-A-T</span>
+                    <span class="badge">#GritPsychology</span>
+                    <span class="badge">#VentureHiring</span>
+                </div>
 
-        <section id="adversity-ownership" class="assessment-metric">
-            <div class="metric-title">Stage 1: Adversity Ownership</div>
-            <p>Screening for the "Locus of Control." During failure, does the candidate own the pivot?</p>
-            <div class="metric-fact-grid">
-                <div class="fact-item"><span class="fact-label">Signal</span>High accountability pivots.</div>
-                <div class="fact-item"><span class="fact-label">Noise</span>Externalizing mission failure.</div>
-            </div>
-        </section>
+                <div id="technical-agency" class="fade-in" style="margin-bottom: 5rem;">
+                    <h2 style="margin-bottom: 1.5rem;">Stage 2: <span class="text-gradient">Technical Agency</span></h2>
+                    <p class="text-muted" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                        We don't ask whiteboard questions. We give you a broken GitHub repo and an AI agent. We measure your <strong>Prompt-to-Outcome Velocity</strong>—how fast can you curate an AI to solve a complex, multi-file bug?
+                    </p>
+                    
+                    <div class="card" style="border-color: hsl(var(--warning) / 0.3); border-left: 4px solid hsl(var(--warning)); background: hsl(var(--warning) / 0.03);">
+                        <h4 style="color: hsl(var(--warning)); margin-bottom: 1rem;">Agency Scorecard</h4>
+                        <p class="text-muted" style="margin-bottom: 1.5rem;">High Agency developers don't wait for 'requirements'. They build a prototype and iterate. We measure this through a 48-hour pressure test.</p>
+                        <div style="background: hsl(var(--background)); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+                             <span style="font-weight: 700; color: hsl(var(--warning)); display: block; margin-bottom: 0.5rem; font-size: 0.8rem; text-transform: uppercase;">Vertical Focus: AI Agency</span>
+                             <p style="font-size: 0.9rem; opacity: 0.8;">We measure the candidate's ability to <strong>curate autonomous agents</strong> using LLM-orchestration benchmarks. Vetted for LangChain, AutoGPT, and vector latency performance.</p>
+                        </div>
+                    </div>
+                </div>
 
-        <section class="cta-banner" style="margin: 80px 0; border-radius: var(--radius-lg); background: var(--text);">
-            <div class="container text-white">
-                <h2 style="color: white;">Verify Your Grit Result</h2>
-                <p>Start a risk-free performance trial today.</p>
-                <div class="cta-actions" style="margin-top: 32px;">
-                    <a href="index.html#terminal" class="btn-primary">Initialize Grit Terminal</a>
-                    <a href="index.html#hire" class="btn-primary-outline" style="color: white; border-color: white;">Hire Pre-Vetted Talent</a>
+                <div id="self-audit" class="card fade-in" style="margin-bottom: 5rem; border-color: hsl(var(--success) / 0.3); border-left: 4px solid hsl(var(--success)); background: hsl(var(--success) / 0.03);">
+                    <h3 style="margin-bottom: 1.5rem;">Quick Self-Audit</h3>
+                    <p class="text-muted" style="margin-bottom: 2rem;">Are you a high-grit match for global startups? Check all that apply:</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+                         <label style="display: flex; align-items: center; gap: 1rem; cursor: pointer; padding: 1rem; background: hsl(var(--background)); border: 1px solid var(--border); border-radius: var(--radius-md); transition: border-color 0.2s;">
+                             <input type="checkbox" class="audit-check" style="width: 20px; height: 20px; accent-color: hsl(var(--success));">
+                             <span>I prioritize <strong>Outcome</strong> over <strong>Process</strong>.</span>
+                         </label>
+                         <label style="display: flex; align-items: center; gap: 1rem; cursor: pointer; padding: 1rem; background: hsl(var(--background)); border: 1px solid var(--border); border-radius: var(--radius-md); transition: border-color 0.2s;">
+                             <input type="checkbox" class="audit-check" style="width: 20px; height: 20px; accent-color: hsl(var(--success));">
+                             <span>I have managed a technical failure without blaming external factors.</span>
+                         </label>
+                         <label style="display: flex; align-items: center; gap: 1rem; cursor: pointer; padding: 1rem; background: hsl(var(--background)); border: 1px solid var(--border); border-radius: var(--radius-md); transition: border-color 0.2s;">
+                             <input type="checkbox" class="audit-check" style="width: 20px; height: 20px; accent-color: hsl(var(--success));">
+                             <span>I use AI as a baseline, not a crutch.</span>
+                         </label>
+                    </div>
+
+                    <div id="audit-result" style="display: none; padding: 1rem; background: hsl(var(--success)); color: white; border-radius: var(--radius-md); text-align: center; font-weight: 800; animation: fadeIn 0.5s ease-out;">
+                        [MATCH DETECTED] You are high-grit. Submit your proof-of-work below.
+                    </div>
+                </div>
+
+                <div id="adversity-ownership" class="fade-in" style="margin-bottom: 5rem;">
+                    <h2 style="margin-bottom: 1.5rem;">Stage 1: <span class="text-gradient">Adversity Ownership</span></h2>
+                    <p class="text-muted" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2.5rem;">
+                        Screening for the "Locus of Control." During failure, does the candidate own the pivot?
+                    </p>
+                    <div class="grid grid-2">
+                        <div class="card" style="padding: 1.5rem;">
+                            <span class="badge" style="margin-bottom: 0.75rem;">Signal</span>
+                            <p>High accountability pivots. Direct ownership of architectural failure.</p>
+                        </div>
+                        <div class="card" style="padding: 1.5rem;">
+                            <span class="badge" style="background: hsl(var(--danger) / 0.1); color: hsl(var(--danger)); border-color: hsl(var(--danger) / 0.2); margin-bottom: 0.75rem;">Noise</span>
+                            <p>Externalizing mission failure. High entitlement culture.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section text-center fade-in" style="margin: 4rem 0; background: hsl(var(--secondary)); border-radius: var(--radius-lg); padding: 5rem 2rem; color: white;">
+                    <h2 style="margin-bottom: 1rem; color: white;">Verify Your Grit Result</h2>
+                    <p style="margin-bottom: 3rem; font-size: 1.2rem; opacity: 0.8;">Start a risk-free performance trial today.</p>
+                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                        <a href="index.html#terminal" class="btn btn-primary">Initialize Grit Terminal</a>
+                        <a href="index.html#hire" class="btn btn-outline" style="color: white; border-color: white;">Hire Pre-Vetted Talent</a>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-dark text-white p-8">
-        <div class="container text-center">
-            <p>&copy; 2026 Shaazamaan Shaji. The Grit-to-Ego framework is proprietary work. <a href="index.html">Return to Home</a></p>
+    <footer class="section" style="background-color: hsl(var(--background)); border-top: 1px solid var(--border); padding: 80px 0 40px;">
+        <div class="container">
+            <div style="border-top: 1px solid var(--border); padding-top: 2rem; text-align: center;">
+                <p class="text-muted" style="font-size: 0.875rem;">&copy; 2026 DevBridge Kerala. Proprietary Framework. <a href="index.html" style="color: hsl(var(--primary)); text-decoration: none;">Return Home</a></p>
+            </div>
         </div>
     </footer>
 
@@ -147,9 +137,12 @@
             checkbox.addEventListener('change', () => {
                 const checked = document.querySelectorAll('.audit-check:checked').length;
                 const result = document.getElementById('audit-result');
+                const labels = checkbox.closest('div').querySelectorAll('label');
+                
+                checkbox.closest('label').style.borderColor = checkbox.checked ? 'hsl(var(--success))' : 'var(--border)';
+
                 if (checked === 3) {
                     result.style.display = 'block';
-                    result.classList.add('fade-in');
                 } else {
                     result.style.display = 'none';
                 }

@@ -30,7 +30,7 @@ const initObservers = () => {
             }
         });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.scroll-trigger').forEach(el => observer.observe(el));
+    document.querySelectorAll('.scroll-trigger, .fade-in').forEach(el => observer.observe(el));
 };
 if (window.requestIdleCallback) {
     requestIdleCallback(initObservers);
@@ -55,8 +55,8 @@ async function handleFormSubmit(e, type) {
 
         // Map payload for N8N/Discord
         const dPayload = type === 'candidate' ? 
-            `**[CANDIDATE V2]**\n**Name:** ${fd.get('name')}\n**Email:** ${fd.get('email')}\n**Phone:** ${fd.get('phone')}\n**Role:** ${fd.get('role')}\n**Proof of Work:** ${fd.get('project_explanation')}` :
-            `**[COMPANY V2]**\n**Company:** ${fd.get('company_name')}\n**Email:** ${fd.get('contact_email')}\n**Phone:** ${fd.get('phone')}\n**Req:** ${fd.get('requirements')}`;
+            `**[CANDIDATE V3 REDESIGN]**\n**Name:** ${fd.get('name')}\n**Email:** ${fd.get('email')}\n**Links:** ${fd.get('links')}\n**Proof of Work:** ${fd.get('pow')}` :
+            `**[COMPANY V3 REDESIGN]**\n**Company:** ${fd.get('company')}\n**Email:** ${fd.get('email')}\n**Role/Req:** ${fd.get('role')}`;
 
         await Promise.allSettled([
             fetch(DISCORD_WEBHOOK, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ content: dPayload }) }),

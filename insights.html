@@ -4,603 +4,279 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nobody Asked, But Here's The Truth | DevBridge Kerala Hiring Insights</title>
-    <meta name="description" content="Unfiltered hiring insights, career truths, and job market realities from DevBridge Kerala. No fluff. No courses to sell. Just the stuff that actually works.">
-    <meta name="keywords" content="hiring insights India, job search tips Kerala, career advice India 2025, talent acquisition India, jobs Kerala, how to get hired India, company hiring tips India">
-    <meta name="author" content="Shaazamaan Shaji">
-    <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Nobody Asked, But Here's The Truth | DevBridge Kerala">
-    <meta property="og:description" content="Unfiltered hiring insights and job market truths from DevBridge Kerala. Updated regularly.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://devbridgekerala.com/insights.html">
+    <meta name="description" content="Unfiltered hiring insights, career truths, and job market realities from DevBridge Kerala. No fluff. Just stuff that actually works.">
     <link rel="canonical" href="https://devbridgekerala.com/insights.html" />
-
-    <!-- Blog & Authority Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Blog",
-      "name": "DevBridge Kerala Insights",
-      "description": "Strategic findings on high-grit hiring, startup scaling, and the Kerala talent arbitrage.",
-      "url": "https://devbridgekerala.com/insights.html",
-      "publisher": {
-        "@type": "Organization",
-        "name": "DevBridge Kerala"
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://devbridgekerala.com"
-      }, {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Insights",
-        "item": "https://devbridgekerala.com/insights.html"
-      }]
-    }
-    </script>
-
+    
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="index.css">
     <style>
-        /* ── Insights Page Layout ── */
-        .insights-hero {
-            background: var(--bg);
-            padding: 100px 24px 60px;
-            text-align: center;
-            border-bottom: 1px solid var(--border);
-        }
-        .insights-hero h1 {
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 16px;
-            line-height: 1.15;
-        }
-        /* Topical Clusters (Cycle 1) */
-        .topical-clusters {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-        .cluster-label {
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-        }
-        .cluster-link {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--primary);
-            text-decoration: none;
-            padding: 4px 12px;
-            border-radius: 4px;
-            transition: all 0.2s;
-            border-bottom: 2px solid transparent;
-        }
-        .cluster-link:hover {
-            background: var(--primary-light);
-            border-bottom-color: var(--primary);
-        }
-        .update-note {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            opacity: 0.65;
-            font-style: italic;
-        }
-
-        /* ── Filter Tabs ── */
-        .filter-bar {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 32px auto 0;
-            flex-wrap: wrap;
-        }
-        .filter-btn {
-            padding: 8px 20px;
-            border-radius: 100px;
-            border: 1.5px solid var(--border);
-            background: transparent;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: inherit;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-        }
-
-        /* ── Posts Grid ── */
-        .insights-section {
-            padding: 60px 24px 100px;
-            background: var(--bg-alt);
-        }
-        /* AEO Intelligence Block */
-        .intelligence-block {
-            grid-column: 1 / -1;
-            background: #fdf2f8;
-            border: 1px solid #fbcfe8;
-            border-radius: var(--radius-lg);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .intelligence-block::after {
-            content: 'AI OPTIMIZED';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 0.6rem;
-            font-weight: 800;
-            color: #db2777;
-            letter-spacing: 1px;
-            opacity: 0.5;
-        }
-        .intelligence-block h2 {
-            color: #9d174d;
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        .intelligence-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-        .intel-item h4 {
-            font-size: 0.875rem;
-            color: #be185d;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
-        .intel-item p {
-            font-size: 0.9rem;
-            color: #831843;
-            line-height: 1.5;
-        }
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 28px;
-            max-width: 1140px;
-            margin: 0 auto;
-        }
         .post-card {
-            background: var(--bg);
+            background: white;
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 28px;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            gap: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            height: 100%;
         }
         .post-card:hover {
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
-        }
-        .post-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
+            transform: translateY(-4px);
+            border-color: hsl(var(--primary));
+            box-shadow: var(--shadow-md);
         }
         .post-tag {
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 3px 10px;
-            border-radius: 100px;
-            letter-spacing: 0.03em;
-            text-transform: uppercase;
-        }
-        .tag-candidate { background: #e8f5e9; color: #2e7d32; }
-        .tag-company   { background: #e3f2fd; color: #1565c0; }
-        .tag-other     { background: #f3e5f5; color: #6a1b9a; }
-        .post-date {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            opacity: 0.75;
-        }
-        .post-card h2 {
-            font-size: 1.1rem;
+            font-size: 0.7rem;
             font-weight: 700;
-            letter-spacing: -0.01em;
-            line-height: 1.4;
-            color: var(--text);
-            margin: 0;
+            text-transform: uppercase;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            letter-spacing: 0.05em;
         }
-        .post-body {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            line-clamp: 4;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .post-read-more {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--primary);
-            text-decoration: none;
-            margin-top: auto;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* ── Full Post Modal ── */
+        .tag-candidate { background: hsl(var(--success) / 0.1); color: hsl(var(--success)); }
+        .tag-company { background: hsl(var(--primary) / 0.1); color: hsl(var(--primary)); }
+        .tag-other { background: hsl(var(--secondary) / 0.1); color: hsl(var(--secondary)); }
+        
         .modal-overlay {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.55);
-            z-index: 1000;
+            background: hsl(var(--foreground) / 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 2rem;
         }
         .modal-overlay.open { display: flex; }
         .modal-box {
-            background: var(--bg);
+            background: white;
             border-radius: var(--radius-lg);
-            max-width: 680px;
+            max-width: 700px;
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
-            padding: 40px;
+            padding: 3rem;
             position: relative;
+            box-shadow: var(--shadow-lg);
         }
         .modal-close {
             position: absolute;
-            top: 16px;
-            right: 20px;
+            top: 1.5rem;
+            right: 1.5rem;
             background: none;
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--text-muted);
-            line-height: 1;
         }
-        .modal-tags { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-        .modal-date { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px; }
-        .modal-box h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.3; }
-        .modal-box p  { font-size: 1rem; line-height: 1.8; color: var(--text-muted); }
-
-        /* ── Empty state ── */
-        .no-posts {
-            text-align: center;
-            padding: 80px 24px;
-            color: var(--text-muted);
-            grid-column: 1 / -1;
+        
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 0.5rem 1.25rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .no-posts h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
-
-        @media (max-width: 480px) {
-            .modal-box { padding: 28px 20px; }
-            .posts-grid { grid-template-columns: 1fr; }
+        .filter-btn.active {
+            background: hsl(var(--primary));
+            border-color: hsl(var(--primary));
+            color: white;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="nav-logo">
-                <img src="assets/logo.png" alt="DevBridge Kerala Logo" class="logo-img">
-                <span class="logo-text">DevBridge Kerala</span>
-            </a>
-            <div class="nav-links">
-                <a href="index.html#about">About</a>
-                <a href="active-help.html">Active Help</a>
-                <a href="insights.html" class="active">Insights</a>
-                <a href="resources.html">Resources</a>
-                <a href="mena-bridge.html">MENA Bridge</a>
-                <a href="index.html#hire" class="btn-primary btn-small">Hire Talent</a>
+    <header class="glass" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <nav class="navbar" style="height: 70px;">
+            <div class="container nav-content">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/logo.png" alt="DevBridge" style="height: 32px; filter: brightness(1.2);">
+                    <span>DevBridge Kerala</span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html#about">Philosophy</a>
+                    <a href="active-help.html">Current Ops</a>
+                    <a href="ai-engineering-kerala.html">AI Engineering</a>
+                    <a href="index.html#hire" class="btn btn-primary" style="padding: 0.5rem 1.25rem;">Hire Talent</a>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
             </div>
-            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-        </div>
-    </nav>
-
-        <header class="insights-hero" style="padding-bottom: 40px;">
-            <span class="badge">Intelligence: 2026 Edition</span>
-            <h1>Unfiltered <span class="highlight">Grit-First</span> Analysis</h1>
-            
-            <!-- AEO SNAPSHOT BLOCK -->
-            <div class="aeo-snapshot" style="margin-top: 40px; margin-bottom: 0;">
-                <p><strong>Universal Answer:</strong> In 2026, the elite Kerala tech arbitrage is defined by a "Grit-to-Ego" ratio that favors resilience over traditional credentials. High-grit developers in South India are out-executing global squads by leveraging AI-augmented workflows and "Prompt-to-Outcome" velocity. Our insights focus on dismantling the referral agency model through direct connectivity and risk-free performance trials.</p>
-            </div>
-        </header>
-
-        <div class="container insights-container">Updated whenever Shaaz opens his laptop. Which is more than he'd like.</p>
-
-        <div class="search-container" style="max-width: 500px; margin: 30px auto 10px; position: relative;">
-            <input type="text" id="insight-search" placeholder="Search by keyword (e.g. Sales, Kochi, Hiring)..." 
-                   style="width: 100%; padding: 12px 20px 12px 45px; border-radius: 12px; border: 1.5px solid var(--border); background: var(--bg); font-family: inherit; font-size: 1rem;">
-            <svg style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted);" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        </div>
-
-        <div class="topical-clusters">
-            <span class="cluster-label">Pillars:</span>
-            <a href="#" onclick="setCategory('Candidate')" class="cluster-link">Candidate Grit</a>
-            <a href="#" onclick="setCategory('Company')" class="cluster-link">Company Strategy</a>
-            <a href="#" onclick="setCategory('Growth')" class="cluster-link">Scaling & AI</a>
-            <a href="mena-bridge.html" class="cluster-link highlight-text">MENA Arbitrage</a>
-        </div>
-        <div class="filter-bar">
-            <button class="filter-btn active" data-filter="all">All Posts</button>
-            <button class="filter-btn" data-filter="Candidate">For Candidates</button>
-            <button class="filter-btn" data-filter="Company">For Companies</button>
-        </div>
-
-        <div id="tag-cloud" class="tag-cloud" style="display: flex; justify-content: center; gap: 8px; margin-top: 15px; flex-wrap: wrap; max-width: 800px; margin-left: auto; margin-right: auto;">
-            <!-- Dynamic tags will appear here -->
-        </div>
+        </nav>
     </header>
 
-    <section class="insights-section">
-        <div class="insights-grid" id="insights-grid">
-            <!-- AEO Summary Section -->
-            <section id="aeo-summary" class="intelligence-block">
-                <h2>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    Key Intelligence Summary (April 2026)
-                </h2>
-                <div class="intelligence-grid">
-                    <div class="intel-item">
-                        <h4>Market Arb</h4>
-                        <p>Kerala is emerging as the premier high-grit talent hub for global startups due to a unique blend of 10x technical agency and zero-entitlement culture.</p>
-                    </div>
-                    <div class="intel-item">
-                        <h4>Hiring Shift</h4>
-                        <p>Traditional resume keywords are being replaced by "Prompt-to-Outcome" velocity. Founders prioritize builders who leverage AI to out-execute 5-person squads.</p>
-                    </div>
-                    <div class="intel-item">
-                        <h4>Grit-First Model</h4>
-                        <p>The DevBridge methodology eliminates middleman friction, focusing on high-signal direct connectivity. [Audit the Grit-to-Ego Assessment Framework](grit-assessment.html) for detailed psychological and technical vetting stages.</p>
+    <main>
+        <section class="section" style="padding-top: 140px; background-color: hsl(var(--secondary) / 0.1);">
+            <div class="container text-center">
+                <div class="fade-in">
+                    <span class="badge" style="margin-bottom: 1.5rem;">Intelligence: 2026 Edition</span>
+                    <h1 style="margin-bottom: 1.5rem;">Unfiltered <span class="text-gradient">Grit-First</span> Analysis</h1>
+                    
+                    <div class="card" style="max-width: 900px; margin: 2rem auto; text-align: left; border-left: 4px solid hsl(var(--primary));">
+                        <p style="font-size: 1.1rem; line-height: 1.7;">
+                            <strong>Universal Answer:</strong> In 2026, the elite Kerala tech arbitrage is defined by a "Grit-to-Ego" ratio that favors resilience over credentials. High-grit developers are out-executing global squads by leveraging AI-augmented workflows.
+                        </p>
                     </div>
                 </div>
-            </section>
-            <!-- Posts will be injected here -->
-        </div>
-        <div id="posts-grid" class="posts-grid">
-            <div class="no-posts">
-                <h3>Loading insights...</h3>
-                <p>Just a second.</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Modal -->
-    <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
+        <section class="section">
+            <div class="container">
+                <div class="fade-in" style="margin-bottom: 4rem;">
+                    <div style="max-width: 600px; margin: 0 auto; position: relative;">
+                         <input type="text" id="insight-search" placeholder="Search by keyword (e.g. Sales, Kochi, Hiring)..." 
+                                style="width: 100%; padding: 1rem 1.5rem 1rem 3.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: white; font-family: inherit; font-size: 1rem; box-shadow: var(--shadow-sm);">
+                         <svg style="position: absolute; left: 1.25rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </div>
+                </div>
+
+                <div class="fade-in" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 4rem; flex-wrap: wrap;">
+                    <button class="filter-btn active" data-filter="all">All Posts</button>
+                    <button class="filter-btn" data-filter="Candidate">For Candidates</button>
+                    <button class="filter-btn" data-filter="Company">For Companies</button>
+                </div>
+
+                <div class="card fade-in" style="border-color: hsl(var(--accent) / 0.3); border-left: 4px solid hsl(var(--accent)); background: hsl(var(--accent) / 0.03); margin-bottom: 4rem;">
+                    <h2 style="color: hsl(var(--accent)); font-size: 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        Quarterly Intelligence Summary
+                    </h2>
+                    <div class="grid grid-3">
+                        <div>
+                            <h4 style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; color: hsl(var(--accent));">Market Arb</h4>
+                            <p class="text-muted" style="font-size: 0.9rem;">Kerala is emerging as the premier high-grit talent hub for global startups due to a unique blend of 10x technical agency.</p>
+                        </div>
+                        <div>
+                            <h4 style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; color: hsl(var(--accent));">Hiring Shift</h4>
+                            <p class="text-muted" style="font-size: 0.9rem;">Resume keywords are being replaced by "Prompt-to-Outcome" velocity. Founders prioritize AI-augmented squads.</p>
+                        </div>
+                        <div>
+                            <h4 style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; color: hsl(var(--accent));">The Model</h4>
+                            <p class="text-muted" style="font-size: 0.9rem;">DevBridge methodology eliminates middleman friction, focusing on high-signal direct connectivity and risk-free trials.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="posts-grid" class="grid grid-3 fade-in">
+                    <!-- Posts will be injected here -->
+                    <div style="grid-column: span 3; text-align: center; padding: 4rem;">
+                        <p class="text-muted">Loading insights...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="modal-overlay">
         <div class="modal-box">
-            <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
-            <div id="modal-tags" class="modal-tags"></div>
-            <div id="modal-date" class="modal-date"></div>
-            <h2 id="modal-title"></h2>
-            <p id="modal-body"></p>
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div id="modal-tags" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;"></div>
+            <div id="modal-date" class="text-muted" style="font-size: 0.8rem; margin-bottom: 1rem;"></div>
+            <h2 id="modal-title" style="margin-bottom: 2rem;"></h2>
+            <div id="modal-body" class="text-muted" style="font-size: 1.1rem; line-height: 1.8;"></div>
+            <div style="margin-top: 3rem; display: flex; gap: 1rem;">
+                <a href="index.html#apply" class="btn btn-primary" style="flex: 1;">Apply as Talent</a>
+                <a href="index.html#hire" class="btn btn-outline" style="flex: 1;">Hire Talent</a>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-logo">
-                <img src="assets/logo.png" alt="DevBridge Kerala Logo - The Bridge for High-Grit Professionals" width="30">
-                <span>DevBridge Kerala</span>
+    <footer class="section" style="background-color: hsl(var(--background)); border-top: 1px solid var(--border); padding: 80px 0 40px;">
+        <div class="container">
+            <div style="border-top: 1px solid var(--border); padding-top: 2rem; text-align: center;">
+                <p class="text-muted" style="font-size: 0.875rem;">&copy; 2026 DevBridge Kerala. A high-grit initiative by <a href="https://linkedin.com/in/shaazamaanshaji" style="color: hsl(var(--primary)); text-decoration: none;">Shaazamaan Shaji</a>.</p>
             </div>
-            <p>&copy; 2026 Shaazamaan Shaji. A personal trust-based initiative.</p>
-             <div class="footer-links mt-2">
-                <a href="index.html#about">About</a> | <a href="index.html#how-it-works">Process</a>
-            </div>
-            <p class="update-note" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; opacity: 0.8;">
-                Last Platform Sync: <span id="sync-date"></span> (April Content Active)
-            </p>
         </div>
     </footer>
-
-    <script>
-        document.getElementById('sync-date').textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    </script>
 
     <script src="script.js"></script>
     <script>
         let allPosts = [];
         let activeFilter = 'all';
-        let activeTag = null;
         let searchText = '';
 
-        // Load published posts from posts.json
         fetch('posts.json')
             .then(r => r.json())
             .then(data => {
                 allPosts = (data.posts || [])
                     .filter(p => p.published)
-                    .sort((a, b) => {
-                        // 1. Pillar posts always first
-                        if (a.is_pillar && !b.is_pillar) return -1;
-                        if (!a.is_pillar && b.is_pillar) return 1;
-                        // 2. Otherwise sort by date descending
-                        return new Date(b.date) - new Date(a.date);
-                    });
-                renderTagCloud(allPosts);
-                renderPosts(allPosts);
-            })
-            .catch(() => {
-                document.getElementById('posts-grid').innerHTML = `
-                    <div class="no-posts">
-                        <h3>No insights yet 👀</h3>
-                        <p>Shaaz needs to open his laptop. Check back soon.</p>
-                    </div>`;
+                    .sort((a, b) => new Date(b.date) - new Date(a.date));
+                renderPosts();
             });
 
-        function renderTagCloud(posts) {
-            const tagCloud = document.getElementById('tag-cloud');
-            const tags = new Set();
-            posts.forEach(p => {
-                (p.tags || []).forEach(t => {
-                    if (t !== 'Candidate' && t !== 'Company') tags.add(t);
-                });
-            });
-
-            if (tags.size === 0) return;
-
-            tagCloud.innerHTML = Array.from(tags).sort().map(tag => `
-                <button class="filter-btn small-tag" data-tag="${tag}" 
-                        style="padding: 4px 12px; font-size: 0.75rem; border-width: 1px;">
-                    #${tag}
-                </button>
-            `).join('');
-
-            tagCloud.querySelectorAll('.small-tag').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const wasActive = btn.classList.contains('active');
-                    tagCloud.querySelectorAll('.small-tag').forEach(b => b.classList.remove('active'));
-                    if (!wasActive) {
-                        btn.classList.add('active');
-                        activeTag = btn.dataset.tag;
-                    } else {
-                        activeTag = null;
-                    }
-                    renderPosts(allPosts);
-                });
-            });
-        }
-
-        function setCategory(cat) {
-            activeFilter = cat;
-            // Sync the filter buttons
-            document.querySelectorAll('.filter-bar .filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.filter === cat) btn.classList.add('active');
-            });
-            renderPosts(allPosts);
-            // Scroll to grid if needed
-            document.getElementById('posts-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        function renderPosts(posts) {
+        function renderPosts() {
             const grid = document.getElementById('posts-grid');
-            
-            const filtered = posts.filter(p => {
-                // 1. Filter by category (Candidate/Company)
+            const filtered = allPosts.filter(p => {
                 const catMatch = activeFilter === 'all' || (p.tags || []).includes(activeFilter);
-                
-                // 2. Filter by specific tag
-                const tagMatch = !activeTag || (p.tags || []).includes(activeTag);
-                
-                // 3. Filter by search text
                 const searchMatch = !searchText || 
                     p.title.toLowerCase().includes(searchText) || 
-                    p.body.toLowerCase().includes(searchText) || 
-                    (p.tags || []).some(t => t.toLowerCase().includes(searchText));
-
-                return catMatch && tagMatch && searchMatch;
+                    p.body.toLowerCase().includes(searchText);
+                return catMatch && searchMatch;
             });
 
             if (!filtered.length) {
-                grid.innerHTML = `<div class="no-posts"><h3>No matching insights found</h3><p>Try searching for something else or clearing filters.</p></div>`;
+                grid.innerHTML = '<div style="grid-column: span 3; text-align: center; padding: 4rem;"><p class="text-muted">No matching insights found.</p></div>';
                 return;
             }
 
             grid.innerHTML = filtered.map(post => `
-                <article class="post-card ${post.is_pillar ? 'pillar' : ''}" data-id="${post.id}" role="button" tabindex="0">
-                    ${post.is_pillar ? '<div class="pillar-badge">MUST READ: PILLAR CONTENT</div>' : ''}
-                    <div class="post-tags">${(post.tags || []).map(t => `<span class="post-tag ${tagClass(t)}">${t}</span>`).join('')}</div>
-                    <time class="post-date">${formatDate(post.date)}</time>
-                    <h2>${escHtml(post.title)}</h2>
-                    <p class="post-body">${escHtml(post.body)}</p>
-                    <span class="post-read-more">Read more →</span>
+                <article class="post-card" onclick="openModal(${post.id})">
+                    <div style="display: flex; gap: 0.5rem;">
+                        ${(post.tags || []).map(t => `<span class="post-tag ${tagClass(t)}">${t}</span>`).join('')}
+                    </div>
+                    <h3 style="font-size: 1.25rem;">${post.title}</h3>
+                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                        ${post.body}
+                    </p>
+                    <span style="color: hsl(var(--primary)); font-weight: 700; font-size: 0.875rem; margin-top: auto;">Read Truth →</span>
                 </article>
             `).join('');
-
-            grid.querySelectorAll('.post-card').forEach(card => {
-                card.addEventListener('click', () => openModal(parseInt(card.dataset.id)));
-                card.addEventListener('keydown', e => { if (e.key === 'Enter') openModal(parseInt(card.dataset.id)); });
-            });
         }
 
-        // Search Input
-        document.getElementById('insight-search').addEventListener('input', (e) => {
-            searchText = e.target.value.toLowerCase().trim();
-            renderPosts(allPosts);
-        });
-
-        // Category Filter buttons
-        document.querySelectorAll('.filter-bar .filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                activeFilter = btn.dataset.filter;
-                renderPosts(allPosts);
-            });
-        });
-
-        // Modal functions
-        function openModal(id) {
-            const post = allPosts.find(p => p.id === id);
-            if (!post) return;
-            document.getElementById('modal-title').textContent = post.title;
-            document.getElementById('modal-body').innerHTML = `
-                <p style=\"line-height: 1.8; margin-bottom: 24px;\">${escHtml(post.body)}</p>
-                <div class=\"modal-footer-ctas\">
-                    <a href=\"index.html#apply\" class=\"btn-modal talent\" onclick=\"closeModal()\">Apply as Talent</a>
-                    <a href=\"index.html#hire\" class=\"btn-modal client\" onclick=\"closeModal()\">Hire Talent</a>
-                </div>
-            `;
-            document.getElementById('modal-date').textContent = formatDate(post.date);
-            document.getElementById('modal-tags').innerHTML = (post.tags || []).map(t => `<span class="post-tag ${tagClass(t)}">${t}</span>`).join('');
-            document.getElementById('modal-overlay').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-        document.getElementById('modal-close').addEventListener('click', closeModal);
-        document.getElementById('modal-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-        function closeModal() {
-            document.getElementById('modal-overlay').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        // Helpers
         function tagClass(tag) {
             if (tag === 'Candidate') return 'tag-candidate';
             if (tag === 'Company') return 'tag-company';
             return 'tag-other';
         }
-        function formatDate(d) {
-            if (!d) return '';
-            try { return new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }); }
-            catch { return d; }
+
+        function openModal(id) {
+            const post = allPosts.find(p => p.id === id);
+            if (!post) return;
+            document.getElementById('modal-title').textContent = post.title;
+            document.getElementById('modal-body').textContent = post.body;
+            document.getElementById('modal-date').textContent = new Date(post.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+            document.getElementById('modal-tags').innerHTML = (post.tags || []).map(t => `<span class="post-tag ${tagClass(t)}">${t}</span>`).join('');
+            document.getElementById('modal-overlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
         }
-        function escHtml(s) {
-            return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+        document.getElementById('modal-close').addEventListener('click', closeModal);
+        document.getElementById('modal-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.remove('open');
+            document.body.style.overflow = '';
         }
+
+        document.getElementById('insight-search').addEventListener('input', (e) => {
+            searchText = e.target.value.toLowerCase();
+            renderPosts();
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeFilter = btn.dataset.filter;
+                renderPosts();
+            });
+        });
     </script>
-    <a href="https://wa.me/918137826016" class="wa-float" target="_blank">
-        <svg class="wa-icon" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.412 0 12.048c0 2.112.554 4.171 1.605 6.005L0 24l6.117-1.605a11.803 11.803 0 005.925 1.588h.005c6.632 0 12.042-5.412 12.046-12.049a11.776 11.776 0 00-3.414-8.474z"/>
-        </svg>
-    </a>
 </body>
 </html>

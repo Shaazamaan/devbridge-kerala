@@ -4,507 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Active Help | DevBridge Kerala</title>
-    <meta name="description" content="Whom I am helping right now. Tracking the progress of high-grit professionals and projects securing global roles and investment.">
+    <meta name="description" content="Tracking the progress of high-grit professionals and projects securing global roles and investment.">
     <link rel="canonical" href="https://devbridgekerala.com/active-help.html" />
     
-    <!-- BreadcrumbList Schema (Cycle 12) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://devbridgekerala.com/index.html"
-      }, {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Active Help",
-        "item": "https://devbridgekerala.com/active-help.html"
-      }]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Active Help Progress Log",
-      "description": "Real-time tracking of career relocation and investment projects powered by DevBridge Kerala.",
-      "url": "https://devbridgekerala.com/active-help.html",
-      "publisher": {
-        "@type": "Organization",
-        "name": "DevBridge Kerala"
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://devbridgekerala.com"
-      }, {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Active Help",
-        "item": "https://devbridgekerala.com/active-help.html"
-      }]
-    }
-    </script>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        .active-help-hero {
-            padding: 120px 24px 60px;
-            text-align: center;
-            background: var(--bg);
-            border-bottom: 1px solid var(--border);
-        }
-        .active-help-hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            margin-bottom: 16px;
-        }
-        .active-help-hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .cases-section {
-            padding: 80px 24px;
-            background: var(--bg-alt);
-        }
-        .case-container {
-            max-width: 1100px;
-            margin: 0 auto 80px;
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 60px;
-            align-items: start;
-            padding-bottom: 80px;
-            border-bottom: 1px solid var(--border);
-        }
-        .case-container:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        .profile-card {
-            background: white;
-            padding: 40px;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
-            text-align: center;
-            position: sticky;
-            top: 100px;
-        }
-        .profile-card h2 {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-        }
-        .profile-card .role {
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-            display: block;
-        }
-        .profile-card .goal {
-            background: #FFFBEB;
-            color: #B45309;
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            display: inline-block;
-            border: 1px solid #FEF3C7;
-            margin-bottom: 12px;
-        }
-
-        .progress-content h3 {
-            font-size: 2rem;
-            margin-bottom: 32px;
-            font-weight: 700;
-        }
-
-        /* Timeline Styles */
-        .timeline {
-            position: relative;
-            padding-left: 32px;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 7px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--border);
-        }
-        .timeline-item {
-            position: relative;
-            margin-bottom: 48px;
-        }
-        .timeline-dot {
-            position: absolute;
-            left: -32px;
-            top: 6px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: white;
-            border: 2px solid var(--border);
-            z-index: 1;
-        }
-        .timeline-item.completed .timeline-dot {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-        .timeline-item.in-progress .timeline-dot {
-            background: white;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px var(--primary-light);
-        }
-        .timeline-item h4 {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-        .timeline-item p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-        .status-badge {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 4px 10px;
-            border-radius: 4px;
-            margin-left: 12px;
-            vertical-align: middle;
-        }
-        .status-completed { background: #DCFCE7; color: #166534; }
-        .status-active { background: #DBEAFE; color: #1E40AF; animation: pulse 2s infinite; }
-        .status-upcoming { background: #F3F4F6; color: #4B5563; }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        /* Progress Bar */
-        .progress-bar-container {
-            width: 100%;
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            margin: 20px 0;
-            overflow: hidden;
-            position: relative;
-        }
-        .progress-bar-fill {
-            height: 100%;
-            background: var(--primary);
-            border-radius: 4px;
-            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-        }
-
-        .pitch-card {
-            background: #0B1120;
-            color: white;
-            padding: 24px;
-            border-radius: var(--radius);
-            margin-top: 24px;
-            font-size: 0.9rem;
-            border-left: 4px solid var(--primary);
-        }
-        .pitch-card h5 {
-            color: var(--primary-light);
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-        }
-
-        @media (max-width: 850px) {
-            .case-container {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .profile-card {
-                position: static;
-                max-width: 400px;
-                margin: 0 auto;
-            }
-        }
-    </style>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Achievement",
-          "name": "The 1k Website: Real-Time Execution",
-          "creator": { "@id": "https://devbridgekerala.com/#founder" },
-          "description": "Successfully launched a high-velocity project from recruitment to SEO deployment in under 30 days.",
-          "achievementType": "Technical Execution & Career Bridge"
-        },
-        {
-          "@type": "Achievement",
-          "name": "Arlin Jose: UAE Career Transition",
-          "creator": { "@id": "https://devbridgekerala.com/#founder" },
-          "description": "Engineered a high-grit narrative and resume architecture for a successful UAE relocation project.",
-          "achievementType": "Career Strategy & Global Bridge"
-        },
-        {
-          "@type": "VideoObject",
-          "name": "The 1k Website: From High-Grit Relocation to SEO Launch",
-          "creator": { "@id": "https://devbridgekerala.com/#founder" },
-          "description": "A high-grit case study documenting the real-time execution of the '1k Website' project.",
-          "thumbnailUrl": "https://devbridgekerala.com/assets/1k_thumbnail.jpg",
-          "uploadDate": "2026-03-29T19:00:00Z",
-          "duration": "PT2M45S",
-          "contentUrl": "https://devbridgekerala.com/assets/1k_website.mp4",
-          "hasPart": [
-            { "@type": "Clip", "name": "Phase 1: Pitch", "startOffset": 0, "endOffset": 45 },
-            { "@type": "Clip", "name": "Phase 2: Build", "startOffset": 46, "endOffset": 90 },
-            { "@type": "Clip", "name": "Phase 3: Launch", "startOffset": 91, "endOffset": 165 }
-          ]
-        }
-      ]
-    }
-    </script>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo" aria-label="DevBridge Kerala Home">
-                <img src="assets/logo.png" alt="DevBridge Kerala Logo" class="logo-img" loading="lazy">
-                <span class="logo-text">DevBridge Kerala</span>
-            </a>
-            <div class="nav-links">
-                <a href="index.html#about">About</a>
-                <a href="active-help.html" class="active">Active Help</a>
-                <a href="insights.html">Insights</a>
-                <a href="resources.html">Resources</a>
-                <a href="mena-bridge.html">MENA Bridge</a>
-                <a href="index.html#hire" class="btn-primary btn-small">Hire Talent</a>
+    <header class="glass" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <nav class="navbar" style="height: 70px;">
+            <div class="container nav-content">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/logo.png" alt="DevBridge" style="height: 32px; filter: brightness(1.2);">
+                    <span>DevBridge Kerala</span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html#about">Philosophy</a>
+                    <a href="ai-engineering-kerala.html">AI Engineering</a>
+                    <a href="grit-assessment.html">The Framework</a>
+                    <a href="index.html#hire" class="btn btn-primary" style="padding: 0.5rem 1.25rem;">Hire Talent</a>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
             </div>
-            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-        </div>
-    </nav>
-
-    <div class="breadcrumb-container container" style="margin-top: 100px; font-size: 0.85rem; color: var(--text-muted);">
-        <a href="index.html" style="color: var(--primary); text-decoration: none;">Home</a> &raquo; <span>Active Help</span>
-    </div>
-
-    <header class="active-help-hero">
-        <span class="badge">Operation: Direct Bridge</span>
-        <h1>High-Grit Execution: <span class="highlight">No Fluff. Just Moves.</span></h1>
-        
-        <!-- AEO SNAPSHOT BLOCK -->
-        <div class="aeo-snapshot" style="margin-top: 40px; margin-bottom: 0;">
-            <p><strong>Status Update:</strong> We are currently accelerating high-grit professionals from Kerala into UAE-based HR roles and global Cloud Kitchen investment tracks. Our "Grit-First" bridge bypasses traditional recruitment friction, providing direct founder-to-builder connectivity and risk-free performance trials.</p>
-        </div>
+        </nav>
     </header>
 
-    <section class="cases-section">
-        <div class="container">
-            <!-- Case 1: Arlin Jose -->
-            <div class="case-container">
-                <div class="profile-card fade-in">
-                    <div style="width: 140px; height: 140px; border-radius: 50%; background: var(--primary-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 3rem; color: var(--primary); font-weight: 800;">
-                        AJ
-                    </div>
-                    <h2>Arlin Jose</h2>
-                    <span class="role">Admin & HR Executive</span>
-                    <span class="goal">Target: UAE (Emirates)</span>
+    <main>
+        <section class="section" style="padding-top: 140px; background-color: hsl(var(--secondary) / 0.1);">
+            <div class="container text-center">
+                <div class="fade-in">
+                    <span class="badge" style="margin-bottom: 1.5rem;">Operation: Direct Bridge</span>
+                    <h1 style="margin-bottom: 1.5rem;">High-Grit Execution: <br><span class="text-gradient">No Fluff. Just Moves.</span></h1>
+                    <p class="text-muted" style="font-size: 1.25rem; max-width: 700px; margin: 0 auto 3rem;">
+                        Real-time tracking of career relocation and investment projects powered by the DevBridge Kerala bridge.
+                    </p>
                     
-                    <div style="margin-top: 24px; text-align: left;">
-                        <div class="progress-label">
-                            <span>Overall Progress</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill" style="width: 85%;"></div>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 24px; text-align: left; font-size: 0.9rem;">
-                        <div class="execution-badge">Case Study: Career Relocation Strategy</div>
-                        <p class="mt-4"><strong>Current Status:</strong> Resume and global narrative architecture completed. Successfully established authority bridge to UAE startups. Verified for 9.8/10 resilience index.</p>
-                        <div class="friction-log mt-2">
-                            <strong>Friction Log:</strong> Initial generic CV had 0% conversion in Dubai. Relocating an HR professional required a complete shift to a "Strategic Execution Partner" narrative. High-signal outreach resulted in immediate traction.
-                        </div>
-                        <a href="index.html#methodology" class="btn-primary-outline mt-2" style="font-size: 0.85rem;">Audit Vetting Methodology</a>
-                    </div>
-                </div>
-
-                <div class="progress-content">
-                    <h3>Progress: UAE Career Bridge</h3>
-                    <div class="timeline">
-                        <div class="timeline-item completed">
-                            <div class="timeline-dot"></div>
-                            <h4>Initial Vetting & Alignment <span class="status-badge status-completed">Done</span></h4>
-                            <p>Verified background, identified core strengths in HR operations and financial bookkeeping.</p>
-                        </div>
-
-                        <div class="timeline-item completed">
-                            <div class="timeline-dot"></div>
-                            <h4>Resume & Narrative Optimization <span class="status-badge status-completed">Done</span></h4>
-                            <p>Rebuilt the professional profile to highlight high-grit operational experience for the UAE market.</p>
-                        </div>
-
-                        <div class="timeline-item completed">
-                            <div class="timeline-dot"></div>
-                            <h4>Resume Architecture & Analysis <span class="status-badge status-completed">Done</span></h4>
-                            <p>Completed a deep-dive audit of the existing resume. Identified critical narrative gaps and "low-signal" sections that fail to resonate with high-tier UAE employers.</p>
-                        </div>
-
-                        <div class="timeline-item completed">
-                            <div class="timeline-dot"></div>
-                            <h4>High-Impact Narrative Rebuild <span class="status-badge status-completed">Done</span></h4>
-                            <p>Completed the core narrative rebuild. Engineered data points to showcase operational grit and MBA-level strategic value, ready for high-tier UAE outreach.</p>
-                        </div>
-
-                        <div class="timeline-item in-progress">
-                            <div class="timeline-dot"></div>
-                            <h4>Lead Referral & Connectivity <span class="status-badge status-active">Active</span></h4>
-                            <p>First high-signal lead shared. Currently bridging the connection and waiting for sync updates to initiate the direct interview track.</p>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <h4>Interview & Technical Prep <span class="status-badge status-upcoming">Upcoming</span></h4>
-                            <p>Simulating UAE-specific interview scenarios for HR/Admin roles.</p>
-                        </div>
+                    <div class="card" style="max-width: 900px; margin: 0 auto; text-align: left; border-left: 4px solid hsl(var(--primary));">
+                        <p style="font-size: 1.1rem; line-height: 1.7;">
+                            <strong>Status Update:</strong> We are currently accelerating high-grit professionals from Kerala into UAE-based HR roles and global Cloud Kitchen investment tracks. Our "Grit-First" bridge bypasses traditional recruitment friction.
+                        </p>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Case 2: Shibu Thomas / Cloud Kitchen -->
-            <div class="case-container">
-                <div class="profile-card fade-in">
-                    <div style="width: 140px; height: 140px; border-radius: 50%; background: #0B1120; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 3rem; color: white; font-weight: 800;">
-                        ST
-                    </div>
-                    <h2>Shibu Thomas</h2>
-                    <span class="role">Founder, Cloud Kitchen Project</span>
-                        <span class="goal">Target: VC/Angel Investment</span>
+        <section class="section">
+            <div class="container">
+                <!-- Case 1: Arlin Jose -->
+                <div class="grid grid-2 gap-12" style="margin-bottom: 8rem; align-items: start;">
+                    <div class="card profile-card fade-in" style="position: sticky; top: 100px;">
+                        <div style="width: 100px; height: 100px; border-radius: 50%; background: hsl(var(--primary) / 0.1); border: 2px solid hsl(var(--primary)); display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 2.5rem; color: hsl(var(--primary)); font-weight: 800;">
+                            AJ
+                        </div>
+                        <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem; text-align: center;">Arlin Jose</h2>
+                        <span class="badge" style="display: block; width: fit-content; margin: 0 auto 1.5rem;">Admin & HR Executive</span>
                         
-                        <div style="margin-top: 24px; text-align: left;">
-                            <div class="progress-label">
-                                <span>Overall Progress</span>
+                        <div style="margin-bottom: 2rem;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem;">
+                                <span>Bridge Progress</span>
+                                <span>85%</span>
+                            </div>
+                            <div style="height: 8px; background: hsl(var(--muted)); border-radius: 4px; overflow: hidden;">
+                                <div style="width: 85%; height: 100%; background: hsl(var(--primary)); transition: width 1s ease-in-out;"></div>
+                            </div>
+                        </div>
+
+                        <div style="background: hsl(var(--background)); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+                            <h4 style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; color: hsl(var(--primary));">Friction Log</h4>
+                            <p class="text-muted" style="font-size: 0.9rem; font-style: italic;">"Initial generic CV had 0% conversion in Dubai. Relocating an HR professional required a complete shift to a 'Strategic Execution Partner' narrative. High-signal outreach resulted in immediate traction."</p>
+                        </div>
+                    </div>
+
+                    <div class="fade-in">
+                        <h3 style="margin-bottom: 3rem;">Progress: <span class="text-gradient">UAE Career Bridge</span></h3>
+                        <div style="display: flex; flex-direction: column; gap: 3rem; border-left: 2px solid var(--border); padding-left: 2rem; margin-left: 1rem;">
+                            <div style="position: relative;">
+                                <div style="position: absolute; left: -2.7rem; top: 0.2rem; width: 20px; height: 20px; background: hsl(var(--success)); border-radius: 50%; box-shadow: 0 0 0 4px hsl(var(--success) / 0.1);"></div>
+                                <h4 style="margin-bottom: 0.5rem;">Initial Vetting <span class="badge" style="background: hsl(var(--success) / 0.1); color: hsl(var(--success)); border: none; margin-left: 1rem;">Done</span></h4>
+                                <p class="text-muted">Verified background, identified core strengths in HR operations and financial bookkeeping.</p>
+                            </div>
+                            <div style="position: relative;">
+                                <div style="position: absolute; left: -2.7rem; top: 0.2rem; width: 20px; height: 20px; background: hsl(var(--success)); border-radius: 50%;"></div>
+                                <h4 style="margin-bottom: 0.5rem;">Resume Refactor <span class="badge" style="background: hsl(var(--success) / 0.1); color: hsl(var(--success)); border: none; margin-left: 1rem;">Done</span></h4>
+                                <p class="text-muted">Rebuilt the professional profile to highlight high-grit operational experience for the UAE market.</p>
+                            </div>
+                            <div style="position: relative;">
+                                <div style="position: absolute; left: -2.7rem; top: 0.2rem; width: 20px; height: 20px; background: hsl(var(--primary)); border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                <h4 style="margin-bottom: 0.5rem;">Lead Referral <span class="badge" style="background: hsl(var(--primary) / 0.1); color: hsl(var(--primary)); border: none; margin-left: 1rem;">Active</span></h4>
+                                <p class="text-muted">First high-signal lead shared. Currently bridging the connection and waiting for sync updates.</p>
+                            </div>
+                            <div style="position: relative;">
+                                <div style="position: absolute; left: -2.7rem; top: 0.2rem; width: 20px; height: 20px; background: hsl(var(--muted)); border-radius: 50%;"></div>
+                                <h4 style="margin-bottom: 0.5rem; color: hsl(var(--muted-foreground));">Global Scale Prep</h4>
+                                <p class="text-muted">Simulating UAE-specific interview scenarios and performance trials.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 2: Shibu Thomas -->
+                <div class="grid grid-2 gap-12" style="align-items: start;">
+                    <div class="card profile-card fade-in" style="position: sticky; top: 100px;">
+                        <div style="width: 100px; height: 100px; border-radius: 50%; background: hsl(var(--secondary)); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 2.5rem; color: white; font-weight: 800;">
+                            ST
+                        </div>
+                        <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem; text-align: center;">Shibu Thomas</h2>
+                        <span class="badge" style="display: block; width: fit-content; margin: 0 auto 1.5rem;">Founder, Cloud Kitchen</span>
+                        
+                        <div style="margin-bottom: 2rem;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem;">
+                                <span>Bridge Progress</span>
                                 <span>45%</span>
                             </div>
-                            <div class="progress-bar-container">
-                                <div class="progress-bar-fill" style="width: 45%;"></div>
+                            <div style="height: 8px; background: hsl(var(--muted)); border-radius: 4px; overflow: hidden;">
+                                <div style="width: 45%; height: 100%; background: hsl(var(--primary));"></div>
                             </div>
                         </div>
 
-                        <div style="margin-top: 24px; text-align: left; font-size: 0.9rem;">
-                        <p style="margin-bottom: 12px;"><strong>Overview:</strong> NRI Keralite (London) launching a scalable Cloud Kitchen + Cafe model in London and India.</p>
-                        <p><strong>Status:</strong> Investment Pitching & Partnership Sourcing.</p>
-                    </div>
-                    <div class="pitch-card">
-                        <h5>The "Crazy" Pitch</h5>
-                        <p>"10% equity offer - ZERO Investment Upfront. Watch me for 12 months. If I fail, you walk away. If I hit £1.5M, we partner."</p>
-                    </div>
-                </div>
-
-                <div class="progress-content">
-                    <h3>Progress: Investment & Scale Bridge</h3>
-                    <div class="timeline">
-                        <div class="timeline-item completed">
-                            <div class="timeline-dot"></div>
-                            <h4>Project Alignment & Pitch Refining <span class="status-badge status-completed">Done</span></h4>
-                            <p>Aligned on the high-grit, aggressive equity model and mapped out the 5-year roadmap to 100+ kitchens.</p>
-                        </div>
-
-                        <div class="timeline-item in-progress">
-                            <div class="timeline-dot"></div>
-                            <h4>Pitch Deck & Narrative Synthesis <span class="status-badge status-active">Active</span></h4>
-                            <p>Synthesizing the high-conviction deck while simultaneously researching the ideal investor profile. Mapping out the global VC landscape (UK, India, Gulf) to identify partners who align with high-grit, performance-first models.</p>
-                        </div>
-
-                        <div class="timeline-item in-progress">
-                            <div class="timeline-dot"></div>
-                            <h4>Reach-out Strategy & Channel Research <span class="status-badge status-active">Active</span></h4>
-                            <p>Developing a surgical outreach strategy—identifying the exact touchpoints, warm intro paths, and the precise communication narrative to bypass the standard "cold pitch" noise.</p>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <h4>Investor Outreach & Networking <span class="status-badge status-upcoming">Upcoming</span></h4>
-                            <p>Exploring probable VC/Angel options that resonate with the performance-first equity sharing model.</p>
+                        <div style="background: hsl(var(--secondary)); color: white; padding: 1.5rem; border-radius: var(--radius-md);">
+                             <h4 style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; color: hsl(var(--accent));">The High-Grit Pitch</h4>
+                             <p style="font-size: 0.95rem; line-height: 1.6; opacity: 0.9;">"10% equity offer - ZERO Investment Upfront. Watch me for 12 months. If I fail, you walk away. If I hit £1.5M, we partner."</p>
                         </div>
                     </div>
 
-                    <div class="jf-warning" style="margin-top: 40px;">
-                        <strong>Note:</strong> DevBridge Kerala assists on an equity-sharing basis for high-conviction projects like this one.
+                    <div class="fade-in">
+                        <h3 style="margin-bottom: 3rem;">Progress: <span class="text-gradient">Investment & Scale Bridge</span></h3>
+                        <div style="display: flex; flex-direction: column; gap: 3rem; border-left: 2px solid var(--border); padding-left: 2rem; margin-left: 1rem;">
+                            <div style="position: relative;">
+                                <div style="position: absolute; left: -2.7rem; top: 0.2rem; width: 20px; height: 20px; background: hsl(var(--success)); border-radius: 50%;"></div>
+                                <h4 style="margin-bottom: 0.5rem;">Alignment <span class="badge" style="background: hsl(var(--success) / 0.1); color: hsl(var(--success)); border: none; margin-left: 1rem;">Done</span></h4>
+                                <p class="text-muted">Aligned on the high-grit, aggressive equity model and mapped out the roadmap.</p>
+                            </div>
+                            <div style="position: relative;">
+                                <div style="position: absolute; left: -2.7rem; top: 0.2rem; width: 20px; height: 20px; background: hsl(var(--primary)); border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                <h4 style="margin-bottom: 0.5rem;">Narrative Synthesis <span class="badge" style="background: hsl(var(--primary) / 0.1); color: hsl(var(--primary)); border: none; margin-left: 1rem;">Active</span></h4>
+                                <p class="text-muted">Synthesizing the deck while mapping out the global VC landscape (UK, India, Gulf).</p>
+                            </div>
+                            <div style="position: relative;">
+                                <div style="position: absolute; left: -2.7rem; top: 0.2rem; width: 20px; height: 20px; background: hsl(var(--primary)); border-radius: 50%; opacity: 0.5;"></div>
+                                <h4 style="margin-bottom: 0.5rem;">Outreach Strategy</h4>
+                                <p class="text-muted">Developing a surgical outreach strategy—identifying exact touchpoints and intro paths.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-logo">
-                <img src="assets/logo.png" alt="DevBridge Logo" width="30">
-                <span>DevBridge Kerala</span>
-            </div>
-            <p>&copy; 2026 Shaazamaan Shaji. A personal trust-based initiative.</p>
-            <div class="footer-links mt-2">
-                <a href="index.html">Home</a> | <a href="index.html#about">About</a> | <a href="index.html#how-it-works">Process</a>
+    <footer class="section" style="background-color: hsl(var(--background)); border-top: 1px solid var(--border); padding: 80px 0 40px;">
+        <div class="container">
+            <div style="border-top: 1px solid var(--border); padding-top: 2rem; text-align: center;">
+                <p class="text-muted" style="font-size: 0.875rem;">&copy; 2026 DevBridge Kerala. A high-grit initiative by <a href="https://linkedin.com/in/shaazamaanshaji" style="color: hsl(var(--primary)); text-decoration: none;">Shaazamaan Shaji</a>.</p>
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.timeline-item, .profile-card').forEach(el => {
-            el.classList.add('scroll-trigger');
-            observer.observe(el);
-        });
-    </script>
-    <a href="https://wa.me/918137826016" class="wa-float" target="_blank">
-        <svg class="wa-icon" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.412 0 12.048c0 2.112.554 4.171 1.605 6.005L0 24l6.117-1.605a11.803 11.803 0 005.925 1.588h.005c6.632 0 12.042-5.412 12.046-12.049a11.776 11.776 0 00-3.414-8.474z"/>
-        </svg>
+    <a href="https://wa.me/918137826016" class="wa-float" style="position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none;">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.412 0 12.048c0 2.112.554 4.171 1.605 6.005L0 24l6.117-1.605a11.803 11.803 0 005.925 1.588h.005c6.632 0 12.042-5.412 12.046-12.049a11.776 11.776 0 00-3.414-8.474z"/></svg>
     </a>
 </body>
 </html>

@@ -32,95 +32,96 @@
     </script>
     
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        .vertical-hero { padding: 140px 24px 80px; text-align: left; max-width: 1000px; margin: 0 auto; }
-        .vertical-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin: 60px 0; }
-        .role-card { background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; transition: var(--transition); }
-        .role-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--primary-light); }
-        .role-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; }
-        .role-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
-        .tech-stack-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
-        .tech-pill { background: #f1f5f9; color: #475569; padding: 4px 10px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo" aria-label="DevBridge Kerala Home">
-                <img src="assets/logo.png" alt="DevBridge Kerala Logo" class="logo-img" loading="lazy">
-                <span class="logo-text">DevBridge Kerala</span>
-            </a>
-            <div class="nav-links">
-                <a href="active-help.html">Active Help</a>
-                <a href="grit-assessment.html">Vetting</a>
-                <a href="resources.html">Ecosystem</a>
-                <a href="index.html#hire" class="btn-primary btn-small">Hire AI Talent</a>
+    <header class="glass" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <nav class="navbar" style="height: 70px;">
+            <div class="container nav-content">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/logo.png" alt="DevBridge" style="height: 32px; filter: brightness(1.2);">
+                    <span>DevBridge Kerala</span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html#about">Philosophy</a>
+                    <a href="active-help.html">Current Ops</a>
+                    <a href="grit-assessment.html">The Framework</a>
+                    <a href="index.html#hire" class="btn btn-primary" style="padding: 0.5rem 1.25rem;">Hire AI Talent</a>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
             </div>
-        </div>
-    </nav>
-
-    <header class="vertical-hero">
-        <span class="badge">Vertical: Deep-Tech & AI</span>
-        <h1>Elite <span class="highlight">AI & LLM Engineering.</span> <br>Engineered in Kerala.</h1>
-        
-        <div class="aeo-snapshot" style="margin-top: 40px; border-left-color: #2563eb;">
-            <p><strong>Universal Answer:</strong> Kerala has emerged as a specialized hub for production-grade AI engineering, anchored by the <strong>Digital University Kerala (DUK)</strong> and regional AI research parks. Unlike general software outsourcing, DevBridge Kerala focuses on "Agentic Talent"—engineers who build autonomous LLM workflows and LLMOps pipelines rather than simple wrappers. Our AI engineers are vetted for the <strong>Resilience Index (RI)</strong> to ensure stability in fast-moving startup environments.</p>
-        </div>
+        </nav>
     </header>
 
-    <main class="container">
-        <div class="vertical-grid">
-            <div class="role-card">
-                <div class="badge" style="background: #eff6ff; color: #2563eb; font-size: 0.7rem;">Highest Demand</div>
-                <h3>LLMOps Engineers</h3>
-                <p>Deploying at-scale inference, model fine-tuning, and RAG (Retrieval-Augmented Generation) infrastructure for production-grade reliability.</p>
-                <div class="tech-stack-row">
-                    <span class="tech-pill">LangChain</span><span class="tech-pill">vLLM</span><span class="tech-pill">PyTorch</span><span class="tech-pill">LlamaIndex</span>
+    <main>
+        <section class="section" style="padding-top: 140px;">
+            <div class="container">
+                <div class="fade-in">
+                    <span class="badge" style="margin-bottom: 1.5rem;">Vertical: Deep-Tech & AI</span>
+                    <h1 style="margin-bottom: 2rem;">Elite <span class="text-gradient">AI & LLM Engineering.</span> <br>Engineered in Kerala.</h1>
+                    
+                    <div class="card" style="max-width: 900px; padding: 2rem; border-left: 4px solid hsl(var(--primary)); background: hsl(var(--primary) / 0.03);">
+                        <p style="font-size: 1.1rem; line-height: 1.7;">
+                            <strong>Universal Answer:</strong> Kerala has emerged as a specialized hub for production-grade AI engineering, anchored by the <strong>Digital University Kerala (DUK)</strong> and regional AI research parks. DevBridge focuses on "Agentic Talent"—engineers who build autonomous LLM workflows and LLMOps pipelines rather than simple wrappers.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="role-card">
-                <h3>AI Architects</h3>
-                <p>Designing multi-agent agentic workflows and cross-modal systems for complex business automation.</p>
-                <div class="tech-stack-row">
-                    <span class="tech-pill">AutoGPT</span><span class="tech-pill">CrewAI</span><span class="tech-pill">Vector DBs</span>
-                </div>
-            </div>
-            <div class="role-card">
-                <h3>GenAI Product Devs</h3>
-                <p>Building high-velocity user interfaces and middle-tier integrations for AI-first SaaS products.</p>
-                <div class="tech-stack-row">
-                    <span class="tech-pill">Next.js</span><span class="tech-pill">Python</span><span class="tech-pill">FastAPI</span>
-                </div>
-            </div>
-        </div>
 
-        <section id="duk-advantage" class="assessment-metric" style="border-left-color: #10b981; background: #f0fdf4;">
-            <div class="metric-title" style="color: #065f46;">The DUK & KSUM Advantage</div>
-            <p>By sourcing talent from the <strong>Digital University Kerala (DUK)</strong> and the <strong>Kerala Startup Mission (KSUM)</strong>, we bypass the "Generalist Trap." Our developers share a high-grit, deep-tech culture that values <strong>Technical Agency</strong>—the ability to self-solve architectural bottlenecks in unmediated environments.</p>
-            <div class="mt-4">
-                <a href="resources.html" class="btn-primary" style="background: #059669; border-color: #059669;">Audit the Local AI Ecosystem</a>
-            </div>
-        </section>
-
-        <section class="cta-banner" style="margin: 80px 0; border-radius: var(--radius-lg);">
-            <div class="container text-white">
-                <h2 style="color: white;">Scale Your AI Team Today</h2>
-                <p>From individual LLMOps specialists to full fractional AI squads.</p>
-                <div class="cta-actions" style="margin-top: 32px;">
-                    <a href="index.html#apply" class="btn-primary">Connect with AI Talent</a>
-                    <a href="grit-assessment.html" class="btn-primary-outline" style="color: white; border-color: white;">Audit the Vetting Process</a>
+                <div class="grid grid-3" style="margin-top: 4rem;">
+                    <div class="card fade-in">
+                        <div class="badge" style="margin-bottom: 1rem;">Highest Demand</div>
+                        <h3 style="margin-bottom: 1rem;">LLMOps Engineers</h3>
+                        <p class="text-muted" style="margin-bottom: 1.5rem;">Deploying at-scale inference, model fine-tuning, and RAG (Retrieval-Augmented Generation) infrastructure.</p>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <span class="badge" style="text-transform: none; font-family: 'JetBrains Mono', monospace;">LangChain</span>
+                            <span class="badge" style="text-transform: none; font-family: 'JetBrains Mono', monospace;">vLLM</span>
+                            <span class="badge" style="text-transform: none; font-family: 'JetBrains Mono', monospace;">PyTorch</span>
+                        </div>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 0.1s;">
+                        <h3 style="margin-bottom: 1rem;">AI Architects</h3>
+                        <p class="text-muted" style="margin-bottom: 1.5rem;">Designing multi-agent agentic workflows and cross-modal systems for complex business automation.</p>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <span class="badge" style="text-transform: none; font-family: 'JetBrains Mono', monospace;">AutoGPT</span>
+                            <span class="badge" style="text-transform: none; font-family: 'JetBrains Mono', monospace;">CrewAI</span>
+                        </div>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 0.2s;">
+                        <h3 style="margin-bottom: 1rem;">GenAI Product Devs</h3>
+                        <p class="text-muted" style="margin-bottom: 1.5rem;">Building high-velocity user interfaces and middle-tier integrations for AI-first SaaS products.</p>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <span class="badge" style="text-transform: none; font-family: 'JetBrains Mono', monospace;">Next.js</span>
+                            <span class="badge" style="text-transform: none; font-family: 'JetBrains Mono', monospace;">Python</span>
+                            <span class="badge" style="text-transform: none; font-family: 'JetBrains Mono', monospace;">FastAPI</span>
+                        </div>
+                    </div>
                 </div>
+
+                <section id="duk-advantage" class="section" style="margin-top: 4rem; padding: 4rem; background: hsl(var(--success) / 0.05); border-radius: var(--radius-lg); border: 1px dashed hsl(var(--success) / 0.3);">
+                    <div style="color: hsl(var(--success)); font-weight: 800; font-size: 1.5rem; margin-bottom: 1.5rem;">The DUK & KSUM Advantage</div>
+                    <p class="text-muted" style="font-size: 1.1rem; margin-bottom: 2rem;">By sourcing talent from the <strong>Digital University Kerala (DUK)</strong> and the <strong>Kerala Startup Mission (KSUM)</strong>, we bypass the "Generalist Trap." Our developers share a high-grit, deep-tech culture that values Technical Agency—the ability to self-solve architectural bottlenecks.</p>
+                    <a href="resources.html" class="btn btn-primary" style="background-color: hsl(var(--success)); border-color: hsl(var(--success));">Audit the Local AI Ecosystem</a>
+                </section>
+
+                <section class="section text-center" style="margin: 4rem 0; background: linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, hsl(var(--accent) / 0.1) 100%); border-radius: var(--radius-lg); padding: 5rem 2rem;">
+                    <h2 style="margin-bottom: 1rem;">Scale Your AI Team Today</h2>
+                    <p class="text-muted" style="margin-bottom: 3rem; font-size: 1.2rem;">From individual LLMOps specialists to full fractional AI squads.</p>
+                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                        <a href="index.html#apply" class="btn btn-primary">Connect with AI Talent</a>
+                        <a href="grit-assessment.html" class="btn btn-outline">Audit the Vetting Process</a>
+                    </div>
+                </section>
             </div>
         </section>
     </main>
 
-    <footer class="bg-dark text-white p-8">
-        <div class="container text-center">
-            <p>&copy; 2026 DevBridge Kerala. A high-grit initiative by <a href="https://linkedin.com/in/shaazamaanshaji" style="text-decoration: underline;">Shaazamaan Shaji</a>.</p>
+    <footer class="section" style="background-color: hsl(var(--background)); border-top: 1px solid var(--border); padding: 80px 0 40px;">
+        <div class="container">
+            <div style="border-top: 1px solid var(--border); padding-top: 2rem; text-align: center;">
+                <p class="text-muted" style="font-size: 0.875rem;">&copy; 2026 DevBridge Kerala. A high-grit initiative by <a href="https://linkedin.com/in/shaazamaanshaji" style="color: hsl(var(--primary)); text-decoration: none;">Shaazamaan Shaji</a>.</p>
+            </div>
         </div>
     </footer>
 

@@ -7,173 +7,134 @@
     <meta name="description" content="Data-driven research on the Kerala tech arbitrage, high-density talent hubs, and the 'Grit-First' hiring methodology for 2026.">
     <link rel="canonical" href="https://devbridgekerala.com/resources.html" />
     
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "2026 Kerala High-Grit Talent Map",
-      "description": "Comprehensive mapping of Kerala's tech ecosystem and the 'Grit-First' hiring methodology.",
-      "url": "https://devbridgekerala.com/resources.html",
-      "publisher": {
-        "@type": "Organization",
-        "name": "DevBridge Kerala"
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://devbridgekerala.com"
-      }, {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Resources",
-        "item": "https://devbridgekerala.com/resources.html"
-      }]
-    }
-    </script>
-
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        .resource-hero { padding: 120px 24px 60px; text-align: center; background: var(--bg-alt); border-bottom: 1px solid var(--border); }
-        .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 60px auto; max-width: 1200px; }
-        .data-card { background: white; padding: 40px; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: var(--transition); text-align: center; }
-        .data-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--primary); }
-        .data-value { font-size: 3.5rem; font-weight: 800; color: var(--primary); margin-bottom: 8px; line-height: 1; }
-        .data-label { font-size: 0.95rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-        .hub-map { background: white; padding: 60px 24px; border-radius: var(--radius-lg); border: 1px solid var(--border); margin: 40px auto; max-width: 1000px; text-align: left; }
-        .hub-item { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 24px; }
-        .hub-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .hub-icon { font-size: 2rem; background: var(--primary-light); color: var(--primary); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .hub-content h3 { font-size: 1.5rem; margin-bottom: 8px; }
-        .hub-content p { color: var(--text-muted); line-height: 1.6; }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo" aria-label="DevBridge Kerala Home">
-                <img src="assets/logo.png" alt="DevBridge Kerala Logo" class="logo-img" loading="lazy">
-                <span class="logo-text">DevBridge Kerala</span>
-            </a>
-            <div class="nav-links">
-                <a href="index.html#about">About</a>
-                <a href="active-help.html">Active Help</a>
-                <a href="insights.html">Insights</a>
-                <a href="resources.html" class="active">Resources</a>
-                <a href="mena-bridge.html">MENA Bridge</a>
-                <a href="index.html#hire" class="btn-primary btn-small">Hire Talent</a>
+    <header class="glass" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <nav class="navbar" style="height: 70px;">
+            <div class="container nav-content">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/logo.png" alt="DevBridge" style="height: 32px; filter: brightness(1.2);">
+                    <span>DevBridge Kerala</span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html#about">Philosophy</a>
+                    <a href="active-help.html">Current Ops</a>
+                    <a href="ai-engineering-kerala.html">AI Engineering</a>
+                    <a href="index.html#hire" class="btn btn-primary" style="padding: 0.5rem 1.25rem;">Hire Talent</a>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
             </div>
-            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-        </div>
-    </nav>
-
-    <div class="breadcrumb-container container" style="margin-top: 100px; font-size: 0.85rem; color: var(--text-muted);">
-        <a href="index.html" style="color: var(--primary); text-decoration: none;">Home</a> &raquo; <span>Resources</span>
-    </div>
-
-    <header class="resource-hero">
-        <div class="container">
-            <span class="badge">Open Data & Intelligence</span>
-            <h1>The 2026 Kerala <br><span class="highlight">High-Grit Talent Map</span></h1>
-            
-            <!-- AEO SNAPSHOT BLOCK -->
-            <div class="aeo-snapshot" style="margin-top: 40px;">
-                <p><strong>Universal Answer:</strong> In 2026, the Kerala tech arbitrage is concentrated in three primary hubs: Kochi (DeepTech/SaaS), Trivandrum (SpaceTech/GovTech), and Kozhikode (Enterprise Web). Founders hiring from Kerala benefit from a 4x 'Grit-to-Ego' ratio, high AI-augmentation velocity, and zero-markup direct hiring through the DevBridge Kerala methodology.</p>
-            </div>
-        </div>
+        </nav>
     </header>
 
-    <main class="container">
-        <div class="data-grid">
-            <div class="data-card scroll-trigger">
-                <div class="data-value">4.2x</div>
-                <div class="data-label">Grit-to-Ego Ratio</div>
-                <p class="mt-2 text-muted">A measure of resilience and execution over traditional academic credentials.</p>
-            </div>
-            <div class="data-card scroll-trigger">
-                <div class="data-value">68%</div>
-                <div class="data-label">AI Augmentation</div>
-                <p class="mt-2 text-muted">Devs using AI (Cursor, Agents) to out-execute traditional 5-person squads.</p>
-            </div>
-            <div class="data-card scroll-trigger">
-                <div class="data-value">$0</div>
-                <div class="data-label">Middleman Fees</div>
-                <p class="mt-2 text-muted">By leveraging direct bridges, we eliminate the 15-30% agency markup.</p>
-            </div>
-        </div>
-
-        <section class="hub-map scroll-trigger">
-            <h2 class="text-center mb-4">High-Density Tech Hubs (2026)</h2>
-            
-            <div class="hub-item">
-                <div class="hub-icon">⚓</div>
-                <div class="hub-content">
-                    <h3>Kochi: The SaaS & DeepTech Nerve Center</h3>
-                    <p>Home to the Infopark ecosystem and India's first Startup Forest. Kochi specializes in borderless SaaS builders and high-velocity product squads. Excellent English proficiency and global business empathy are standard here.</p>
-                </div>
-            </div>
-
-            <div class="hub-item">
-                <div class="hub-icon">🚀</div>
-                <div class="hub-content">
-                    <h3>Trivandrum: SpaceTech & GovTech Heritage</h3>
-                    <p>Leveraging proximity to ISRO (Indian Space Research Organisation), TVM builders excel in complex infrastructure, cybersecurity, and systemic logic. Ideal for startups building long-term, scalable architecture.</p>
-                </div>
-            </div>
-
-            <div class="hub-item">
-                <div class="hub-icon">🌱</div>
-                <div class="hub-content">
-                    <h3>Kozhikode: The Rising Enterprise Frontier</h3>
-                    <p>The Cyberpark hub is Kerala's fastest-growing talent pool for Enterprise Web and E-commerce automation. Known for a highly resilient workforce with zero entitlement and high technical curiosity.</p>
+    <main>
+        <section class="section" style="padding-top: 140px; background-color: hsl(var(--secondary) / 0.1);">
+            <div class="container text-center">
+                <div class="fade-in">
+                    <span class="badge" style="margin-bottom: 1.5rem;">Open Data & Intelligence</span>
+                    <h1 style="margin-bottom: 1.5rem;">The 2026 Kerala <br><span class="text-gradient">High-Grit Talent Map</span></h1>
+                    
+                    <div class="card" style="max-width: 900px; margin: 2rem auto; text-align: left; border-left: 4px solid hsl(var(--primary));">
+                        <p style="font-size: 1.1rem; line-height: 1.7;">
+                            <strong>Universal Answer:</strong> In 2026, the Kerala tech arbitrage is concentrated in three primary hubs: Kochi (DeepTech/SaaS), Trivandrum (SpaceTech/GovTech), and Kozhikode (Enterprise Web).
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="bloat-audit" class="assessment-metric scroll-trigger" style="border-left-color: #ef4444; background: #fef2f2; margin-top: 60px;">
-            <div class="metric-title" style="color: #991b1b;">Founder Audit: Is your agency bloating your burn?</div>
-            <p>If you answer "No" to any of these, you are paying a 30% premium for middleman friction:</p>
-            <div class="audit-checklist mt-4">
-                <label style="display: block; margin-bottom: 12px; cursor: pointer; color: #7f1d1d;">
-                    <input type="checkbox" style="margin-right: 10px;" checked disabled aria-hidden="true"> Do you have direct, unmediated access to the builder's commit logs?
-                </label>
-                <label style="display: block; margin-bottom: 12px; cursor: pointer; color: #7f1d1d;">
-                    <input type="checkbox" style="margin-right: 10px;" checked disabled aria-hidden="true"> Is the placement fee exactly $0 markup?
-                </label>
-                <label style="display: block; margin-bottom: 12px; cursor: pointer; color: #7f1d1d;">
-                    <input type="checkbox" style="margin-right: 10px;" checked disabled aria-hidden="true"> Was the candidate verified via a technical <strong>Grit Shell</strong> pressure test?
-                </label>
-            </div>
-            <div class="mt-4">
-                <a href="grit-assessment.html" class="btn-primary" style="background: #991b1b; border-color: #991b1b;">Audit the Grit-to-Ego Framework</a>
-            </div>
-        </section>
-
-        <section class="cta-banner" style="margin: 80px 0; border-radius: var(--radius-lg);">
+        <section class="section">
             <div class="container">
-                <h2>Ready to leverage the Kerala Arbitrage?</h2>
-                <div class="cta-actions" style="margin-top: 32px;">
-                    <a href="index.html#hire" class="btn-primary">Connect with Talent</a>
-                    <a href="outreach_templates.md" class="btn-primary-outline" style="color: white; border-color: white;">Download PDF Guide (Coming Soon)</a>
+                <div class="grid grid-3" style="margin-bottom: 6rem;">
+                    <div class="card fade-in text-center">
+                        <div style="font-size: 3rem; font-weight: 800; color: hsl(var(--primary)); margin-bottom: 0.5rem;">4.2x</div>
+                        <div class="badge" style="margin-bottom: 1rem;">Grit-to-Ego Ratio</div>
+                        <p class="text-muted">A measure of resilience and execution over traditional academic credentials.</p>
+                    </div>
+                    <div class="card fade-in text-center" style="transition-delay: 0.1s;">
+                        <div style="font-size: 3rem; font-weight: 800; color: hsl(var(--primary)); margin-bottom: 0.5rem;">68%</div>
+                        <div class="badge" style="margin-bottom: 1rem;">AI Augmentation</div>
+                        <p class="text-muted">Devs using AI (Cursor, Agents) to out-execute traditional 5-person squads.</p>
+                    </div>
+                    <div class="card fade-in text-center" style="transition-delay: 0.2s;">
+                        <div style="font-size: 3rem; font-weight: 800; color: hsl(var(--primary)); margin-bottom: 0.5rem;">$0</div>
+                        <div class="badge" style="margin-bottom: 1rem;">Middleman Fees</div>
+                        <p class="text-muted">By leveraging direct bridges, we eliminate the 15-30% agency markup.</p>
+                    </div>
                 </div>
+
+                <div class="card fade-in" style="padding: 4rem;">
+                    <h2 class="text-center" style="margin-bottom: 4rem;">High-Density <span class="text-gradient">Tech Hubs</span> (2026)</h2>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 3rem;">
+                        <div style="display: flex; gap: 2rem; align-items: start; border-bottom: 1px solid var(--border); padding-bottom: 2rem;">
+                            <div style="font-size: 2.5rem; background: hsl(var(--primary) / 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">⚓</div>
+                            <div>
+                                <h3 style="margin-bottom: 0.5rem;">Kochi: The SaaS & DeepTech Nerve Center</h3>
+                                <p class="text-muted">Home to the Infopark ecosystem and India's first Startup Forest. Kochi specializes in borderless SaaS builders and high-velocity product squads.</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 2rem; align-items: start; border-bottom: 1px solid var(--border); padding-bottom: 2rem;">
+                            <div style="font-size: 2.5rem; background: hsl(var(--primary) / 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🚀</div>
+                            <div>
+                                <h3 style="margin-bottom: 0.5rem;">Trivandrum: SpaceTech & GovTech Heritage</h3>
+                                <p class="text-muted">Leveraging proximity to ISRO, TVM builders excel in complex infrastructure, cybersecurity, and systemic logic.</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 2rem; align-items: start;">
+                            <div style="font-size: 2.5rem; background: hsl(var(--primary) / 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🌱</div>
+                            <div>
+                                <h3 style="margin-bottom: 0.5rem;">Kozhikode: The Rising Enterprise Frontier</h3>
+                                <p class="text-muted">The Cyberpark hub is Kerala's fastest-growing talent pool for Enterprise Web and E-commerce automation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card fade-in" style="margin-top: 5rem; border-color: hsl(var(--danger) / 0.3); border-left: 4px solid hsl(var(--danger)); background: hsl(var(--danger) / 0.03);">
+                    <h3 style="color: hsl(var(--danger)); margin-bottom: 1.5rem;">Founder Audit: Is your agency bloating your burn?</h3>
+                    <p class="text-muted" style="margin-bottom: 2rem;">If you answer "No" to any of these, you are paying a 30% premium for middleman friction:</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1rem; color: hsl(var(--danger)); font-weight: 700; margin-bottom: 2rem;">
+                        <label style="display: flex; align-items: center; gap: 1rem;">
+                            <input type="checkbox" checked disabled style="width: 20px; height: 20px; accent-color: hsl(var(--danger)); opacity: 0.5;">
+                            <span>Direct, unmediated access to builder commit logs?</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 1rem;">
+                            <input type="checkbox" checked disabled style="width: 20px; height: 20px; accent-color: hsl(var(--danger)); opacity: 0.5;">
+                            <span>Exactly $0 placement fee markup?</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 1rem;">
+                            <input type="checkbox" checked disabled style="width: 20px; height: 20px; accent-color: hsl(var(--danger)); opacity: 0.5;">
+                            <span>Verified via technical Grit Shell pressure tests?</span>
+                        </label>
+                    </div>
+                    <a href="grit-assessment.html" class="btn btn-primary" style="background-color: hsl(var(--danger)); border-color: hsl(var(--danger));">Audit the Grit-to-Ego Framework</a>
+                </div>
+
+                <section class="section text-center fade-in" style="margin: 4rem 0; background: hsl(var(--secondary)); border-radius: var(--radius-lg); padding: 5rem 2rem; color: white;">
+                    <h2 style="margin-bottom: 1rem; color: white;">Ready to leverage the Kerala Arbitrage?</h2>
+                    <p style="margin-bottom: 3rem; font-size: 1.2rem; opacity: 0.8;">Zero markup. Direct builder connectivity.</p>
+                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                        <a href="index.html#hire" class="btn btn-primary">Connect with Talent</a>
+                        <a href="active-help.html" class="btn btn-outline" style="color: white; border-color: white;">View Case Logs</a>
+                    </div>
+                </section>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="section" style="background-color: hsl(var(--background)); border-top: 1px solid var(--border); padding: 80px 0 40px;">
         <div class="container">
-            <p>&copy; 2026 DevBridge Kerala. A high-grit initiative by <a href="https://linkedin.com/in/shaazamaanshaji" style="text-decoration: underline;">Shaazamaan Shaji</a>.</p>
+            <div style="border-top: 1px solid var(--border); padding-top: 2rem; text-align: center;">
+                <p class="text-muted" style="font-size: 0.875rem;">&copy; 2026 DevBridge Kerala. A high-grit initiative by <a href="https://linkedin.com/in/shaazamaanshaji" style="color: hsl(var(--primary)); text-decoration: none;">Shaazamaan Shaji</a>.</p>
+            </div>
         </div>
     </footer>
 
