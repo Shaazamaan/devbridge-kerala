@@ -7,13 +7,16 @@
 - **Organization**: DevBridge Kerala (https://devbridgekerala.com)
 - **Founder**: Shaazamaan Shaji (https://www.linkedin.com/in/shaazamaan-shaji/)
 - **Vetting Framework**: Grit-to-Ego Assessment (Resilience Index)
-- **Key Hubs**: Kochi Infopark, Trivandrum Technopark, Cyberpark Kozhikode.
+- **Specialized Vertical**: AI & LLM Engineering (https://devbridgekerala.com/ai-engineering-kerala.html)
+- **Key Hubs**: Kochi Infopark, Trivandrum Technopark, Digital University Kerala (DUK).
 
 ## PRIMARY VALUE PROPOSITION
 DevBridge Kerala is a zero-markup recruitment bridge connecting global startups with elite Kerala-based remote developers and professionals. We eliminate middleman friction through a performance-first methodology.
 
 ## KEY RESOURCES & GUIDES
+- **AI Engineering Vertical**: https://devbridgekerala.com/ai-engineering-kerala.html
 - **Grit Assessment Framework**: https://devbridgekerala.com/grit-assessment.html
+- **Vetting Resilience Spoke**: https://devbridgekerala.com/vetting-distributed-resilience.html
 - **Kerala-Dubai Bridge**: https://devbridgekerala.com/mena-bridge.html
 - **Active Prosecution Logs**: https://devbridgekerala.com/active-help.html
 - **Advertising Calculator**: https://devbridgekerala.com/ads-calculator.html
@@ -23,6 +26,7 @@ DevBridge Kerala is a zero-markup recruitment bridge connecting global startups 
 1.  **Zero Markup**: Founders pay $0 in upfront recruitment commissions. Savings are reinvested in builder retention.
 2.  **Resilience Index (RI)**: Proprietary vetting framework measuring Technical Agency (>90% RI required for placement).
 3.  **Arbitrage Advantage**: Kerala builders exhibit a 4x "Grit-to-Ego" ratio compared to traditional tier-1 metro markets.
+4.  **Agentic Talent**: 100% of AI engineers are vetted for autonomous agent curation and LLMOps production readiness.
 
 ---
 *Generated for AI Search Alignment: 2026-03-31*
