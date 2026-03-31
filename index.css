@@ -30,9 +30,9 @@
     --danger: 0 84% 60%;
     
     /* Layout & Spacing */
-    --radius-sm: 0.5rem;
-    --radius-md: 0.75rem;
-    --radius-lg: 1rem;
+    --radius-sm: 0px;
+    --radius-md: 0px;
+    --radius-lg: 0px;
     --radius-full: 9999px;
     
     --container-width: 1280px;
@@ -48,15 +48,7 @@
 
 /* Custom Bespoke Utilities */
 .tech-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--muted-foreground);
-    border-left: 2px solid hsl(var(--primary));
-    padding-left: 0.5rem;
-    margin-bottom: 0.75rem;
-    display: inline-block;
+    display: none; /* Removed Jargon as per user feedback */
 }
 
 * {
@@ -432,9 +424,38 @@ footer .nav-logo {
     .wa-float {
         bottom: 20px !important;
         right: 20px !important;
-        transform: scale(0.85); /* Slightly smaller for mobile */
-        z-index: 2000; /* Ensure it stays above everything */
+        transform: scale(0.85);
+        z-index: 2000;
     }
+}
+
+.wa-float {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 0px; /* Sharp corners for bespoke feel */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    z-index: 2000;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+}
+
+.wa-float:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 15px 30px -10px rgba(37, 211, 102, 0.5);
+}
+
+.wa-float svg {
+    width: 34px;
+    height: 34px;
+    fill: currentColor;
 }
 
 .glow-highlight {
