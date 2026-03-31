@@ -227,8 +227,20 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>What do you need help with? *</label>
-                                <textarea name="situation" required rows="5" placeholder="Tell me what's going on. What are you looking for? What have you tried? No need to be formal."></textarea>
+                                <label>What kind of help do you need? *</label>
+                                <select name="help_type" required>
+                                    <option value="" disabled selected>Select one...</option>
+                                    <option value="Job Search">Job Search</option>
+                                    <option value="Startup / Investor Help">Startup / Investor Help</option>
+                                    <option value="Career Move / Relocation">Career Move / Relocation</option>
+                                    <option value="Resume & Profile">Resume &amp; Profile</option>
+                                    <option value="Connections / Introductions">Connections / Introductions</option>
+                                    <option value="Something Else">Something Else</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tell me what's going on *</label>
+                                <textarea name="situation" required rows="5" placeholder="What are you looking for? What have you tried? No need to be formal."></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary" style="width: 100%;">
                                 Send — I'll Read It Personally

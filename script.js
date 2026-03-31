@@ -46,35 +46,38 @@ async function handleFormSubmit(e, type) {
     const btn = form.querySelector('button[type="submit"]');
     const fd = new FormData(form);
 
-    btn.innerText = 'Processing...';
+    btn.innerText = 'Sending...';
     btn.disabled = true;
 
     try {
-        // Honeypot validation
         if (fd.get('bot-field')) throw new Error("Spam detected");
 
-        // Map payload for N8N/Discord
-        const dPayload = type === 'candidate' ? 
-            `**[CANDIDATE V3 REDESIGN]**\n**Name:** ${fd.get('name')}\n**Email:** ${fd.get('email')}\n**Links:** ${fd.get('links')}\n**Proof of Work:** ${fd.get('pow')}` :
-            `**[COMPANY V3 REDESIGN]**\n**Company:** ${fd.get('company')}\n**Email:** ${fd.get('email')}\n**Role/Req:** ${fd.get('role')}`;
+        let dPayload;
+        if (type === 'help-request') {
+            const helpType = fd.get('help_type') || 'Not specified';
+            dPayload = `📩 **New Help Request**\n**Name:** ${fd.get('name')}\n**Contact:** ${fd.get('contact')}\n**Type:** ${helpType}\n**Situation:**\n${fd.get('situation')}`;
+        } else if (type === 'candidate') {
+            dPayload = `🧑‍💻 **Candidate Application**\n**Name:** ${fd.get('name')}\n**Email:** ${fd.get('email')}\n**Links:** ${fd.get('links')}\n**Situation:** ${fd.get('pow')}`;
+        } else {
+            dPayload = `🏢 **Company Request**\n**Company:** ${fd.get('company')}\n**Email:** ${fd.get('email')}\n**Role/Req:** ${fd.get('role')}`;
+        }
 
         await Promise.allSettled([
             fetch(DISCORD_WEBHOOK, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ content: dPayload }) }),
             fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(fd).toString() }),
-            logDvkEvent(type === 'candidate' ? "Candidate Profile Submitted" : "Company Hiring Request Received")
+            logDvkEvent(`Form Submitted: ${type}`)
         ]);
 
-        window.location.href = type === 'candidate' ? '/thank-you.html?type=candidate' : '/thank-you.html?type=company';
+        window.location.href = '/thank-you.html';
 
     } catch(err) {
-        alert("Submission failed. Re-try or email directly.");
-        btn.innerText = 'Submit';
+        alert("Submission failed. Please try again or message me on WhatsApp.");
+        btn.innerText = 'Send — I\'ll Read It Personally';
         btn.disabled = false;
     }
 }
 
-// 4. Scroll Depth Tracking (High-Signal Conversion)
-
+// 4. Scroll Depth Tracking
 const trackedDepths = new Set();
 window.addEventListener('scroll', () => {
     const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
@@ -85,62 +88,8 @@ window.addEventListener('scroll', () => {
         }
     });
 }, { passive: true });
-// 5. Grit Terminal Logic (Cycle 7)
-const terminalBody = document.getElementById('terminal-body');
-const hiddenInput = document.getElementById('terminal-hidden-input');
-const inputDisplay = document.getElementById('terminal-input-display');
 
-if (terminalBody && hiddenInput) {
-    terminalBody.addEventListener('click', () => hiddenInput.focus());
-    
-    hiddenInput.addEventListener('input', (e) => {
-        inputDisplay.textContent = e.target.value;
-    });
-
-    hiddenInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            const cmd = hiddenInput.value.trim().toLowerCase();
-            processCommand(cmd);
-            hiddenInput.value = '';
-            inputDisplay.textContent = '';
-        }
-    });
-}
-
-function processCommand(cmd) {
-    appendLine(`<span class="prompt">guest@dvk:~#</span> ${cmd}`);
-    
-    if (cmd === 'help') {
-        appendLine('Available commands: <span class="terminal-highlight">help</span>, <span class="terminal-highlight">verify</span>, <span class="terminal-highlight">ls</span>, <span class="terminal-highlight">clear</span>');
-    } else if (cmd === 'ls') {
-        appendLine('Active Modules: <br> - grit_engine_v2 <br> - bridge_mena_v1 <br> - aeo_snapshot_mgr');
-    } else if (cmd.startsWith('verify')) {
-        appendLine('[SYSTEM] Initiating Deep-Dive Vetting...');
-        setTimeout(() => {
-            appendLine('<span class="terminal-success">[SUCCESS] </span> Talent Verified. Resilience Index: 98%.');
-            appendLine('<span class="terminal-highlight">[ACTION] </span> High-Grit match detected. Standardizing application...');
-            logDvkEvent('Terminal Successful Verification');
-            setTimeout(() => {
-                document.querySelector('#apply')?.scrollIntoView({ behavior: 'smooth' });
-                document.querySelector('#apply .container')?.classList.add('glow-highlight');
-            }, 1500);
-        }, 1000);
-    } else if (cmd === 'clear') {
-        terminalBody.innerHTML = '';
-    } else if (cmd) {
-        appendLine(`<span class="terminal-error">Command not found: ${cmd}</span>`);
-    }
-}
-
-function appendLine(html) {
-    const div = document.createElement('div');
-    div.className = 'terminal-line';
-    div.innerHTML = html;
-    terminalBody.insertBefore(div, terminalBody.lastElementChild);
-    terminalBody.scrollTop = terminalBody.scrollHeight;
-}
-
+// 5. Form Listeners
+document.forms['help-request']?.addEventListener('submit', e => handleFormSubmit(e, 'help-request'));
 document.forms['candidate']?.addEventListener('submit', e => handleFormSubmit(e, 'candidate'));
 document.forms['company']?.addEventListener('submit', e => handleFormSubmit(e, 'company'));
-
-
