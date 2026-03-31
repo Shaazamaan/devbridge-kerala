@@ -455,12 +455,12 @@
         </div>
     </div>
 
-    <script src="malayalam-voice-map.js"></script>
+    <script src="universal-voice-engine.js"></script>
     <script>
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1484903468404572273/U8ka36mWRRgklK3dzFWaqXoJudN9F_Z-S7a9MsCwJzGq8Vcz9FdFtkJnUVuWzVBboaa7";
         const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbzRMsjt0SPmViIhNtR_6GVj81Es65zI71A7uwmUOmsUTxnQKQOktAWWLYY0MdbjxDYPvg/exec";
 
-        // Voice Assistant Logic
+        // Advanced Universal Voice Agent
         document.addEventListener('DOMContentLoaded', function() {
             const voiceOverlay = document.getElementById('voice-overlay');
             const startVoiceBtn = document.getElementById('start-voice-btn');
@@ -470,13 +470,16 @@
             const voicePulse = document.getElementById('voice-pulse');
             const voiceProgress = document.getElementById('voice-progress');
             
-            let currentStep = 0;
+            let selectedLang = 'en'; // Default to English for the Language Gate
+            let currentStep = -1; // -1 for the Language Gate
+            let isConfirming = false;
+            let tempValue = '';
+
             const steps = [
                 { id: 'businessName', field: 'businessName' },
                 { id: 'tagline', field: 'tagline' },
                 { id: 'city', field: 'city' },
                 { id: 'category', field: 'businessCategory' },
-                { id: 'description', field: 'businessDescription' },
                 { id: 'service1', field: 'service1' },
                 { id: 'service2', field: 'service2' },
                 { id: 'service3', field: 'service3' },
@@ -488,38 +491,50 @@
 
             const recognition = 'webkitSpeechRecognition' in window ? new webkitSpeechRecognition() : null;
             if (recognition) {
-                recognition.lang = 'ml-IN';
                 recognition.continuous = false;
                 recognition.interimResults = true;
             }
 
             function speak(text, callback) {
                 const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'ml-IN';
+                utterance.lang = UNIVERSAL_VOICE_ENGINE.locales[selectedLang] || 'en-IN';
                 utterance.onend = callback;
                 speechSynthesis.speak(utterance);
             }
 
             function startStep(index) {
+                if (index < 0) { // Language Gate
+                    selectedLang = 'en';
+                    voiceQuestion.innerText = "Language Preference?";
+                    voiceTranscript.innerText = "Listening for English or Malayalam...";
+                    speak(UNIVERSAL_VOICE_ENGINE.prompts.en.welcome, () => {
+                        recognition.lang = 'en-IN';
+                        recognition.start();
+                    });
+                    return;
+                }
+
                 if (index >= steps.length) {
-                    voiceQuestion.innerText = MALAYALAM_VOICE_MAP.confirmation;
-                    voiceTranscript.innerText = "All items captured.";
-                    voicePulse.classList.add('hidden');
-                    setTimeout(() => {
+                    voiceQuestion.innerText = UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].success;
+                    speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].success, () => {
                         voiceOverlay.classList.add('hidden');
                         document.querySelector('button[type="submit"]').scrollIntoView({ behavior: 'smooth' });
-                    }, 2000);
+                        speak("All data captured, you can now submit the form.");
+                    });
                     return;
                 }
 
                 currentStep = index;
+                isConfirming = false;
                 const step = steps[index];
-                voiceQuestion.innerText = MALAYALAM_VOICE_MAP[step.id];
+                const promptText = UNIVERSAL_VOICE_ENGINE.prompts[selectedLang][step.id];
+                voiceQuestion.innerText = promptText;
                 voiceTranscript.innerText = "Listening...";
                 voiceProgress.style.width = `${((index + 1) / steps.length) * 100}%`;
 
-                speak(MALAYALAM_VOICE_MAP[step.id], () => {
-                    if (recognition) recognition.start();
+                speak(promptText, () => {
+                    recognition.lang = UNIVERSAL_VOICE_ENGINE.locales[selectedLang];
+                    recognition.start();
                 });
             }
 
@@ -527,41 +542,80 @@
                 recognition.onresult = (event) => {
                     const result = event.results[event.results.length - 1][0].transcript;
                     voiceTranscript.innerText = result;
-                    const step = steps[currentStep];
-                    
-                    // Simple radio mapping
-                    if (step.field === 'style_radio') {
-                        const styleVal = result.toLowerCase().includes('modern') ? 'Modern' : (result.toLowerCase().includes('natural') ? 'Natural' : 'Elegant');
-                        document.querySelector(`input[name="style"][value="${styleVal}"]`).checked = true;
-                    } else if (step.field === 'goal_radio') {
-                        const goalVal = result.toLowerCase().includes('call') ? 'Call' : 'WhatsApp';
-                        document.querySelector(`input[name="goal"][value="${goalVal}"]`).checked = true;
-                        if (window.updateGoalFields) window.updateGoalFields();
-                    } else {
-                        const input = document.getElementsByName(step.field)[0];
-                        if (input) input.value = result;
-                    }
 
                     if (event.results[event.results.length - 1].isFinal) {
                         recognition.stop();
-                        setTimeout(() => startStep(currentStep + 1), 1000);
+                        
+                        if (currentStep === -1) { // Language Gate Result
+                            if (result.toLowerCase().includes('മലയാളം') || result.toLowerCase().includes('malayalam')) {
+                                selectedLang = 'ml';
+                            } else {
+                                selectedLang = 'en';
+                            }
+                            speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].confirmLanguage, () => startStep(0));
+                            return;
+                        }
+
+                        if (!isConfirming) {
+                            tempValue = result;
+                            const confirmText = UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].confirmValue.replace('{value}', tempValue);
+                            isConfirming = true;
+                            speak(confirmText, () => {
+                                recognition.start();
+                            });
+                        } else {
+                            // Listening for Yes or No (Malayalam: അതെ or അല്ല)
+                            const isYes = result.toLowerCase().includes('yes') || result.toLowerCase().includes('അതെ');
+                            if (isYes) {
+                                const step = steps[currentStep];
+                                // Map value to form
+                                if (step.field === 'style_radio') {
+                                    const styleVal = tempValue.toLowerCase().includes('modern') ? 'Modern' : (tempValue.toLowerCase().includes('natural') ? 'Natural' : 'Elegant');
+                                    const radio = document.querySelector(`input[name="style"][value="${styleVal}"]`);
+                                    if(radio) radio.checked = true;
+                                } else if (step.field === 'goal_radio') {
+                                    const goalVal = tempValue.toLowerCase().includes('call') ? 'Call' : 'WhatsApp';
+                                    const radio = document.querySelector(`input[name="goal"][value="${goalVal}"]`);
+                                    if(radio) {
+                                        radio.checked = true;
+                                        if (window.updateGoalFields) window.updateGoalFields();
+                                    }
+                                } else if (step.field === 'email') {
+                                    const input = document.getElementsByName(step.field)[0];
+                                    if(input) input.value = UNIVERSAL_VOICE_ENGINE.formatters.email(tempValue);
+                                } else if (step.field === 'whatsapp') {
+                                    const input = document.getElementsByName(step.field)[0];
+                                    if(input) input.value = UNIVERSAL_VOICE_ENGINE.formatters.number(tempValue);
+                                } else {
+                                    const input = document.getElementsByName(step.field)[0];
+                                    if(input) input.value = tempValue;
+                                }
+                                startStep(currentStep + 1);
+                            } else {
+                                isConfirming = false;
+                                speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].retry, () => startStep(currentStep));
+                            }
+                        }
                     }
                 };
 
                 recognition.onerror = () => {
-                    voiceTranscript.innerText = MALAYALAM_VOICE_MAP.retry;
                     recognition.stop();
+                    speak(UNIVERSAL_VOICE_ENGINE.prompts[selectedLang].retry, () => {
+                        recognition.start();
+                    });
                 };
             }
 
             startVoiceBtn.addEventListener('click', () => {
                 voiceOverlay.classList.remove('hidden');
-                startStep(0);
+                startStep(-1);
             });
 
             closeVoiceBtn.addEventListener('click', () => {
                 voiceOverlay.classList.add('hidden');
                 if (recognition) recognition.stop();
+                speechSynthesis.cancel();
             });
 
             document.getElementById('voice-skip-btn').addEventListener('click', () => {
@@ -571,6 +625,7 @@
 
             document.getElementById('voice-retry-btn').addEventListener('click', () => {
                 recognition.stop();
+                isConfirming = false;
                 startStep(currentStep);
             });
         });
