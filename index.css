@@ -437,7 +437,7 @@ footer .nav-logo {
     height: 60px;
     background-color: #25d366;
     color: white;
-    border-radius: 0px; /* Sharp corners for bespoke feel */
+    border-radius: 50%; /* Circle shape */
     display: flex;
     align-items: center;
     justify-content: center;
