@@ -349,7 +349,10 @@
                             <label class="block text-xs font-800 text-slate-500 uppercase mb-1">Business Logo <span class="text-slate-400 font-normal normal-case">(Optional)</span></label>
                             <p class="text-[10px] text-slate-400 mb-3">No logo? We'll auto-generate a branded monogram from your initials.</p>
                             <input type="file" name="file_logo" id="file_logo" aria-label="Business Logo Upload Slot" accept="image/*,video/mp4,video/webm" class="w-full text-xs">
-                            <input type="hidden" name="logo_desc" id="logo_desc">
+                            <div class="mt-2 text-right">
+                                <button type="button" onclick="this.nextElementSibling.classList.toggle('hidden')" class="text-[9px] font-bold text-blue-500 uppercase tracking-widest hover:underline">I don't have a logo yet</button>
+                                <textarea name="logo_desc" id="logo_desc" placeholder="Describe the logo vision (e.g. Minimalist, Lotus theme, Gold colors)..." class="hidden mt-2 w-full p-3 rounded-xl border border-slate-100 bg-slate-50 text-xs font-semibold focus:ring-2 focus:ring-blue-500 outline-none transition-all"></textarea>
+                            </div>
                             <p class="text-[9px] text-slate-400 mt-1">Image, GIF, or short video accepted</p>
                         </div>
                     </div>
@@ -357,16 +360,22 @@
                         <label class="block text-xs font-800 text-slate-500 uppercase mb-1">Hero Media <span class="text-slate-400 font-normal normal-case">(Optional)</span></label>
                         <p class="text-[10px] text-slate-400 mb-3">No photo? We'll select a curated stock image that matches your business.</p>
                         <input type="file" name="file_hero" id="file_hero" aria-label="Hero Media Upload Slot" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
-                        <input type="hidden" name="hero_desc" id="hero_desc">
+                        <div class="mb-3 text-right">
+                            <button type="button" onclick="this.nextElementSibling.classList.toggle('hidden')" class="text-[9px] font-bold text-blue-500 uppercase tracking-widest hover:underline">Describe my hero vision</button>
+                            <textarea name="hero_desc" id="hero_desc" placeholder="Describe the background vibe (e.g. Luxury interior, satisfied customers, fast service)..." class="hidden mt-2 w-full p-3 rounded-xl border border-slate-100 bg-slate-50 text-xs font-semibold focus:ring-2 focus:ring-blue-500 outline-none transition-all"></textarea>
+                        </div>
                         <p class="text-[9px] text-slate-400 mb-2">Image / GIF / Video — or paste an embed link below</p>
                         <input type="url" name="hero_embed" id="hero_embed" aria-label="Hero Embed Link Slot" placeholder="YouTube / Vimeo / direct video URL (optional)" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
                             <label class="block text-xs font-800 text-slate-400 uppercase mb-1">Gallery Media 1 <span class="font-normal normal-case">(Optional)</span></label>
-                            <input type="file" name="file_extra1" id="file_extra1" aria-label="Gallery Image 1 Upload Slot" accept="image/*,video/mp4,video/webm" class="w-full text-xs mb-2">
-                            <input type="hidden" name="extra_desc1" id="extra_desc1">
-                            <input type="url" name="extra1_embed" id="extra1_embed" aria-label="Gallery 1 Embed Link Slot" placeholder="Or paste video/GIF embed link" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs">
+                            <input type="file" name="file_extra1" id="file_extra1" aria-label="Gallery Image 1 Upload Slot" accept="image/*,video/mp4,video/webm" class="w-full text-xs">
+                            <div class="mt-2 text-right">
+                                <button type="button" onclick="this.nextElementSibling.classList.toggle('hidden')" class="text-[9px] font-bold text-blue-500 uppercase tracking-widest hover:underline">I don't have photos yet</button>
+                                <textarea name="extra_desc1" id="extra_desc1" placeholder="Describe your gallery or extra work..." class="hidden mt-2 w-full p-3 rounded-xl border border-slate-100 bg-slate-50 text-xs font-semibold focus:ring-2 focus:ring-blue-500 outline-none transition-all"></textarea>
+                            </div>
+                            <input type="url" name="extra1_embed" id="extra1_embed" aria-label="Gallery 1 Embed Link Slot" placeholder="Or paste video/GIF embed link" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs mt-2">
                         </div>
                         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
                             <label class="block text-xs font-800 text-slate-400 uppercase mb-1">Gallery Media 2 <span class="font-normal normal-case">(Optional)</span></label>
@@ -790,16 +799,60 @@
                 speechSynthesis.cancel();
             });
 
-            document.getElementById('voice-skip-btn').addEventListener('click', () => {
-                recognition.stop();
-                startStep(currentStep + 1);
-            });
-
             document.getElementById('voice-retry-btn').addEventListener('click', () => {
                 recognition.stop();
                 isConfirming = false;
                 startStep(currentStep);
             });
+
+            // --- Unified Manual Persistence Engine ---
+            const form = document.getElementById('intake-form');
+            
+            // 1. Global Manual Auto-Save
+            form.addEventListener('input', (e) => {
+                // Save current state whenever a manual input occurs
+                saveDraft(currentStep); 
+            });
+
+            // 2. Auditory Feedback for Manual Typing (Critical Fields)
+            const criticalFields = ['email', 'whatsapp', 'phone', 'businessName'];
+            criticalFields.forEach(field => {
+                const el = document.getElementsByName(field)[0];
+                if (el) {
+                    el.addEventListener('blur', () => {
+                        if (el.value.trim() !== "") {
+                            if (field === 'email' && !el.value.includes('@')) playTone('error');
+                            else playTone('success');
+                        }
+                    });
+                }
+            });
+
+            // 3. Auto-Restore State on Load
+            const draft = loadDraft();
+            if (draft && draft.data) {
+                Object.keys(draft.data).forEach(key => {
+                    const els = document.getElementsByName(key);
+                    if (els.length > 0) {
+                        const el = els[0];
+                        if (el.type === 'radio') {
+                            const radio = document.querySelector(`input[name="${key}"][value="${draft.data[key]}"]`);
+                            if (radio) {
+                                radio.checked = true;
+                                radio.dispatchEvent(new Event('change'));
+                            }
+                        } else {
+                            el.value = draft.data[key];
+                        }
+                    }
+                });
+                // Restore descriptions if they were toggled
+                if (draft.data.logo_desc) document.getElementById('logo_desc').classList.remove('hidden');
+                if (draft.data.hero_desc) document.getElementById('hero_desc').classList.remove('hidden');
+                if (draft.data.extra_desc1) document.getElementById('extra_desc1').classList.remove('hidden');
+                
+                console.log("Omni-Persistence: Profile Restored from local vault.");
+            }
         });
 
         document.addEventListener('DOMContentLoaded', function() {
