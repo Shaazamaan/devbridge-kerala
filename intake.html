@@ -146,14 +146,30 @@
                         </div>
                         <div>
                             <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-4">Primary Conversion Goal *</label>
-                            <select name="goal" id="goal-select" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium appearance-none bg-slate-50">
-                                <option value="WhatsApp">WhatsApp Message</option>
-                                <option value="Call">Phone Call</option>
-                            </select>
+                            <div class="space-y-2" id="goal-radios">
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
+                                    <input type="radio" name="goal" id="goal-wa" value="WhatsApp" checked class="w-4 h-4 text-blue-600">
+                                    <span class="text-sm font-semibold">WhatsApp Message 💬</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
+                                    <input type="radio" name="goal" id="goal-call" value="Call" class="w-4 h-4 text-blue-600">
+                                    <span class="text-sm font-semibold">Phone Call 📞</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
+                                    <input type="radio" name="goal" id="goal-both" value="Both" class="w-4 h-4 text-blue-600">
+                                    <span class="text-sm font-semibold">Both WhatsApp &amp; Call 🔥</span>
+                                </label>
+                            </div>
 
-                            <div class="mt-6">
-                                <label id="contact-number-label" class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">WhatsApp Number *</label>
-                                <input type="tel" name="whatsapp" id="contact-number-input" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="+91 ...">
+                            <div class="mt-6 space-y-4">
+                                <div id="field-whatsapp">
+                                    <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">WhatsApp Number *</label>
+                                    <input type="tel" name="whatsapp" id="input-whatsapp" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="+91 ...">
+                                </div>
+                                <div id="field-phone" class="hidden">
+                                    <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Phone / Call Number *</label>
+                                    <input type="tel" name="phone" id="input-phone" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="+91 ...">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -179,10 +195,75 @@
                         <p class="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-tight">We will use this email to coordinate the final code handover and custom domain setup AFTER the remaining ₹900 balance is paid.</p>
                     </div>
                     
-                    <!-- NEW: Special Instructions -->
+                    <!-- Map Link -->
+                    <div class="pt-4 border-t border-slate-100">
+                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Google Maps Link <span class="text-slate-400 font-normal normal-case">(Optional — we'll add a map to your site)</span></label>
+                        <input type="url" name="mapLink" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium" placeholder="https://maps.app.goo.gl/...">
+                    </div>
+
+                    <!-- Special Instructions -->
                     <div class="pt-4 border-t border-slate-100">
                         <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Extra Instructions / Custom Notes (Optional)</label>
-                        <textarea name="specialInstructions" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs font-medium italic" rows="2" placeholder="e.g. 'Use specific hex codes #FF0000' or 'Add a custom map in the footer'"></textarea>
+                        <textarea name="specialInstructions" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-xs font-medium italic" rows="2" placeholder="e.g. 'Use specific hex codes #FF0000' or 'Use a dark theme'"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3B: Testimonials -->
+            <section class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
+                <h3 class="text-sm font-800 uppercase tracking-widest text-blue-600 mb-2 flex items-center gap-2">
+                    <span class="w-2 h-4 bg-blue-600 rounded-full"></span>
+                    Real Testimonials
+                </h3>
+                <p class="text-xs text-slate-400 font-semibold mb-6">Optional — if you have real client reviews, add them here. They'll appear on your site instead of placeholders.</p>
+                <div class="space-y-6">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                        <p class="text-[10px] font-800 text-slate-400 uppercase tracking-widest mb-4">Review #1</p>
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Client Name</label>
+                                <input type="text" name="testi1_name" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm" placeholder="e.g. Anitha Krishnan">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Role / Location</label>
+                                <input type="text" name="testi1_role" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm" placeholder="e.g. Homeowner, Kakkanad">
+                            </div>
+                        </div>
+                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Their Quote</label>
+                        <textarea name="testi1_quote" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm" placeholder="What did they say about your work?"></textarea>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                        <p class="text-[10px] font-800 text-slate-400 uppercase tracking-widest mb-4">Review #2</p>
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Client Name</label>
+                                <input type="text" name="testi2_name" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm" placeholder="e.g. Rahul Menon">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Role / Location</label>
+                                <input type="text" name="testi2_role" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm" placeholder="e.g. Business Owner, Thrissur">
+                            </div>
+                        </div>
+                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Their Quote</label>
+                        <textarea name="testi2_quote" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm" placeholder="What did they say about your work?"></textarea>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                        <p class="text-[10px] font-800 text-slate-400 uppercase tracking-widest mb-4">Review #3</p>
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Client Name</label>
+                                <input type="text" name="testi3_name" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm" placeholder="e.g. Priya Thomas">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Role / Location</label>
+                                <input type="text" name="testi3_role" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm" placeholder="e.g. Parent, Ernakulam">
+                            </div>
+                        </div>
+                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Their Quote</label>
+                        <textarea name="testi3_quote" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm" placeholder="What did they say about your work?"></textarea>
                     </div>
                 </div>
             </section>
@@ -299,24 +380,37 @@
             const form = document.getElementById('intake-form');
             const submitBtn = document.getElementById('submit-btn');
             const errorMsg = document.getElementById('error-msg');
-            const goalSelect = document.getElementById('goal-select');
+            const goalSelect = null; // replaced by radios
             const formReqContainer = document.getElementById('form-req-container');
             const successModal = document.getElementById('success-modal');
-            const contactNumLabel = document.getElementById('contact-number-label');
-            const contactNumInput = document.getElementById('contact-number-input');
 
-            // Dynamic label update based on Goal
-            function updateContactLabel() {
-                if (goalSelect.value === 'Call') {
-                    contactNumLabel.textContent = 'Phone / Call Number *';
-                    contactNumInput.placeholder = '+91 ...';
-                } else {
-                    contactNumLabel.textContent = 'WhatsApp Number *';
-                    contactNumInput.placeholder = '+91 ...';
+            // Goal radio toggle — show/hide WhatsApp & Phone fields
+            const fieldWA = document.getElementById('field-whatsapp');
+            const fieldPhone = document.getElementById('field-phone');
+            const inputWA = document.getElementById('input-whatsapp');
+            const inputPhone = document.getElementById('input-phone');
+
+            function updateGoalFields() {
+                const goal = document.querySelector('input[name="goal"]:checked')?.value || 'WhatsApp';
+                if (goal === 'WhatsApp') {
+                    fieldWA.classList.remove('hidden');
+                    inputWA.required = true;
+                    fieldPhone.classList.add('hidden');
+                    inputPhone.required = false;
+                } else if (goal === 'Call') {
+                    fieldWA.classList.add('hidden');
+                    inputWA.required = false;
+                    fieldPhone.classList.remove('hidden');
+                    inputPhone.required = true;
+                } else { // Both
+                    fieldWA.classList.remove('hidden');
+                    inputWA.required = true;
+                    fieldPhone.classList.remove('hidden');
+                    inputPhone.required = true;
                 }
             }
-            goalSelect.addEventListener('change', updateContactLabel);
-            updateContactLabel();
+            document.querySelectorAll('input[name="goal"]').forEach(r => r.addEventListener('change', updateGoalFields));
+            updateGoalFields();
 
             // Other category toggle
             const categorySelect = document.getElementById('business-category-select');
@@ -414,17 +508,32 @@
                     } catch(err) { console.error("Database sync failed, continuing to Discord."); }
 
                     loaderText.innerText = "Step 3/3: Notifying Command (Discord)...";
-                    const contactLabel = payload.goal === 'Call' ? 'Phone' : 'WhatsApp';
+                    const goal = payload.goal || 'WhatsApp';
                     let msg = `🚀 **NEW START-GATE SUBMISSION**\n\n`;
                     msg += `**1. IDENTITY**\n• Business: ${payload.businessName}\n• Tagline: ${payload.tagline}\n`;
                     msg += `• City: ${payload.city || 'N/A'}\n• Category: ${payload.businessCategory || 'N/A'}\n`;
                     if(registrationData) msg += `• **Assigned ClientID:** \`${registrationData.clientId}\`\n\n`;
-                    
+
                     msg += `**2. SERVICES**\n• ${payload.service1}\n• ${payload.service2}\n• ${payload.service3}\n\n`;
-                    msg += `**3. STYLE & GOAL**\n• Style: ${payload.style}\n• Goal: ${payload.goal}\n`;
-                    msg += `• ${contactLabel}: ${payload.whatsapp}\n\n`;
+
+                    msg += `**3. STYLE & GOAL**\n• Style: ${payload.style}\n• Goal: ${goal}\n`;
+                    if (goal === 'WhatsApp' || goal === 'Both') msg += `• WhatsApp: ${payload.whatsapp || 'N/A'}\n`;
+                    if (goal === 'Call' || goal === 'Both') msg += `• Phone: ${payload.phone || 'N/A'}\n`;
+                    msg += `\n`;
+
                     msg += `**4. DEPLOYMENT**\n• Email: ${payload.email}\n`;
+                    if(payload.mapLink) msg += `• Map: ${payload.mapLink}\n`;
                     if(payload.specialInstructions) msg += `• Notes: ${payload.specialInstructions}\n`;
+
+                    const t1 = payload.testi1_name && payload.testi1_quote;
+                    const t2 = payload.testi2_name && payload.testi2_quote;
+                    const t3 = payload.testi3_name && payload.testi3_quote;
+                    if (t1 || t2 || t3) {
+                        msg += `\n**TESTIMONIALS**\n`;
+                        if(t1) msg += `• "${payload.testi1_quote}" — ${payload.testi1_name}${payload.testi1_role ? ', ' + payload.testi1_role : ''}\n`;
+                        if(t2) msg += `• "${payload.testi2_quote}" — ${payload.testi2_name}${payload.testi2_role ? ', ' + payload.testi2_role : ''}\n`;
+                        if(t3) msg += `• "${payload.testi3_quote}" — ${payload.testi3_name}${payload.testi3_role ? ', ' + payload.testi3_role : ''}\n`;
+                    }
                     msg += `\n📝 *Client signed all 4 compliance locks.*`;
 
                     const discordBody = new FormData();

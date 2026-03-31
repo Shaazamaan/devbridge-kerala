@@ -92,10 +92,18 @@ function handleIntake(data) {
     summary += "SECTION 3: STYLE & GOAL\n";
     summary += "• Visual Style: " + (data.style || "N/A") + "\n";
     summary += "• Conversion Goal: " + (data.goal || "N/A") + "\n";
-    summary += "• " + contactLabel + ": " + (data.whatsapp || "N/A") + "\n\n";
+    var goal = data.goal || 'WhatsApp';
+    if (goal === 'WhatsApp' || goal === 'Both') {
+      summary += "• WhatsApp: " + (data.whatsapp || "N/A") + "\n";
+    }
+    if (goal === 'Call' || goal === 'Both') {
+      summary += "• Phone: " + (data.phone || "N/A") + "\n";
+    }
+    summary += "\n";
     
     summary += "SECTION 4: DEPLOYMENT & NOTES\n";
     summary += "• Admin Email: " + (data.email || "N/A") + "\n";
+    if (data.mapLink) summary += "• Google Maps: " + data.mapLink + "\n";
     if (data.specialInstructions) {
       summary += "• Special Instructions: " + data.specialInstructions + "\n";
     }
@@ -113,6 +121,21 @@ function handleIntake(data) {
     if (data.FILE_PAYMENT_NAME) summary += "• Payment Proof: " + data.FILE_PAYMENT_NAME + "\n";
     if (data.FILE_EXTRA1_NAME) summary += "• Extra Asset 1: " + data.FILE_EXTRA1_NAME + "\n";
     if (data.FILE_EXTRA2_NAME) summary += "• Extra Asset 2: " + data.FILE_EXTRA2_NAME + "\n";
+
+    var hasTestimonials = (data.testi1_name && data.testi1_quote) || (data.testi2_name && data.testi2_quote) || (data.testi3_name && data.testi3_quote);
+    if (hasTestimonials) {
+      summary += "\nSECTION 7: REAL TESTIMONIALS\n";
+      summary += "--------------------\n";
+      if (data.testi1_name && data.testi1_quote) {
+        summary += "• \"" + data.testi1_quote + "\" — " + data.testi1_name + (data.testi1_role ? ", " + data.testi1_role : "") + "\n";
+      }
+      if (data.testi2_name && data.testi2_quote) {
+        summary += "• \"" + data.testi2_quote + "\" — " + data.testi2_name + (data.testi2_role ? ", " + data.testi2_role : "") + "\n";
+      }
+      if (data.testi3_name && data.testi3_quote) {
+        summary += "• \"" + data.testi3_quote + "\" — " + data.testi3_name + (data.testi3_role ? ", " + data.testi3_role : "") + "\n";
+      }
+    }
     
     summary += "\nTransmission Timestamp: " + timestamp.toLocaleString() + "\n";
     
