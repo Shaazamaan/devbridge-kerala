@@ -119,6 +119,10 @@
                                 <option value="Technology &amp; IT">Technology &amp; IT</option>
                                 <option value="Other">Other</option>
                             </select>
+                            <div class="mt-4">
+                                <label class="block text-[10px] font-800 text-slate-400 uppercase tracking-widest mb-2 italic">Subcategory <span class="font-normal normal-case">(Optional — e.g. Bridal Jewellery, Men's Fashion, Web Design)</span></label>
+                                <input type="text" name="businessSubcategory" placeholder="What is your niche?" class="w-full px-4 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium text-xs">
+                            </div>
                             <div id="other-category-wrap" class="hidden mt-3">
                                 <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Please specify your category *</label>
                                 <textarea name="otherCategory" id="other-category-input" rows="2"
@@ -152,16 +156,21 @@
                         </select>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-4">
+                    <div class="grid md:grid-cols-3 gap-4">
                         <div id="product-count-wrap" class="bg-slate-50 p-4 rounded-2xl border border-slate-100 transition-all">
-                            <label class="block text-[10px] font-800 text-slate-500 uppercase tracking-widest mb-2">Total Number of Products</label>
+                            <label class="block text-[10px] font-800 text-slate-500 uppercase tracking-widest mb-2 font-mono">1. Items/Products</label>
                             <input type="number" id="num-products" name="num-products" min="0" max="200" class="w-full px-4 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-mono font-bold" placeholder="0">
-                            <p class="text-[9px] text-slate-400 mt-1 italic">Items you ship or sell. (Max 200)</p>
+                            <p class="text-[9px] text-slate-400 mt-1 italic">Ship/Sell (Max 200)</p>
                         </div>
                         <div id="service-count-wrap" class="bg-slate-50 p-4 rounded-2xl border border-slate-100 transition-all">
-                            <label class="block text-[10px] font-800 text-slate-500 uppercase tracking-widest mb-2">Total Number of Services</label>
+                            <label class="block text-[10px] font-800 text-slate-500 uppercase tracking-widest mb-2 font-mono">2. Services</label>
                             <input type="number" id="num-services" name="num-services" min="0" max="200" class="w-full px-4 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-mono font-bold" placeholder="0">
-                            <p class="text-[9px] text-slate-400 mt-1 italic">Expertise you offer. (Max 200)</p>
+                            <p class="text-[9px] text-slate-400 mt-1 italic">Expertise (Max 200)</p>
+                        </div>
+                        <div id="subcat-count-wrap" class="bg-slate-50 p-4 rounded-2xl border border-slate-100 transition-all">
+                            <label class="block text-[10px] font-800 text-slate-500 uppercase tracking-widest mb-2 font-mono">3. Subcategories</label>
+                            <input type="number" id="num-subcategories" name="num-subcategories" min="0" max="200" class="w-full px-4 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-mono font-bold" placeholder="0">
+                            <p class="text-[9px] text-slate-400 mt-1 italic">Groups (Max 200)</p>
                         </div>
                     </div>
 
@@ -539,7 +548,7 @@
     <script src="universal-voice-engine.js"></script>
     <script>
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1484903468404572273/U8ka36mWRRgklK3dzFWaqXoJudN9F_Z-S7a9MsCwJzGq8Vcz9FdFtkJnUVuWzVBboaa7";
-        const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbw1dOkxeI3Vkk-afkIe9v5jvh9_eY3VSEu7IxpZqoUvWSsv6xX8XlB8n7ubA1WqLhOTew/exec";
+        const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbx6S4X5dfQsVEDxdiz_UXr041Fgch6OQyNhNnj131-ONv225ES4ZYCEU5m5pJATqF9L/exec";
 
         // Advanced Universal Voice Agent
         document.addEventListener('DOMContentLoaded', function() {
@@ -564,6 +573,7 @@
                 { id: 'offering-type', field: 'offering-type' },
                 { id: 'num-products', field: 'num-products' },
                 { id: 'num-services', field: 'num-services' },
+                { id: 'num-subcategories', field: 'num-subcategories' },
                 { id: 'style', field: 'style_radio' },
                 { id: 'goal', field: 'goal_radio' },
                 { id: 'whatsapp', field: 'whatsapp' },
@@ -1023,12 +1033,14 @@
             const dynamicContainer = document.getElementById('dynamic-items-container');
             const numProductsInput = document.getElementById('num-products');
             const numServicesInput = document.getElementById('num-services');
+            const numSubcatInput = document.getElementById('num-subcategories');
             const bulkPasteWrap = document.getElementById('bulk-paste-container');
 
             function renderDynamicSlots() {
                 const numProducts = parseInt(numProductsInput.value) || 0;
                 const numServices = parseInt(numServicesInput.value) || 0;
-                const totalItems = numProducts + numServices;
+                const numSubcat = parseInt(numSubcatInput.value) || 0;
+                const totalItems = numProducts + numServices + numSubcat;
                 
                 bulkPasteWrap.classList.toggle('hidden', totalItems < 3);
                 
@@ -1073,10 +1085,33 @@
                 for(let i=0; i<numServices; i++) {
                     html += `
                     <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 group transition-all hover:bg-slate-100">
-                        <div class="flex items-center justify-between mb-2">
-                            <h4 class="text-[9px] font-800 text-slate-500 uppercase tracking-widest">⚡ Service #${i+1}</h4>
+                        <div class="flex flex-col md:flex-row gap-4 mb-2">
+                            <div class="flex-1">
+                                <label class="block text-[9px] font-800 text-slate-500 uppercase tracking-widest mb-1">Service ${i + 1} Name</label>
+                                <input type="text" name="serv_name_${i}" required class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-1 focus:ring-blue-400 transition-all font-semibold text-sm" placeholder="Service Name">
+                            </div>
+                            <div class="w-full md:w-1/3">
+                                <label class="block text-[9px] font-800 text-slate-400 uppercase tracking-widest mb-1 italic">Service Group</label>
+                                <input type="text" name="serv_subcat_${i}" placeholder="e.g. Consultation" class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-1 focus:ring-blue-400 transition-all font-medium text-xs">
+                            </div>
                         </div>
-                        <input type="text" name="serv_name_${i}" required class="w-full px-3 py-2 rounded-xl border border-slate-200 outline-none focus:ring-1 focus:ring-blue-400 transition-all font-semibold text-sm" placeholder="Service Name">
+                    </div>`;
+                }
+
+                // Render Subcategories
+                for(let i=0; i<numSubcat; i++) {
+                    html += `
+                    <div class="bg-amber-50/30 p-4 rounded-2xl border border-amber-100/50 group transition-all hover:bg-emerald-50">
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="flex-1">
+                                <label class="block text-[9px] font-800 text-amber-500 uppercase tracking-widest mb-1">Subcategory #${i + 1} Name</label>
+                                <input type="text" name="subcat_name_${i}" placeholder="Enter subcategory name" class="w-full px-3 py-2 rounded-xl border border-amber-200 outline-none focus:ring-2 focus:ring-amber-500 transition-all font-bold text-sm">
+                            </div>
+                            <div class="w-full md:w-1/3">
+                                <label class="block text-[9px] font-800 text-slate-400 uppercase tracking-widest mb-1 italic">Cover Photo</label>
+                                <input type="file" name="subcat_file_${i}" accept="image/*" class="w-full text-[9px]">
+                            </div>
+                        </div>
                     </div>`;
                 }
 
@@ -1087,18 +1122,20 @@
             // Bulk Paste Auto-Filler
             const bulkTextarea = document.getElementById('bulk-paste-names');
             bulkTextarea.addEventListener('input', () => {
-                const names = bulkTextarea.value.split(/[\n,]+/).map(n => n.trim()).filter(n => n);
-                if (names.length === 0) return;
-
+                const lines = bulkTextarea.value.split(/[\n,]/).map(l => l.trim()).filter(l => l !== "");
                 const numProducts = parseInt(numProductsInput.value) || 0;
                 const numServices = parseInt(numServicesInput.value) || 0;
+                const numSubcat = parseInt(numSubcatInput.value) || 0;
 
-                names.forEach((name, idx) => {
+                lines.forEach((name, idx) => {
                     if (idx < numProducts) {
                         const el = document.getElementsByName(`prod_name_${idx}`)[0];
                         if (el) el.value = name;
                     } else if (idx < numProducts + numServices) {
                         const el = document.getElementsByName(`serv_name_${idx - numProducts}`)[0];
+                        if (el) el.value = name;
+                    } else if (idx < numProducts + numServices + numSubcat) {
+                        const el = document.getElementsByName(`subcat_name_${idx - (numProducts + numServices)}`)[0];
                         if (el) el.value = name;
                     }
                 });
@@ -1153,6 +1190,7 @@
 
             numProductsInput.addEventListener('input', renderDynamicSlots);
             numServicesInput.addEventListener('input', renderDynamicSlots);
+            numSubcatInput.addEventListener('input', renderDynamicSlots);
             form.addEventListener('input', validateForm);
             form.addEventListener('change', validateForm);
 
@@ -1194,12 +1232,15 @@
 
                     const products = [];
                     const services = [];
+                    const subcategories = [];
                     const numProducts = parseInt(numProductsInput.value) || 0;
                     const numServices = parseInt(numServicesInput.value) || 0;
+                    const numSubcat = parseInt(numSubcatInput.value) || 0;
 
-                    // 2. Process Dynamic Products & Files for Drive
+                    // 2. Process Dynamic Products for Drive
                     for(let i=0; i<numProducts; i++) {
                         const name = formData.get(`prod_name_${i}`);
+                        const subcatRef = formData.get(`prod_subcat_${i}`);
                         const file = formData.get(`prod_file_${i}`);
                         const desc = formData.get(`prod_desc_${i}`);
                         const embed = formData.get(`prod_embed_${i}`);
@@ -1210,16 +1251,33 @@
                             const b64 = await toBase64(file);
                             unifiedFiles.push({ name: fileName, type: file.type, base64: b64 });
                         }
-                        products.push({ name, desc, embed, fileName });
+                        products.push({ name, subcatRef, desc, embed, fileName });
                     }
 
                     // 3. Process Dynamic Services
                     for(let i=0; i<numServices; i++) {
-                        services.push({ name: formData.get(`serv_name_${i}`) });
+                        services.push({ 
+                            name: formData.get(`serv_name_${i}`),
+                            subcat: formData.get(`serv_subcat_${i}`)
+                        });
+                    }
+
+                    // 4. Process Dynamic Subcategories for Drive
+                    for(let i=0; i<numSubcat; i++) {
+                        const name = formData.get(`subcat_name_${i}`);
+                        const file = formData.get(`subcat_file_${i}`);
+                        
+                        let fileName = null;
+                        if (file && file.size > 0) {
+                            fileName = `CAT_${i}_${file.name}`;
+                            const b64 = await toBase64(file);
+                            unifiedFiles.push({ name: fileName, type: file.type, base64: b64 });
+                        }
+                        subcategories.push({ name, fileName });
                     }
 
                     payload.files = unifiedFiles;
-                    payload.dynamicItems = { products, services, bulkPaste: formData.get('bulk-paste-names') };
+                    payload.dynamicItems = { products, services, subcategories, bulkPaste: formData.get('bulk-paste-names') };
 
                     loaderText.innerText = "Step 2/3: Archiving to Global HQ (Database)...";
                     let registrationData = null;
