@@ -848,43 +848,61 @@
         function switchLanguage(lang) {
             document.body.style.opacity = '0';
             setTimeout(() => {
-                currentLang = lang;
-                const elements = document.querySelectorAll('[data-i18n]');
-                elements.forEach(el => {
-                    const key = el.getAttribute('data-i18n');
-                    if (TRANSLATIONS[lang][key]) {
-                        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                            el.placeholder = TRANSLATIONS[lang][key];
-                        } else if (el.tagName === 'OPTION') {
-                            el.text = TRANSLATIONS[lang][key];
+                try {
+                    if (!TRANSLATIONS[lang]) return;
+                    currentLang = lang;
+                    const elements = document.querySelectorAll('[data-i18n]');
+                    elements.forEach(el => {
+                        const key = el.getAttribute('data-i18n');
+                        if (TRANSLATIONS[lang][key]) {
+                            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                                el.placeholder = TRANSLATIONS[lang][key];
+                            } else if (el.tagName === 'OPTION') {
+                                el.text = TRANSLATIONS[lang][key];
+                            } else {
+                                // Preserving icons by only targeting text if children exist
+                                if (el.children.length > 0) {
+                                    const textNode = Array.from(el.childNodes).find(node => node.nodeType === 3 && node.textContent.trim().length > 0);
+                                    if (textNode) textNode.textContent = TRANSLATIONS[lang][key];
+                                    else {
+                                        // Fallback: If no simple text node, we append/replace carefully or just use innerText if safe
+                                        el.innerText = TRANSLATIONS[lang][key];
+                                    }
+                                } else {
+                                    el.innerText = TRANSLATIONS[lang][key];
+                                }
+                            }
+                        }
+                    });
+
+                    // Update Toggle UI
+                    const btnEn = document.getElementById('lang-en');
+                    const btnMl = document.getElementById('lang-ml');
+                    if (btnEn && btnMl) {
+                        if (lang === 'en') {
+                            btnEn.classList.add('bg-white', 'shadow-sm', 'text-slate-900');
+                            btnEn.classList.remove('text-slate-400');
+                            btnMl.classList.remove('bg-white', 'shadow-sm', 'text-slate-900');
+                            btnMl.classList.add('text-slate-400');
+                            document.documentElement.lang = "en";
                         } else {
-                            el.innerText = TRANSLATIONS[lang][key];
+                            btnMl.classList.add('bg-white', 'shadow-sm', 'text-slate-900');
+                            btnMl.classList.remove('text-slate-400');
+                            btnEn.classList.remove('bg-white', 'shadow-sm', 'text-slate-900');
+                            btnEn.classList.add('text-slate-400');
+                            document.documentElement.lang = "ml";
                         }
                     }
-                });
-
-                // Update Toggle UI
-                const btnEn = document.getElementById('lang-en');
-                const btnMl = document.getElementById('lang-ml');
-                if (lang === 'en') {
-                    btnEn.classList.add('bg-white', 'shadow-sm', 'text-slate-900');
-                    btnEn.classList.remove('text-slate-400');
-                    btnMl.classList.remove('bg-white', 'shadow-sm', 'text-slate-900');
-                    btnMl.classList.add('text-slate-400');
-                    document.documentElement.lang = "en";
-                } else {
-                    btnMl.classList.add('bg-white', 'shadow-sm', 'text-slate-900');
-                    btnMl.classList.remove('text-slate-400');
-                    btnEn.classList.remove('bg-white', 'shadow-sm', 'text-slate-900');
-                    btnEn.classList.add('text-slate-400');
-                    document.documentElement.lang = "ml";
+                    
+                    // Save preference
+                    localStorage.setItem('dbk_lang', lang);
+                    try { updateHUD(); } catch(e) { console.warn("HUD update failed during lang switch:", e); }
+                } catch (err) {
+                    console.error("Language switch critical failure:", err);
+                } finally {
+                    document.body.style.opacity = '1';
                 }
-                
-                // Save preference
-                localStorage.setItem('dbk_lang', lang);
-                updateHUD();
-                document.body.style.opacity = '1';
-            }, 200);
+            }, 300);
         }
 
         function toggleHUD() {
@@ -900,6 +918,8 @@
         function setProgress(percent) {
             const circle = document.getElementById('hud-progress-ring');
             const text = document.getElementById('hud-progress-text');
+            if (!circle || !text) return;
+            
             const radius = circle.r.baseVal.value;
             const circumference = 2 * Math.PI * radius;
             const offset = circumference - (percent / 100 * circumference);
