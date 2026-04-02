@@ -134,9 +134,22 @@
                                 <option value="Technology &amp; IT">Technology &amp; IT</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <div class="mt-4">
-                                <label class="block text-[10px] font-800 text-slate-400 uppercase tracking-widest mb-2 italic">Subcategory <span class="font-normal normal-case">(Optional — e.g. Bridal Jewellery, Men's Fashion, Web Design)</span></label>
-                                <input type="text" name="businessSubcategory" placeholder="What is your niche?" class="w-full px-4 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium text-xs">
+                            <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100">
+                                    <label class="block text-[9px] font-800 text-blue-500 uppercase tracking-widest mb-2">Display Currency Symbol *</label>
+                                    <select name="currency" class="w-full px-3 py-2 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 font-bold text-sm">
+                                        <option value="₹">INR (₹)</option>
+                                        <option value="AED">AED</option>
+                                        <option value="$">USD ($)</option>
+                                        <option value="£">GBP (£)</option>
+                                        <option value="SAR">SAR</option>
+                                        <option value="QAR">QAR</option>
+                                    </select>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Service Context/Group</label>
+                                    <input type="text" name="businessSubcategory" placeholder="e.g. Bridal Jewellery" class="w-full px-3 py-2 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 text-xs">
+                                </div>
                             </div>
                             <div id="other-category-wrap" class="hidden mt-3">
                                 <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Please specify your category *</label>
@@ -1070,19 +1083,23 @@
                                 <span class="w-2 h-2 bg-blue-600 rounded-full"></span>
                                 Product #${i+1}
                             </h4>
-                            <button type="button" onclick="this.parentElement.nextElementSibling.children[1].classList.toggle('hidden')" class="text-[9px] font-bold text-blue-500 uppercase hover:underline">+ Add Main Media/Details</button>
+                            <button type="button" onclick="this.parentElement.nextElementSibling.children[1].classList.toggle('hidden')" class="text-[9px] font-bold text-blue-500 uppercase hover:underline">+ Add Price & Main Asset</button>
                         </div>
                         <div class="grid gap-4">
                             <input type="text" name="prod_name_${i}" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-bold text-sm" placeholder="e.g. Arabica Coffee Beans">
                             
-                            <div class="hidden grid md:grid-cols-2 gap-4 bg-blue-50/20 p-4 rounded-2xl border border-blue-100/50">
+                            <div class="hidden grid md:grid-cols-3 gap-4 bg-blue-50/20 p-4 rounded-2xl border border-blue-100/50">
                                 <div class="bg-white p-3 rounded-xl border border-slate-100">
-                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Main Product Media</label>
+                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Main Asset</label>
                                     <input type="file" name="prod_file_${i}" accept="image/*,video/*,application/pdf,application/zip" class="text-[9px] w-full">
                                 </div>
                                 <div class="bg-white p-3 rounded-xl border border-slate-100">
-                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Main Item Bio</label>
-                                    <textarea name="prod_desc_${i}" rows="1" class="w-full bg-slate-50 p-2 rounded-lg text-[10px] outline-none" placeholder="General description for this product..."></textarea>
+                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Price/MRP</label>
+                                    <input type="number" name="prod_price_${i}" class="w-full bg-slate-50 p-2 rounded-lg text-[10px] outline-none font-bold" placeholder="0.00">
+                                </div>
+                                <div class="bg-white p-3 rounded-xl border border-slate-100 italic text-[9px] text-slate-400">
+                                    Briefly describe main item bio below...
+                                    <textarea name="prod_desc_${i}" rows="1" class="w-full mt-1 bg-slate-50 p-2 rounded-lg text-[10px] outline-none" placeholder="Description..."></textarea>
                                 </div>
                             </div>
 
@@ -1110,19 +1127,23 @@
                                 <span class="w-2 h-2 bg-emerald-600 rounded-full"></span>
                                 Service #${i+1}
                             </h4>
-                            <button type="button" onclick="this.parentElement.nextElementSibling.children[1].classList.toggle('hidden')" class="text-[9px] font-bold text-emerald-500 uppercase hover:underline">+ Add Main Media/Details</button>
+                            <button type="button" onclick="this.parentElement.nextElementSibling.children[1].classList.toggle('hidden')" class="text-[9px] font-bold text-emerald-500 uppercase hover:underline">+ Add Price & Main Asset</button>
                         </div>
                         <div class="grid gap-4">
                             <input type="text" name="serv_name_${i}" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-bold text-sm" placeholder="e.g. Premium Consulting">
                             
-                            <div class="hidden grid md:grid-cols-2 gap-4 bg-emerald-50/20 p-4 rounded-2xl border border-emerald-100/50">
+                            <div class="hidden grid md:grid-cols-3 gap-4 bg-emerald-50/20 p-4 rounded-2xl border border-emerald-100/50">
                                 <div class="bg-white p-3 rounded-xl border border-slate-100">
-                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Main Service Media</label>
+                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Main Asset</label>
                                     <input type="file" name="serv_file_${i}" accept="image/*,video/*,application/pdf,application/zip" class="text-[9px] w-full">
                                 </div>
                                 <div class="bg-white p-3 rounded-xl border border-slate-100">
-                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Service Overview</label>
-                                    <textarea name="serv_desc_${i}" rows="1" class="w-full bg-slate-50 p-2 rounded-lg text-[10px] outline-none" placeholder="Description of this service..."></textarea>
+                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Service Price</label>
+                                    <input type="number" name="serv_price_${i}" class="w-full bg-slate-50 p-2 rounded-lg text-[10px] outline-none font-bold" placeholder="0.00">
+                                </div>
+                                <div class="bg-white p-3 rounded-xl border border-slate-100 italic text-[9px] text-slate-400">
+                                    Briefly describe main service below...
+                                    <textarea name="serv_desc_${i}" rows="1" class="w-full mt-1 bg-slate-50 p-2 rounded-lg text-[10px] outline-none" placeholder="Description..."></textarea>
                                 </div>
                             </div>
 
@@ -1161,6 +1182,10 @@
                             <div class="flex-1">
                                 <label class="block text-[8px] font-800 text-${accent}-400 uppercase mb-1">Variation #${j+1} Name</label>
                                 <input type="text" name="${type}_${idx}_sub_${j}_name" required class="w-full px-3 py-2 rounded-lg border border-slate-100 bg-slate-50 outline-none focus:ring-2 focus:ring-${accent}-400 transition-all text-xs font-bold" placeholder="Level/Variation Name">
+                            </div>
+                            <div class="w-24">
+                                <label class="block text-[8px] font-800 text-${accent}-400 uppercase mb-1">Price</label>
+                                <input type="number" name="${type}_${idx}_sub_${j}_price" class="w-full px-3 py-2 rounded-lg border border-slate-100 bg-slate-100 outline-none focus:ring-2 focus:ring-${accent}-400 transition-all text-xs font-bold" placeholder="0.00">
                             </div>
                             <div class="flex-1">
                                 <label class="block text-[8px] font-800 text-slate-400 uppercase mb-1 italic">Variation Media / File</label>
@@ -1288,10 +1313,11 @@
                     const numProducts = parseInt(numProductsInput.value) || 0;
                     const numServices = parseInt(numServicesInput.value) || 0;
 
-                    // 2. Process Dynamic Products (Hierarchical)
+                    // 2. Process Dynamic Products (Hierarchical + eComm)
                     for(let i=0; i<numProducts; i++) {
                         const product = {
                             name: formData.get(`prod_name_${i}`),
+                            price: formData.get(`prod_price_${i}`),
                             desc: formData.get(`prod_desc_${i}`),
                             subItems: []
                         };
@@ -1306,6 +1332,7 @@
                         const subCount = parseInt(formData.get(`prod_sub_count_${i}`)) || 0;
                         for(let j=0; j<subCount; j++) {
                             const subName = formData.get(`prod_${i}_sub_${j}_name`);
+                            const subPrice = formData.get(`prod_${i}_sub_${j}_price`);
                             const subFile = formData.get(`prod_${i}_sub_${j}_file`);
                             const subDesc = formData.get(`prod_${i}_sub_${j}_desc`);
                             
@@ -1315,15 +1342,16 @@
                                 const b64 = await toBase64(subFile);
                                 unifiedFiles.push({ name: subFileName, type: subFile.type, base64: b64 });
                             }
-                            product.subItems.push({ name: subName, fileName: subFileName, desc: subDesc });
+                            product.subItems.push({ name: subName, price: subPrice, fileName: subFileName, desc: subDesc });
                         }
                         products.push(product);
                     }
 
-                    // 3. Process Dynamic Services (Hierarchical)
+                    // 3. Process Dynamic Services (Hierarchical + eComm)
                     for(let i=0; i<numServices; i++) {
                         const service = {
                             name: formData.get(`serv_name_${i}`),
+                            price: formData.get(`serv_price_${i}`),
                             desc: formData.get(`serv_desc_${i}`),
                             subItems: []
                         };
@@ -1338,6 +1366,7 @@
                         const subCount = parseInt(formData.get(`serv_sub_count_${i}`)) || 0;
                         for(let j=0; j<subCount; j++) {
                             const subName = formData.get(`serv_${i}_sub_${j}_name`);
+                            const subPrice = formData.get(`serv_${i}_sub_${j}_price`);
                             const subFile = formData.get(`serv_${i}_sub_${j}_file`);
                             const subDesc = formData.get(`serv_${i}_sub_${j}_desc`);
                             
@@ -1347,7 +1376,7 @@
                                 const b64 = await toBase64(subFile);
                                 unifiedFiles.push({ name: subFileName, type: subFile.type, base64: b64 });
                             }
-                            service.subItems.push({ name: subName, fileName: subFileName, desc: subDesc });
+                            service.subItems.push({ name: subName, price: subPrice, fileName: subFileName, desc: subDesc });
                         }
                         services.push(service);
                     }
