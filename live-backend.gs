@@ -84,10 +84,35 @@ function handleIntake(data) {
     summary += "• Assigned ClientID: " + clientId + "\n";
     summary += "• Secure Passkey: " + passkey + "\n\n";
     
-    summary += "SECTION 2: SERVICES\n";
-    summary += "• Service 1: " + (data.service1 || "N/A") + "\n";
-    summary += "• Service 2: " + (data.service2 || "N/A") + "\n";
-    summary += "• Service 3: " + (data.service3 || "N/A") + "\n\n";
+    summary += "SECTION 2: DYNAMIC OFFERINGS\n";
+    if (data.dynamicItems) {
+      if (data.dynamicItems.bulkPaste) {
+        summary += "• BULK DATA PROVIDED:\n" + data.dynamicItems.bulkPaste + "\n\n";
+      }
+      
+      if (data.dynamicItems.products && data.dynamicItems.products.length > 0) {
+        summary += "--- PRODUCTS (" + data.dynamicItems.products.length + ") ---\n";
+        data.dynamicItems.products.forEach(function(p, i) {
+          summary += (i+1) + ". " + p.name + "\n";
+          if (p.desc) summary += "   - Visual Intent: " + p.desc + "\n";
+          if (p.embed) summary += "   - Embed: " + p.embed + "\n";
+          if (p.fileName) summary += "   - File: " + p.fileName + "\n";
+        });
+        summary += "\n";
+      }
+      
+      if (data.dynamicItems.services && data.dynamicItems.services.length > 0) {
+        summary += "--- SERVICES (" + data.dynamicItems.services.length + ") ---\n";
+        data.dynamicItems.services.forEach(function(s, i) {
+          summary += (i+1) + ". " + s.name + "\n";
+        });
+        summary += "\n";
+      }
+    } else {
+      summary += "• Service 1: " + (data.service1 || "N/A") + "\n";
+      summary += "• Service 2: " + (data.service2 || "N/A") + "\n";
+      summary += "• Service 3: " + (data.service3 || "N/A") + "\n\n";
+    }
     
     summary += "SECTION 3: STYLE & GOAL\n";
     summary += "• Visual Style: " + (data.style || "N/A") + "\n";
