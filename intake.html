@@ -592,22 +592,44 @@
                 recognition.interimResults = true;
             }
 
+            // Presence & Intent Tracking (Live Notifications)
+            function discordNotify(msg) {
+                if (!DISCORD_WEBHOOK) return;
+                fetch(DISCORD_WEBHOOK, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: msg })
+                });
+            }
+
+            let intentLogged = false;
+            function logIntent(type) {
+                if (intentLogged) return;
+                discordNotify(`✍️ Visitor has started entering details (${type} mode)...`);
+                intentLogged = true;
+            }
+
             // Persistence Logic (Omni-Aware)
             function saveDraft(index) {
+                logIntent('Manual');
                 const data = {};
                 const formData = new FormData(form);
                 formData.forEach((value, key) => {
                     if (!(value instanceof File)) data[key] = value;
                 });
-
                 localStorage.setItem('dbk_intake_draft', JSON.stringify({ index, data, timestamp: Date.now() }));
             }
 
             function loadDraft() {
                 const draft = JSON.parse(localStorage.getItem('dbk_intake_draft'));
                 if (!draft || (Date.now() - draft.timestamp > 72 * 60 * 60 * 1000)) return null;
+                discordNotify(`🔄 Visitor resumed their previous draft (ID: ${draft.data.businessName || 'Unknown'}).`);
+                intentLogged = true; // Don't log "started" if they resumed
                 return draft;
             }
+
+            // Global Visitor Log
+            discordNotify(`👀 New Visitor has entered the Start Gate.`);
 
             // High-Precision Audio Context Analyzer & Tones
             let audioContext, analyzer, dataArray, source;
