@@ -25,6 +25,23 @@
         }
         input[type="file"]::file-selector-button:hover { background-color: #1e293b; }
         .custom-check:checked { background-color: #3b82f6; border-color: #3b82f6; }
+
+        body { transition: opacity 0.3s ease; }
+
+        /* HUD Styling */
+        #structure-hud {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(59, 130, 246, 0.2) transparent;
+        }
+        .hud-item { animation: slideIn 0.3s ease-out forwards; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen">
@@ -37,16 +54,22 @@
     <header class="glass sticky top-0 z-40 border-b border-slate-200 py-6 px-6">
         <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-center md:text-left">
-                <h1 class="text-2xl font-800 tracking-tight text-slate-900 uppercase italic">Start Gate</h1>
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Professional Intake & Rapid Deployment Portal</p>
+                <h1 class="text-2xl font-800 tracking-tight text-slate-900 uppercase italic" data-i18n="title">Start Gate</h1>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest" data-i18n="subtitle">Professional Intake & Rapid Deployment Portal</p>
             </div>
             <div class="flex items-center gap-4">
+                <!-- Language Toggle -->
+                <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 shadow-inner">
+                    <button type="button" onclick="switchLanguage('en')" id="lang-en" class="px-3 py-1.5 rounded-lg text-[10px] font-800 transition-all bg-white shadow-sm text-slate-900">EN</button>
+                    <button type="button" onclick="switchLanguage('ml')" id="lang-ml" class="px-3 py-1.5 rounded-lg text-[10px] font-800 transition-all text-slate-400 hover:text-slate-600">മല</button>
+                </div>
+
                 <div class="bg-slate-900 text-white px-4 py-2 rounded-xl text-center shadow-lg">
-                    <p class="text-[9px] font-bold opacity-60 uppercase">Clock ticking</p>
+                    <p class="text-[9px] font-bold opacity-60 uppercase" data-i18n="timer_label">Clock ticking</p>
                     <p class="text-xl font-800 font-mono" id="timer">04:22:04</p>
                 </div>
                 <div class="bg-amber-100 text-amber-800 px-4 py-2 rounded-xl text-center border border-amber-200">
-                    <p class="text-[9px] font-bold uppercase">Priority Status</p>
+                    <p class="text-[9px] font-bold uppercase" data-i18n="status_label">Priority Status</p>
                     <p class="text-xs font-800 pulse" id="urgency-ticker">Waitlist: 2 Slots Remaining</p>
                 </div>
             </div>
@@ -76,20 +99,20 @@
             <section class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
                 <h3 class="text-sm font-800 uppercase tracking-widest text-blue-600 mb-6 flex items-center gap-2">
                     <span class="w-2 h-4 bg-blue-600 rounded-full"></span>
-                    1. Identity & Vision
+                    <span data-i18n="sec1_title">1. Identity & Vision</span>
                 </h3>
                 <div class="grid gap-6">
                     <div>
-                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Business Name *</label>
+                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2" data-i18n="biz_name">Business Name *</label>
                         <input type="text" name="businessName" required 
                                class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium"
-                               placeholder="e.g. Nexus Digital">
+                               data-i18n="placeholder_biz" placeholder="e.g. Nexus Digital">
                     </div>
                     <div>
-                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2">Main Tagline / Slogan *</label>
+                        <label class="block text-xs font-700 text-slate-500 uppercase tracking-wider mb-2" data-i18n="tagline">Main Tagline / Slogan *</label>
                         <input type="text" name="tagline" required 
                                class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium"
-                               placeholder="e.g. Scaling Commerce Globally">
+                               data-i18n="placeholder_tagline" placeholder="e.g. Scaling Commerce Globally">
                     </div>
                     <div class="space-y-6">
                         <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
@@ -172,11 +195,11 @@
             <section class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
                 <h3 class="text-sm font-800 uppercase tracking-widest text-blue-600 mb-6 flex items-center gap-2">
                     <span class="w-2 h-4 bg-blue-600 rounded-full"></span>
-                    2. Core Offerings
+                    <span data-i18n="sec2_title">2. Core Offerings</span>
                 </h3>
                 <div class="space-y-6">
                     <div class="bg-blue-50 p-6 rounded-3xl border border-blue-100 mb-4 transition-all">
-                        <label class="block text-xs font-800 text-blue-600 uppercase tracking-widest mb-3">What are you selling?</label>
+                        <label class="block text-xs font-800 text-blue-600 uppercase tracking-widest mb-3" data-i18n="offering_label">What are you selling?</label>
                         <select id="offering-type" name="offering-type" class="w-full px-5 py-4 rounded-2xl border border-blue-200 outline-none focus:ring-4 focus:ring-blue-100 transition-all font-bold text-slate-700 bg-white shadow-sm">
                             <option value="both">Everything (Both Products & Services)</option>
                             <option value="products">Only Products (Items you ship/sell)</option>
@@ -487,7 +510,8 @@
 
                 <div class="pt-6">
                     <button type="submit" id="submit-btn" disabled 
-                            class="w-full py-5 rounded-2xl bg-white text-slate-900 font-800 text-lg uppercase tracking-wider shadow-lg disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-[1.01] active:scale-[0.98]">
+                            class="w-full py-5 rounded-2xl bg-white text-slate-900 font-800 text-lg uppercase tracking-wider shadow-lg disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-[1.01] active:scale-[0.98]"
+                            data-i18n="submit_btn">
                         Initiate Build Environment
                     </button>
                     <p id="error-msg" class="text-center mt-4 text-rose-400 text-[10px] font-bold uppercase hidden">⚠️ Please complete all required assets & signatures</p>
@@ -562,8 +586,280 @@
         </div>
     </div>
 
+    <!-- Live Structure HUD (Desktop) -->
+    <aside id="structure-hud" class="fixed right-8 top-32 w-64 glass rounded-[2rem] border border-white/50 shadow-2xl p-6 hidden lg:block z-30 transition-all">
+        <div class="flex items-center justify-between mb-6">
+            <h4 class="text-[10px] font-800 text-slate-500 uppercase tracking-widest" data-i18n="hud_title">Live Site Structure</h4>
+            <div class="relative w-10 h-10">
+                <svg class="progress-ring" width="40" height="40">
+                    <circle class="text-slate-100" stroke-width="4" stroke="currentColor" fill="transparent" r="16" cx="20" cy="20"/>
+                    <circle id="hud-progress-ring" class="text-blue-600 progress-ring__circle" stroke-width="4" stroke-linecap="round" stroke="currentColor" fill="transparent" r="16" cx="20" cy="20" stroke-dasharray="100.53 100.53" stroke-dashoffset="100.53"/>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center text-[8px] font-900 text-blue-600" id="hud-progress-text">0%</div>
+            </div>
+        </div>
+
+        <div id="hud-tree" class="space-y-4 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+            <div class="hud-item opacity-60 italic text-[10px] text-slate-400">Initialize identity to begin mapping...</div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-slate-100">
+            <p class="text-[8px] font-bold text-slate-400 uppercase tracking-tighter" data-i18n="hud_ready">Build Readiness Status</p>
+            <div id="hud-status" class="mt-1 text-[9px] font-800 text-rose-500 uppercase tracking-wide">Waiting for Assets...</div>
+        </div>
+    </aside>
+
+    <!-- Mobile HUD Toggle -->
+    <button type="button" onclick="toggleHUD()" class="lg:hidden fixed bottom-8 right-8 w-14 h-14 bg-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center z-40 active:scale-90 transition-transform">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </button>
+
     <script src="universal-voice-engine.js"></script>
     <script>
+        const TRANSLATIONS = {
+            en: {
+                title: "Start Gate",
+                subtitle: "Professional Intake & Rapid Deployment Portal",
+                timer_label: "Clock ticking",
+                status_label: "Priority Status",
+                sec1_title: "1. Identity & Vision",
+                biz_name: "Business Name *",
+                tagline: "Main Tagline / Slogan *",
+                logo: "Business Logo (Vector or High-Res)",
+                hero: "Primary Hero / Key Visual",
+                city: "City / Locality *",
+                category: "Business Category *",
+                currency: "Display Currency Symbol *",
+                about: "About Your Business",
+                placeholder_biz: "e.g. Nexus Digital",
+                placeholder_tagline: "e.g. Scaling Commerce Globally",
+                btn_visual_intent: "+ Add Visual Intent / Variation Info",
+                btn_ai_prompt: "+ Describe Custom AI Generation Prompt",
+                sec2_title: "2. Core Offerings",
+                offering_label: "What are you selling?",
+                prod_count: "1. Total Products/Collections",
+                serv_count: "2. Services Offered",
+                style_label: "Website Style *",
+                goal_label: "Primary Conversion Goal *",
+                wa_btn: "WhatsApp Message 💬",
+                call_btn: "Phone Call 📞",
+                both_btn: "Both WhatsApp & Call 🔥",
+                sec3_title: "3. Deployment & Handover Access",
+                submit_btn: "Initiate Build Environment",
+                voice_mic_req: "Microphone Access Required",
+                listening: "Listening...",
+                beta_mode: "Beta Mode",
+                under_dev: "Under active development",
+                testi_title: "Real Testimonials",
+                testi_subtitle: "Optional — if you have real client reviews, add them here.",
+                compliance_title: "Quadruple Lock Compliance",
+                lock1: "I understand the 24-hour guarantee covers the Phase 1 staging build.",
+                lock2: "I confirm I have uploaded the ₹100 advance payment screenshot.",
+                lock3: "I understand this is a 'Speed Build' with zero manual revisions.",
+                lock4: "I confirm this is for a high-performance single-page static website.",
+                lock5: "Support Pact: I understand you will handle my queries with care.",
+                payment_heading: "Secure Your 24-Hour Slot",
+                hud_title: "Live Site Structure",
+                hud_ready: "Build Readiness Status",
+                hud_mapping: "Initialize identity to begin mapping...",
+                hud_collecting: "Collecting Intel...",
+                hud_ready_label: "Build Ready 🚀"
+            },
+            ml: {
+                title: "സ്റ്റാർട്ട് ഗേറ്റ്",
+                subtitle: "പ്രൊഫഷണൽ ഇൻടേക്ക് & റാപ്പിഡ് ഡിപ്ലോയ്മെന്റ് പോർട്ടൽ",
+                timer_label: "സമയം പോകുന്നു",
+                status_label: "മുൻഗണന നില",
+                sec1_title: "1. ഐഡന്റിറ്റി & വിഷൻ",
+                biz_name: "ബിസിനസ്സ് പേര് *",
+                tagline: "പ്രധാന ടാഗ്‌ലൈൻ / സ്ലോഗൻ *",
+                logo: "ബിസിനസ്സ് ലോഗോ (Vector അല്ലെങ്കിൽ High-Res)",
+                hero: "പ്രധാന ഹീറോ / കീ വിഷ്വൽ",
+                city: "നഗരം / പ്രദേശം *",
+                category: "ബിസിനസ്സ് വിഭാഗം *",
+                currency: "കറൻസി ചിഹ്നം *",
+                about: "നിങ്ങളുടെ ബിസിനസ്സിനെക്കുറിച്ച്",
+                placeholder_biz: "ഉദാ: നെക്സസ് ഡിജിറ്റൽ",
+                placeholder_tagline: "ഉദാ: സ്കെയിലിംഗ് കൊമേഴ്സ് ഗ്ലോബലി",
+                btn_visual_intent: "+ വിഷ്വൽ ഇൻറ്റന്റ് / വേരിയേഷൻ വിവരങ്ങൾ ചേർക്കുക",
+                btn_ai_prompt: "+ കസ്റ്റം AI ജനറേഷൻ പ്രോംപ്റ്റ് വിവരിക്കുക",
+                sec2_title: "2. പ്രധാന സേവനങ്ങൾ (Core Offerings)",
+                offering_label: "നിങ്ങൾ എന്താണ് വിൽക്കുന്നത്?",
+                prod_count: "1. ആകെ ഉൽപ്പന്നങ്ങൾ/ശേഖരങ്ങൾ",
+                serv_count: "2. നൽകുന്ന സേവനങ്ങൾ",
+                style_label: "വെബ്സൈറ്റ് ശൈലി *",
+                goal_label: "പ്രധാന ലക്ഷ്യം (Conversion Goal) *",
+                wa_btn: "വാട്സ്ആപ്പ് സന്ദേശം 💬",
+                call_btn: "ഫോൺ കോൾ 📞",
+                both_btn: "വാട്സ്ആപ്പും കോളും 🔥",
+                sec3_title: "3. ഡിപ്ലോയ്മെന്റ് & ഹാൻഡ്‌ഓവർ ആക്സസ്",
+                submit_btn: "ബിൽഡ് എൻവയോൺമെന്റ് ആരംഭിക്കുക",
+                voice_mic_req: "മൈക്രോഫോൺ അനുമതി ആവശ്യമാണ്",
+                listening: "ശ്രദ്ധിക്കുന്നു...",
+                beta_mode: "ബീറ്റ മോഡ്",
+                under_dev: "വികസന ഘട്ടത്തിലാണ്",
+                testi_title: "യഥാർത്ഥ സാക്ഷ്യപത്രങ്ങൾ (Testimonials)",
+                testi_subtitle: "നിങ്ങൾക്ക് ക്ലയന്റ് റിവ്യൂകൾ ഉണ്ടെങ്കിൽ ഇവിടെ ചേർക്കാം.",
+                compliance_title: "നാല് ഘട്ടങ്ങളുള്ള സുരക്ഷാ കരാർ",
+                lock1: "24 മണിക്കൂർ ഗ്യാരണ്ടി ഫേസ് 1 സ്റ്റേജിംഗ് ബിൽഡിന് മാത്രമാണെന്ന് ഞാൻ മനസ്സിലാക്കുന്നു.",
+                lock2: "₹100 മുൻകൂർ പേയ്‌മെന്റ് സ്ക്രീൻഷോട്ട് ഞാൻ അപ്‌ലോഡ് ചെയ്തിട്ടുണ്ട്.",
+                lock3: "ഇതൊരു 'സ്പീഡ് ബിൽഡ്' ആണെന്നും ഇതിൽ സൗജന്യ റിവിഷനുകൾ ഇല്ലെന്നും ഞാൻ മനസ്സിലാക്കുന്നു.",
+                lock4: "ഇതൊരു സിംഗിൾ പേജ് സ്റ്റാറ്റിക് വെബ്സൈറ്റിന് വേണ്ടിയാണെന്ന് ഞാൻ സ്ഥിരീകരിക്കുന്നു.",
+                lock5: "സപ്പോർട്ട് പാക്ട്: എന്റെ സംശയങ്ങൾ നിങ്ങൾ കൃത്യമായി പരിഹരിക്കുമെന്ന് ഞാൻ പ്രതീക്ഷിക്കുന്നു.",
+                payment_heading: "നിങ്ങളുടെ 24-മണിക്കൂർ സ്ലോട്ട് ഉറപ്പാക്കുക",
+                hud_title: "ലൈവ് സൈറ്റ് സ്ട്രക്ചർ",
+                hud_ready: "ബിൽഡ് റെഡിനെസ്സ് സ്റ്റാറ്റസ്",
+                hud_mapping: "തുടങ്ങുന്നതിനായി വിവരങ്ങൾ നൽകുക...",
+                hud_collecting: "വിവരങ്ങൾ ശേഖരിക്കുന്നു...",
+                hud_ready_label: "സജ്ജമാണ് 🚀"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function switchLanguage(lang) {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                currentLang = lang;
+                const elements = document.querySelectorAll('[data-i18n]');
+                elements.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (TRANSLATIONS[lang][key]) {
+                        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                            el.placeholder = TRANSLATIONS[lang][key];
+                        } else if (el.tagName === 'OPTION') {
+                            el.text = TRANSLATIONS[lang][key];
+                        } else {
+                            el.innerText = TRANSLATIONS[lang][key];
+                        }
+                    }
+                });
+
+                // Update Toggle UI
+                const btnEn = document.getElementById('lang-en');
+                const btnMl = document.getElementById('lang-ml');
+                if (lang === 'en') {
+                    btnEn.classList.add('bg-white', 'shadow-sm', 'text-slate-900');
+                    btnEn.classList.remove('text-slate-400');
+                    btnMl.classList.remove('bg-white', 'shadow-sm', 'text-slate-900');
+                    btnMl.classList.add('text-slate-400');
+                    document.documentElement.lang = "en";
+                } else {
+                    btnMl.classList.add('bg-white', 'shadow-sm', 'text-slate-900');
+                    btnMl.classList.remove('text-slate-400');
+                    btnEn.classList.remove('bg-white', 'shadow-sm', 'text-slate-900');
+                    btnEn.classList.add('text-slate-400');
+                    document.documentElement.lang = "ml";
+                }
+                
+                // Save preference
+                localStorage.setItem('dbk_lang', lang);
+                updateHUD();
+                document.body.style.opacity = '1';
+            }, 200);
+        }
+
+        function toggleHUD() {
+            const hud = document.getElementById('structure-hud');
+            hud.classList.toggle('hidden');
+            hud.classList.toggle('lg:block');
+            hud.classList.toggle('fixed');
+            hud.classList.toggle('inset-0');
+            hud.classList.toggle('z-50');
+            hud.classList.toggle('m-6');
+        }
+
+        function setProgress(percent) {
+            const circle = document.getElementById('hud-progress-ring');
+            const text = document.getElementById('hud-progress-text');
+            const radius = circle.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+            const offset = circumference - (percent / 100 * circumference);
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            circle.style.strokeDashoffset = offset;
+            text.innerText = `${Math.round(percent)}%`;
+        }
+
+        function updateHUD() {
+            const hudTree = document.getElementById('hud-tree');
+            const statusEl = document.getElementById('hud-status');
+            const formData = new FormData(form);
+            
+            let html = '';
+            let Score = 0;
+            let TotalSteps = 10; // Basic fields + dynamic checks
+
+            // 🏠 Identity
+            const bName = formData.get('businessName') || 'Untitled Project';
+            if (formData.get('businessName')) Score++;
+            html += `<div class="hud-item flex items-center gap-2 text-[11px] font-900 text-slate-800">
+                <span class="text-blue-500">🏠</span> ${bName}
+            </div>`;
+
+            // 📦 Products
+            const numP = parseInt(formData.get('num-products')) || 0;
+            if (numP > 0) {
+                html += `<div class="hud-item pl-4 mt-2">
+                    <div class="flex items-center justify-between text-[10px] font-800 text-slate-500 uppercase tracking-tighter">
+                        <span>📦 Products</span>
+                        <span class="bg-blue-100 text-blue-600 px-1.5 rounded-md text-[8px]">${numP}</span>
+                    </div>`;
+                for(let i=0; i<Math.min(numP, 5); i++) {
+                    const pName = formData.get(`prod_name_${i}`) || `Product #${i+1}`;
+                    html += `<p class="pl-3 mt-1 text-[9px] font-medium text-slate-400 border-l border-slate-100 truncate">• ${pName}</p>`;
+                }
+                if (numP > 5) html += `<p class="pl-3 text-[8px] text-slate-300 italic">+ ${numP - 5} more...</p>`;
+                html += `</div>`;
+            }
+
+            // 🛠️ Services
+            const numS = parseInt(formData.get('num-services')) || 0;
+            if (numS > 0) {
+                html += `<div class="hud-item pl-4 mt-1">
+                    <div class="flex items-center justify-between text-[10px] font-800 text-slate-500 uppercase tracking-tighter">
+                        <span>🛠️ Services</span>
+                        <span class="bg-emerald-100 text-emerald-600 px-1.5 rounded-md text-[8px]">${numS}</span>
+                    </div>`;
+                for(let i=0; i<Math.min(numS, 5); i++) {
+                    const sName = formData.get(`serv_name_${i}`) || `Service #${i+1}`;
+                    html += `<p class="pl-3 mt-1 text-[9px] font-medium text-slate-400 border-l border-slate-100 truncate">• ${sName}</p>`;
+                }
+                if (numS > 5) html += `<p class="pl-3 text-[8px] text-slate-300 italic">+ ${numS - 5} more...</p>`;
+                html += `</div>`;
+            }
+
+            // Completion Logic
+            if (formData.get('tagline')) Score++;
+            if (formData.get('businessCategory')) Score++;
+            if (formData.get('city')) Score++; // Added 10th step
+            if (formData.get('whatsapp')) Score++;
+            if (formData.get('email')) Score++;
+            if (formData.get('file_payment') && formData.get('file_payment').size > 0) Score += 2;
+            if (numP > 0 || numS > 0) Score += 2;
+
+            const finalPercent = (Score / TotalSteps) * 100;
+            setProgress(finalPercent);
+
+            if (finalPercent >= 100) {
+                statusEl.innerText = TRANSLATIONS[currentLang].hud_ready_label;
+                statusEl.className = "mt-1 text-[9px] font-800 text-emerald-500 uppercase tracking-wide";
+            } else {
+                statusEl.innerText = TRANSLATIONS[currentLang].hud_collecting;
+                statusEl.className = "mt-1 text-[9px] font-800 text-rose-500 uppercase tracking-wide";
+            }
+
+            hudTree.innerHTML = html || `<div class="hud-item opacity-60 italic text-[10px] text-slate-400">${TRANSLATIONS[currentLang].hud_mapping}</div>`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('dbk_lang');
+            if (savedLang) switchLanguage(savedLang);
+            
+            // Listen for any form changes to update HUD
+            form.addEventListener('input', updateHUD);
+            updateHUD();
+        });
+
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1484903468404572273/U8ka36mWRRgklK3dzFWaqXoJudN9F_Z-S7a9MsCwJzGq8Vcz9FdFtkJnUVuWzVBboaa7";
         const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbzfKX17hXFkUooQ6kX4eBJ9AK8_PPMHsEqqtIfQO_qMfIS_sQBu1S1OUym88s2AI5Utqg/exec";
 
