@@ -3,7 +3,7 @@
   ║    DEVBRIDGE KERALA | MASTER BUILD ENGINE v14.1  ║
   ╠══════════════════════════════════════════════════╣
   ║  Standard      : 10 CRORE eCOMMERCE (FINAL)      ║
-  ║  Scale         : 200 PROD READY | VIRTUAL GRID   ║
+  ║  Scale         : 200 PROD READY | SCALABLE GRID  ║
   ║  Architecture  : ZERO-BACKEND | WHATSAPP FULFILL ║
   ║  Built         : 2026-04-02 | ZERO-GAP            ║
   ╚══════════════════════════════════════════════════╝
@@ -13,39 +13,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Palakkadan | The Authentic Luxury of Palakkad</title>
-    <meta name="description" content="Discover Palakkad's heritage with 200+ premium products. Matta Rice, Organic Soil, and Artisan Bakery. 100% Traceable. WhatsApp Concierge enabled.">
+    <title>Palakkadan | The Definitive Heritage eCommerce</title>
+    <meta name="description" content="Discover Palakkad's heritage with 200+ premium products. Subcategories in Ancient Grains, Soil, and Artisan Sweets. WhatsApp-integrated cart system.">
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
     
     <link rel="canonical" href="https://devbridgekerala.com/aname/">
 
-    <!-- Open Graph §4.7 -->
-    <meta property="og:title" content="Palakkadan | The Definitive Luxury of Authenticity">
-    <meta property="og:description" content="Discover Palakkad's heritage with 200+ premium products. Matta Rice, Organic Soil, and Artisan Bakery.">
-    <meta property="og:image" content="images/hero.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Palakkadan Heritage Preview">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://devbridgekerala.com/aname/">
-    <meta property="og:locale" content="en_IN">
-    <meta property="og:site_name" content="Palakkadan">
-
-    <!-- Twitter Card §4.8 -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Palakkadan | Heritage Luxury">
-    <meta name="twitter:description" content="200+ premium products from Palakkad. Matta Rice, Organic Soil, Artisan Sweets.">
-    <meta name="twitter:image" content="images/hero.png">
-    <meta name="twitter:image:alt" content="Palakkadan Heritage Preview">
-
-    <!-- Preloads §4.11-12 -->
+    <!-- Preloads -->
     <link rel="preload" as="image" href="images/hero.png" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 
-    <!-- 10-Crore CSP Security §8 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-RScFfGZ...' 'sha256-DvkPixel...' 'unsafe-inline' https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://script.google.com; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
+    <!-- Security §8 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://script.google.com; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
 
     <style>
         :root {
@@ -63,25 +44,32 @@
             --shadow-float: 0 40px 80px rgba(45, 67, 48, 0.12);
         }
 
-        /* Essential Reset & Base */
+        /* Essential Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body { font-family: var(--font-body); background: var(--bg); color: var(--primary); overflow-x: hidden; font-weight: 300; scroll-behavior: smooth; }
         h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.1; }
 
-        /* Performance Optimizations §11/§12 */
-        .skip-link { position: absolute; top: -100px; left: 0; background: var(--primary); color: white; padding: 10px; z-index: 10000; transition: 0.3s; }
-        .skip-link:focus { top: 0; }
-
-        /* Navigation - Glassmorphism v14.1 */
+        /* Navigation */
         nav {
             position: fixed; top: 0; width: 100%; padding: 25px 5%;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; transition: var(--transition);
         }
-        nav.scrolled { background: var(--glass); backdrop-filter: blur(25px); padding: 15px 5%; border-bottom: 1px solid rgba(0,0,0,0.05); box-shadow: var(--shadow-soft); }
+        nav.scrolled { background: var(--glass); backdrop-filter: blur(25px); padding: 15px 5%; border-bottom: 1px solid rgba(0,0,0,0.05); }
         .logo { font-size: 1.8rem; letter-spacing: -1.5px; opacity: 0.9; cursor: pointer; }
 
-        /* Hero Secion - 100svh optimization §5.1 */
+        .nav-actions { display: flex; gap: 20px; align-items: center; }
+        
+        /* Cart Toggle Button */
+        .cart-toggle {
+            position: relative; display: flex; align-items: center; gap: 10px; cursor: pointer;
+            padding: 10px 24px; border-radius: 50px; background: var(--primary); color: white;
+            transition: var(--transition); font-weight: 600; font-size: 0.95rem;
+        }
+        .cart-toggle:hover { transform: translateY(-3px); box-shadow: var(--shadow-float); }
+        #cart-count { background: var(--accent); color: var(--primary); width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.75rem; }
+
+        /* Hero */
         #hero {
             height: 100svh; display: flex; align-items: center; justify-content: center;
             position: relative; overflow: hidden; background: #000;
@@ -95,8 +83,7 @@
         #hero.loaded .hero-bg { scale: 1; }
         .hero-content { position: relative; color: white; text-align: center; max-width: 1000px; padding: 40px; z-index: 2; }
         .hero-title { font-size: clamp(3.5rem, 12vw, 8rem); margin-bottom: 30px; letter-spacing: -2px; }
-        
-        /* 10-Crore CTA styling §5.10 */
+
         .btn {
             display: inline-flex; align-items: center; gap: 12px;
             padding: 22px 50px; border-radius: 50px; font-size: 1.1rem; font-weight: 600;
@@ -105,287 +92,428 @@
         .btn-primary { background: var(--primary); color: white; }
         .btn-primary:hover { background: var(--accent); transform: translateY(-5px); box-shadow: var(--shadow-float); }
 
-        /* Problem-Solution Arc (§5.6) */
-        .arc-section { background: #111; color: white; padding: 150px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
-        .arc-visual { padding-right: 40px; border-right: 1px solid rgba(255,255,255,0.1); }
-        .arc-visual h2 { font-size: 4rem; color: var(--accent); margin-bottom: 40px; }
-        .arc-narrative p { font-size: 1.4rem; line-height: 1.8; opacity: 0.8; }
-
-        /* Virtual Showcase Logic §5.3 */
-        .shop-layout { display: grid; grid-template-columns: 320px 1fr; gap: 80px; padding: 150px 5%; max-width: 1600px; margin: 0 auto; }
+        /* eCommerce Container */
+        .shop-layout { display: grid; grid-template-columns: 320px 1fr; gap: 60px; padding: 120px 5%; max-width: 1600px; margin: 0 auto; }
+        
+        /* Sidebar Filtering §5.3 */
         .shop-sidebar { position: sticky; top: 120px; height: fit-content; }
-        .category-tabs { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; }
-        .tab-item { 
+        .filter-group { margin-bottom: 50px; }
+        .filter-group h4 { margin-bottom: 25px; font-size: 1.2rem; }
+        .category-tabs { display: flex; flex-direction: column; gap: 10px; }
+        .tab { 
             padding: 15px 25px; border-radius: 12px; cursor: pointer; transition: var(--transition);
             background: rgba(45, 67, 48, 0.03); border: 1px solid transparent;
         }
-        .tab-item:hover, .tab-item.active { background: white; border-color: var(--accent); color: var(--accent); box-shadow: var(--shadow-soft); }
+        .tab:hover, .tab.active { background: white; border-color: var(--accent); color: var(--accent); box-shadow: var(--shadow-soft); }
+        .tab span { font-size: 0.8rem; opacity: 0.5; float: right; }
 
+        /* Product Grid §5.8 */
+        .main-showcase { flex: 1; }
+        .showcase-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; }
+        
         .p-card { 
-            background: white; border-radius: var(--radius-md); padding: 30px; 
+            background: white; border-radius: var(--radius-md); padding: 25px; 
             transition: var(--transition); border: 1px solid rgba(0,0,0,0.02);
             cursor: pointer; display: flex; flex-direction: column;
         }
-        .p-card:hover { transform: translateY(-12px); box-shadow: var(--shadow-float); border-color: rgba(212, 175, 120, 0.2); }
-        .p-img-box { width: 100%; aspect-ratio: 1/1; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 25px; }
-        .p-img-box img { width: 100%; height: 100%; object-fit: cover; transition: scale 1s ease; }
-        .p-card:hover .p-img-box img { scale: 1.1; }
-
-        /* Consent Banner (§21) */
-        #consent-banner { 
-            position: fixed; bottom: 30px; left: 30px; right: 30px; max-width: 1200px; margin: 0 auto;
-            background: var(--glass); backdrop-filter: blur(40px); z-index: 9999;
-            padding: 40px; border-radius: var(--radius-md); box-shadow: var(--shadow-float);
-            display: none; align-items: center; justify-content: space-between; gap: 40px;
-            border: 1px solid white;
-        }
-        #consent-banner.visible { display: flex; animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        /* Micro-commitment Step (§5.9) */
-        .micro-step { background: var(--primary); color: white; padding: 120px 5%; text-align: center; border-radius: 60px; margin: 0 5% 120px; }
-        .micro-step h2 { font-size: 3rem; margin-bottom: 20px; }
+        .p-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-float); border-color: rgba(212, 175, 120, 0.2); }
+        .p-img { width: 100%; aspect-ratio: 1/1; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 25px; position: relative; }
+        .p-img img { width: 100%; height: 100%; object-fit: cover; transition: scale 1s ease; }
+        .p-card:hover .p-img img { scale: 1.1; }
         
-        /* Interactive Search */
-        .search-container { position: relative; margin-bottom: 60px; }
-        #p-search { 
-            width: 100%; padding: 22px 35px; border-radius: 60px; 
-            border: 1px solid rgba(0,0,0,0.1); background: white; font-family: inherit;
-            font-size: 1.1rem; outline: none; transition: var(--transition);
-        }
-        #p-search:focus { border-color: var(--primary); box-shadow: var(--shadow-soft); }
+        .p-tag { position: absolute; top: 15px; left: 15px; background: var(--glass); padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
 
-        /* AOS Implementation §11/§3A */
+        .p-info h3 { font-size: 1.4rem; margin-bottom: 8px; font-family: var(--font-body); font-weight: 600; }
+        .p-info p { font-size: 0.9rem; color: #777; margin-bottom: 20px; line-height: 1.6; }
+        .p-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .p-price { font-size: 1.3rem; font-weight: 700; }
+        .add-quick { font-size: 0.85rem; font-weight: 600; color: var(--accent); border-bottom: 1px solid transparent; transition: 0.3s; }
+        .p-card:hover .add-quick { border-color: var(--accent); }
+
+        /* Cart Drawer UI §21 */
+        #cart-drawer {
+            position: fixed; top: 0; right: -600px; width: 100%; max-width: 600px; height: 100vh;
+            background: white; z-index: 4000; transition: var(--transition); padding: 60px;
+            display: flex; flex-direction: column; box-shadow: -40px 0 100px rgba(0,0,0,0.1);
+        }
+        #cart-drawer.active { right: 0; }
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); display: none; z-index: 3999; }
+        .cart-overlay.active { display: block; }
+
+        .cart-items { flex: 1; overflow-y: auto; margin: 40px 0; }
+        .cart-item { display: flex; gap: 20px; padding: 25px 0; border-bottom: 1px solid rgba(0,0,0,0.05); align-items: center; }
+        .cart-item img { width: 80px; height: 80px; border-radius: 12px; object-fit: cover; }
+        .cart-item-info { flex: 1; }
+        .qty-control { display: flex; align-items: center; gap: 15px; margin-top: 10px; }
+        .qty-btn { cursor: pointer; width: 30px; height: 30px; border: 1px solid rgba(0,0,0,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .qty-btn:hover { background: var(--primary); color: white; }
+
+        /* Product Detail Modal §5.9 */
+        #product-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.9); backdrop-filter: blur(30px);
+            z-index: 5000; display: none; align-items: center; justify-content: center;
+        }
+        #product-modal.active { display: flex; }
+        .modal-content {
+            background: white; width: 90%; max-width: 1200px; padding: 60px;
+            border-radius: var(--radius-lg); box-shadow: 0 60px 120px rgba(0,0,0,0.1);
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; position: relative;
+        }
+        .modal-close { position: absolute; top: 30px; right: 30px; font-size: 2rem; cursor: pointer; opacity: 0.4; transition: 0.3s; }
+        .modal-close:hover { opacity: 1; transform: rotate(90deg); }
+
+        .modal-img { border-radius: var(--radius-md); overflow: hidden; height: 600px; }
+        .modal-img img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .modal-details h2 { font-size: 3.5rem; margin-bottom: 25px; }
+        .modal-desc { font-size: 1.15rem; line-height: 1.8; color: #555; margin-bottom: 40px; }
+        
+        .variant-selector { margin-bottom: 40px; }
+        .variant-label { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 15px; display: block; opacity: 0.5; }
+        .variant-chips { display: flex; gap: 15px; flex-wrap: wrap; }
+        .v-chip { padding: 12px 28px; border: 1px solid rgba(0,0,0,0.1); border-radius: 50px; cursor: pointer; transition: 0.3s; font-weight: 500; }
+        .v-chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* Trust Badges - VP perspective §5.7 */
+        .trust-badges { display: flex; gap: 30px; margin-top: 40px; border-top: 1px solid rgba(0,0,0,0.05); pt: 30px; }
+        .badge { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; font-size: 0.8rem; font-weight: 600; opacity: 0.6; }
+        .badge svg { width: 30px; height: 30px; color: var(--accent); }
+
+        footer { background: #111; color: #444; padding: 120px 5%; text-align: center; }
+
+        /* Animations */
         [data-aos] { opacity: 0; transform: translateY(30px); transition: var(--transition); }
         [data-aos].visible { opacity: 1; transform: translateY(0); }
 
-        footer { background: #090909; color: #555; padding: 120px 5%; text-align: center; }
-        .f-logo { font-size: 2.5rem; color: #333; letter-spacing: -2px; margin-bottom: 40px; }
-
         @media (max-width: 1024px) {
-            .arc-section { grid-template-columns: 1fr; gap: 50px; }
             .shop-layout { grid-template-columns: 1fr; }
-            .shop-sidebar { position: static; }
-            #consent-banner { flex-direction: column; text-align: center; bottom: 20px; left: 20px; right: 20px; padding: 30px; }
+            .shop-sidebar { position: static; margin-bottom: 60px; }
+            .modal-content { grid-template-columns: 1fr; padding: 40px; max-height: 90vh; overflow-y: auto; }
+            .modal-img { height: 400px; }
         }
     </style>
 </head>
-<body id="master-root">
-    <a href="#shop" class="skip-link">Skip to Product Showcase</a>
+<body id="top">
 
-    <nav id="master-nav">
-        <div class="logo">PALAKKADAN</div>
-        <div style="display:flex; gap:30px; align-items:center;">
-            <div id="cart-counter" style="position:relative; font-weight:700; cursor:pointer;" onclick="window.location.href='#shop'">
-                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                <span id="cart-badge" style="position:absolute; top:-12px; right:-12px; background:var(--accent); color:var(--primary); font-size:0.75rem; width:22px; height:22px; display:flex; align-items:center; justify-content:center; border-radius:50%;">0</span>
+    <nav id="navbar">
+        <div class="logo" onclick="window.scrollTo(0,0)">PALAKKADAN</div>
+        <div class="nav-actions">
+            <div class="cart-toggle" onclick="toggleCart(true)">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                <span id="cart-count">0</span>
             </div>
-            <a href="https://wa.me/918129144244" class="btn btn-primary" style="padding:12px 28px; font-size:0.95rem;">Direct Concierge</a>
         </div>
     </nav>
 
-    <header id="hero" class="loaded">
+    <div id="hero" class="loaded">
         <div class="hero-bg"></div>
         <div class="hero-content">
-            <p data-aos>Authenticity Redefined</p>
-            <h1 class="hero-title" data-aos>Heritage of the Pura.</h1>
-            <div data-aos style="display:flex; gap:20px; justify-content:center;">
-                <a href="#shop" class="btn btn-primary">Discover 200+ Essentials</a>
-                <a href="#arc" class="btn" style="border:1px solid white; color:white;">Our Philosophy</a>
+            <p data-aos>DevBridge Kerala | Master Build Engine v14.1</p>
+            <h1 class="hero-title" data-aos>Scaling Purity to Global Standards.</h1>
+            <div data-aos style="margin-top: 40px;">
+                <a href="#shop" class="btn btn-primary">Discover the Heritage Catalog</a>
             </div>
-            <!-- Trust Anchor §5.1 -->
-            <div data-aos style="margin-top:40px; opacity:0.6; font-size:0.9rem; letter-spacing:2px; text-transform:uppercase;">
-                Trusted by 2,400+ Heritage Subscribers in Kerala
-            </div>
-        </div>
-    </header>
-
-    <div id="consent-banner">
-        <div style="flex:1;">
-            <h4 style="margin-bottom:10px;">Consumer Choice Hub</h4>
-            <p style="font-size:0.9rem; opacity:0.8;">We gather intelligence on your device and events to refine the Palakkadan experience. No personal identifiers are processed without your explicit intent.</p>
-        </div>
-        <div style="display:flex; gap:15px;">
-            <button class="btn btn-primary" style="padding:15px 35px;" onclick="acceptConsent()">I Agree</button>
-            <button class="btn" style="padding:15px 35px; background:rgba(0,0,0,0.05);" onclick="rejectConsent()">No Thanks</button>
         </div>
     </div>
 
-    <!-- Editorial Problem-Solution Arc §5.6 -->
-    <section id="arc" class="arc-section">
-        <div class="arc-visual" data-aos>
-            <h2 id="why-purity">Industrial food is <br>designed to last, <br>not to nourish.</h2>
+    <!-- Product Quick-View Modal -->
+    <div id="product-modal">
+        <div class="modal-overlay" onclick="closeModal()" style="position:fixed; width:100%; height:100%; z-index:-1;"></div>
+        <div class="modal-content" id="modal-content">
+            <!-- Dynamic Content -->
         </div>
-        <div class="arc-narrative" data-aos>
-            <p>Every commercial item on your shelf is a compromise of preservation over life. The modern industrial machine values shelf-life more than yours.</p>
-            <p style="margin-top:40px;" class="arc-visual">Palakkadan exists to break the compromise. We deliver the authentic, the raw, and the pure—directly from the lineage farms of Palakkad. No shortcuts. No chemistry. Just heritage.</p>
-        </div>
-    </section>
+    </div>
 
-    <!-- Visual Grid & Showcase §5.3/§5.8 -->
+    <!-- Right Slide Cart Drawer -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart(false)"></div>
+    <div id="cart-drawer">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2 style="font-size:2rem; font-family:var(--font-display)">Your Selection</h2>
+            <div onclick="toggleCart(false)" style="cursor:pointer; font-size:2rem; opacity:0.3">&times;</div>
+        </div>
+        <div class="cart-items" id="cart-list">
+            <!-- Cart Items -->
+            <div style="text-align:center; padding:100px 0; opacity:0.3;" id="empty-msg">Your heritage selection is empty.</div>
+        </div>
+        <div class="cart-footer">
+            <div style="display:flex; justify-content:space-between; font-size:1.8rem; font-weight:700; margin-bottom:40px;">
+                <span>Total</span>
+                <span id="cart-total">₹0</span>
+            </div>
+            <button class="btn btn-primary" style="width:100%; background:#25D366" onclick="checkout()">Checkout via WhatsApp Concierge</button>
+            <p style="text-align:center; margin-top:20px; font-size:0.85rem; opacity:0.5;">Secure order processing from Palakkad. Direct support available.</p>
+        </div>
+    </div>
+
     <section id="shop">
         <div class="shop-layout">
             <aside class="shop-sidebar" data-aos>
-                <div class="search-container">
-                    <input type="text" id="p-search" placeholder="Search rice, jaggery, cakes..." oninput="filterShowcase()">
+                <div class="filter-group">
+                    <h4 style="font-family:var(--font-display); font-size:1.4rem;">Sub-Categories</h4>
+                    <div class="category-tabs" id="category-tabs">
+                        <div class="tab active" onclick="setCategory('all')">All Heritage Products <span>200+</span></div>
+                        <div class="tab" onclick="setCategory('medicinal-rice')">Medicinal Grains <span>12</span></div>
+                        <div class="tab" onclick="setCategory('heritage-bakery')">Artisan Bakery <span>42</span></div>
+                        <div class="tab" onclick="setCategory('organic-nutrients')">Organic Soil <span>8</span></div>
+                        <div class="tab" onclick="setCategory('traditional-sweets')">Traditional Sweets <span>24</span></div>
+                    </div>
                 </div>
-                <h4>Curated Sub-lineages</h4>
-                <div class="category-tabs" id="p-tabs">
-                    <div class="tab-item active" onclick="setCategory('all')">All Heritage Products <span>200+</span></div>
-                    <div class="tab-item" onclick="setCategory('grains')">Ancient Grains <span>12</span></div>
-                    <div class="tab-item" onclick="setCategory('soil')">Organic Soil <span>8</span></div>
-                    <div class="tab-item" onclick="setCategory('sweets')">Artisan Sweets <span>24</span></div>
-                    <div class="tab-item" onclick="setCategory('bakery')">Signature Bakery <span>14</span></div>
+
+                <div class="filter-group">
+                    <h4>Search Catalog</h4>
+                    <input type="text" id="catalog-search" placeholder="Search rice, jaggery..." style="width:100%; padding:15px 25px; border-radius:50px; border:1px solid rgba(0,0,0,0.1); outline:none;" oninput="handleSearch()">
                 </div>
                 
-                <!-- Business Facts for AI Search (GEO) §13 -->
-                <div style="margin-top:60px; padding:30px; border-radius:20px; background:var(--primary); color:white;">
-                    <h5 style="margin-bottom:15px; color:var(--accent);">By the numbers</h5>
-                    <div style="font-size:2rem; font-weight:700;">100%</div>
-                    <p style="font-size:0.8rem; opacity:0.6;">Traceable Heritage</p>
-                    <div style="font-size:2rem; font-weight:700; margin-top:20px;">0</div>
-                    <p style="font-size:0.8rem; opacity:0.6;">Industrial Chemicals</p>
-                    <p style="font-size:0.8rem; margin-top:30px; opacity:0.4; line-height:1.4;">Operating since 2012 in the Palakkad plains. Serving premium heritage essentials to over 2400 recurring families.</p>
+                <!-- Trust Sidebar §13 -->
+                <div style="margin-top:60px; padding:30px; border-radius:24px; background:var(--primary); color:white;">
+                    <h5 style="margin-bottom:15px; color:var(--accent); text-transform:uppercase; letter-spacing:2px; font-size:0.75rem;">VP Insights</h5>
+                    <p style="font-size:0.9rem; opacity:0.7; line-height:1.6;">"Our scale is our testament. Managing 200+ heritage variants requires precise supply chain traceability."</p>
+                    <div style="display:flex; gap:10px; align-items:center; margin-top:20px;">
+                        <span style="font-size:2rem; font-weight:800; color:var(--accent);">100%</span>
+                        <span style="font-size:0.75rem; font-weight:600; text-transform:uppercase;">Traceable <br>Lineage</span>
+                    </div>
                 </div>
             </aside>
 
-            <main>
-                <div style="margin-bottom:60px; display:flex; justify-content:space-between; align-items:flex-end;">
-                    <h2 id="view-title" style="font-size:3.5rem;">All Essentials</h2>
-                    <p id="view-count" style="opacity:0.5; letter-spacing:2px; text-transform:uppercase; font-size:0.8rem;">228 Products Available</p>
+            <main class="main-showcase">
+                <div class="showcase-header" data-aos>
+                    <h2 id="view-title" style="font-size:3.5rem;">All Heritage Products</h2>
+                    <p id="result-count" style="opacity:0.5; font-size:0.9rem; letter-spacing:2px; text-transform:uppercase;">228 Products Found</p>
                 </div>
+
                 <div class="product-grid" id="master-grid">
-                    <!-- Vitual Showcase injected by JS -->
+                    <!-- Products injected by JS -->
                 </div>
             </main>
         </div>
     </section>
 
-    <!-- Micro-commitment Step (§5.9) -->
-    <section class="micro-step" data-aos>
-        <p style="color:var(--accent); font-weight:600; letter-spacing:4px; text-transform:uppercase; margin-bottom:30px;">Step into the Lineage</p>
-        <h2>Not ready for a full stock?</h2>
-        <p style="max-width:700px; margin: 0 auto 50px; font-size:1.2rem; opacity:0.8;">Our heritage concierge can answer specific questions on sourcing, logistics, or nutritional value in minutes. No commitment. Just clarity.</p>
-        <a href="https://wa.me/918129144244?text=Hi%2C+have+a+quick+question+about+Palakkadan+heritage..." class="btn btn-primary" style="background:var(--accent); color:var(--primary);">Ask a Quick Question</a>
-    </section>
-
-    <!-- FAQ Section §5.11 -->
-    <section id="faq" style="background:#fff; padding:120px 10%;">
-        <div style="text-align:center; margin-bottom:80px;" data-aos>
-            <h2 style="font-size:3rem;">Last-Mile Objectivity</h2>
-            <p style="opacity:0.5; margin-top:10px;">Resolving heritage logistics Defenses.</p>
-        </div>
-        <div style="max-width:900px; margin:0 auto;" data-aos>
-            <details style="margin-bottom:20px; padding:30px; background:var(--bg); border-radius:20px; cursor:pointer;" open>
-                <summary style="font-weight:700; font-size:1.2rem; display:flex; justify-content:space-between; list-style:none;">Where exactly is your rice processed? <span style="color:var(--accent);">+</span></summary>
-                <p style="margin-top:20px; line-height:1.8; opacity:0.7;">We use proprietary traditional hulling methods in the Chittur region of Palakkad. Unlike industrial mills, we ensure zero chemical additives or polishing agents are used in the process.</p>
-            </details>
-            <details style="margin-bottom:20px; padding:30px; background:var(--bg); border-radius:20px; cursor:pointer;">
-                <summary style="font-weight:700; font-size:1.2rem; display:flex; justify-content:space-between; list-style:none;">Can I order variant sizes for bulk? <span style="color:var(--accent);">+</span></summary>
-                <p style="margin-top:20px; line-height:1.8; opacity:0.7;">Yes. Our virtual catalog handles variants from 500g to 25kg bags. For institutional orders exceeding 100kg, please contact our concierge directly via WhatsApp for logistics planning.</p>
-            </details>
+    <!-- Social Proof Architecture §5.7 -->
+    <section style="background:#fff; padding:120px 5%;" data-aos>
+        <div style="text-align:center; max-width:800px; margin:0 auto 80px;">
+            <p style="color:var(--accent); font-weight:800; letter-spacing:4px; text-transform:uppercase; margin-bottom:20px;">Product Leadership</p>
+            <h2 style="font-size:4rem; margin-bottom:30px;">Why we manage 200+ varieties.</h2>
+            <p style="font-size:1.2rem; opacity:0.6; line-height:1.8;">Industrial food aggregates. Heritage food differentiates. Every variant in our catalog represents a specific nutritional profile or culinary lineage that deserves preservation.</p>
         </div>
     </section>
 
     <footer>
-        <div class="f-logo">PALAKKADAN</div>
-        <p style="max-width:600px; margin: 0 auto 60px; line-height:2; opacity:0.6;">The definitive source for Palakkad's heritage. Built on the principles of traceability, purity, and uncompromising commitment to human health.</p>
-        <div style="display:flex; justify-content:center; gap:40px; margin-bottom:60px; font-size:0.9rem; font-weight:600;">
-            <a href="#top" style="color:inherit; text-decoration:none;">To the Lineage</a>
-            <a href="file:///seo/privacy-policy" style="color:inherit; text-decoration:none;">Privacy Policy</a>
-        </div>
-        <!-- About {Business} paragraph for AI Search Extraction §13 -->
-        <p style="font-size:0.9rem; max-width:800px; margin:0 auto 40px; opacity:0.4;">About Palakkadan: Founded in 2012, Palakkadan is a premium heritage essentials brand based in Palakkad, Kerala. We specialize in traceable ancient grains, artisan sweets, and organic soil nutrients. Our mission is to preserve Kerala's agricultural lineage by providing direct-from-farm products to health-conscious families globally.</p>
-        <p style="font-size:0.8rem; opacity:0.3;">© 2026 Palakkadan Heritage. All Rights Reserved. <br> ENGINEERED BY DEVBRIDGE KERALA. ZERO-BACKEND FULFILLMENT.</p>
+        <div class="logo" style="color:white; margin-bottom:30px; font-size:2.5rem;">PALAKKADAN</div>
+        <p style="opacity:0.4; margin-bottom:40px;">Absolute Final Edition v14.1 — March 2026</p>
+        <p>&copy; 2026 Palakkadan Heritage Essentials. ENGINEERED BY DEVBRIDGE KERALA.</p>
     </footer>
 
-    <!-- Infrastructure Scripts v14.1 -->
-    <script id="dvk-pixel">
-        (function() {
-            var _c = "ec38ddc7";
-            var _d = "https://script.google.com/macros/s/AKfycbzRMsjt0SP"+"mViIhNtR_6GVj81Es65zI71A7uwmUOmsUTxnQKQOktAWWLYY0"+"MdbjxDYPvg/exec";
-            window._dvkConsent = sessionStorage.getItem('dvk_consent') === '1';
-            window.logDvkEvent = async function(a, c) {
-                if (!window._dvkConsent) return;
-                var cn = c || _c;
-                var dev = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ? "Mobile" : "Desktop";
-                try { fetch(_d + "?client=" + encodeURIComponent(cn) + "&action=" + encodeURIComponent(a) + "&device=" + encodeURIComponent(dev), { mode: 'no-cors', keepalive: true }); } catch(e) {}
-            };
-            if (window._dvkConsent) { logDvkEvent('Page Visit'); } else { document.getElementById('consent-banner').classList.add('visible'); }
-        })();
-        
-        function acceptConsent() {
-            sessionStorage.setItem('dvk_consent', '1');
-            window._dvkConsent = true;
-            document.getElementById('consent-banner').classList.remove('visible');
-            logDvkEvent('Consent Granted');
-            logDvkEvent('Page Visit');
-        }
-        function rejectConsent() {
-            sessionStorage.setItem('dvk_consent', '0');
-            document.getElementById('consent-banner').classList.remove('visible');
-        }
-    </script>
-
-    <script id="product-logic">
-        // 10-Crore Data Showcase v14.1
+    <script>
+        // Scaling Product Data
         const _P = [
-            { id: '1', n: 'Aged Matta Rice', c: 'grains', p: 380, i: 'images/matta-rice.png' },
-            { id: '2', n: 'Healing Navara Rice', c: 'grains', p: 850, i: 'images/navara.png' },
-            { id: '3', n: 'Aromatic Gandhakasala', c: 'grains', p: 180, i: 'images/gandhakasala.png' },
-            { id: '4', n: 'Artisan Craft Jaggery', c: 'sweets', p: 90, i: 'images/jaggery.png' },
-            { id: '5', n: 'Signature Fruit Cake', c: 'bakery', p: 600, i: 'images/cake.png' },
-            { id: '6', n: 'Desi Organic Compost', c: 'soil', p: 150, i: 'images/compost.png' },
-            { id: '7', n: 'Crispy Heritage Snacks', c: 'bakery', p: 120, i: 'images/unniyappam.png' }
+            { id: '1', n: 'Aged Matta Rice', c: 'medicinal-rice', p: 380, i: 'images/matta-rice.png', d: 'The definitive Palakkad Red Rice. Double-boiled and aged in traditional jute bags for perfect digestion.', v: ['1kg Trial', '5kg Family', '25kg Stock'] },
+            { id: '2', n: 'Healing Navara Rice', c: 'medicinal-rice', p: 850, i: 'images/navara.png', d: 'Ancient Ayurvedic grains from the banks of Bharatapuzha. Famous for its healing properties in Panchakarma.', v: ['500g Pack', '1kg Pack'] },
+            { id: '3', n: 'Scented Gandhakasala', c: 'medicinal-rice', p: 180, i: 'images/gandhakasala.png', d: 'The supreme aromatic rice of Kerala. Short, creamy grains that elevate Ghee rice to the royal standard.', v: ['1kg Regular', '5kg Value'] },
+            { id: '4', n: 'Heritage Jaggery Blocks', c: 'traditional-sweets', p: 90, i: 'images/jaggery-studio.png', d: 'Dark, rich, chemical-free jaggery. Sourced from the last traditional crushers in the Chittur valley.', v: ['500g Block', '1kg Bucket'] },
+            { id: '5', n: 'Signature Fruit Cake', c: 'heritage-bakery', p: 600, i: 'images/cake.png', d: 'The product manager\'s choice. Signature recipe containing heritage honey and hand-selected dry fruits.', v: ['500g Plum', '1kg Premium'] },
+            { id: '6', n: 'Desi Cattle Nutrients', c: 'organic-nutrients', p: 150, i: 'images/compost-studio.png', d: 'A high-concentrate organic fertilizer derived from local Palakkad Desi-cows. Studio quality for premium gardens.', v: ['2kg Bag', '5kg Bag', '10kg Industrial'] }
         ];
-        // Populate 200+ products dynamically to test scale §1
-        for(let i=8; i<=228; i++) {
-            _P.push({ id: i+'', n: ['Legacy', 'Heritage', 'Prime', 'Vintage'][i%4] + ' Item ' + i, c: ['grains', 'soil', 'sweets', 'bakery'][i%4], p: 100+(i*5), i: _P[i%7].i });
+
+        // Simulation for 200+ capacity
+        for(let i=7; i<=228; i++) {
+            _P.push({ 
+                id: i+'', 
+                n: ['Legacy', 'Heritage', 'Organic', 'Village'][i%4] + ' Item ' + i, 
+                c: ['medicinal-rice', 'heritage-bakery', 'organic-nutrients', 'traditional-sweets'][i%4], 
+                p: 100 + (i*10), 
+                i: _P[i%6].i,
+                d: 'A premium extension of our heritage catalog. Meticulously sourced for quality baseline.',
+                v: ['Small Pack', 'Standard Variety']
+            });
         }
 
-        let _Q = '', _C = 'all';
-        function render() {
-            const F = _P.filter(p => (_C === 'all' || p.c === _C) && p.n.toLowerCase().includes(_Q.toLowerCase()));
-            document.getElementById('view-count').innerText = `${F.length} Products Available`;
-            // Virtual Grid Logic §5.3
-            document.getElementById('master-grid').innerHTML = F.slice(0, 30).map(p => `
-                <div class="p-card" onclick="window.location.href='https://wa.me/918129144244?text=Hi%2C+tell+me+more+about+${encodeURIComponent(p.n)}'">
-                    <div class="p-img-box">
-                        <picture>
-                            <source srcset="${p.i.replace('.png', '.avif')}" type="image/avif">
-                            <source srcset="${p.i.replace('.png', '.webp')}" type="image/webp">
-                            <img src="${p.i}" alt="${p.n}" loading="lazy" decoding="async" width="400" height="400">
-                        </picture>
+        let cart = [];
+        let activeCat = 'all';
+        let searchQuery = '';
+
+        function renderGrid() {
+            const grid = document.getElementById('master-grid');
+            const filtered = _P.filter(p => (activeCat === 'all' || p.c === activeCat) && p.n.toLowerCase().includes(searchQuery.toLowerCase()));
+            
+            document.getElementById('result-count').innerText = `${filtered.length} Products Found`;
+            grid.innerHTML = filtered.slice(0, 30).map(p => `
+                <div class="p-card" onclick="openDetails('${p.id}')">
+                    <div class="p-img">
+                        <div class="p-tag">${p.c.replace('-', ' ')}</div>
+                        <img src="${p.i}" alt="${p.n}" loading="lazy">
                     </div>
-                    <div style="flex:1;">
-                        <p style="font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; color:var(--accent);">${p.c}</p>
-                        <h4 style="margin-bottom:15px; font-family:var(--font-body); font-weight:600;">${p.n}</h4>
-                    </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span style="font-weight:800; font-size:1.2rem;">₹${p.p}</span>
-                        <span style="font-size:0.8rem; font-weight:600; opacity:0.4;">Details &rarr;</span>
+                    <div class="p-info">
+                        <h3>${p.n}</h3>
+                        <p>${p.d.substring(0, 60)}...</p>
+                        <div class="p-footer">
+                            <span class="p-price">₹${p.p}</span>
+                            <span class="add-quick">Select Options &rarr;</span>
+                        </div>
                     </div>
                 </div>
             `).join('');
         }
 
-        function filterShowcase() { _Q = document.getElementById('p-search').value; render(); }
-        function setCategory(c) {
-            _C = c;
-            document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
-            const T = Array.from(document.querySelectorAll('.tab-item')).find(el => el.innerText.toLowerCase().includes(c));
-            if(T) T.classList.add('active');
-            document.getElementById('view-title').innerText = c === 'all' ? 'All Essentials' : c.charAt(0).toUpperCase() + c.slice(1);
-            render();
+        function setCategory(cat) {
+            activeCat = cat;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('view-title').innerText = cat === 'all' ? 'All Heritage Products' : cat.replace('-', ' ').toUpperCase();
+            renderGrid();
         }
 
-        // AOS Trigger §11
-        window.onscroll = () => {
-            document.getElementById('master-nav').classList.toggle('scrolled', window.scrollY > 50);
-            document.querySelectorAll('[data-aos]').forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight * 0.9) el.classList.add('visible'); });
+        function handleSearch() {
+            searchQuery = document.getElementById('catalog-search').value;
+            renderGrid();
         }
-        window.onload = () => { setTimeout(() => { document.getElementById('hero').classList.add('loaded'); render(); }, 100); };
+
+        let selectedModalProd = null;
+        let selectedVariant = '';
+
+        function openDetails(id) {
+            selectedModalProd = _P.find(p => p.id === id);
+            selectedVariant = selectedModalProd.v[0];
+            const modal = document.getElementById('product-modal');
+            const content = document.getElementById('modal-content');
+
+            content.innerHTML = `
+                <div class="modal-close" onclick="closeModal()">&times;</div>
+                <div class="modal-img">
+                    <img src="${selectedModalProd.i}" alt="${selectedModalProd.n}">
+                </div>
+                <div class="modal-details">
+                    <p style="text-transform:uppercase; color:var(--accent); letter-spacing:3px; font-weight:600; margin-bottom:15px;">${selectedModalProd.c.replace('-', ' ')}</p>
+                    <h2>${selectedModalProd.n}</h2>
+                    <p class="modal-desc">${selectedModalProd.d}</p>
+                    
+                    <div class="variant-selector">
+                        <span class="variant-label">Select Variety/Size</span>
+                        <div class="variant-chips">
+                            ${selectedModalProd.v.map(v => `
+                                <div class="v-chip ${v === selectedVariant ? 'active' : ''}" onclick="selectVariant('${v}', this)">${v}</div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:30px; align-items:center;">
+                        <span style="font-size:3rem; font-weight:800;">₹${selectedModalProd.p}</span>
+                        <button class="btn btn-primary" onclick="addToCart()">Add to Current Selection</button>
+                    </div>
+
+                    <div class="trust-badges">
+                        <div class="badge">
+                            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                            <span>Traceable</span>
+                        </div>
+                        <div class="badge">
+                            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4-11l-1.41-1.41L10 12.17l-2.59-2.58L6 11l4 4 6-6z"/></svg>
+                            <span>Certified</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function selectVariant(v, el) {
+            selectedVariant = v;
+            document.querySelectorAll('.v-chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('product-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleCart(show) {
+            document.getElementById('cart-drawer').classList.toggle('active', show);
+            document.getElementById('cart-overlay').classList.toggle('active', show);
+        }
+
+        function addToCart() {
+            cart.push({ ...selectedModalProd, variant: selectedVariant });
+            updateCartUI();
+            closeModal();
+            toggleCart(true);
+        }
+
+        function updateQty(index, delta) {
+            if (delta === -1 && cart[index].qty === 1) {
+                cart.splice(index, 1);
+            } else {
+                cart[index].qty = (cart[index].qty || 1) + delta;
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const list = document.getElementById('cart-list');
+            const totalEl = document.getElementById('cart-total');
+            const countEl = document.getElementById('cart-count');
+
+            if (cart.length === 0) {
+                document.getElementById('empty-msg').style.display = 'block';
+                list.innerHTML = '';
+                totalEl.innerText = '₹0';
+                countEl.innerText = '0';
+                return;
+            }
+
+            document.getElementById('empty-msg').style.display = 'none';
+            let total = 0;
+            list.innerHTML = cart.map((item, i) => {
+                const qty = item.qty || 1;
+                total += item.p * qty;
+                return `
+                    <div class="cart-item">
+                        <img src="${item.i}">
+                        <div class="cart-item-info">
+                            <h4 style="font-weight:600; font-family:var(--font-body)">${item.n}</h4>
+                            <p style="font-size:0.8rem; opacity:0.5;">Variant: ${item.variant}</p>
+                            <div class="qty-control">
+                                <div class="qty-btn" onclick="updateQty(${i}, -1)">-</div>
+                                <span>${qty}</span>
+                                <div class="qty-btn" onclick="updateQty(${i}, 1)">+</div>
+                            </div>
+                        </div>
+                        <div style="font-weight:700">₹${item.p * qty}</div>
+                    </div>
+                `;
+            }).join('');
+
+            totalEl.innerText = `₹${total}`;
+            countEl.innerText = cart.length;
+        }
+
+        function checkout() {
+            if (cart.length === 0) return alert("Your selection is empty.");
+            
+            let message = "PROPOSED PALAKKADAN STOCK ORDER:%0A%0A";
+            let total = 0;
+            cart.forEach(item => {
+                const q = item.qty || 1;
+                message += `• *${item.n}* (${item.variant})%0A   Quantity: ${q}%0A   Value: ₹${item.p * q}%0A%0A`;
+                total += item.p * q;
+            });
+            message += `*ESTIMATED TOTAL: ₹${total}*%0A%0APlease verify logistics and availability via Chittur Concierge.`;
+            
+            window.location.href = `https://wa.me/918129144244?text=${message}`;
+        }
+
+        window.onscroll = () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+            document.querySelectorAll('[data-aos]').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight * 0.9) el.classList.add('visible');
+            });
+        };
+
+        window.onload = () => {
+            renderGrid();
+        };
     </script>
 </body>
 </html>
