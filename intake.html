@@ -51,9 +51,18 @@
         }
         .blueprint-card.active {
             border-color: #3b82f6;
-            background-color: #eff6ff;
+            background-color: #ffffff;
             transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.2), 0 10px 10px -5px rgba(59, 130, 246, 0.1);
+        }
+        .blueprint-card.active h5 { color: #0f172a !important; }
+        .blueprint-card.active p { color: #475569 !important; }
+        .blueprint-card.active .text-slate-400 { color: #64748b !important; }
+        .blueprint-card.active .text-blue-400 { color: #2563eb !important; }
+        
+        .blueprint-card:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: rgba(59, 130, 246, 0.3);
         }
         .ecomm-only { transition: all 0.4s ease; }
         .hidden-mode { display: none !important; opacity: 0; pointer-events: none; }
@@ -904,6 +913,34 @@
                 }
             }, 300);
         }
+
+        function setSiteMode(mode) {
+            const input = document.getElementById('site-mode-input');
+            if (input) input.value = mode;
+
+            // Update UI Active State
+            document.querySelectorAll('.blueprint-card').forEach(c => c.classList.remove('active'));
+            const activeCard = document.getElementById(`mode-${mode}`);
+            if (activeCard) activeCard.classList.add('active');
+
+            // Handle eCommerce vs Identity visibility
+            const currencyWrap = document.getElementById('currency-wrap');
+            const ecommFields = document.querySelectorAll('.ecomm-only-field');
+
+            if (mode === 'ecommerce') {
+                if (currencyWrap) currencyWrap.classList.remove('hidden-mode');
+                ecommFields.forEach(el => el.classList.remove('hidden-mode'));
+            } else {
+                if (currencyWrap) currencyWrap.classList.add('hidden-mode');
+                ecommFields.forEach(el => el.classList.add('hidden-mode'));
+            }
+
+            try {
+                if (typeof renderDynamicSlots === 'function') renderDynamicSlots();
+                if (typeof updateHUD === 'function') updateHUD();
+            } catch(e) { console.warn("UI Refresh failed during mode switch:", e); }
+        }
+        window.setSiteMode = setSiteMode;
 
         function toggleHUD() {
             const hud = document.getElementById('structure-hud');
