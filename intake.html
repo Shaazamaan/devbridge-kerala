@@ -583,19 +583,20 @@
                 recognition.interimResults = true;
             }
 
-            // Persistence Logic
+            // Persistence Logic (Omni-Aware)
             function saveDraft(index) {
                 const data = {};
-                steps.forEach(s => {
-                    const el = document.getElementsByName(s.field)[0] || document.getElementById(s.field);
-                    if(el) data[s.field] = el.value || el.checked;
+                const formData = new FormData(form);
+                formData.forEach((value, key) => {
+                    if (!(value instanceof File)) data[key] = value;
                 });
+
                 localStorage.setItem('dbk_intake_draft', JSON.stringify({ index, data, timestamp: Date.now() }));
             }
 
             function loadDraft() {
                 const draft = JSON.parse(localStorage.getItem('dbk_intake_draft'));
-                if (!draft || (Date.now() - draft.timestamp > 24 * 60 * 60 * 1000)) return null;
+                if (!draft || (Date.now() - draft.timestamp > 72 * 60 * 60 * 1000)) return null;
                 return draft;
             }
 
@@ -866,31 +867,16 @@
             
             // 1. Global Manual Auto-Save
             form.addEventListener('input', (e) => {
-                // Save current state whenever a manual input occurs
                 saveDraft(currentStep); 
-            });
-
-            // 2. Auditory Feedback for Manual Typing (Critical Fields)
-            const criticalFields = ['email', 'whatsapp', 'phone', 'businessName'];
-            criticalFields.forEach(field => {
-                const el = document.getElementsByName(field)[0];
-                if (el) {
-                    el.addEventListener('blur', () => {
-                        if (el.value.trim() !== "") {
-                            if (field === 'email' && !el.value.includes('@')) playTone('error');
-                            else playTone('success');
-                        }
-                    });
-                }
             });
 
             // 3. Auto-Restore State on Load
             const draft = loadDraft();
             if (draft && draft.data) {
-                // Phase 1: Basic & Numbers
+                // Phase 1: Core Identifiers & Static Counts
                 Object.keys(draft.data).forEach(key => {
                     const el = document.getElementsByName(key)[0] || document.getElementById(key);
-                    if (el) {
+                    if (el && !key.startsWith('prod_') && !key.startsWith('serv_')) {
                         if (el.type === 'radio') {
                             const radio = document.querySelector(`input[name="${key}"][value="${draft.data[key]}"]`);
                             if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change')); }
@@ -898,23 +884,28 @@
                     }
                 });
                 
-                // Phase 2: Trigger Dynamic Render
+                // Phase 2: Dynamic Primary Render
                 if (typeof renderDynamicSlots === 'function') renderDynamicSlots();
                 
-                // Phase 3: Restore Dynamic Field Values
+                // Phase 3: Nested Counts & Nested Rendering
                 Object.keys(draft.data).forEach(key => {
-                    if (key.startsWith('prod_') || key.startsWith('serv_')) {
+                    if (key.includes('sub_count')) {
                         const el = document.getElementsByName(key)[0];
-                        if (el && el.type !== 'file') el.value = draft.data[key];
+                        if (el) {
+                            el.value = draft.data[key];
+                            const idx = key.match(/\d+/)[0];
+                            if (window.renderSubItems) window.renderSubItems(idx);
+                        }
                     }
                 });
 
-                // Restore descriptions if they were toggled
-                if (draft.data.logo_desc) document.getElementById('logo_desc').classList.remove('hidden');
-                if (draft.data.hero_desc) document.getElementById('hero_desc').classList.remove('hidden');
-                if (draft.data.extra_desc1) document.getElementById('extra_desc1').classList.remove('hidden');
+                // Phase 4: Full Form Restoration (Recursive)
+                Object.keys(draft.data).forEach(key => {
+                    const el = document.getElementsByName(key)[0];
+                    if (el && el.type !== 'file') el.value = draft.data[key];
+                });
                 
-                console.log("Omni-Persistence: Profile Restored from local vault.");
+                console.log("Tree-Persistence: Profile and Hierarchy Restored.");
             }
         });
 
