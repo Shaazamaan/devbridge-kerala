@@ -1,8 +1,0 @@
-User-agent: *
-Disallow: /
-# DevBridge Kerala Build — preview phase
-# Update Sitemap line and remove Disallow when going live
-# User-agent: *
-# Allow: /
-# Disallow: /preview/
-# Sitemap: https://palakkadan.in/sitemap.xml

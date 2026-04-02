@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# Palakkadan Project Landing v14.1
+# Sitemap: https://devbridgekerala.com/palakkadan/sitemap.xml
