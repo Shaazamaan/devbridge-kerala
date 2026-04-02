@@ -42,6 +42,21 @@
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
         }
+
+        /* Blueprint Mode Styling */
+        .blueprint-card {
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+        .blueprint-card.active {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
+        }
+        .ecomm-only { transition: all 0.4s ease; }
+        .hidden-mode { display: none !important; opacity: 0; pointer-events: none; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen">
@@ -95,6 +110,43 @@
     <main class="max-w-3xl mx-auto px-6 py-12">
         <form id="intake-form" class="space-y-8">
             
+            <!-- Strategic Segment: Site Blueprint -->
+            <section class="bg-slate-900 p-8 rounded-[3rem] shadow-2xl border border-slate-800">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h3 class="text-sm font-800 uppercase tracking-widest text-blue-400 mb-1" data-i18n="blueprint_title">Digital Blueprint Mode</h3>
+                        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">Choose your site's core mission</p>
+                    </div>
+                    <div class="bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full text-[9px] font-900 uppercase tracking-widest border border-blue-500/20">Decision Required</div>
+                </div>
+
+                <input type="hidden" name="siteMode" id="site-mode-input" value="identity">
+                
+                <div class="grid md:grid-cols-3 gap-4">
+                    <!-- Identity Mode -->
+                    <div onclick="setSiteMode('identity')" id="mode-identity" class="blueprint-card active bg-slate-800/50 p-6 rounded-3xl border-slate-700 hover:bg-slate-800 transition-all">
+                        <div class="w-12 h-12 bg-slate-700 text-white rounded-2xl flex items-center justify-center mb-4 text-xl">🏠</div>
+                        <h5 class="text-xs font-900 text-white uppercase tracking-wider mb-2" data-i18n="blueprint_identity">Business Identity</h5>
+                        <p class="text-[9px] text-slate-400 font-medium leading-relaxed">Portfolio, Personal Brand, or Service Card. No pricing.</p>
+                    </div>
+
+                    <!-- Service Mode -->
+                    <div onclick="setSiteMode('service')" id="mode-service" class="blueprint-card bg-slate-800/50 p-6 rounded-3xl border-slate-700 hover:bg-slate-800 transition-all">
+                        <div class="w-12 h-12 bg-emerald-600/20 text-emerald-400 rounded-2xl flex items-center justify-center mb-4 text-xl">🛠️</div>
+                        <h5 class="text-xs font-900 text-white uppercase tracking-wider mb-2" data-i18n="blueprint_service">Service Showcase</h5>
+                        <p class="text-[9px] text-slate-400 font-medium leading-relaxed">Expertise, Lead Gen, and Booking focus. Optional pricing.</p>
+                    </div>
+
+                    <!-- eCommerce Mode -->
+                    <div onclick="setSiteMode('ecommerce')" id="mode-ecommerce" class="blueprint-card bg-slate-800/50 p-6 rounded-3xl border-slate-700 hover:bg-slate-800 transition-all">
+                        <div class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-4 text-xl shadow-lg shadow-blue-500/20">🛍️</div>
+                        <h5 class="text-xs font-900 text-white uppercase tracking-wider mb-2" data-i18n="blueprint_ecommerce">eCommerce Store</h5>
+                        <h5 class="text-[8px] font-900 text-blue-400 uppercase tracking-widest mb-1 italic">Full Cart-to-WA</h5>
+                        <p class="text-[9px] text-slate-400 font-medium leading-relaxed">Product catalogs, Catalog mode, and Live Pricing.</p>
+                    </div>
+                </div>
+            </section>
+
             <!-- Section 1: Identity -->
             <section class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
                 <h3 class="text-sm font-800 uppercase tracking-widest text-blue-600 mb-6 flex items-center gap-2">
@@ -157,9 +209,9 @@
                                 <option value="Technology &amp; IT">Technology &amp; IT</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <div class="mt-4 grid md:grid-cols-2 gap-4">
+                            <div class="ecomm-only hidden-mode mt-4 grid md:grid-cols-2 gap-4" id="currency-wrap">
                                 <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100">
-                                    <label class="block text-[9px] font-800 text-blue-500 uppercase tracking-widest mb-2">Display Currency Symbol *</label>
+                                    <label class="block text-[9px] font-800 text-blue-500 uppercase tracking-widest mb-2" data-i18n="currency">Display Currency Symbol *</label>
                                     <select name="currency" class="w-full px-3 py-2 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 font-bold text-sm">
                                         <option value="₹">INR (₹)</option>
                                         <option value="AED">AED</option>
@@ -187,6 +239,66 @@
                         <textarea name="businessDescription" rows="3"
                                   class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm font-medium"
                                   placeholder="e.g. Family-run bakery in Kochi specialising in custom wedding cakes and traditional Kerala sweets. Est. 2012, 500+ happy customers."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 1.5: Connectivity & Socials (OMNI-PAGE TOOLKIT) -->
+            <section class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
+                <h3 class="text-sm font-800 uppercase tracking-widest text-emerald-600 mb-6 flex items-center gap-2">
+                    <span class="w-2 h-4 bg-emerald-600 rounded-full"></span>
+                    <span data-i18n="conn_title">1.5 Connectivity & Socials (Omni-Page)</span>
+                </h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <label class="block text-[10px] font-800 text-slate-500 uppercase tracking-widest mb-2" data-i18n="cta_label">Primary Action Hook (CTA) *</label>
+                        <select name="primaryCTA" class="w-full px-4 py-3 rounded-xl border border-slate-200 font-bold text-sm outline-none focus:ring-2 focus:ring-emerald-500">
+                            <option value="WhatsApp">Order via WhatsApp 💬</option>
+                            <option value="Call">Call to Inquire 📞</option>
+                            <option value="Book">Book Appointment 📅</option>
+                            <option value="Identity">Contact Us 🏢</option>
+                        </select>
+                        <p class="text-[9px] text-slate-400 italic">This will be your site's main button text.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                        <label class="block text-[10px] font-800 text-slate-500 uppercase tracking-widest mb-4" data-i18n="hours_label">Business Operating Hours</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[8px] font-bold text-slate-400 uppercase">Opening Time</label>
+                                <input type="time" name="hours_open" value="09:00" class="w-full mt-1 p-2 rounded-lg border border-slate-200 text-xs">
+                            </div>
+                            <div>
+                                <label class="text-[8px] font-bold text-slate-400 uppercase">Closing Time</label>
+                                <input type="time" name="hours_close" value="18:00" class="w-full mt-1 p-2 rounded-lg border border-slate-200 text-xs">
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2">
+                            <input type="checkbox" name="is247" id="is247" class="custom-check w-4 h-4 rounded" onchange="document.querySelectorAll('[name^=\'hours_\']').forEach(i => i.disabled = this.checked)">
+                            <label for="is247" class="text-[10px] font-bold text-slate-500 uppercase">Open 24/7</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-8 border-t border-slate-100">
+                    <label class="block text-xs font-800 text-slate-400 uppercase tracking-wider mb-6" data-i18n="social_label">Social Media Footprint</label>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                            <span class="text-lg">📸</span>
+                            <input type="url" name="social_instagram" placeholder="Instagram URL" class="flex-1 bg-transparent outline-none text-xs font-medium" oninput="updateHUD()">
+                        </div>
+                        <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                            <span class="text-lg">👍</span>
+                            <input type="url" name="social_facebook" placeholder="Facebook URL" class="flex-1 bg-transparent outline-none text-xs font-medium" oninput="updateHUD()">
+                        </div>
+                        <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                            <span class="text-lg">💼</span>
+                            <input type="url" name="social_linkedin" placeholder="LinkedIn URL" class="flex-1 bg-transparent outline-none text-xs font-medium" oninput="updateHUD()">
+                        </div>
+                        <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                            <span class="text-lg">🎥</span>
+                            <input type="url" name="social_youtube" placeholder="YouTube URL" class="flex-1 bg-transparent outline-none text-xs font-medium" oninput="updateHUD()">
+                        </div>
                     </div>
                 </div>
             </section>
@@ -663,7 +775,15 @@
                 hud_ready: "Build Readiness Status",
                 hud_mapping: "Initialize identity to begin mapping...",
                 hud_collecting: "Collecting Intel...",
-                hud_ready_label: "Build Ready 🚀"
+                hud_ready_label: "Build Ready 🚀",
+                blueprint_title: "Digital Blueprint Mode",
+                blueprint_identity: "Business Identity",
+                blueprint_service: "Service Showcase",
+                blueprint_ecommerce: "eCommerce Store",
+                conn_title: "1.5 Connectivity & Socials (Omni-Page)",
+                cta_label: "Primary Action Hook (CTA) *",
+                hours_label: "Business Operating Hours",
+                social_label: "Social Media Footprint"
             },
             ml: {
                 title: "സ്റ്റാർട്ട് ഗേറ്റ്",
@@ -711,7 +831,15 @@
                 hud_ready: "ബിൽഡ് റെഡിനെസ്സ് സ്റ്റാറ്റസ്",
                 hud_mapping: "തുടങ്ങുന്നതിനായി വിവരങ്ങൾ നൽകുക...",
                 hud_collecting: "വിവരങ്ങൾ ശേഖരിക്കുന്നു...",
-                hud_ready_label: "സജ്ജമാണ് 🚀"
+                hud_ready_label: "സജ്ജമാണ് 🚀",
+                blueprint_title: "ഡിജിറ്റൽ ബ്ലൂപ്രിന്റ് മോഡ്",
+                blueprint_identity: "ബിസിനസ്സ് ഐഡന്റിറ്റി",
+                blueprint_service: "സർവീസ് ഷോക്കേസ്",
+                blueprint_ecommerce: "ഇ-കൊമേഴ്‌സ് സ്റ്റോർ",
+                conn_title: "1.5 കണക്റ്റിവിറ്റി & സോഷ്യൽസ്",
+                cta_label: "പ്രധാന ആക്ഷൻ (CTA) *",
+                hours_label: "ബിസിനസ്സ് സമയം",
+                social_label: "അക്കൗണ്ടുകൾ"
             }
         };
 
@@ -784,58 +912,83 @@
             const hudTree = document.getElementById('hud-tree');
             const statusEl = document.getElementById('hud-status');
             const formData = new FormData(form);
+            const mode = formData.get('siteMode');
             
             let html = '';
             let Score = 0;
-            let TotalSteps = 10; // Basic fields + dynamic checks
+            let TotalSteps = 12; // Expanded for Omni-Page
 
-            // 🏠 Identity
-            const bName = formData.get('businessName') || 'Untitled Project';
+            // --- 🏠 HUD Header: Blueprint Mode ---
+            const bName = formData.get('businessName') || (currentLang === 'en' ? 'Untitled Project' : 'പേരില്ലാത്ത പ്രോജക്റ്റ്');
+            const modeEmoji = mode === 'ecommerce' ? '🛍️' : (mode === 'service' ? '🛠️' : '🏠');
+            const modeText = TRANSLATIONS[currentLang][`blueprint_${mode}`] || mode;
+            
             if (formData.get('businessName')) Score++;
-            html += `<div class="hud-item flex items-center gap-2 text-[11px] font-900 text-slate-800">
-                <span class="text-blue-500">🏠</span> ${bName}
+            
+            html += `<div class="hud-item mb-4 pb-4 border-b border-slate-100">
+                <div class="flex items-center gap-2 text-[11px] font-900 text-slate-800">
+                    <span class="text-blue-500">${modeEmoji}</span> ${bName}
+                </div>
+                <div class="text-[8px] font-800 text-slate-400 uppercase tracking-widest mt-1">${modeText}</div>
             </div>`;
 
-            // 📦 Products
+            // --- 🔗 Connectivity Badges ---
+            let socialHtml = '';
+            if (formData.get('social_instagram')) socialHtml += '📸 ';
+            if (formData.get('social_facebook')) socialHtml += '👍 ';
+            if (formData.get('social_linkedin')) socialHtml += '💼 ';
+            if (formData.get('social_youtube')) socialHtml += '🎥 ';
+            
+            if (socialHtml) {
+                html += `<div class="hud-item mb-4">
+                    <p class="text-[8px] font-bold text-slate-400 uppercase mb-1">Social Footprint</p>
+                    <div class="text-[10px]">${socialHtml}</div>
+                </div>`;
+                Score++;
+            }
+
+            // --- 📦 Products ---
             const numP = parseInt(formData.get('num-products')) || 0;
             if (numP > 0) {
-                html += `<div class="hud-item pl-4 mt-2">
+                html += `<div class="hud-item pl-4 mt-2 mb-4">
                     <div class="flex items-center justify-between text-[10px] font-800 text-slate-500 uppercase tracking-tighter">
                         <span>📦 Products</span>
                         <span class="bg-blue-100 text-blue-600 px-1.5 rounded-md text-[8px]">${numP}</span>
                     </div>`;
-                for(let i=0; i<Math.min(numP, 5); i++) {
+                for(let i=0; i<Math.min(numP, 3); i++) {
                     const pName = formData.get(`prod_name_${i}`) || `Product #${i+1}`;
-                    html += `<p class="pl-3 mt-1 text-[9px] font-medium text-slate-400 border-l border-slate-100 truncate">• ${pName}</p>`;
+                    const pPrice = mode === 'ecommerce' ? ` (${formData.get(`prod_price_${i}`) || '0'})` : '';
+                    html += `<p class="pl-3 mt-1 text-[9px] font-medium text-slate-400 border-l border-slate-100 truncate">• ${pName}${pPrice}</p>`;
                 }
-                if (numP > 5) html += `<p class="pl-3 text-[8px] text-slate-300 italic">+ ${numP - 5} more...</p>`;
                 html += `</div>`;
             }
 
-            // 🛠️ Services
+            // --- 🛠️ Services ---
             const numS = parseInt(formData.get('num-services')) || 0;
             if (numS > 0) {
-                html += `<div class="hud-item pl-4 mt-1">
+                html += `<div class="hud-item pl-4 mt-1 mb-4">
                     <div class="flex items-center justify-between text-[10px] font-800 text-slate-500 uppercase tracking-tighter">
                         <span>🛠️ Services</span>
                         <span class="bg-emerald-100 text-emerald-600 px-1.5 rounded-md text-[8px]">${numS}</span>
                     </div>`;
-                for(let i=0; i<Math.min(numS, 5); i++) {
+                for(let i=0; i<Math.min(numS, 3); i++) {
                     const sName = formData.get(`serv_name_${i}`) || `Service #${i+1}`;
-                    html += `<p class="pl-3 mt-1 text-[9px] font-medium text-slate-400 border-l border-slate-100 truncate">• ${sName}</p>`;
+                    const sPrice = mode === 'ecommerce' ? ` (${formData.get(`serv_price_${i}`) || '0'})` : '';
+                    html += `<p class="pl-3 mt-1 text-[9px] font-medium text-slate-400 border-l border-slate-100 truncate">• ${sName}${sPrice}</p>`;
                 }
-                if (numS > 5) html += `<p class="pl-3 text-[8px] text-slate-300 italic">+ ${numS - 5} more...</p>`;
                 html += `</div>`;
             }
 
-            // Completion Logic
+            // --- Progress Logic ---
             if (formData.get('tagline')) Score++;
             if (formData.get('businessCategory')) Score++;
-            if (formData.get('city')) Score++; // Added 10th step
+            if (formData.get('city')) Score++;
             if (formData.get('whatsapp')) Score++;
             if (formData.get('email')) Score++;
+            if (formData.get('primaryCTA')) Score++;
+            if (formData.get('hours_open')) Score++;
             if (formData.get('file_payment') && formData.get('file_payment').size > 0) Score += 2;
-            if (numP > 0 || numS > 0) Score += 2;
+            if (numP > 0 || numS > 0) Score += 1;
 
             const finalPercent = (Score / TotalSteps) * 100;
             setProgress(finalPercent);
@@ -1361,6 +1514,30 @@
             const numServicesInput = document.getElementById('num-services');
             const bulkPasteWrap = document.getElementById('bulk-paste-container');
 
+            function setSiteMode(mode) {
+                const input = document.getElementById('site-mode-input');
+                input.value = mode;
+
+                // Update UI Active State
+                document.querySelectorAll('.blueprint-card').forEach(c => c.classList.remove('active'));
+                document.getElementById(`mode-${mode}`).classList.add('active');
+
+                // Toggle eCommerce Visibility
+                const currencyWrap = document.getElementById('currency-wrap');
+                const ecommFields = document.querySelectorAll('.ecomm-only-field');
+                
+                if (mode === 'ecommerce') {
+                    currencyWrap.classList.remove('hidden-mode');
+                    ecommFields.forEach(el => el.classList.remove('hidden-mode'));
+                } else {
+                    currencyWrap.classList.add('hidden-mode');
+                    ecommFields.forEach(el => el.classList.add('hidden-mode'));
+                }
+
+                renderDynamicSlots();
+                updateHUD();
+            }
+
             function renderDynamicSlots() {
                 const numProducts = parseInt(numProductsInput.value) || 0;
                 const numServices = parseInt(numServicesInput.value) || 0;
@@ -1389,7 +1566,7 @@
                                     <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Main Asset</label>
                                     <input type="file" name="prod_file_${i}" accept="image/*,video/*,application/pdf,application/zip" class="text-[9px] w-full">
                                 </div>
-                                <div class="bg-white p-3 rounded-xl border border-slate-100">
+                                <div class="bg-white p-3 rounded-xl border border-slate-100 ecomm-only-field ${document.getElementById('site-mode-input').value !== 'ecommerce' ? 'hidden-mode' : ''}">
                                     <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Price/MRP</label>
                                     <input type="number" name="prod_price_${i}" class="w-full bg-slate-50 p-2 rounded-lg text-[10px] outline-none font-bold" placeholder="0.00">
                                 </div>
@@ -1433,7 +1610,7 @@
                                     <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Main Asset</label>
                                     <input type="file" name="serv_file_${i}" accept="image/*,video/*,application/pdf,application/zip" class="text-[9px] w-full">
                                 </div>
-                                <div class="bg-white p-3 rounded-xl border border-slate-100">
+                                <div class="bg-white p-3 rounded-xl border border-slate-100 ecomm-only-field ${document.getElementById('site-mode-input').value !== 'ecommerce' ? 'hidden-mode' : ''}">
                                     <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Service Price</label>
                                     <input type="number" name="serv_price_${i}" class="w-full bg-slate-50 p-2 rounded-lg text-[10px] outline-none font-bold" placeholder="0.00">
                                 </div>
@@ -1467,8 +1644,8 @@
                 const countInput = document.getElementsByName(`${type}_sub_count_${idx}`)[0];
                 const containerId = type === 'prod' ? `subitem-container-${idx}` : `subitem-container-serv-${idx}`;
                 const container = document.getElementById(containerId);
-                const count = parseInt(countInput.value) || 0;
                 const accent = type === 'prod' ? 'blue' : 'emerald';
+                const mode = document.getElementById('site-mode-input').value;
                 
                 let html = '';
                 for(let j=0; j<count; j++) {
@@ -1477,9 +1654,9 @@
                         <div class="flex flex-col md:flex-row gap-4">
                             <div class="flex-1">
                                 <label class="block text-[8px] font-800 text-${accent}-400 uppercase mb-1">Variation #${j+1} Name</label>
-                                <input type="text" name="${type}_${idx}_sub_${j}_name" required class="w-full px-3 py-2 rounded-lg border border-slate-100 bg-slate-50 outline-none focus:ring-2 focus:ring-${accent}-400 transition-all text-xs font-bold" placeholder="Level/Variation Name">
+                                <input type="text" name="${type}_${idx}_sub_${j}_name" required class="w-full px-3 py-2 rounded-lg border border-slate-100 bg-slate-50 outline-none focus:ring-2 focus:ring-${accent}-400 transition-all text-xs font-bold" placeholder="Level/Variation Name" oninput="updateHUD()">
                             </div>
-                            <div class="w-24">
+                            <div class="w-24 ecomm-only-field ${mode !== 'ecommerce' ? 'hidden-mode' : ''}">
                                 <label class="block text-[8px] font-800 text-${accent}-400 uppercase mb-1">Price</label>
                                 <input type="number" name="${type}_${idx}_sub_${j}_price" class="w-full px-3 py-2 rounded-lg border border-slate-100 bg-slate-100 outline-none focus:ring-2 focus:ring-${accent}-400 transition-all text-xs font-bold" placeholder="0.00">
                             </div>
