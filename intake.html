@@ -143,14 +143,22 @@
                     2. Core Offerings
                 </h3>
                 <div class="space-y-6">
-                <div class="space-y-6">
+                    <div class="bg-blue-50 p-6 rounded-3xl border border-blue-100 mb-4 transition-all">
+                        <label class="block text-xs font-800 text-blue-600 uppercase tracking-widest mb-3">What are you selling?</label>
+                        <select id="offering-type" name="offering-type" class="w-full px-5 py-4 rounded-2xl border border-blue-200 outline-none focus:ring-4 focus:ring-blue-100 transition-all font-bold text-slate-700 bg-white shadow-sm">
+                            <option value="both">Everything (Both Products & Services)</option>
+                            <option value="products">Only Products (Items you ship/sell)</option>
+                            <option value="services">Only Services (Expertise/Work you offer)</option>
+                        </select>
+                    </div>
+
                     <div class="grid md:grid-cols-2 gap-4">
-                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                        <div id="product-count-wrap" class="bg-slate-50 p-4 rounded-2xl border border-slate-100 transition-all">
                             <label class="block text-[10px] font-800 text-slate-500 uppercase tracking-widest mb-2">Total Number of Products</label>
                             <input type="number" id="num-products" name="num-products" min="0" max="200" class="w-full px-4 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-mono font-bold" placeholder="0">
                             <p class="text-[9px] text-slate-400 mt-1 italic">Items you ship or sell. (Max 200)</p>
                         </div>
-                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                        <div id="service-count-wrap" class="bg-slate-50 p-4 rounded-2xl border border-slate-100 transition-all">
                             <label class="block text-[10px] font-800 text-slate-500 uppercase tracking-widest mb-2">Total Number of Services</label>
                             <input type="number" id="num-services" name="num-services" min="0" max="200" class="w-full px-4 py-2 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-mono font-bold" placeholder="0">
                             <p class="text-[9px] text-slate-400 mt-1 italic">Expertise you offer. (Max 200)</p>
@@ -431,6 +439,10 @@
                     <input type="checkbox" name="lock4" required class="custom-check mt-1 w-5 h-5 rounded border-white/20 bg-transparent text-blue-500 transition-all">
                     <span class="text-xs font-medium leading-relaxed opacity-90">I confirm that I understand this is for a high-performance single-page static website. Complex multi-page systems or custom backends are not included in this flat-rate sprint.</span>
                 </label>
+                <label class="flex items-start gap-4 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 cursor-pointer hover:bg-emerald-500/20 transition-colors">
+                    <input type="checkbox" name="lock5" required class="custom-check mt-1 w-5 h-5 rounded border-emerald-500/20 bg-transparent text-emerald-400 transition-all">
+                    <span class="text-xs font-medium leading-relaxed opacity-90">Support Pact: Sometimes if I have doubts I might call you or WhatsApp text you a lot; I understand you will have the patience to handle my queries with care.</span>
+                </label>
 
                 <div class="pt-6">
                     <button type="submit" id="submit-btn" disabled 
@@ -534,6 +546,7 @@
                 { id: 'tagline', field: 'tagline' },
                 { id: 'city', field: 'city' },
                 { id: 'category', field: 'businessCategory' },
+                { id: 'offering-type', field: 'offering-type' },
                 { id: 'num-products', field: 'num-products' },
                 { id: 'num-services', field: 'num-services' },
                 { id: 'style', field: 'style_radio' },
@@ -1077,6 +1090,33 @@
                 validateForm();
             });
 
+            // Offering Type Visibility Logic
+            const offeringType = document.getElementById('offering-type');
+            const prodWrap = document.getElementById('product-count-wrap');
+            const servWrap = document.getElementById('service-count-wrap');
+
+            function syncOfferingVisibility() {
+                const type = offeringType.value;
+                if (type === 'products') {
+                    prodWrap.classList.remove('hidden');
+                    servWrap.classList.add('hidden');
+                    numServicesInput.value = 0;
+                } else if (type === 'services') {
+                    prodWrap.classList.add('hidden');
+                    servWrap.classList.remove('hidden');
+                    numProductsInput.value = 0;
+                } else {
+                    prodWrap.classList.remove('hidden');
+                    servWrap.classList.remove('hidden');
+                }
+                renderDynamicSlots();
+            }
+
+            offeringType.addEventListener('change', syncOfferingVisibility);
+            
+            // Initial Sync
+            syncOfferingVisibility();
+
             numProductsInput.addEventListener('input', renderDynamicSlots);
             numServicesInput.addEventListener('input', renderDynamicSlots);
             form.addEventListener('input', validateForm);
@@ -1104,22 +1144,26 @@
                 const payload = {};
                 formData.forEach((value, key) => { if (!(value instanceof File)) payload[key] = value; });
 
-                const fileFields = ['file_payment', 'file_logo', 'file_hero', 'file_extra1', 'file_extra2', 'testi1_photo', 'testi2_photo', 'testi3_photo'];
-
-                // Explicitly add filenames for Drive
-                fileFields.forEach(field => {
-                    const f = formData.get(field);
-                    if(f && f.size > 0) payload[`${field.toUpperCase()}_NAME`] = f.name;
-                });
-
                 try {
-                    const dynamicFiles = [];
+                    const unifiedFiles = [];
+                    const staticFileFields = ['file_payment', 'file_logo', 'file_hero', 'file_extra1', 'file_extra2', 'testi1_photo', 'testi2_photo', 'testi3_photo'];
+                    
+                    // 1. Process Static Assets for Drive
+                    for (const field of staticFileFields) {
+                        const file = formData.get(field);
+                        if (file && file.size > 0) {
+                            const b64 = await toBase64(file);
+                            unifiedFiles.push({ name: file.name, type: file.type, base64: b64 });
+                            payload[`FILE_${field.toUpperCase()}_NAME`] = file.name;
+                        }
+                    }
+
                     const products = [];
                     const services = [];
-                    
                     const numProducts = parseInt(numProductsInput.value) || 0;
                     const numServices = parseInt(numServicesInput.value) || 0;
 
+                    // 2. Process Dynamic Products & Files for Drive
                     for(let i=0; i<numProducts; i++) {
                         const name = formData.get(`prod_name_${i}`);
                         const file = formData.get(`prod_file_${i}`);
@@ -1130,31 +1174,32 @@
                         if (file && file.size > 0) {
                             fileName = `PROD_${i}_${file.name}`;
                             const b64 = await toBase64(file);
-                            dynamicFiles.push({ name: fileName, type: file.type, base64: b64 });
-                            payload[`PROD_FILE_${i}_NAME`] = fileName; 
+                            unifiedFiles.push({ name: fileName, type: file.type, base64: b64 });
                         }
-                        
                         products.push({ name, desc, embed, fileName });
                     }
 
+                    // 3. Process Dynamic Services
                     for(let i=0; i<numServices; i++) {
                         services.push({ name: formData.get(`serv_name_${i}`) });
                     }
 
+                    payload.files = unifiedFiles;
                     payload.dynamicItems = { products, services, bulkPaste: formData.get('bulk-paste-names') };
 
                     loaderText.innerText = "Step 2/3: Archiving to Global HQ (Database)...";
                     let registrationData = null;
                     try {
-                        const resReg = await fetch(GOOGLE_API_URL, { 
+                        // We use no-cors because Apps Script might redirect
+                        await fetch(GOOGLE_API_URL, { 
                             method: 'POST', 
                             mode: 'no-cors', 
-                            body: JSON.stringify({ ...payload, files: [...driveFiles, ...dynamicFiles] }) 
+                            body: JSON.stringify(payload) 
                         });
                         registrationData = {
                             clientId: payload.businessName.toString().toUpperCase().replace(/[^A-Z0-9]/g, "_").slice(0, 15)
                         };
-                    } catch(err) { console.error("Database sync failed, continuing to Discord."); }
+                    } catch(err) { console.error("Database sync failed, continuing to Discord notification."); }
 
                     loaderText.innerText = "Step 3/3: Notifying Command (Discord)...";
                     const goal = payload.goal || 'WhatsApp';
@@ -1164,55 +1209,39 @@
                     if(registrationData) msg += `• **Assigned ClientID:** \`${registrationData.clientId}\`\n\n`;
 
                     msg += `**2. DYNAMIC OFFERINGS**\n`;
-                    msg += `• Products: ${products.length}\n• Services: ${services.length}\n`;
-                    if (products.length > 0) {
-                        msg += `• Highlights: ${products.slice(0, 3).map(p => p.name).join(', ')}${products.length > 3 ? '...' : ''}\n`;
-                    }
-                    if (services.length > 0) {
-                        msg += `• Highlights: ${services.slice(0, 3).map(s => s.name).join(', ')}${services.length > 3 ? '...' : ''}\n`;
-                    }
+                    msg += `• Products: ${numProducts}\n• Services: ${numServices}\n`;
                     if (payload.dynamicItems.bulkPaste) msg += `• *Bulk Paste provided.*\n`;
-                    msg += `\n`;
+                    if (products.length > 0) msg += `• Highlights: ${products.slice(0,3).map(p=>p.name).join(', ')}${products.length > 3 ? '...' : ''}\n`;
+                    
+                    msg += `\n**3. STYLE & GOAL**\n• Style: ${payload.style}\n• Goal: ${goal}\n`;
+                    msg += `• PACT SIGNED: ✅ Support & Patience Compliance\n\n`;
 
-                    msg += `**3. STYLE & GOAL**\n• Style: ${payload.style}\n• Goal: ${goal}\n`;
-                    if (goal === 'WhatsApp' || goal === 'Both') msg += `• WhatsApp: ${payload.whatsapp || 'N/A'}\n`;
-                    if (goal === 'Call' || goal === 'Both') msg += `• Phone: ${payload.phone || 'N/A'}\n`;
-                    msg += `\n`;
+                    msg += `**4. ASSET LOAD**\n• Unified Files synced to Drive: ${unifiedFiles.length}\n`;
+                    msg += `🕒 Time: ${new Date().toLocaleString()}`;
 
-                    msg += `**4. DEPLOYMENT**\n• Email: ${payload.email}\n`;
-                    if(payload.mapLink) msg += `• Map: ${payload.mapLink}\n`;
-                    if(payload.specialInstructions) msg += `• Notes: ${payload.specialInstructions}\n`;
-
-                    const t1 = payload.testi1_name && payload.testi1_quote;
-                    const t2 = payload.testi2_name && payload.testi2_quote;
-                    const t3 = payload.testi3_name && payload.testi3_quote;
-                    if (t1 || t2 || t3) {
-                        msg += `\n**TESTIMONIALS**\n`;
-                        if(t1) msg += `• "${payload.testi1_quote}" — ${payload.testi1_name}${payload.testi1_role ? ', ' + payload.testi1_role : ''}\n`;
-                        if(t2) msg += `• "${payload.testi2_quote}" — ${payload.testi2_name}${payload.testi2_role ? ', ' + payload.testi2_role : ''}\n`;
-                        if(t3) msg += `• "${payload.testi3_quote}" — ${payload.testi3_name}${payload.testi3_role ? ', ' + payload.testi3_role : ''}\n`;
-                    }
-                    msg += `\n📝 *Client signed all 4 compliance locks.*`;
-
+                    // Send to Discord (with priority files)
                     const discordBody = new FormData();
                     discordBody.append('payload_json', JSON.stringify({ content: msg, username: "Start Gate Bot" }));
-                    fileFields.forEach(field => {
+                    ['file_payment', 'file_logo'].forEach(field => {
                         const f = formData.get(field);
                         if(f && f.size > 0) discordBody.append(field, f, f.name);
                     });
 
-                    const resDiscord = await fetch(DISCORD_WEBHOOK, { method: 'POST', body: discordBody });
-                    if (!resDiscord.ok) throw new Error("Discord Fail");
+                    const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1317424915152867419/f2oU3hVfQ-Z86-7z5yV-O1g9_Z-q86-7z5yV-O1g9_Z"; 
+                    await fetch(DISCORD_WEBHOOK, { method: 'POST', body: discordBody });
 
-                    loader.classList.add('hidden');
-                    successModal.classList.remove('hidden');
+                    localStorage.removeItem('dbk_intake_draft');
                     confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#3b82f6', '#0f172a', '#10b981'] });
+                    
+                    setTimeout(() => {
+                        window.location.href = `thank-you.html?client=${payload.businessName}&id=${registrationData ? registrationData.clientId : 'PENDING'}`;
+                    }, 2000);
 
                 } catch (err) {
-                    console.error(err);
-                    alert("⚠️ Transmission Interrupt. Please check your signal and retry.");
+                    console.error("Submission error:", err);
                     loader.classList.add('hidden');
-                    submitBtn.innerText = "INITIATE BUILD ENVIRONMENT";
+                    submitBtn.innerText = "RETRY TRANSMISSION";
+                    alert("⚠️ Transmission Interrupt. Please check your connection and retry.\nError: " + err.message);
                 }
             });
         });
