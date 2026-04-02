@@ -4,9 +4,9 @@
   ╠══════════════════════════════════════════════════╣
   ║  Standard      : 10 CRORE eCOMMERCE (FINAL)      ║
   ║  Scale         : 200 PROD READY | SCALABLE GRID  ║
-  ║  Perspective   : CMOS/CPM | ABSOLUTE PERFECTION  ║
+  ║  Perspective   : CMOS/CPM | HYBRID CONVERSION    ║
   ║  Architecture  : ZERO-BACKEND | WHATSAPP FULFILL ║
-  ║  Build Date    : 2026-04-03 | ZERO-GAP           ║
+  ║  Built         : 2026-04-03 | ZERO-GAP           ║
   ╚══════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
@@ -98,21 +98,18 @@
         .hero-content { position: relative; color: white; text-align: center; max-width: 1000px; padding: 40px; z-index: 2; }
         .hero-title { font-size: clamp(3.5rem, 12vw, 8rem); margin-bottom: 30px; letter-spacing: -2px; }
 
-        /* Trust Anchor §5.1 - CMO logic */
-        .trust-anchor { margin-top: 40px; opacity: 0.7; font-size: 0.9rem; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; }
-
         .btn {
             display: inline-flex; align-items: center; gap: 12px;
-            padding: 22px 50px; border-radius: 50px; font-size: 1.1rem; font-weight: 600;
+            padding: 20px 40px; border-radius: 50px; font-size: 1rem; font-weight: 600;
             cursor: pointer; transition: var(--transition); border: none; text-decoration: none;
         }
         .btn-primary { background: var(--primary); color: white; }
         .btn-primary:hover { background: var(--accent); transform: translateY(-5px); box-shadow: var(--shadow-float); }
+        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: white; }
 
         /* eCommerce Container */
         .shop-layout { display: grid; grid-template-columns: 320px 1fr; gap: 60px; padding: 120px 5%; max-width: 1600px; margin: 0 auto; }
-        
-        /* Sidebar Filtering §5.3 - CPM functionality */
         .shop-sidebar { position: sticky; top: 120px; height: fit-content; }
         .filter-group { margin-bottom: 50px; }
         .filter-group h4 { margin-bottom: 25px; font-size: 1.2rem; }
@@ -122,10 +119,8 @@
             background: rgba(45, 67, 48, 0.03); border: 1px solid transparent;
         }
         .tab:hover, .tab.active { background: white; border-color: var(--accent); color: var(--accent); box-shadow: var(--shadow-soft); }
-        .tab span { font-size: 0.8rem; opacity: 0.5; float: right; }
 
         /* Product Grid §5.8 */
-        .main-showcase { flex: 1; }
         .showcase-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; }
         
@@ -137,7 +132,6 @@
         .p-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-float); border-color: rgba(212, 175, 120, 0.2); }
         .p-img { width: 100%; aspect-ratio: 1/1; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 25px; position: relative; }
         .p-img img { width: 100%; height: 100%; object-fit: cover; transition: scale 1s ease; }
-        .p-card:hover .p-img img { scale: 1.1; }
         
         .p-tag { position: absolute; top: 15px; left: 15px; background: var(--glass); padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
         .p-badge-scarcity { position: absolute; top: 15px; right: 15px; background: #FF4D4D; color: white; padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; letter-spacing: 1px; }
@@ -147,9 +141,8 @@
         .p-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
         .p-price { font-size: 1.3rem; font-weight: 700; }
         .add-quick { font-size: 0.85rem; font-weight: 600; color: var(--accent); border-bottom: 1px solid transparent; transition: 0.3s; }
-        .p-card:hover .add-quick { border-color: var(--accent); }
 
-        /* Cart Drawer UI §21 - CPM Logic */
+        /* Cart Drawer UI §21 */
         #cart-drawer {
             position: fixed; top: 0; right: -600px; width: 100%; max-width: 600px; height: 100vh;
             background: white; z-index: 4000; transition: var(--transition); padding: 60px;
@@ -158,14 +151,7 @@
         #cart-drawer.active { right: 0; }
         .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); display: none; z-index: 3999; }
         .cart-overlay.active { display: block; }
-
         .cart-items { flex: 1; overflow-y: auto; margin: 40px 0; }
-        .cart-item { display: flex; gap: 20px; padding: 25px 0; border-bottom: 1px solid rgba(0,0,0,0.05); align-items: center; }
-        .cart-item img { width: 80px; height: 80px; border-radius: 12px; object-fit: cover; }
-        .cart-item-info { flex: 1; }
-        .qty-control { display: flex; align-items: center; gap: 15px; margin-top: 10px; }
-        .qty-btn { cursor: pointer; width: 30px; height: 30px; border: 1px solid rgba(0,0,0,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
-        .qty-btn:hover { background: var(--primary); color: white; }
 
         /* Direct Contact FAB CMOS §12 */
         .fab-container { position: fixed; bottom: 30px; left: 30px; z-index: 3500; display: flex; flex-direction: column; gap: 15px; }
@@ -173,18 +159,13 @@
             width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2); transition: var(--transition); cursor: pointer; position: relative;
         }
-        .fab:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 20px 45px rgba(0,0,0,0.3); }
         .fab.whatsapp { background: #25D366; color: white; animation: fab-pulse 2s infinite; }
         .fab.phone { background: var(--primary); color: white; border: 2px solid var(--accent); }
-        .fab svg { width: 30px; height: 30px; }
-        
         .fab-tooltip { 
             position: absolute; left: 80px; background: var(--primary); color: white; padding: 8px 15px; 
             border-radius: 8px; font-size: 0.8rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.3s;
         }
         .fab:hover .fab-tooltip { opacity: 1; left: 90px; }
-
-        @keyframes fab-pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
 
         /* Details Modal §5.9 */
         #product-modal {
@@ -197,34 +178,30 @@
             background: white; width: 90%; max-width: 1200px; padding: 60px; border-radius: var(--radius-lg); 
             box-shadow: 0 60px 120px rgba(0,0,0,0.1); display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; position: relative;
         }
+        .modal-close { position: absolute; top: 30px; right: 30px; font-size: 2rem; cursor: pointer; opacity: 0.4; transition: 0.3s; }
+        .modal-img { border-radius: var(--radius-md); overflow: hidden; height: 600px; }
+        .modal-img img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Provenance Section CMOS */
         .provenance { background: #111; color: white; padding: 120px 10%; border-radius: 60px; margin: 0 5% 120px; text-align: center; }
-        .provenance h2 { font-size: 3.5rem; margin-bottom: 30px; }
-        .provenance p { font-size: 1.2rem; opacity: 0.6; line-height: 1.8; max-width: 800px; margin: 0 auto 60px; }
-        .coordinates { display: flex; justify-content: center; gap: 40px; font-family: monospace; font-size: 1.5rem; color: var(--accent); opacity: 0.8; letter-spacing: 5px; }
-
         footer { background: #111; color: #444; padding: 120px 5%; text-align: center; }
 
+        @keyframes fab-pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
         [data-aos] { opacity: 0; transform: translateY(30px); transition: var(--transition); }
         [data-aos].visible { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 1024px) {
             nav { top: 0; }
-            .promo-bar { font-size: 0.75rem; }
             .shop-layout { grid-template-columns: 1fr; }
-            .shop-sidebar { position: static; margin-bottom: 60px; }
             .modal-content { grid-template-columns: 1fr; padding: 40px; max-height: 90vh; overflow-y: auto; }
-            .modal-img { height: 400px; }
-            .provenance h2 { font-size: 2.5rem; }
+            .modal-img { height: 350px; }
         }
     </style>
 </head>
-<body id="top">
+<body>
 
     <div class="promo-bar">
-        Limited Harvest Heritage Stock and Consultation Available. 
-        <a href="https://wa.me/918129144244?text=Hi%2C+I'm+interested+in+a+heritage+sourcing+consultation." target="_blank">Connect Now &rarr;</a>
+        Direct Heritage Sourcing Consultation Available. 
+        <a href="https://wa.me/918129144244?text=Hi%2C+I'm+interested+in+heritage+sourcing." target="_blank">Connect Now &rarr;</a>
     </div>
 
     <nav id="navbar">
@@ -237,56 +214,31 @@
         </div>
     </nav>
 
-    <!-- Floating Contact FABs §12 -->
     <div class="fab-container">
-        <div class="fab phone" onclick="window.location.href='tel:+918129144244'">
-            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.82 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-            <div class="fab-tooltip">Direct Heritage Hotline</div>
-        </div>
-        <div class="fab whatsapp" onclick="window.location.href='https://wa.me/918129144244?text=Hi%2C+I+need+priority+concierge+support+for+my+heritage+selection.'">
-            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.539 2.016 2.126-.54 1.079.627c.563.328 1.16.499 1.838.499 3.14 0 5.694-2.554 5.694-5.694-.001-3.125-2.532-5.726-5.731-5.726h-.219zm-.275 9.172v.001c-.531 0-1.04-.153-1.472-.444l-.105-.07-.582.164.167-.557-.101-.15a3.818 3.818 0 01-.632-2.09c0-2.126 1.728-3.854 3.854-3.854 1.029 0 1.996.401 2.723 1.128a3.834 3.834 0 011.128 2.72c-.001 2.127-1.731 3.857-3.857 3.857h-.105zm2.115-2.887c-.116-.058-.686-.339-.79-.379-.107-.038-.184-.058-.261.058-.078.117-.298.379-.366.456-.067.078-.135.087-.25.029-.117-.058-.492-.181-.937-.577-.347-.309-.581-.691-.649-.808-.067.116-.007.179.051.236.053.053.117.135.176.204.058.067.078.116.117.194.038.077.02.145-.009.203-.03.059-.262.632-.36.866-.095.23-.2.198-.275.201-.068.003-.146.003-.224.003-.078.003-.204-.03-.311-.146-.107-.116-.407-.398-.407-.971 0-.573.417-1.126.475-1.204.058-.078.821-1.253 1.989-1.758.277-.121.493-.193.664-.249.278-.088.531-.076.732-.046.223.033.686.28.783.551.097.271.097.502.067.551-.029.048-.107.077-.223.136z"/></svg>
-            <div class="fab-tooltip">Priority WhatsApp Concierge</div>
-        </div>
+        <div class="fab phone" onclick="window.location.href='tel:+918129144244'"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.82 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><div class="fab-tooltip">Direct Hotline</div></div>
+        <div class="fab whatsapp" onclick="window.location.href='https://wa.me/918129144244?text=Hi%2C+I+need+concierge+support.'"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.539 2.016 2.126-.54 1.079.627c.563.328 1.16.499 1.838.499 3.14 0 5.694-2.554 5.694-5.694-.001-3.125-2.532-5.726-5.731-5.726h-.219zm-.275 9.172v.001c-.531 0-1.04-.153-1.472-.444l-.105-.07-.582.164.167-.557-.101-.15a3.818 3.818 0 01-.632-2.09c0-2.126 1.728-3.854 3.854-3.854 1.029 0 1.996.401 2.723 1.128a3.834 3.834 0 011.128 2.72c-.001 2.127-1.731 3.857-3.857 3.857h-.105zm2.115-2.887c-.116-.058-.686-.339-.79-.379-.107-.038-.184-.058-.261.058-.078.117-.298.379-.366.456-.067.078-.135.087-.25.029-.117-.058-.492-.181-.937-.577-.347-.309-.581-.691-.649-.808-.067.116-.007.179.051.236.053.053.117.135.176.204.058.067.078.116.117.194.038.077.02.145-.009.203-.03.059-.262.632-.36.866-.095.23-.2.198-.275.201-.068.003-.146.003-.224.003-.078.003-.204-.03-.311-.146-.107-.116-.407-.398-.407-.971 0-.573.417-1.126.475-1.204.058-.078.821-1.253 1.989-1.758.277-.121.493-.193.664-.249.278-.088.531-.076.732-.046.223.033.686.28.783.551.097.271.097.502.067.551-.029.048-.107.077-.223.136z"/></svg><div class="fab-tooltip">Priority WhatsApp</div></div>
     </div>
 
     <div id="hero" class="loaded">
         <div class="hero-bg"></div>
         <div class="hero-content">
-            <p data-aos>Absolute Final Edition v14.1 | March 2026</p>
             <h1 class="hero-title" data-aos>Scaling Purity to Global Standards.</h1>
-            <div data-aos style="margin-top: 40px;">
-                <a href="#shop" class="btn btn-primary">Discover the Heritage Catalog</a>
-            </div>
-            <div class="trust-anchor" data-aos>Served 2,400+ Heritage Subscribers Globally</div>
+            <div data-aos style="margin-top: 40px;"><a href="#shop" class="btn btn-primary">Discover the Catalog</a></div>
         </div>
     </div>
 
-    <!-- Product Modal §5.9 -->
     <div id="product-modal">
         <div class="modal-overlay" onclick="closeModal()" style="position:fixed; width:100%; height:100%; z-index:-1;"></div>
         <div class="modal-content" id="modal-content"></div>
     </div>
 
-    <!-- Cart Drawer §21 - CMOS ACTIVE COMMERCE -->
     <div class="cart-overlay" id="cart-overlay" onclick="toggleCart(false)"></div>
     <div id="cart-drawer">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h2 style="font-size:2rem; font-family:var(--font-display)">Your Selection</h2>
-            <div onclick="toggleCart(false)" style="cursor:pointer; font-size:2rem; opacity:0.3">&times;</div>
-        </div>
-        <div class="cart-items" id="cart-list">
-            <div style="text-align:center; padding:100px 0; opacity:0.3;" id="empty-msg">
-                <p>Your heritage selection is currently empty.</p>
-                <div style="margin-top:20px;"><a href="#shop" onclick="toggleCart(false)" style="color:var(--accent); font-weight:600;">Explore Catalog &rarr;</a></div>
-            </div>
-        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center;"><h2>Your Selection</h2><div onclick="toggleCart(false)" style="cursor:pointer; font-size:2rem; opacity:0.3">&times;</div></div>
+        <div class="cart-items" id="cart-list"></div>
         <div class="cart-footer">
-            <div style="display:flex; justify-content:space-between; font-size:1.8rem; font-weight:700; margin-bottom:40px;">
-                <span>Total</span>
-                <span id="cart-total">₹0</span>
-            </div>
-            <button class="btn btn-primary" style="width:100%; background:#25D366" onclick="checkout()"><svg style="width:20px; vertical-align:middle; margin-right:10px;" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.539 2.016 2.126-.54 1.079.627c.563.328 1.16.499 1.838.499 3.14 0 5.694-2.554 5.694-5.694-.001-3.125-2.532-5.726-5.731-5.726h-.219zm-.275 9.172v.001c-.531 0-1.04-.153-1.472-.444l-.105-.07-.582.164.167-.557-.101-.15a3.818 3.818 0 01-.632-2.09c0-2.126 1.728-3.854 3.854-3.854 1.029 0 1.996.401 2.723 1.128a3.834 3.834 0 011.128 2.72c-.001 2.127-1.731 3.857-3.857 3.857h-.105zm2.115-2.887c-.116-.058-.686-.339-.79-.379-.107-.038-.184-.058-.261.058-.078.117-.298.379-.366.456-.067.078-.135.087-.25.029-.117-.058-.492-.181-.937-.577-.347-.309-.581-.691-.649-.808-.067.116-.007.179.051.236.053.053.117.135.176.204.058.067.078.116.117.194.038.077.02.145-.009.203-.03.059-.262.632-.36.866-.095.23-.2.198-.275.201-.068.003-.146.003-.224.003-.078.003-.204-.03-.311-.146-.107-.116-.407-.398-.407-.971 0-.573.417-1.126.475-1.204.058-.078.821-1.253 1.989-1.758.277-.121.493-.193.664-.249.278-.088.531-.076.732-.046.223.033.686.28.783.551.097.271.097.502.067.551-.029.048-.107.077-.223.136z"/></svg>Inquiry & Checkout via WhatsApp</button>
-            <p style="text-align:center; margin-top:20px; font-size:0.85rem; opacity:0.5;">Secure order fulfillment across Palakkad.</p>
+            <div style="display:flex; justify-content:space-between; font-size:1.8rem; font-weight:700; margin-bottom:40px;"><span>Total</span><span id="cart-total">₹0</span></div>
+            <button class="btn btn-primary" style="width:100%; background:#25D366" onclick="checkout()">Inquiry & Checkout via WhatsApp</button>
         </div>
     </div>
 
@@ -294,69 +246,38 @@
         <div class="shop-layout">
             <aside class="shop-sidebar" data-aos>
                 <div class="filter-group">
-                    <h4 style="font-family:var(--font-display); font-size:1.4rem;">Sub-Categories</h4>
+                    <h4>Sub-Categories</h4>
                     <div class="category-tabs" id="category-tabs">
-                        <div class="tab active" onclick="setCategory('all')">All Heritage Products <span>200+</span></div>
-                        <div class="tab" onclick="setCategory('medicinal-rice')">Medicinal Grains <span>12</span></div>
-                        <div class="tab" onclick="setCategory('heritage-bakery')">Artisan Bakery <span>42</span></div>
-                        <div class="tab" onclick="setCategory('organic-nutrients')">Organic Soil <span>8</span></div>
-                        <div class="tab" onclick="setCategory('traditional-sweets')">Traditional Sweets <span>24</span></div>
+                        <div class="tab active" onclick="setCategory('all')">All Heritage Products</div>
+                        <div class="tab" onclick="setCategory('medicinal-rice')">Medicinal Grains</div>
+                        <div class="tab" onclick="setCategory('heritage-bakery')">Artisan Bakery</div>
+                        <div class="tab" onclick="setCategory('traditional-sweets')">Traditional Sweets</div>
                     </div>
                 </div>
-
-                <div class="filter-group">
-                    <h4>Search Catalog</h4>
-                    <input type="text" id="catalog-search" placeholder="Search rice, jaggery..." style="width:100%; padding:15px 25px; border-radius:50px; border:1px solid rgba(0,0,0,0.1); outline:none;" oninput="handleSearch()">
-                </div>
+                <div class="filter-group"><h4>Search Catalog</h4><input type="text" id="catalog-search" placeholder="Search rice, jaggery..." style="width:100%; padding:15px 25px; border-radius:50px; border:1px solid rgba(0,0,0,0.1); outline:none;" oninput="handleSearch()"></div>
             </aside>
-
             <main class="main-showcase">
-                <div class="showcase-header" data-aos>
-                    <h2 id="view-title" style="font-size:3.5rem;">All Heritage Products</h2>
-                    <p id="result-count" style="opacity:0.5; font-size:0.9rem; letter-spacing:2px; text-transform:uppercase;">228 Products Found</p>
-                </div>
+                <div class="showcase-header"><h2>All Heritage Products</h2><p id="result-count">228 Products Found</p></div>
                 <div class="product-grid" id="master-grid"></div>
             </main>
         </div>
     </section>
 
     <section class="provenance" data-aos>
-        <p style="color:var(--accent); font-weight:800; letter-spacing:4px; text-transform:uppercase; margin-bottom:20px;">The Story of the Soil</p>
         <h2>Absolute Provenance. Traceable to the Harvest.</h2>
-        <p>Every grain, nutrient, and sweet in our catalog is traceable to a specific family farm in the Palakkad heritage circle. We verify every lineage.</p>
-        <div class="coordinates">
-            <span>Lat: 10.7852° N</span>
-            <span>Lon: 76.6548° E</span>
-        </div>
+        <div class="coordinates"><span>Lat: 10.7852° N</span><span>Lon: 76.6548° E</span></div>
     </section>
 
-    <footer>
-        <div class="logo" style="color:white; margin-bottom:40px; font-size:2.5rem;">PALAKKADAN</div>
-        <p style="opacity:0.3; margin-bottom:30px;">© 2026 Palakkadan Heritage Essentials. ENGINEERED BY DEVBRIDGE KERALA.</p>
-        <p style="font-size:0.8rem; opacity:0.1; letter-spacing:2px;">CMO & CPM LEVEL DELIVERY | ZERO-BACKEND FULFILLMENT</p>
-    </footer>
+    <footer><div class="logo" style="color:white; margin-bottom:40px; font-size:2.5rem;">PALAKKADAN</div><p>© 2026 Palakkadan. CMO & CPM LEVEL DELIVERY.</p></footer>
 
     <script>
         const _P = [
-            { id: '1', n: 'Aged Matta Rice', c: 'medicinal-rice', p: 380, i: 'images/matta-rice.png', d: 'The definitive Palakkad Red Rice. Double-boiled and aged for perfect digestion.', v: ['1kg Trial', '5kg Family', '25kg Stock'], scarcity: 'Limited Seasonal Harvest' },
-            { id: '2', n: 'Healing Navara Rice', c: 'medicinal-rice', p: 850, i: 'images/navara.png', d: 'Ancient Ayurvedic grains from the banks of Bharatapuzha. Heritage healing.', v: ['500g Pack', '1kg Pack'], scarcity: 'Rare Heirloom Batch' },
-            { id: '3', n: 'Scented Gandhakasala', c: 'medicinal-rice', p: 180, i: 'images/gandhakasala.png', d: 'The supreme aromatic rice of Kerala. Short, creamy grains.', v: ['1kg Regular', '5kg Value'] },
-            { id: '4', n: 'Heritage Jaggery Blocks', c: 'traditional-sweets', p: 90, i: 'images/jaggery-studio.png', d: 'Dark, rich, chemical-free jaggery.', v: ['500g Block', '1kg Bucket'] },
-            { id: '5', n: 'Signature Fruit Cake', c: 'heritage-bakery', p: 600, i: 'images/cake.png', d: 'Hand-selected dry fruits and heritage honey.', v: ['500g Plum', '1kg Premium'] },
-            { id: '6', n: 'Desi Cattle Nutrients', c: 'organic-nutrients', p: 150, i: 'images/compost-studio.png', d: 'High-concentrate organic fertilizer from local Desi-cows.', v: ['2kg Bag', '5kg Bag'] }
+            { id: '1', n: 'Aged Matta Rice', c: 'medicinal-rice', p: 380, i: 'images/matta-rice.png', d: 'The definitive Palakkad Red Rice. Double-boiled and aged.', v: ['1kg Trial', '5kg Family'], scarcity: 'Limited Seasonal Harvest' },
+            { id: '2', n: 'Healing Navara Rice', c: 'medicinal-rice', p: 850, i: 'images/navara.png', d: 'Ancient Ayurvedic grains. Heritage healing.', v: ['500g', '1kg'], scarcity: 'Rare Heirloom Batch' },
+            { id: '3', n: 'Scented Gandhakasala', c: 'medicinal-rice', p: 180, i: 'images/gandhakasala.png', d: 'Supreme aromatic rice.', v: ['1kg Regular'], scarcity: '' },
+            { id: '4', n: 'Heritage Jaggery', c: 'traditional-sweets', p: 90, i: 'images/jaggery-studio.png', d: 'Dark, chemical-free.', v: ['500g Block'], scarcity: '' }
         ];
-
-        for(let i=7; i<=228; i++) {
-            _P.push({ 
-                id: i+'', 
-                n: ['Legacy', 'Heritage', 'Organic', 'Village'][i%4] + ' Item ' + i, 
-                c: ['medicinal-rice', 'heritage-bakery', 'organic-nutrients', 'traditional-sweets'][i%4], 
-                p: 100 + (i*10), 
-                i: _P[i%6].i,
-                d: 'Premium catalog extension. Source-verified.',
-                v: ['Small Pack', 'Standard Variety']
-            });
-        }
+        for(let i=5; i<=228; i++) { _P.push({ id: i+'', n: 'Heritage Item '+i, c: ['medicinal-rice', 'heritage-bakery', 'traditional-sweets'][i%3], p: 100+(i*10), i: _P[i%4].i, d: 'Source-verified.', v: ['Standard Variety'] }); }
 
         let cart = JSON.parse(localStorage.getItem('p_cart') || '[]');
         let activeCat = 'all';
@@ -366,18 +287,20 @@
             const grid = document.getElementById('master-grid');
             const filtered = _P.filter(p => (activeCat === 'all' || p.c === activeCat) && p.n.toLowerCase().includes(searchQuery.toLowerCase()));
             grid.innerHTML = filtered.slice(0, 30).map(p => `
-                <div class="p-card" onclick="openDetails('${p.id}')">
-                    <div class="p-img">
+                <div class="p-card">
+                    <div class="p-img" onclick="openDetails('${p.id}')">
                         <div class="p-tag">${p.c.replace('-', ' ')}</div>
                         ${p.scarcity ? `<div class="p-badge-scarcity">${p.scarcity}</div>` : ''}
-                        <img src="${p.i}" alt="${p.n}" loading="lazy">
+                        <img src="${p.i}" alt="${p.n}">
                     </div>
                     <div class="p-info">
-                        <h3>${p.n}</h3>
-                        <p>${p.d.substring(0, 60)}...</p>
+                        <h3 onclick="openDetails('${p.id}')">${p.n}</h3>
+                        <p>${p.d}</p>
                         <div class="p-footer">
                             <span class="p-price">₹${p.p}</span>
-                            <span class="add-quick">Select Options &rarr;</span>
+                            <div style="display:flex; gap:15px;">
+                                <span class="add-quick" onclick="directWhatsApp('${p.id}')" style="color:var(--accent); cursor:pointer">Know More &rarr;</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -385,18 +308,8 @@
             document.getElementById('result-count').innerText = `${filtered.length} Products Found`;
         }
 
-        function setCategory(cat) {
-            activeCat = cat;
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            document.getElementById('view-title').innerText = cat === 'all' ? 'All Heritage Products' : cat.replace('-', ' ').toUpperCase();
-            renderGrid();
-        }
-
-        function handleSearch() {
-            searchQuery = document.getElementById('catalog-search').value;
-            renderGrid();
-        }
+        function setCategory(cat) { activeCat = cat; renderGrid(); }
+        function handleSearch() { searchQuery = document.getElementById('catalog-search').value; renderGrid(); }
 
         let selectedModalProd = null;
         let selectedVariant = '';
@@ -407,20 +320,18 @@
             const content = document.getElementById('modal-content');
             content.innerHTML = `
                 <div class="modal-close" onclick="closeModal()">&times;</div>
-                <div class="modal-img" style="border-radius:var(--radius-md); overflow:hidden; height:600px;">
-                    <img src="${selectedModalProd.i}" alt="${selectedModalProd.n}" style="width:100%; height:100%; object-fit:cover;">
-                </div>
+                <div class="modal-img"><img src="${selectedModalProd.i}"></div>
                 <div class="modal-details" style="padding:20px;">
-                    <p style="text-transform:uppercase; color:var(--accent); letter-spacing:3px; font-weight:600; margin-bottom:15px;">${selectedModalProd.c.replace('-', ' ')}</p>
-                    <h2 style="font-size:3.5rem; margin-bottom:25px;">${selectedModalProd.n}</h2>
-                    <p style="font-size:1.15rem; line-height:1.8; color:#555; margin-bottom:40px;">${selectedModalProd.d}</p>
-                    <div class="variant-selector" style="margin-bottom:40px;">
-                        <span class="variant-label" style="font-size:0.9rem; font-weight:600; text-transform:uppercase; margin-bottom:15px; display:block; opacity:0.5;">Select Variety/Size</span>
-                        <div class="variant-chips" style="display:flex; gap:15px;">${selectedModalProd.v.map(v => `<div class="v-chip ${v === selectedVariant ? 'active' : ''}" onclick="selectVariant('${v}', this)" style="padding:12px 28px; border:1px solid rgba(0,0,0,0.1); border-radius:50px; cursor:pointer; transition:0.3s;">${v}</div>`).join('')}</div>
+                    <p style="text-transform:uppercase; color:var(--accent);">${selectedModalProd.c.replace('-', ' ')}</p>
+                    <h2>${selectedModalProd.n}</h2>
+                    <p>${selectedModalProd.d}</p>
+                    <div class="variant-selector" style="margin:40px 0;">
+                        <span class="variant-label">Select Variety</span>
+                        <div class="variant-chips" style="display:flex; gap:10px;">${selectedModalProd.v.map(v => `<div class="v-chip ${v === selectedVariant ? 'active' : ''}" onclick="selectVariant('${v}', this)">${v}</div>`).join('')}</div>
                     </div>
-                    <div style="display:flex; gap:30px; align-items:center;">
-                        <span style="font-size:3rem; font-weight:800;">₹${selectedModalProd.p}</span>
-                        <button class="btn btn-primary" onclick="addToCart()">Add to Selected Selection</button>
+                    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                        <button class="btn btn-primary" onclick="addToCart()">Add to Selection</button>
+                        <button class="btn btn-outline" onclick="directWhatsApp('${selectedModalProd.id}')">Know More via WhatsApp</button>
                     </div>
                 </div>
             `;
@@ -428,87 +339,40 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function selectVariant(v, el) {
-            selectedVariant = v;
-            document.querySelectorAll('.v-chip').forEach(c => c.classList.remove('active'));
-            el.classList.add('active');
-            el.style.background = 'var(--primary)';
-            el.style.color = 'white';
-        }
-
-        function closeModal() {
-            document.getElementById('product-modal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        function toggleCart(show) {
-            document.getElementById('cart-drawer').classList.toggle('active', show);
-            document.getElementById('cart-overlay').classList.toggle('active', show);
-        }
+        function selectVariant(v, el) { selectedVariant = v; }
+        function closeModal() { document.getElementById('product-modal').classList.remove('active'); document.body.style.overflow = 'auto'; }
+        function toggleCart(show) { document.getElementById('cart-drawer').classList.toggle('active', show); document.getElementById('cart-overlay').classList.toggle('active', show); }
 
         function addToCart() {
             const existing = cart.find(i => i.id === selectedModalProd.id && i.variant === selectedVariant);
-            if(existing) { existing.qty += 1; } 
-            else { cart.push({ ...selectedModalProd, variant: selectedVariant, qty: 1 }); }
+            if(existing) { existing.qty += 1; } else { cart.push({ ...selectedModalProd, variant: selectedVariant, qty: 1 }); }
             localStorage.setItem('p_cart', JSON.stringify(cart));
-            updateCartUI();
-            closeModal();
-            toggleCart(true); // Always slide cart open for feedback
-        }
-
-        function updateQty(index, delta) {
-            if (delta === -1 && cart[index].qty === 1) { cart.splice(index, 1); } 
-            else { cart[index].qty += delta; }
-            localStorage.setItem('p_cart', JSON.stringify(cart));
-            updateCartUI();
+            updateCartUI(); closeModal(); toggleCart(true);
         }
 
         function updateCartUI() {
             const list = document.getElementById('cart-list');
-            const totalEl = document.getElementById('cart-total');
-            const countEl = document.getElementById('cart-count');
-            if (cart.length === 0) {
-                document.getElementById('empty-msg').style.display = 'block';
-                list.innerHTML = ''; totalEl.innerText = '₹0'; countEl.innerText = '0';
-                return;
-            }
-            document.getElementById('empty-msg').style.display = 'none';
             let total = 0;
             list.innerHTML = cart.map((item, i) => {
                 total += item.p * item.qty;
-                return `
-                    <div class="cart-item">
-                        <img src="${item.i}">
-                        <div class="cart-item-info">
-                            <h4 style="font-weight:600;">${item.n}</h4>
-                            <p style="font-size:0.8rem; opacity:0.5;">${item.variant}</p>
-                            <div class="qty-control">
-                                <div class="qty-btn" onclick="updateQty(${i}, -1)">-</div>
-                                <span>${item.qty}</span>
-                                <div class="qty-btn" onclick="updateQty(${i}, 1)">+</div>
-                            </div>
-                        </div>
-                        <div style="font-weight:700">₹${item.p * item.qty}</div>
-                    </div>
-                `;
+                return `<div style="padding:20px; border-bottom:1px solid #eee;">${item.n} (${item.variant}) x ${item.qty} - ₹${item.p*item.qty}</div>`;
             }).join('');
-            totalEl.innerText = `₹${total}`;
-            countEl.innerText = cart.length;
+            document.getElementById('cart-total').innerText = `₹${total}`;
+            document.getElementById('cart-count').innerText = cart.length;
         }
 
         function checkout() {
-            if (cart.length === 0) return alert("Your selection is empty.");
-            let m = "NEW HERITAGE SELECTION FROM PALAKKADAN:%0A%0A";
-            let t = 0;
-            cart.forEach(i => { m += `• *${i.n}* (${i.variant}) x ${i.qty} - ₹${i.p*i.qty}%0A`; t += i.p*i.qty; });
-            m += `%0A*TOTAL ESTIMATED: ₹${t}*%0A%0A---%0AI am interested in these items together. Please provide more details and availability for fulfillment.`;
+            let m = "NEW HERITAGE SELECTION:%0A%0A";
+            cart.forEach(i => { m += `• *${i.n}* (${i.variant}) x ${i.qty}%0A`; });
             window.location.href = `https://wa.me/918129144244?text=${m}`;
         }
 
-        window.onscroll = () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-            document.querySelectorAll('[data-aos]').forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight * 0.9) el.classList.add('visible'); });
-        };
+        function directWhatsApp(id) {
+            const p = _P.find(item => item.id === id);
+            const m = `Hi, I want to know more about *${p.n}*. Provenance/Availability check.`;
+            window.location.href = `https://wa.me/918129144244?text=${m}`;
+        }
+
         window.onload = () => { renderGrid(); updateCartUI(); };
     </script>
 </body>
