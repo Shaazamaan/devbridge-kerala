@@ -1070,10 +1070,22 @@
                                 <span class="w-2 h-2 bg-blue-600 rounded-full"></span>
                                 Product #${i+1}
                             </h4>
+                            <button type="button" onclick="this.parentElement.nextElementSibling.children[1].classList.toggle('hidden')" class="text-[9px] font-bold text-blue-500 uppercase hover:underline">+ Add Main Media/Details</button>
                         </div>
                         <div class="grid gap-4">
                             <input type="text" name="prod_name_${i}" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-bold text-sm" placeholder="e.g. Arabica Coffee Beans">
                             
+                            <div class="hidden grid md:grid-cols-2 gap-4 bg-blue-50/20 p-4 rounded-2xl border border-blue-100/50">
+                                <div class="bg-white p-3 rounded-xl border border-slate-100">
+                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Main Product Media</label>
+                                    <input type="file" name="prod_file_${i}" accept="image/*,video/*,application/pdf,application/zip" class="text-[9px] w-full">
+                                </div>
+                                <div class="bg-white p-3 rounded-xl border border-slate-100">
+                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Main Item Bio</label>
+                                    <textarea name="prod_desc_${i}" rows="1" class="w-full bg-slate-50 p-2 rounded-lg text-[10px] outline-none" placeholder="General description for this product..."></textarea>
+                                </div>
+                            </div>
+
                             <!-- Sub-variation Trigger -->
                             <div class="bg-slate-50 p-4 rounded-2xl border border-dashed border-slate-200">
                                 <div class="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -1098,10 +1110,22 @@
                                 <span class="w-2 h-2 bg-emerald-600 rounded-full"></span>
                                 Service #${i+1}
                             </h4>
+                            <button type="button" onclick="this.parentElement.nextElementSibling.children[1].classList.toggle('hidden')" class="text-[9px] font-bold text-emerald-500 uppercase hover:underline">+ Add Main Media/Details</button>
                         </div>
                         <div class="grid gap-4">
                             <input type="text" name="serv_name_${i}" required class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-bold text-sm" placeholder="e.g. Premium Consulting">
                             
+                            <div class="hidden grid md:grid-cols-2 gap-4 bg-emerald-50/20 p-4 rounded-2xl border border-emerald-100/50">
+                                <div class="bg-white p-3 rounded-xl border border-slate-100">
+                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Main Service Media</label>
+                                    <input type="file" name="serv_file_${i}" accept="image/*,video/*,application/pdf,application/zip" class="text-[9px] w-full">
+                                </div>
+                                <div class="bg-white p-3 rounded-xl border border-slate-100">
+                                    <label class="block text-[9px] font-800 text-slate-400 uppercase mb-2">Service Overview</label>
+                                    <textarea name="serv_desc_${i}" rows="1" class="w-full bg-slate-50 p-2 rounded-lg text-[10px] outline-none" placeholder="Description of this service..."></textarea>
+                                </div>
+                            </div>
+
                             <!-- Service Variation Trigger -->
                             <div class="bg-emerald-50/30 p-4 rounded-2xl border border-dashed border-emerald-200">
                                 <div class="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -1268,8 +1292,16 @@
                     for(let i=0; i<numProducts; i++) {
                         const product = {
                             name: formData.get(`prod_name_${i}`),
+                            desc: formData.get(`prod_desc_${i}`),
                             subItems: []
                         };
+
+                        const mainFile = formData.get(`prod_file_${i}`);
+                        if (mainFile && mainFile.size > 0) {
+                            product.fileName = `PROD_${i}_MAIN_${mainFile.name}`;
+                            const b64 = await toBase64(mainFile);
+                            unifiedFiles.push({ name: product.fileName, type: mainFile.type, base64: b64 });
+                        }
                         
                         const subCount = parseInt(formData.get(`prod_sub_count_${i}`)) || 0;
                         for(let j=0; j<subCount; j++) {
@@ -1292,14 +1324,22 @@
                     for(let i=0; i<numServices; i++) {
                         const service = {
                             name: formData.get(`serv_name_${i}`),
+                            desc: formData.get(`serv_desc_${i}`),
                             subItems: []
                         };
+
+                        const mainFile = formData.get(`serv_file_${i}`);
+                        if (mainFile && mainFile.size > 0) {
+                            service.fileName = `SERV_${i}_MAIN_${mainFile.name}`;
+                            const b64 = await toBase64(mainFile);
+                            unifiedFiles.push({ name: service.fileName, type: mainFile.type, base64: b64 });
+                        }
                         
                         const subCount = parseInt(formData.get(`serv_sub_count_${i}`)) || 0;
                         for(let j=0; j<subCount; j++) {
                             const subName = formData.get(`serv_${i}_sub_${j}_name`);
                             const subFile = formData.get(`serv_${i}_sub_${j}_file`);
-                            const subDesc = formData.get(`${type}_${i}_sub_${j}_desc`); // Note: fixing variable reference to serv
+                            const subDesc = formData.get(`serv_${i}_sub_${j}_desc`);
                             
                             let subFileName = null;
                             if (subFile && subFile.size > 0) {
@@ -1307,7 +1347,7 @@
                                 const b64 = await toBase64(subFile);
                                 unifiedFiles.push({ name: subFileName, type: subFile.type, base64: b64 });
                             }
-                            service.subItems.push({ name: subName, fileName: subFileName, desc: subDesc || formData.get(`serv_${i}_sub_${j}_desc`) });
+                            service.subItems.push({ name: subName, fileName: subFileName, desc: subDesc });
                         }
                         services.push(service);
                     }
