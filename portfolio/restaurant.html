@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpiceRoute | Restaurant Demo | DevBridge Kerala</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #7c2d12; --accent: #f97316; --bg: #fff7ed; --font: 'Outfit', sans-serif; --font-display: 'Playfair Display', serif; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: var(--font); background: var(--bg); color: #431407; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        
+        /* Demo Gate */
+        #demo-gate { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); z-index: 100000; display: flex; align-items: center; justify-content: center; color: white; text-align: center; padding: 40px; }
+        .gate-box h2 { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 20px; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 15px 40px; border-radius: 50px; font-weight: 800; cursor: pointer; border: none; text-decoration: none; transition: 0.3s; }
+        .btn-primary { background: var(--accent); color: white; }
+
+        /* Menu Section */
+        .menu-category { margin-bottom: 60px; }
+        .menu-category h2 { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 30px; border-bottom: 2px solid var(--accent); display: inline-block; }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .menu-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(0,0,0,0.1); padding-bottom: 15px; }
+        .m-name { font-weight: 700; font-size: 1.1rem; }
+        .m-price { font-weight: 800; color: var(--accent); }
+
+        /* Hero */
+        header { padding: 120px 0; text-align: center; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200'); background-size: cover; background-position: center; color: white; margin-bottom: 80px; }
+        header h1 { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 5rem); margin-bottom: 20px; }
+
+        .sticky-cta { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 15px 30px; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        @media (max-width: 768px) { .menu-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div id="demo-gate">
+        <div class="gate-box">
+            <h2>Scenario: Restaurant.</h2>
+            <p>This is a <strong>Restaurant Digital Menu Demo</strong> created for demonstration. ₹1000 solution.</p>
+            <button class="btn btn-primary" onclick="this.parentElement.parentElement.style.display='none'">Continue to Demo</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>SpiceRoute Dining.</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9;">Authentic Flavors. Zero Convenience Compromise. Digital Menu Inside.</p>
+            <a href="https://wa.me/918129144244?text=Hi, I saw the Restaurant Demo. I want a similar website." class="btn btn-primary">Book a Table &rarr;</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="menu-category">
+            <h2>Chef's Specials</h2>
+            <div class="menu-grid">
+                <div class="menu-item" onclick="location.href='https://wa.me/918129144244?text=Hi, I want to order the Highland Biriyani from the demo.'">
+                    <div><div class="m-name">Highland Mutton Biriyani</div><p style="font-size: 0.8rem; opacity: 0.6;">Slow-cooked heritage recipe.</p></div>
+                    <div class="m-price">₹450</div>
+                </div>
+                <div class="menu-item" onclick="location.href='https://wa.me/918129144244?text=Hi, I want to order the Butter Chicken from the demo.'">
+                    <div><div class="m-name">Coastal Butter Chicken</div><p style="font-size: 0.8rem; opacity: 0.6;">Smoked Tandoori with creamy tomato gravy.</p></div>
+                    <div class="m-price">₹380</div>
+                </div>
+                <div class="menu-item" onclick="location.href='https://wa.me/918129144244?text=Hi, I want to order the Vegan Platter from the demo.'">
+                    <div><div class="m-name">Sahyadri Vegan Platter</div><p style="font-size: 0.8rem; opacity: 0.6;">Curated hilltop organics.</p></div>
+                    <div class="m-price">₹320</div>
+                </div>
+                <div class="menu-item" onclick="location.href='https://wa.me/918129144244?text=Hi, I want to order the Prawn Curry from the demo.'">
+                    <div><div class="m-name">Malabar Prawn Roast</div><p style="font-size: 0.8rem; opacity: 0.6;">Pepper-crusted sea fresh prawns.</p></div>
+                    <div class="m-price">₹420</div>
+                </div>
+            </div>
+        </section>
+
+        <section style="background: var(--primary); color: white; padding: 80px; border-radius: 40px; text-align: center; margin-bottom: 100px;">
+            <h2 style="font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 30px;">Digitize Your Restaurant.</h2>
+            <p style="margin-bottom: 40px; opacity: 0.8;">Premium Look. WhatsApp Ordering Included. Only ₹1000.</p>
+            <a href="https://wa.me/918129144244?text=Hi, I want a similar restaurant menu website for my business." class="btn btn-primary" style="background: var(--accent);">Get Started &rarr;</a>
+        </section>
+    </main>
+
+    <a href="https://wa.me/918129144244?text=Hi, I saw the SpiceRoute menu. I want to book a table." class="sticky-cta">Reserve via WhatsApp</a>
+
+</body>
+</html>

@@ -14,14 +14,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Palakkadan | The Definitive Heritage eCommerce</title>
-    <meta name="description" content="Discover Palakkad's heritage with 200+ premium products. Subcategories in Ancient Grains, Soil, and Artisan Sweets. WhatsApp-integrated cart system. Supreme heritage authenticity.">
+    <title>Heritage Legacy | Premium Concept Showcase</title>
+    <meta name="description" content="A demonstration of high-performance single-page eCommerce for heritage products. Mobile-first architecture with WhatsApp-integrated fulfillment. Experience the possibility of ₹1000 premium websites.">
     
-    <link rel="canonical" href="https://devbridgekerala.com/palakkadan/">
+    <link rel="canonical" href="https://devbridgekerala.com/portfolio/heritage-demo">
 
     <!-- Heritage Optimized Social Branding §4.7 -->
-    <meta property="og:title" content="Palakkadan | The Definitive Luxury of Authenticity">
-    <meta property="og:description" content="Discover Palakkad's heritage with 200+ premium products. Subcategories in Ancient Grains, Soil, and Artisan Bakery.">
+    <meta property="og:title" content="Heritage Legacy | Premium Concept Showcase">
+    <meta property="og:description" content="Experience the definitive luxury of authenticity in a single-page active commerce demo.">
     <meta property="og:image" content="images/hero.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -300,28 +300,29 @@
         }
         .lead-input { width: 100%; padding: 15px 25px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); margin-bottom: 15px; outline: none; font-family: var(--font-body); }
 
-        /* Demo Notice Modal §15.3 */
-        #demo-notice {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
-            z-index: 20000; display: flex; align-items: center; justify-content: center;
+        /* Mandatory Demo Gate §2026 */
+        #demo-gate {
+            position: fixed; inset: 0; 
+            background: rgba(0,0,0,0.98); backdrop-filter: blur(25px);
+            z-index: 100000; display: flex; align-items: center; justify-content: center;
+            color: white; text-align: center; padding: 40px;
         }
-        .notice-box {
-            background: white; padding: 60px; border-radius: var(--radius-lg); 
-            max-width: 600px; width: 90%; text-align: center; box-shadow: var(--shadow-float);
-        }
-        .notice-box h2 { font-size: 2.2rem; color: var(--accent); margin-bottom: 20px; }
-        .notice-box p { font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 35px; }
+        .gate-box { max-width: 600px; }
+        .gate-box h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--accent); }
+        .gate-box p { font-size: 1.1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 40px; }
+        
+        /* ... existing modal styles ... */
     </style>
 </head>
 <body id="top">
-    <!-- Discovery Disclaimer §15.3 -->
-    <div id="demo-notice">
-        <div class="notice-box">
-            <span style="text-transform:uppercase; letter-spacing:4px; font-weight:800; color:var(--accent); display:block; margin-bottom:15px; font-size:0.8rem;">Master Build Architecture</span>
-            <h2>Premium eCommerce Concept</h2>
-            <p>This platform demonstrates a high-performance <strong>eCommerce concept developed at this rate</strong>. It showcases how a single-page architecture can achieve premium scale, heritage storytelling, and WhatsApp-driven fulfillment with minimal overhead.<br><br><em>Note: Final features and catalog depth are dynamic and depend on client-provided metadata.</em></p>
-            <button class="btn btn-primary" onclick="closeNotice()" style="width:100%;">Proceed to Heritage Catalog</button>
+<body id="top">
+    <!-- Mandatory Entry Gate §v1.0 -->
+    <div id="demo-gate">
+        <div class="gate-box">
+            <span style="text-transform:uppercase; letter-spacing:4px; font-weight:800; color:var(--accent); display:block; margin-bottom:20px; font-size:0.9rem;">Master Build Showcase</span>
+            <h2>Demo Experience</h2>
+            <p>This is a demo experience created for <strong>demonstration purposes only</strong>. This is not a live client project. Your actual version will be fully customized based on your business inputs and requirements.</p>
+            <button class="btn btn-primary" onclick="unlockDemo()" style="width:100%; padding:25px;">Understood, Show Me Example</button>
         </div>
     </div>
 
@@ -333,12 +334,12 @@
     </div>
 
     <div class="promo-bar">
-        Direct Heritage Sourcing Consultation Available. 
-        <a href="https://wa.me/918129144244?text=Hi%2C+I'm+interested+in+heritage+sourcing." target="_blank">Connect Now &rarr;</a>
+        High-Performance Single-Page eCommerce Showcase.
+        <a href="https://wa.me/918129144244?text=Hi, I saw your Heritage eCommerce demo. I want a similar website." target="_blank">Order Similar Website &rarr;</a>
     </div>
 
     <nav id="navbar">
-        <div class="logo" onclick="window.scrollTo(0,0)">PALAKKADAN</div>
+        <div class="logo" onclick="window.scrollTo(0,0)">HERITAGE LEGACY</div>
         <div class="nav-menu">
             <a href="#about" class="nav-link">Our Heritage</a>
             <a href="#shop" class="nav-link">Catalog</a>
@@ -790,15 +791,15 @@
 
         function checkout() {
             if (cart.length === 0) return alert("Selection is empty.");
-            let m = "PALAKKADAN BATCH ORDER REQ:%0A%0A";
+            let m = "HERITAGE DEMO SELECTION:%0A%0A";
             cart.forEach(i => { m += `• *${i.n}* (${i.variant}) x ${i.qty}%0A`; });
-            m += "%0A---%0AOrder request for bulk fulfillment from palakkadan.in heritage stock.";
+            m += "%0A---%0ADemo inquiry from DevBridge Showcase Portfolio.";
             window.location.href = `https://wa.me/918129144244?text=${m}`;
         }
 
         function directWhatsApp(id) {
             const p = _P.find(item => item.id === id);
-            const m = `Hi, I want to know more about *${p.n}*. Provenance/Availability check.`;
+            const m = `Hi, I saw your Heritage Demo. I'm interested in a website for *${p.n}* type business.`;
             window.location.href = `https://wa.me/918129144244?text=${m}`;
         }
 
@@ -809,20 +810,12 @@
             nav.querySelector('.logo').style.color = sc ? 'var(--primary)' : 'white';
             document.querySelectorAll('[data-aos]').forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight * 0.9) el.classList.add('visible'); });
         };
-        function closeNotice() {
-            document.getElementById('demo-notice').style.display = 'none';
+        function unlockDemo() {
+            document.getElementById('demo-gate').style.display = 'none';
         }
-        function checkSession() {
-            const last = localStorage.getItem('last_visited');
-            const now = Date.now();
-            if (last && (now - last > 24 * 60 * 60 * 1000)) {
-                localStorage.clear();
-                window.location.reload();
-            }
-            localStorage.setItem('last_visited', now);
-        }
+
         window.onload = () => {
-            document.getElementById('demo-notice').style.display = 'flex';
+            document.getElementById('demo-gate').style.display = 'flex';
             checkSession();
             renderGrid();
             updateCartUI();

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Build Portfolio | DevBridge Kerala</title>
+    <meta name="description" content="Explore a library of high-converting, single-page website demos. Premium outcomes at ₹1000 for any business scenario. From local shops to influencers.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #3b82f6; 
+            --bg: #F8FAFC;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Outfit', sans-serif;
+            --radius: 24px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: var(--font-body); background: var(--bg); color: var(--primary); overflow-x: hidden; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+
+        /* Full Screen Disclaimer Gate §v1.0 */
+        #master-gate {
+            position: fixed; inset: 0; 
+            background: var(--primary); color: white;
+            z-index: 100000; display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 40px;
+        }
+        .gate-box { max-width: 700px; }
+        .gate-box h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 20px; color: white; }
+        .gate-box p { font-size: 1.25rem; line-height: 1.8; opacity: 0.8; margin-bottom: 50px; }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 20px 50px; border-radius: 50px; font-weight: 800; font-size: 1.1rem;
+            text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s;
+            border: none; text-decoration: none;
+        }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3); }
+
+        /* Portfolio Header */
+        header { padding: 120px 0 60px; text-align: center; }
+        header h2 { font-family: var(--font-display); font-size: 3.5rem; margin-bottom: 20px; }
+        header p { font-size: 1.2rem; opacity: 0.6; max-width: 600px; margin: 0 auto; }
+
+        /* Scenario Grid §v1.0 */
+        .scenario-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 
+            gap: 40px; margin-bottom: 120px; 
+        }
+        .s-card { 
+            background: white; border-radius: var(--radius); padding: 50px; 
+            border: 1px solid rgba(15, 23, 42, 0.05); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden; display: flex; flex-direction: column; min-height: 400px;
+        }
+        .s-card:hover { transform: translateY(-15px); box-shadow: 0 50px 100px rgba(15, 23, 42, 0.1); border-color: var(--accent); }
+        .s-card h3 { font-family: var(--font-display); font-size: 2rem; margin-bottom: 15px; }
+        .s-card p { font-size: 1.05rem; line-height: 1.6; opacity: 0.6; margin-bottom: 30px; }
+        .s-card .cta { margin-top: auto; color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1.5px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+
+        /* Value Frame §v1.0 */
+        .value-frame { 
+            background: var(--primary); color: white; padding: 120px 0; border-radius: 60px; 
+            text-align: center; margin-bottom: 120px;
+        }
+        .value-frame h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 30px; }
+        .value-frame .price { font-size: 5rem; font-weight: 800; color: #fbbf24; margin-bottom: 40px; display: block; }
+
+        @media (max-width: 768px) {
+            .scenario-grid { grid-template-columns: 1fr; }
+            header h2 { font-size: 2.5rem; }
+            .value-frame h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Priority Entry Gate -->
+    <div id="master-gate">
+        <div class="gate-box">
+            <span style="text-transform:uppercase; letter-spacing:4px; font-weight:800; color:var(--accent); display:block; margin-bottom:20px; font-size:0.9rem;">DevBridge Kerala Discovery</span>
+            <h1>High-Value Demo Hub.</h1>
+            <p>This is a demo portfolio created to showcase possible website outcomes. These are <strong>NOT real client projects</strong>. Your actual website will be built based on your specific business data, goals, and requirements. Results, design, and structure may vary accordingly.</p>
+            <button class="btn btn-primary" onclick="unlockPortfolio()">Understood, Show Me Examples</button>
+        </div>
+    </div>
+
+    <main class="container">
+        <header>
+            <h2>Scenario Library.</h2>
+            <p>Pick a business scenario below to see the conversion depth we achieve for ₹1000 single-page websites.</p>
+        </header>
+
+        <section class="scenario-grid">
+            <a href="../palakkadan/index.html" class="s-card" style="text-decoration: none; color: inherit;">
+                <span style="opacity: 0.4; font-weight: 800; margin-bottom: 15px; display: block;">Scenario 01</span>
+                <h3>Heritage Agriculture.</h3>
+                <p>A premium eCommerce showcase for 200+ heritage products. Optimized for bulk selection and high-trust storytelling.</p>
+                <div class="cta">Explore Demo &rarr;</div>
+            </a>
+
+            <a href="local-shop.html" class="s-card" style="text-decoration: none; color: inherit;">
+                <span style="opacity: 0.4; font-weight: 800; margin-bottom: 15px; display: block;">Scenario 02</span>
+                <h3>Local Retailer & Shop.</h3>
+                <p>Dynamic neighborhood grocery or product store. Features fast searching and direct WhatsApp order manifests.</p>
+                <div class="cta">Explore Demo &rarr;</div>
+            </a>
+
+            <a href="restaurant.html" class="s-card" style="text-decoration: none; color: inherit;">
+                <span style="opacity: 0.4; font-weight: 800; margin-bottom: 15px; display: block;">Scenario 03</span>
+                <h3>Restaurant & Cafe.</h3>
+                <p>Digital menu with tactile category navigation. Optimized for quick food orders and reservation inquiries.</p>
+                <div class="cta">Explore Demo &rarr;</div>
+            </a>
+
+            <a href="consultant.html" class="s-card" style="text-decoration: none; color: inherit;">
+                <span style="opacity: 0.4; font-weight: 800; margin-bottom: 15px; display: block;">Scenario 04</span>
+                <h3>Professional Consultant.</h3>
+                <p>High-conversion landing page for freelancers and consultants. Focused on establishing authority and booking calls.</p>
+                <div class="cta">Explore Demo &rarr;</div>
+            </a>
+        </section>
+
+        <section class="value-frame">
+            <div class="container">
+                <h2>The DevBridge Value.</h2>
+                <span class="price">₹1000</span>
+                <p style="font-size: 1.5rem; opacity: 0.8; max-width: 800px; margin: 0 auto 50px;">We build single-page active commerce engines that look and perform like professional ₹1,00,000+ custom solutions.</p>
+                <a href="https://wa.me/918129144244?text=Hi, I saw your portfolio. I want a similar high-converting demo for my business." class="btn btn-primary" style="background: #fbbf24; color: var(--primary);">Claim Your Site &rarr;</a>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 100px 0; text-align: center; border-top: 1px solid rgba(0,0,0,0.05);">
+        <p style="opacity: 0.4; font-size: 0.9rem;">&copy; 2026 DevBridge Kerala Demo Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function unlockPortfolio() {
+            document.getElementById('master-gate').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

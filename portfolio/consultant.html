@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExpertFlow | Consultant Demo | DevBridge Kerala</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1e1b4b; --accent: #6366f1; --bg: #f8fafc; --font: 'Outfit', sans-serif; --radius: 20px; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: var(--font); background: var(--bg); color: #1e293b; line-height: 1.7; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 5%; }
+        
+        /* Demo Gate */
+        #demo-gate { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); z-index: 100000; display: flex; align-items: center; justify-content: center; color: white; text-align: center; padding: 40px; }
+        .gate-box h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 18px 45px; border-radius: 50px; font-weight: 800; cursor: pointer; border: none; text-decoration: none; transition: 0.3s; }
+        .btn-primary { background: var(--accent); color: white; }
+
+        /* Sections */
+        section { padding: 100px 0; }
+        .hero { text-align: center; padding: 140px 0 80px; }
+        .hero h1 { font-size: clamp(3rem, 10vw, 5rem); margin-bottom: 25px; line-height: 1; color: var(--primary); }
+        .hero p { font-size: 1.25rem; max-width: 700px; margin: 0 auto 40px; opacity: 0.7; }
+
+        .problem-frame { background: #e0e7ff; padding: 80px; border-radius: 40px; text-align: center; }
+        .problem-frame h2 { color: #3730a3; margin-bottom: 20px; }
+
+        .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 50px; }
+        .s-card { background: white; padding: 40px; border-radius: var(--radius); border: 1px solid rgba(0,0,0,0.05); transition: 0.3s; }
+        .s-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); border-color: var(--accent); }
+        .s-card h3 { margin-bottom: 15px; color: var(--primary); }
+
+        .sticky-cta { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 15px 30px; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+
+        @media (max-width: 760px) { .service-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div id="demo-gate">
+        <div class="gate-box">
+            <h2>Scenario: Consultant.</h2>
+            <p>This is a <strong>High-Conversion Consultant Demo</strong>. Authority-focused lead generation for ₹1000.</p>
+            <button class="btn btn-primary" onclick="this.parentElement.parentElement.style.display='none'">Continue to Demo</button>
+        </div>
+    </div>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Expert Advice. <br>Scale Your Success.</h1>
+            <p>We help businesses navigate complex growth challenges through data-driven advisory and strategic execution.</p>
+            <a href="https://wa.me/918129144244?text=Hi, I saw the Consultant Demo. I'm looking for strategic advice." class="btn btn-primary">Book Strategy Call</a>
+        </section>
+
+        <section class="problem-frame">
+            <h2>Struggling to Scale?</h2>
+            <p>Most businesses hit a ceiling because of outdated processes or lack of clear strategy. We built this demo to show how an expert can showcase their authority and capture high-value leads for just ₹1000.</p>
+        </section>
+
+        <section>
+            <h2 style="text-align: center; margin-bottom: 40px;">Our Services</h2>
+            <div class="service-grid">
+                <div class="s-card" onclick="location.href='https://wa.me/918129144244?text=Hi, I want to discuss Growth Strategy for my business.'">
+                    <h3>Growth Strategy</h3>
+                    <p>Comprehensive roadmap for business expansion and revenue optimization across all channels.</p>
+                </div>
+                <div class="s-card" onclick="location.href='https://wa.me/918129144244?text=Hi, I want to discuss Operational Efficiency for my business.'">
+                    <h3>Operational Efficiency</h3>
+                    <p>Streamline your workflows and reduce overhead with precision-engineered operational systems.</p>
+                </div>
+                <div class="s-card" onclick="location.href='https://wa.me/918129144244?text=Hi, I want to discuss Team Leadership training.'">
+                    <h3>Team Leadership</h3>
+                    <p>High-performance leadership coaching to align your team with your long-term vision.</p>
+                </div>
+                <div class="s-card" onclick="location.href='https://wa.me/918129144244?text=Hi, I want to discuss Digital Transformation.'">
+                    <h3>Digital Transformation</h3>
+                    <p>Leverage cutting-edge technology to automate your business and dominate the market.</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="background: var(--primary); color: white; padding: 100px 50px; border-radius: 40px; text-align: center; margin-bottom: 120px;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 30px;">Build Your Authority.</h2>
+            <p style="margin-bottom: 40px; opacity: 0.8;">Premium Aesthetic. Lead Generation Focus. Fully Static. ₹1000.</p>
+            <a href="https://wa.me/918129144244?text=Hi, I want a similar consultant landing page for my business." class="btn btn-primary">Launch My Site &rarr;</a>
+        </section>
+    </main>
+
+    <a href="https://wa.me/918129144244?text=Hi, I saw your Consultant Demo. I have a question about my business." class="sticky-cta">Consult via WhatsApp</a>
+
+</body>
+</html>
