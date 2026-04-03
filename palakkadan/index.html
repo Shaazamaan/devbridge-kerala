@@ -77,7 +77,7 @@
 
         /* Navigation §5.2 */
         nav {
-            position: sticky; top: 0; width: 100%; padding: 20px 5%;
+            position: sticky; top: 0; width: 100%; padding: 25px 5%;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; transition: var(--transition);
             background: transparent;
@@ -266,23 +266,25 @@
 
         /* Mobile Overlap Fixes §15.1 */
         @media (max-width: 768px) {
-            nav { padding: 10px 5%; background: rgba(0,0,0,0.1); backdrop-filter: blur(8px); }
-            .logo { font-size: 1.4rem; font-weight: 900; }
+            nav { padding: 20px 5% !important; background: rgba(0,0,0,0.2); backdrop-filter: blur(8px); }
+            .logo { font-size: 1.35rem; font-weight: 900; }
             .promo-bar { font-size: 0.65rem; padding: 15px 5%; position: relative; }
             .grid-3 { grid-template-columns: 1fr; gap: 30px; }
-            .section-header h2 { font-size: 2.5rem; }
-            .modal-content { padding: 25px; grid-template-columns: 1fr; width: 95%; max-height: 95vh; overflow-y: auto; gap: 30px; }
+            .section-header h2 { font-size: 2.2rem; }
+            .modal-content { padding: 20px; grid-template-columns: 1fr; width: 95%; max-height: 90vh; overflow-y: auto; gap: 20px; }
             .modal-img { height: 280px; }
             .cart-close { top: 20px; right: 20px; }
-            #cart-drawer { padding: 20px; width: 85%; }
+            #cart-drawer { padding: 20px; width: 90%; }
             .p-footer { flex-direction: column; align-items: flex-start; gap: 15px; }
             .p-info h3 { font-size: 1.25rem; }
-            .p-badges-left { top: 10px; left: 10px; gap: 5px; }
-            .p-img { padding: 0; }
-            .p-img img { order: 1; height: 280px; width: 100%; border-radius: var(--radius-sm); }
-            .p-card { margin-bottom: 20px; transition: none; padding: 15px; }
-            .fab-container { bottom: 20px; right: 20px; gap: 10px; }
-            .fab { width: 50px; height: 50px; }
+            .p-badges-left { top: 12px; left: 12px; gap: 6px; }
+            .p-info { padding-top: 20px; }
+            .p-img { width: 100% !important; height: auto !important; aspect-ratio: 1/1 !important; display: block !important; padding: 0 !important; }
+            .p-img img { position: relative !important; display: block; border-radius: var(--radius-sm); order: initial !important; height: 100% !important; }
+            .p-card { margin-bottom: 40px; padding: 15px; background: white; border: 1px solid rgba(0,0,0,0.05); }
+            .product-grid { gap: 60px; }
+            .fab-container { bottom: 20px; right: 20px; gap: 12px; }
+            .fab { width: 48px; height: 48px; border: 2px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         }
 
         /* Lead Modal §15.2 */
