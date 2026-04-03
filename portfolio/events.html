@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Events | Luxury Event Management Demo v4.0</title>
+    <meta name="business-type" content="Event Management">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="v4-master.css">
+    
+    <style>
+        /* Scenario Specific Theme: Royal Gold & Onyx */
+        :root {
+            --primary: #0a0a0a; 
+            --accent: #ca8a04;  /* Royal Gold */
+            --bg: #111111;      
+        }
+        body { color: white; }
+        .hero-v4 { 
+            height: 95vh; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(rgba(10, 10, 10, 0.4), rgba(10, 10, 10, 0.4)), url('images/event_hero.png');
+            background-size: cover; background-position: center; border-radius: 0 0 100px 100px;
+            color: white; text-align: center; border-bottom: 3px solid var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Layer 1: Mandatory Entry Gate v4.0 -->
+    <div id="scenario-gate-v4">
+        <div class="gate-inner">
+            <span class="badge-elite" style="border-color:var(--accent); color:var(--accent);">Scenario 14 Benchmark</span>
+            <h2>Grand Events v4.0.</h2>
+            <p>Experience the highest conversion architecture for the hospitaliy and planning industry. This demo showcases how we establish visionary authority and capture premium corporate/wedding event inquiries in 24 hours.</p>
+            <button class="btn-v4" style="background:var(--accent); color:#000; width:100%;" onclick="unlockPortfolioV4()">Experience Scenario &rarr;</button>
+        </div>
+    </div>
+
+    <section class="hero-v4" data-v4-reveal>
+        <div class="container">
+            <span class="badge-elite" style="background:rgba(202, 138, 4, 0.2); color:white;">Visionary Logistics</span>
+            <h1 style="font-size: clamp(3.5rem, 12vw, 7.5rem); margin-bottom: 30px;">Grand Events <br>Kerala.</h1>
+            <p style="font-size: 1.5rem; font-weight: 300; opacity: 0.9; max-width: 800px; margin: 0 auto 50px;">Architecting the most spectacular moments of your life. From corporate summits to grand royal unions—we handle the luxury of precision.</p>
+            <a href="https://wa.me/918137826016" class="btn-v4" style="background:var(--accent); color:#000;">Consult My Event &rarr;</a>
+        </div>
+    </section>
+
+    <main class="container" style="padding: 120px 0;">
+        
+        <!-- Layer 2: Decision Accelerator -->
+        <section data-v4-reveal>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 120px;">
+                <div class="glass-v4" style="padding: 40px; border-radius: var(--radius-md); text-align: center; background:rgba(255,255,255,0.02);">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🏰</div>
+                    <h3>Bespoke Decor</h3>
+                    <p>Absolute focus on art-directed environments. We don't use generic rentals—we build custom experiences.</p>
+                </div>
+                <div class="glass-v4" style="padding: 40px; border-radius: var(--radius-md); text-align: center; background:rgba(255,255,255,0.02);">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🗓️</div>
+                    <h3>Precision Flow</h3>
+                    <p>Second-by-second event manifest. Guaranteed zero-friction logistics from RSVP to Wrap-up.</p>
+                </div>
+                <div class="glass-v4" style="padding: 40px; border-radius: var(--radius-md); text-align: center; background:rgba(255,255,255,0.02);">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">💎</div>
+                    <h3>White-Glove</h3>
+                    <p>Exclusive concierge support for your VIP guests. High-end hospitality integrated with every plan.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Layer 2: Comparison Block -->
+        <section data-v4-reveal>
+            <div style="text-align:center; margin-bottom:60px;">
+                <h2 style="font-size: 3.5rem;">The Aesthetic Choice.</h2>
+                <p style="opacity:0.6;">Compare visionary management to generic event 'Decoration'.</p>
+            </div>
+            <div class="comparison-grid">
+                <div class="comp-card neg" style="background:#111; color:rgba(255,255,255,0.4);">
+                    <h4>GENERIC PLANNERS</h4>
+                    <ul class="comp-list">
+                        <li>Familiar, repetitive decors</li>
+                        <li>Chaotic on-site coordination</li>
+                        <li>Hidden vendor markups</li>
+                        <li>No narrative depth</li>
+                        <li>Stress-prone execution</li>
+                    </ul>
+                </div>
+                <div class="comp-card pos" style="background:#111; border-color:var(--accent);">
+                    <span class="badge-elite" style="background:var(--accent); color:black; border:none; margin-bottom:15px; font-size:0.6rem;">Master Logic</span>
+                    <h4 style="color:white;">GRAND EVENTS ELITE</h4>
+                    <ul class="comp-list">
+                        <li style="color:white;">Art-directed custom themes</li>
+                        <li style="color:white;">Tactical, precise expert team</li>
+                        <li style="color:white;">Transparent factory-direct costs</li>
+                        <li style="color:white;">Full cinematic story-arc</li>
+                        <li style="color:white;">Stress-free white-glove care</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Layer 14: Perception Maximization -->
+        <section style="background: white; color: black; padding: 140px 40px; border-radius: 100px; text-align: center; margin-bottom: 120px;" data-v4-reveal>
+            <span class="badge-elite" style="border-color:var(--accent); color:var(--accent);">The DevBridge Standard</span>
+            <h2 style="font-size: 4.5rem; margin-bottom: 30px;">Own the Visual <br>Authority for ₹1000.</h2>
+            <p style="font-size: 1.5rem; opacity: 0.8; max-width: 800px; margin: 0 auto 60px;">Event Planners: Don't lose leads to messy social media pages. Own a high-end digital showroom that establishes world-class authority and captures bookings instantly.</p>
+            <a href="https://wa.me/918137826016" class="btn-v4" style="background:var(--accent); color:#000; padding: 25px 80px;">Build My Event Hub &rarr;</a>
+        </section>
+    </main>
+
+    <a href="https://wa.me/918137826016" class="wa-sticky">
+        Inquire Event Manifest
+    </a>
+
+    <div id="activity-toast"></div>
+    <div id="exit-capture"></div>
+
+    <script src="v4-master.js"></script>
+</body>
+</html>

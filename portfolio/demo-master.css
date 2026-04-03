@@ -1,0 +1,75 @@
+/* 
+  ╔══════════════════════════════════════════════════╗
+  ║    DEVBRIDGE KERALA | SUPREME ENGINE v3.0        ║
+  ║    Standard      : PALAKKADAN 3X (ULTRA-LUXE)    ║
+  ║    Architecture  : STATIC CONVERSION ENGINE      ║
+  ╚══════════════════════════════════════════════════╝
+*/
+
+:root {
+    --primary: #0f172a;
+    --accent: #3b82f6; 
+    --bg: #f8fafc;
+    --glass: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-utility: 'Outfit', sans-serif;
+    --radius-lg: 40px;
+    --radius-md: 24px;
+    --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    --shadow-supreme: 0 50px 100px -20px rgba(0,0,0,0.12), 0 30px 60px -30px rgba(0,0,0,0.15);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--primary); overflow-x: hidden; scroll-behavior: smooth; line-height: 1.6; }
+
+.container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+
+/* Typography Standard */
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; letter-spacing: -0.02em; }
+.text-gradient { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.badge { display: inline-flex; padding: 8px 20px; background: rgba(59, 130, 246, 0.1); color: var(--accent); border-radius: 50px; font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 20px; font-family: var(--font-utility); }
+
+/* Elite Glassmorphism 3.0 */
+.glass-supreme {
+    background: var(--glass);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-supreme);
+}
+
+/* Button Excellence */
+.btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 22px 55px; border-radius: 60px; font-weight: 800; 
+    text-transform: uppercase; letter-spacing: 2px; cursor: pointer;
+    border: none; text-decoration: none; transition: var(--transition);
+    font-family: var(--font-utility); font-size: 1rem;
+}
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 30px 60px rgba(15, 23, 42, 0.3); }
+
+/* Mandatory Gate Styling */
+#scenario-gate {
+    position: fixed; inset: 0; background: #000; z-index: 1000000;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 40px; color: white;
+}
+#scenario-gate h2 { font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 20px; color: #fbbf24; }
+#scenario-gate p { font-size: 1.25rem; opacity: 0.7; max-width: 600px; margin: 0 auto 50px; line-height: 1.8; }
+
+/* Sticky WhatsApp 3.0 */
+.wa-sticky {
+    position: fixed; bottom: 40px; right: 40px; background: #25D366; color: white;
+    padding: 20px 45px; border-radius: 60px; font-weight: 800; font-family: var(--font-utility);
+    box-shadow: 0 20px 50px rgba(37, 211, 102, 0.4); text-decoration: none; z-index: 9999;
+    display: flex; align-items: center; gap: 12px; transition: var(--transition);
+    border: 2px solid white; text-transform: uppercase; letter-spacing: 1px;
+}
+.wa-sticky:hover { transform: translateY(-10px) rotate(2deg); }
+
+/* Observer Animations */
+[data-aos] { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-aos].visible { opacity: 1; transform: translateY(0); }

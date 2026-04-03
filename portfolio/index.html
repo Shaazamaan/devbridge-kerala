@@ -3,179 +3,456 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Build Portfolio | DevBridge Kerala</title>
-    <meta name="description" content="Explore a library of high-converting, single-page website demos. Premium outcomes at ₹1000 for any business scenario. From local shops to influencers.">
+    <title>Scenario Engine v4.0 | DevBridge Kerala Autonomous Portfolio (55+ Demos)</title>
+    <meta name="description" content="Explore 55+ high-converting website scenarios for Kerala businesses. Tactical trust, 24h delivery, and premium outcomes. Build your digital future today.">
+    <meta name="business-type" content="Portfolio Hub">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --primary: #0F172A;
-            --accent: #3b82f6; 
-            --bg: #F8FAFC;
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Outfit', sans-serif;
-            --radius: 24px;
-        }
-
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: var(--font-body); background: var(--bg); color: var(--primary); overflow-x: hidden; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
-
-        /* Full Screen Disclaimer Gate §v1.0 */
-        #master-gate {
-            position: fixed; inset: 0; 
-            background: var(--primary); color: white;
-            z-index: 100000; display: flex; align-items: center; justify-content: center;
-            text-align: center; padding: 40px;
-        }
-        .gate-box { max-width: 700px; }
-        .gate-box h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 20px; color: white; }
-        .gate-box p { font-size: 1.25rem; line-height: 1.8; opacity: 0.8; margin-bottom: 50px; }
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 20px 50px; border-radius: 50px; font-weight: 800; font-size: 1.1rem;
-            text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s;
-            border: none; text-decoration: none;
-        }
-        .btn-primary { background: var(--accent); color: white; }
-        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3); }
-
-        /* Portfolio Header */
-        header { padding: 120px 0 60px; text-align: center; }
-        header h2 { font-family: var(--font-display); font-size: 3.5rem; margin-bottom: 20px; }
-        header p { font-size: 1.2rem; opacity: 0.6; max-width: 600px; margin: 0 auto; }
-
-        /* Scenario Grid §v1.0 */
-        .scenario-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 
-            gap: 40px; margin-bottom: 120px; 
-        }
-        .s-card { 
-            background: white; border-radius: var(--radius); padding: 50px; 
-            border: 1px solid rgba(15, 23, 42, 0.05); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; overflow: hidden; display: flex; flex-direction: column; min-height: 400px;
-        }
-        .s-card:hover { transform: translateY(-15px); box-shadow: 0 50px 100px rgba(15, 23, 42, 0.1); border-color: var(--accent); }
-        .s-card .s-tag { opacity: 0.4; font-weight: 800; margin-bottom: 15px; display: block; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; }
-        .s-card h3 { font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 15px; }
-        .s-card p { font-size: 1.05rem; line-height: 1.6; opacity: 0.6; margin-bottom: 30px; }
-        .s-card .cta { margin-top: auto; color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1.5px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
-
-        [data-aos] { opacity: 0; transform: translateY(30px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        [data-aos].visible { opacity: 1; transform: translateY(0); }
-
-        /* Value Frame §v1.0 */
-        .value-frame { 
-            background: var(--primary); color: white; padding: 120px 0; border-radius: 60px; 
-            text-align: center; margin-bottom: 120px;
-        }
-        .value-frame h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 30px; }
-        .value-frame .price { font-size: 5rem; font-weight: 800; color: #fbbf24; margin-bottom: 40px; display: block; }
-
-        @media (max-width: 768px) {
-            .scenario-grid { grid-template-columns: 1fr; }
-            header h2 { font-size: 2.5rem; }
-            .value-frame h2 { font-size: 2rem; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="v4-master.css">
 </head>
 <body>
 
-    <!-- Priority Entry Gate -->
-    <div id="master-gate">
-        <div class="gate-box">
-            <span style="text-transform:uppercase; letter-spacing:4px; font-weight:800; color:var(--accent); display:block; margin-bottom:20px; font-size:0.9rem;">DevBridge Kerala Discovery</span>
-            <h1>High-Value Demo Hub.</h1>
-            <p>This is a demo portfolio created to showcase possible website outcomes. These are <strong>NOT real client projects</strong>. Your actual website will be built based on your specific business data, goals, and requirements. Results, design, and structure may vary accordingly.</p>
-            <button class="btn btn-primary" onclick="unlockPortfolio()">Understood, Show Me Examples</button>
+    <!-- Layer 1: Mandatory Entry Gate v4.0 -->
+    <div id="scenario-gate-v4">
+        <div class="gate-inner">
+            <span class="badge-elite" style="border-color:var(--warning); color:var(--warning);">Architecture Showcase</span>
+            <h2>Experience the Engine.</h2>
+            <p>Welcome to the DevBridge Kerala Scenario Engine. This is a demonstration of 55+ premium website architectures for real-world Kerala business cases. These are not client projects—they are benchmarks of what we can create for you in 24 hours.</p>
+            <button class="btn-v4" style="background:var(--warning); color:#000; width:100%;" onclick="unlockPortfolioV4()">Browse Scenarios &rarr;</button>
         </div>
     </div>
 
-    <main class="container">
-        <header>
-            <h2>Scenario Library.</h2>
-            <p>Pick a business scenario below to see the conversion depth we achieve for ₹1000 single-page websites.</p>
-        </header>
+    <header style="padding: 180px 0 100px; text-align: center; background: white; border-radius: 0 0 80px 80px;">
+        <div class="container" data-v4-reveal>
+            <span class="badge-elite">Continuous Growth Engine</span>
+            <h1 style="font-size: clamp(3.5rem, 10vw, 6rem); margin-bottom: 30px;">Find Your <br><span class="text-gradient">Business Scenario.</span></h1>
+            <p style="font-size: 1.4rem; opacity: 0.6; max-width: 800px; margin: 0 auto 60px;">We build websites that look like ₹1 Lakh agencies, but priced for Kerala's entrepreneurs at ₹1000. Delivered in 24 hours. No advance needed.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto;">
+                <div class="glass-v4" style="padding: 30px; border-radius: var(--radius-md);">
+                    <h3 style="font-size: 2.5rem; color: var(--accent); margin-bottom: 5px;">55+</h3>
+                    <p style="text-transform:uppercase; font-size:0.7rem; font-weight:800; opacity:0.6;">Live Demos</p>
+                </div>
+                <div class="glass-v4" style="padding: 30px; border-radius: var(--radius-md);">
+                    <h3 style="font-size: 2.5rem; color: var(--accent); margin-bottom: 5px;">35+</h3>
+                    <p style="text-transform:uppercase; font-size:0.7rem; font-weight:800; opacity:0.6;">Niche Categories</p>
+                </div>
+                <div class="glass-v4" style="padding: 30px; border-radius: var(--radius-md);">
+                    <h3 style="font-size: 2.5rem; color: var(--accent); margin-bottom: 5px;">₹0</h3>
+                    <p style="text-transform:uppercase; font-size:0.7rem; font-weight:800; opacity:0.6;">Payable Advance</p>
+                </div>
+                <div class="glass-v4" style="padding: 30px; border-radius: var(--radius-md);">
+                    <h3 style="font-size: 2.5rem; color: var(--accent); margin-bottom: 5px;">24h</h3>
+                    <p style="text-transform:uppercase; font-size:0.7rem; font-weight:800; opacity:0.6;">Launch Speed</p>
+                </div>
+            </div>
+        </div>
+    </header>
 
-        <section class="scenario-grid">
-            <a href="../palakkadan/index.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
-                <span class="s-tag">Scenario 01</span>
-                <h3>Heritage Legacy.</h3>
-                <p>A premium eCommerce showcase for 200+ heritage products. Optimized for bulk selection and high-trust storytelling.</p>
-                <div class="cta">Explore Demo &rarr;</div>
-            </a>
-
-            <a href="local-shop.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
-                <span class="s-tag">Scenario 02</span>
-                <h3>FreshRoute Pro.</h3>
-                <p>Luxury organic grocery mart. Features fast searching, glassmorphism UI, and direct WhatsApp order manifests.</p>
-                <div class="cta">Explore Demo &rarr;</div>
-            </a>
-
-            <a href="restaurant.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
-                <span class="s-tag">Scenario 03</span>
-                <h3>SpiceRoute Luxe.</h3>
-                <p>Elite fine-dining digital menu. Optimized for boutique restaurants and premium café booking flows.</p>
-                <div class="cta">Explore Demo &rarr;</div>
-            </a>
-
-            <a href="consultant.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
-                <span class="s-tag">Scenario 04</span>
-                <h3>ExpertFlow Elite.</h3>
-                <p>Corporate-standard authority vault for consultants and advisors. Focused on elite lead capture and trust.</p>
-                <div class="cta">Explore Demo &rarr;</div>
-            </a>
-
-            <a href="realty.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
-                <span class="s-tag">Scenario 05</span>
-                <h3>Astra Realty.</h3>
-                <p>High-end property showcase for luxury realtors. Features immersive villa galleries and private viewing hooks.</p>
-                <div class="cta">Explore Demo &rarr;</div>
-            </a>
-
-            <a href="vibe.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
-                <span class="s-tag">Scenario 06</span>
-                <h3>VibeCheck.</h3>
-                <p>Vibrant personal brand hub for influencers and creators. Optimized for Link-in-Bio alternatives and brand collabs.</p>
-                <div class="cta">Explore Demo &rarr;</div>
-            </a>
-
-            <a href="iron.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
-                <span class="s-tag">Scenario 07</span>
-                <h3>IronCore.</h3>
-                <p>Performance-driven dark mode gym engine. Designed for personal trainers and industrial fitness centers.</p>
-                <div class="cta">Explore Demo &rarr;</div>
-            </a>
+    <main class="container" style="padding: 100px 0;">
+        
+        <!-- Layer 2: Decision Accelerator (Comparison) -->
+        <section data-v4-reveal>
+            <div style="text-align:center; margin-bottom:60px;">
+                <h2 style="font-size: 3.5rem;">The DevBridge Standard.</h2>
+                <p style="opacity:0.6;">Compare the elite standard to generic alternatives.</p>
+            </div>
+            
+            <div class="comparison-grid">
+                <div class="comp-card neg">
+                    <h4>WITHOUT US</h4>
+                    <ul class="comp-list">
+                        <li>Invisible online presence</li>
+                        <li>Losing customers to competitors</li>
+                        <li>No direct customer contact</li>
+                        <li>Amateur brand perception</li>
+                        <li>Months of delivery wait</li>
+                    </ul>
+                </div>
+                <div class="comp-card pos">
+                    <span class="badge-elite" style="background:var(--success); color:white; border:none; margin-bottom:15px; font-size:0.6rem;">Master Template</span>
+                    <h4>WITH THIS ENGINE</h4>
+                    <ul class="comp-list">
+                        <li>Professional agency-level presence</li>
+                        <li>WhatsApp-integrated lead capture</li>
+                        <li>Instant booking & commerce</li>
+                        <li>Elite brand authority (v4.0)</li>
+                        <li>Delivered within 24 hours</li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
-        <section class="value-frame">
-            <div class="container">
-                <h2>The DevBridge Value.</h2>
-                <span class="price">₹1000</span>
-                <p style="font-size: 1.5rem; opacity: 0.8; max-width: 800px; margin: 0 auto 50px;">We build single-page active commerce engines that look and perform like professional ₹1,00,000+ custom solutions.</p>
-                <a href="https://wa.me/918137826016?text=Hi, I saw your portfolio. I want a similar high-converting demo for my business." class="btn btn-primary" style="background: #fbbf24; color: var(--primary);">Claim Your Site &rarr;</a>
+        <!-- Layer 3: Smart Filtering Interface -->
+        <section style="margin: 120px 0;" data-v4-reveal>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 60px;">
+                <button class="btn-filter active" onclick="filterScenarios('all')">All Industries</button>
+                <button class="btn-filter" onclick="filterScenarios('shop')">Shop / Mart</button>
+                <button class="btn-filter" onclick="filterScenarios('service')">Professional Service</button>
+                <button class="btn-filter" onclick="filterScenarios('food')">Food & Wellness</button>
+                <button class="btn-filter" onclick="filterScenarios('consultant')">Consultant / Job</button>
+                <button class="btn-filter" onclick="filterScenarios('automotive')">Automotive</button>
+                <button class="btn-filter" onclick="filterScenarios('tech')">Tech & Industry</button>
+            </div>
+
+            <div class="scenario-grid-v4" id="scenario-grid">
+                <!-- Batch 9: Scenarios 51-55 -->
+                <a href="driving.html" class="s-card-v4" data-category="service education">
+                    <div class="s-preview">Scenario 55</div>
+                    <h3>Driver Elite Hub.</h3>
+                    <p>Professional driving school & license agency. Navigational trust.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="packers.html" class="s-card-v4" data-category="service industry">
+                    <div class="s-preview">Scenario 54</div>
+                    <h3>SwiftMove Elite.</h3>
+                    <p>Packers & movers / relocation bureau. Logistical sovereignty.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="water-tank.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 53</div>
+                    <h3>AquaPure Hub.</h3>
+                    <p>Water tank & sump cleaning. Hydraulic source purity.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="pest.html" class="s-card-v4" data-category="service wellness">
+                    <div class="s-preview">Scenario 52</div>
+                    <h3>PestShield Elite.</h3>
+                    <p>Professional pest control & eradication. Biological sovereignty.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="cleaning.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 51</div>
+                    <h3>PurePoint Cleaning.</h3>
+                    <p>Home & office deep-cleaning. Sanitary sovereignty manifest.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+
+                <!-- Batch 6: Scenarios 36-40 -->
+                <a href="tutor.html" class="s-card-v4" data-category="service education">
+                    <div class="s-preview">Scenario 40</div>
+                    <h3>Elite Private Tutor.</h3>
+                    <p>1-on-1 individual academic audit. Rank resilience manifest.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="tax.html" class="s-card-v4" data-category="service consultant">
+                    <div class="s-preview">Scenario 39</div>
+                    <h3>TaxGuard Elite Advisor.</h3>
+                    <p>Financial audit & GST consulting. Compliance sovereignty.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="homestay.html" class="s-card-v4" data-category="service food">
+                    <div class="s-preview">Scenario 38</div>
+                    <h3>Serene Stays Homestay.</h3>
+                    <p>Boutique hotel & luxury retreat. Experiential tranquility.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="trades.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 37</div>
+                    <h3>QuickPoint Trades.</h3>
+                    <p>Elite plumber & electrician bureau. Technical arrival manifest.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="repair.html" class="s-card-v4" data-category="service tech">
+                    <div class="s-preview">Scenario 36</div>
+                    <h3>TechFix Elite Repair.</h3>
+                    <p>Laptop & mobile diagnostic center. Chipset-level recovery.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+
+                <!-- Batch 5 (Latest) -->
+                <a href="jobs.html" class="s-card-v4" data-category="consultant">
+                    <div class="s-preview">Scenario 35</div>
+                    <h3>Career Global Jobs.</h3>
+                    <p>Overseas job placement authority. Built for Gulf & European recruitment.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="supplements.html" class="s-card-v4" data-category="shop wellness">
+                    <div class="s-preview">Scenario 34</div>
+                    <h3>Titan Fuel Proteins.</h3>
+                    <p>High-end fitness supplement store. 100% authenticity logic.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="agent.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 33</div>
+                    <h3>Prime Realty Elite.</h3>
+                    <p>Luxury real estate broker showroom. High-ticket asset authority.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="wash.html" class="s-card-v4" data-category="automotive">
+                    <div class="s-preview">Scenario 32</div>
+                    <h3>Aqua Shield Wash.</h3>
+                    <p>Premium car wash sanctuary. Focus on zero-swirl decontamination.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="care.html" class="s-card-v4" data-category="service wellness">
+                    <div class="s-preview">Scenario 31</div>
+                    <h3>Compassion Care.</h3>
+                    <p>Home nursing & elderly support. Established trust for delicate care.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                
+                <!-- Batch 4 -->
+                <a href="catering.html" class="s-card-v4" data-category="food">
+                    <div class="s-preview">Scenario 30</div>
+                    <h3>Royal Feast Catering.</h3>
+                    <p>Luxury event food manifest. Culunary grandeur at scale.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="boutique.html" class="s-card-v4" data-category="shop">
+                    <div class="s-preview">Scenario 29</div>
+                    <h3>Silicon Hub Boutique.</h3>
+                    <p>Specialized high-end tech & laptops. Hardware intelligence.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="pet-shop.html" class="s-card-v4" data-category="shop">
+                    <div class="s-preview">Scenario 28</div>
+                    <h3>Paws & Pantry.</h3>
+                    <p>Premium pet food & supply store. Nutrition-first integrity.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="solar.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 27</div>
+                    <h3>SunGrid Elite Solar.</h3>
+                    <p>Residential solar engineering. Energy independence manifest.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="study-abroad.html" class="s-card-v4" data-category="consultant">
+                    <div class="s-preview">Scenario 26</div>
+                    <h3>Global Pathway.</h3>
+                    <p>Overseas education & visa consultant. Global trajectory manifest.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="mua.html" class="s-card-v4" data-category="service wellness">
+                    <div class="s-preview">Scenario 25</div>
+                    <h3>Bridal Glow MUA.</h3>
+                    <p>Luxury wedding makeup artistry. Radiant transformation vault.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="detailing.html" class="s-card-v4" data-category="automotive">
+                    <div class="s-preview">Scenario 24</div>
+                    <h3>Gloss & Shield.</h3>
+                    <p>Ceramic coating & PPF studio. Surface protection authority.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="chemist.html" class="s-card-v4" data-category="shop service">
+                    <div class="s-preview">Scenario 23</div>
+                    <h3>Pharma Elite.</h3>
+                    <p>Independent pharmacy demo. Medical-grade trust & speed.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="architect.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 22</div>
+                    <h3>Blueprint Elite.</h3>
+                    <p>Freelance architect showroom. Structural authority manifest.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="supermarket.html" class="s-card-v4" data-category="shop">
+                    <div class="s-preview">Scenario 21</div>
+                    <h3>Local Mart Elite.</h3>
+                    <p>Neighborhood supermarket logic. Direct farm-to-door fresh.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="yoga.html" class="s-card-v4" data-category="wellness food">
+                    <div class="s-preview">Scenario 20</div>
+                    <h3>Zen Yoga Studio.</h3>
+                    <p>Wellness coach & private flows. Tranquil vitality manifest.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="pet-grooming.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 19</div>
+                    <h3>Paws & Claws Groomer.</h3>
+                    <p>Artisan pet spa logic. Gentle hygiene authority.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="interior.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 18</div>
+                    <h3>Master Spaces.</h3>
+                    <p>Elite interior design demo. Content depth & luxury.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+
+                <!-- Batch 1-17 Core -->
+                <a href="mobile.html" class="s-card-v4" data-category="shop">
+                    <div class="s-preview">Scenario 17</div>
+                    <h3>Titan Tech Gadgets.</h3>
+                    <p>High-end mobile store. Flagship trust manifest.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="salon.html" class="s-card-v4" data-category="service food">
+                    <div class="s-preview">Scenario 16</div>
+                    <h3>Aura Wellness & Spa.</h3>
+                    <p>Elite salon sanctuary. Appointment-first architecture.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="car-rental.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 15</div>
+                    <h3>Coastline Rentals.</h3>
+                    <p>Premium car rental manifest. High-speed booking.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="events.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 14</div>
+                    <h3>Grand Events Hub.</h3>
+                    <p>Luxury event management. Visionary logistics.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="wedding.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 13</div>
+                    <h3>Legacy Studio.</h3>
+                    <p>Wedding photography demo. Timeless storytelling.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="editor.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 12</div>
+                    <h3>EditFlow Media.</h3>
+                    <p>Video editor showroom. Retention-optimized cuts.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="local-mess.html" class="s-card-v4" data-category="food">
+                    <div class="s-preview">Scenario 11</div>
+                    <h3>Amma's Kitchen.</h3>
+                    <p>Authentic home mess. Tiffin subscription logic.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="tuition.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 10</div>
+                    <h3>Elite Academy.</h3>
+                    <p>Results-driven tuition center. Rank engineering.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="saree.html" class="s-card-v4" data-category="shop">
+                    <div class="s-preview">Scenario 09</div>
+                    <h3>Sutra Silk Boutique.</h3>
+                    <p>Luxury saree showroom. Hand-loomed authority.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="bakery.html" class="s-card-v4" data-category="food">
+                    <div class="s-preview">Scenario 08</div>
+                    <h3>The Cake Studio.</h3>
+                    <p>Artisan home bakery. Bespoke celebrations.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="iron.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 07</div>
+                    <h3>IronCore Gym.</h3>
+                    <p>Elite training facility. Tactical transformation.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="vibe.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 06</div>
+                    <h3>VibeCheck Creator.</h3>
+                    <p>Influencer agency hub. Trend-aware conversion.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="realty.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 05</div>
+                    <h3>Astra Realty Group.</h3>
+                    <p>High-ticket real estate. Portfolio-first trust.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="consultant.html" class="s-card-v4" data-category="service">
+                    <div class="s-preview">Scenario 04</div>
+                    <h3>ExpertFlow Elite.</h3>
+                    <p>General consulting authority. Lead-gen champion.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="restaurant.html" class="s-card-v4" data-category="food">
+                    <div class="s-preview">Scenario 03</div>
+                    <h3>SpiceRoute Luxe.</h3>
+                    <p>Fine dining & restaurant. Table-booking master.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="local-shop.html" class="s-card-v4" data-category="shop">
+                    <div class="s-preview">Scenario 02</div>
+                    <h3>FreshRoute Pro.</h3>
+                    <p>Local shop & grocery. WhatsApp commerce elite.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+                <a href="../palakkadan/index.html" class="s-card-v4" data-category="food shop">
+                    <div class="s-preview">Scenario 01</div>
+                    <h3>Heritage Legacy.</h3>
+                    <p>Palakkadan Rice/Jaggery. 3X high-ticket conversion.</p>
+                    <div class="s-link">Explore Demo &rarr;</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Request Your Scenario (Layer 9) -->
+        <section style="margin: 140px 0;" data-v4-reveal>
+            <div class="glass-v4" style="padding: 100px 60px; border-radius: 80px; text-align: center; background: var(--primary); color: white;">
+                <span class="badge-elite" style="border-color:var(--accent); color:var(--accent);">Niche Unlimited</span>
+                <h2 style="font-size: 4rem; margin-bottom: 30px;">Don't See Your Niche?</h2>
+                <p style="font-size: 1.4rem; opacity: 0.8; max-width: 800px; margin: 0 auto 60px;">The Scenario Engine is growing. I can build a high-converting landing page for <b>ANY business in Kerala</b> within 24 hours. Request your niche below and see it live for free.</p>
+                
+                <div style="max-width: 600px; margin: 0 auto; display: grid; gap: 20px;">
+                    <input type="text" id="niche-input" placeholder="Enter your business type (e.g. Pet Clinic, Solar Dealer...)" 
+                           style="width: 100%; padding: 25px; border-radius: 50px; border: none; font-family: inherit; font-size: 1.1rem; text-align: center;">
+                    <button class="btn-v4" style="background:var(--warning); color:black; width: 100%;" onclick="requestNiche()">Request My Scenario &rarr;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Conversion Layer -->
+        <section class="glass-v4" style="padding: 120px 40px; border-radius: 80px; text-align: center; margin-bottom: 120px;" data-v4-reveal>
+            <h2 style="font-size: 4.5rem; margin-bottom: 30px;">Own a Piece of the Engine.</h2>
+            <p style="font-size: 1.5rem; opacity: 0.6; margin-bottom: 50px;">We take your business, apply one of these 35+ conversion architectures, and launch it in 24 hours. All for ₹1000.</p>
+            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+                <a href="https://wa.me/918137826016" class="btn-v4" style="background:var(--success); color:white; padding: 25px 80px;">Start My Project Now</a>
+                <a href="tel:+918137826016" class="btn-v4" style="border: 2px solid var(--primary); color:var(--primary); padding:25px 40px;">Direct Hotline</a>
             </div>
         </section>
     </main>
 
-    <footer style="padding: 100px 0; text-align: center; border-top: 1px solid rgba(0,0,0,0.05);">
-        <p style="opacity: 0.4; font-size: 0.9rem;">&copy; 2026 DevBridge Kerala Demo Portfolio. All rights reserved.</p>
+    <footer style="padding: 100px 0; text-align: center; border-top: 1px solid rgba(0,0,0,0.05); background: white;">
+        <p style="opacity: 0.4; font-size: 0.9rem;">&copy; 2026 DevBridge Kerala Scenario Engine v4.0. Independent Growth Architecture.</p>
     </footer>
 
-    <script>
-        function unlockPortfolio() {
-            document.getElementById('master-gate').style.display = 'none';
+    <style>
+        /* Specific Hub Components v4.0 */
+        .btn-filter { padding: 12px 30px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.05); background: white; font-family: var(--font-utility); font-weight: 800; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; transition: 0.4s; }
+        .btn-filter.active, .btn-filter:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-3px); }
+
+        .scenario-grid-v4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 30px; }
+        .s-card-v4 { display: flex; flex-direction: column; padding: 60px; background: white; border-radius: var(--radius-lg); border: 1px solid rgba(0,0,0,0.03); transition: var(--transition); text-decoration: none; color: inherit; position: relative; overflow: hidden; }
+        .s-card-v4:hover { transform: translateY(-15px); box-shadow: var(--shadow-elite); border-color: var(--accent); }
+        .s-preview { position: absolute; top: 0; left: 0; padding: 10px 20px; background: var(--primary); color: white; font-size: 0.7rem; font-weight: 800; font-family: var(--font-utility); letter-spacing: 2px; }
+        .s-card-v4 h3 { font-size: 2.2rem; margin-bottom: 15px; }
+        .s-card-v4 p { font-size: 1.1rem; opacity: 0.5; margin-bottom: 30px; line-height: 1.6; }
+        .s-link { margin-top: auto; color: var(--accent); font-weight: 800; font-family: var(--font-utility); text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.8rem; }
+        
+        @media (max-width: 768px) {
+            .scenario-grid-v4 { grid-template-columns: 1fr; }
+            .s-card-v4 { padding: 40px; }
         }
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
+    </style>
+
+    <script src="v4-master.js"></script>
+    <script>
+        function filterScenarios(cat) {
+            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+            const btn = Array.from(document.querySelectorAll('.btn-filter')).find(b => b.innerText.toLowerCase().includes(cat.toLowerCase()) || (cat === 'all' && b.innerText.includes('All')));
+            if(btn) btn.classList.add('active');
+            
+            document.querySelectorAll('.s-card-v4').forEach(card => {
+                const cats = card.dataset.category.split(' ');
+                if(cat === 'all' || cats.includes(cat)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
             });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+        }
+
+        function requestNiche() {
+            const val = document.getElementById('niche-input').value;
+            if(!val) return alert('Pelase enter a niche first!');
+            window.open(`https://wa.me/918137826016?text=I saw the Portfolio Hub and I'm interested in a scenario for: ${val}`);
+        }
     </script>
 </body>
+</html>
+>
 </html>

@@ -1,0 +1,105 @@
+/* 
+  ╔══════════════════════════════════════════════════╗
+  ║    DEVBRIDGE KERALA | AUTONOMOUS ENGINE v4.0     ║
+  ║    Standard      : SENIOR VP / DIRECTOR UX       ║
+  ║    Architecture  : TACTICAL TRUST & CONVERSION   ║
+  ╚══════════════════════════════════════════════════╝
+*/
+
+:root {
+    --primary: #0f172a;
+    --accent: #3b82f6; 
+    --success: #25d366;
+    --warning: #fbbf24;
+    --bg: #f8fafc;
+    --glass: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-utility: 'Outfit', sans-serif;
+    --radius-supreme: 48px;
+    --radius-lg: 32px;
+    --radius-md: 20px;
+    --transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    --shadow-elite: 0 40px 100px -20px rgba(15, 23, 42, 0.15), 0 20px 40px -30px rgba(15, 23, 42, 0.1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--primary); overflow-x: hidden; scroll-behavior: smooth; line-height: 1.6; font-weight: 300; }
+.container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+
+/* Typography Standard v4.0 */
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; }
+.text-gradient { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.badge-elite { display: inline-flex; padding: 10px 24px; background: rgba(59, 130, 246, 0.08); color: var(--accent); border-radius: 60px; font-weight: 800; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2.5px; margin-bottom: 25px; font-family: var(--font-utility); border: 1px solid rgba(59, 130, 246, 0.2); }
+
+/* Comparison Architecture §Layer2 */
+.comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 80px 0; }
+.comp-card { padding: 40px; border-radius: var(--radius-lg); border: 1px solid rgba(0,0,0,0.05); transition: var(--transition); background: white; }
+.comp-card.neg { filter: grayscale(1); opacity: 0.6; background: #f1f5f9; }
+.comp-card.pos { border-color: var(--accent); box-shadow: var(--shadow-elite); }
+.comp-card h4 { font-family: var(--font-utility); font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+.comp-list { list-style: none; }
+.comp-list li { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; font-size: 1.1rem; }
+.comp-list li::before { content: "✕"; color: #ef4444; font-weight: 900; }
+.pos li::before { content: "✓"; color: var(--success); }
+
+/* Activity Simulator Toast §Layer1 */
+#activity-toast {
+    position: fixed; bottom: 40px; left: 40px; background: white; padding: 15px 25px;
+    border-radius: 60px; box-shadow: var(--shadow-elite); border: 1px solid rgba(0,0,0,0.05);
+    z-index: 99999; display: flex; align-items: center; gap: 15px;
+    transform: translateX(-200%); transition: var(--transition);
+}
+#activity-toast.visible { transform: translateX(0); }
+.activity-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 0.8rem; }
+.activity-info { font-size: 0.9rem; font-weight: 500; }
+.activity-info strong { color: var(--accent); }
+
+/* Exit Capture Logic §Layer4 */
+#exit-capture {
+    position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
+    z-index: 1000000; display: none; align-items: center; justify-content: center;
+    color: white; text-align: center; padding: 40px;
+}
+.exit-box { max-width: 600px; }
+.exit-box h2 { font-size: 4rem; margin-bottom: 20px; }
+.exit-box p { font-size: 1.4rem; opacity: 0.7; margin-bottom: 40px; line-height: 1.8; }
+
+/* Micro-Interaction Engine §Layer5 */
+.glass-v4 {
+    background: var(--glass);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-elite);
+}
+.btn-v4 {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 24px 60px; border-radius: 60px; font-weight: 800; 
+    text-transform: uppercase; letter-spacing: 2px; cursor: pointer;
+    border: none; text-decoration: none; transition: var(--transition);
+    font-family: var(--font-utility); font-size: 1rem;
+}
+.btn-v4:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 40px 80px rgba(15, 23, 42, 0.2); }
+
+/* Reveal Engine */
+[data-v4-reveal] { opacity: 0; transform: translateY(50px); transition: 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-v4-reveal].visible { opacity: 1; transform: translateY(0); }
+
+/* Scenario Gate Upgrade */
+#scenario-gate-v4 {
+    position: fixed; inset: 0; background: #000; z-index: 10000000;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+}
+#scenario-gate-v4 .gate-inner { max-width: 800px; padding: 40px; }
+#scenario-gate-v4 h2 { font-size: clamp(2.5rem, 8vw, 4.5rem); color: var(--warning); margin-bottom: 30px; }
+#scenario-gate-v4 p { font-size: 1.35rem; color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 50px; }
+
+/* Mobile Optimization CPM §Layer7 */
+@media (max-width: 768px) {
+    .comparison-grid { grid-template-columns: 1fr; }
+    #activity-toast { bottom: 20px; left: 20px; right: 20px; width: auto; font-size: 0.8rem; }
+    .exit-box h2 { font-size: 2.5rem; }
+    .btn-v4 { padding: 20px 40px; width: 100%; border-radius: var(--radius-md); }
+}

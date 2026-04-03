@@ -3,152 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IronCore | Performance Fitness & Gym Demo</title>
+    <title>IronCore | Elite Performance Gym Demo v4.0</title>
+    <meta name="business-type" content="High-Performance Gym">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="v4-master.css">
+    
     <style>
+        /* Scenario Specific Theme: Industrial Charcoal & Hazard Yellow */
         :root {
-            --primary: #ef4444; 
-            --accent: #ffffff;
-            --bg: #0a0a0a;
-            --font-body: 'Outfit', sans-serif;
-            --radius-lg: 32px;
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --primary: #0a0a0a; 
+            --accent: #fbbf24;  /* Hazard Yellow */
+            --bg: #111111;      
         }
-
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
-        body { font-family: var(--font-body); background: var(--bg); color: white; overflow-x: hidden; scroll-behavior: smooth; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
-        
-        /* Demo Gate §v2.0 */
-        #demo-gate {
-            position: fixed; inset: 0; 
-            background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px);
-            z-index: 100000; display: flex; align-items: center; justify-content: center;
-            color: white; text-align: center; padding: 40px;
-        }
-        .gate-box h2 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 900; color: var(--primary); font-style: italic; }
-        .gate-box p { font-size: 1.1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 40px; }
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 22px 55px; border-radius: 50px; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 2px; cursor: pointer; border: none; text-decoration: none; transition: var(--transition);
-        }
-        .btn-primary { background: var(--primary); color: white; }
-
-        /* Hero Gym §v2.0 */
-        .hero {
+        body { color: white; }
+        .hero-v4 { 
             height: 95vh; display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), url('images/iron_hero.png');
-            background-size: cover; background-position: center; border-radius: 0 0 60px 60px;
-            text-align: center; position: relative; border-bottom: 5px solid var(--primary);
-        }
-        .hero h1 { font-size: clamp(3.5rem, 15vw, 8rem); font-weight: 900; font-style: italic; line-height: 0.85; margin-bottom: 30px; letter-spacing: -2px; }
-
-        /* Program Section §v2.0 */
-        .section-title { text-align: center; padding: 100px 0 60px; }
-        .section-title h2 { font-size: 4rem; font-weight: 900; font-style: italic; color: white; opacity: 0.1; position: absolute; left: 50%; transform: translateX(-50%); width: 100%; top: 40px; z-index: -1; }
-        .section-title h3 { font-size: 2.5rem; font-weight: 900; position: relative; z-index: 1; }
-
-        .program-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; padding-bottom: 120px; }
-        .p-card { 
-            background: #1a1a1a; padding: 50px; border-radius: var(--radius-lg); 
-            border: 1px solid rgba(255, 255, 255, 0.05); transition: var(--transition);
-        }
-        .p-card:hover { border-color: var(--primary); transform: translateY(-10px); background: #222; }
-        .p-card h4 { font-size: 1.8rem; font-weight: 900; margin-bottom: 15px; color: var(--primary); }
-        .p-card p { opacity: 0.6; font-size: 1rem; line-height: 1.6; margin-bottom: 30px; }
-
-        /* Performance Banner */
-        .perf-banner {
-            background: var(--primary); color: white; border-radius: 60px; padding: 120px 40px;
-            text-align: center; margin-bottom: 120px; box-shadow: 0 40px 80px rgba(239, 68, 68, 0.3);
-        }
-        .perf-banner h2 { font-size: 5rem; font-weight: 900; font-style: italic; margin-bottom: 30px; }
-
-        /* FAB */
-        .fab {
-            position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white;
-            padding: 20px 45px; border-radius: 50px; font-weight: 800; box-shadow: 0 15px 40px rgba(239, 68, 68, 0.4);
-            z-index: 1000; text-decoration: none; display: flex; align-items: center; gap: 12px;
-            transition: var(--transition); border: 2px solid white; text-transform: uppercase; letter-spacing: 2px;
-        }
-        .fab:hover { transform: scale(1.1) rotate(2deg); }
-
-        [data-aos] { opacity: 0; transform: skewX(-5deg) translateX(-30px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        [data-aos].visible { opacity: 1; transform: skewX(0) translateX(0); }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 4rem; }
-            .perf-banner h2 { font-size: 3rem; }
+            background: linear-gradient(rgba(10, 10, 10, 0.4), rgba(10, 10, 10, 0.2)), url('images/iron_hero.png');
+            background-size: cover; background-position: center; border-radius: 0 0 100px 100px;
+            color: white; text-align: center; border-bottom: 3px solid var(--accent);
         }
     </style>
 </head>
 <body>
 
-    <div id="demo-gate">
-        <div class="gate-box">
-            <span style="text-transform:uppercase; letter-spacing:4px; font-weight:800; color:var(--primary); display:block; margin-bottom:20px; font-size:0.9rem;">Elite Scenario 07</span>
-            <h2>IronCore Performance.</h2>
-            <p>Experience the definitive <strong>High-Performance Fitness Hub Architecture</strong>. Optimized for physical trainers and gym owners. High-converting session booking flow for ₹1000.</p>
-            <button class="btn btn-primary" onclick="this.parentElement.parentElement.style.display='none'">Unlock Performance Demo</button>
+    <!-- Layer 1: Mandatory Entry Gate v4.0 -->
+    <div id="scenario-gate-v4">
+        <div class="gate-inner">
+            <span class="badge-elite" style="border-color:var(--accent); color:var(--accent);">Scenario 07 Benchmark</span>
+            <h2>IronCore v4.0.</h2>
+            <p>Experience the highest conversion architecture for the fitness industry. This demo showcases how we establish performance authority and capture massive membership inquiries in 24 hours.</p>
+            <button class="btn-v4" style="background:var(--accent); color:#000; width:100%;" onclick="unlockPortfolioV4()">Experience Scenario &rarr;</button>
         </div>
     </div>
 
-    <section class="hero">
+    <section class="hero-v4" data-v4-reveal>
         <div class="container">
-            <span style="text-transform:uppercase; letter-spacing:6px; font-weight:800; color:var(--primary); display:block; margin-bottom:20px; font-size:1rem;">Dominate Your Potential</span>
-            <h1>LIFT HEAVY. <br>LIVE ELITE.</h1>
-            <p style="font-size: 1.4rem; font-weight: 300; opacity: 0.8; margin-bottom: 45px;">Industrial strength training. Professional performance coaching.</p>
-            <a href="https://wa.me/918137826016?text=Hi, I saw the IronCore Gym Demo. I want a similar fitness landing page." class="btn btn-primary">Book Evaluation Session</a>
+            <span class="badge-elite" style="background:rgba(251, 191, 36, 0.2); color:white;">Performance Engineering</span>
+            <h1 style="font-size: clamp(3.5rem, 12vw, 7.5rem); margin-bottom: 30px;">IronCore Gym.</h1>
+            <p style="font-size: 1.5rem; font-weight: 300; opacity: 0.9; max-width: 800px; margin: 0 auto 50px;">Forging the elite athletes of Kerala. From strength-optimization manifests to nutritional guidance—experience the luxury of physical performance.</p>
+            <a href="https://wa.me/918137826016" class="btn-v4" style="background:var(--accent); color:#000;">Claim Trial Session &rarr;</a>
         </div>
     </section>
 
-    <main class="container" style="position: relative;">
-        <div class="section-title" data-aos>
-            <h2>PERFORMANCE</h2>
-            <h3>Tactical Programs.</h3>
-        </div>
+    <main class="container" style="padding: 120px 0;">
+        
+        <!-- Layer 2: Decision Accelerator -->
+        <section data-v4-reveal>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 120px;">
+                <div class="glass-v4" style="padding: 40px; border-radius: var(--radius-md); text-align: center; background:rgba(255,255,255,0.02);">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🐗</div>
+                    <h3>Elite Coaching</h3>
+                    <p>Scientific training protocols lead by certified sport-physiologists. No generic rep-counting.</p>
+                </div>
+                <div class="glass-v4" style="padding: 40px; border-radius: var(--radius-md); text-align: center; background:rgba(255,255,255,0.02);">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🔩</div>
+                    <h3>Iron Strength</h3>
+                    <p>High-end industrial equipment calibrated for zero mechanical friction. Pure force production.</p>
+                </div>
+                <div class="glass-v4" style="padding: 40px; border-radius: var(--radius-md); text-align: center; background:rgba(255,255,255,0.02);">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🥛</div>
+                    <h3>Fuel Station</h3>
+                    <p>Integrated nutrition planning and local-organic supplement sourcing for 100% recovery.</p>
+                </div>
+            </div>
+        </section>
 
-        <div class="program-grid">
-            <div class="p-card" data-aos onclick="location.href='https://wa.me/918137826016?text=Hi, I saw IronCore. I want to discuss the Strength & Power program.'">
-                <h4>Strength & Power</h4>
-                <p>Advanced barbell training and metabolic conditioning for elite athletic output and functional strength.</p>
-                <div style="font-weight: 800; color: var(--primary); font-size: 0.8rem; letter-spacing: 2px;">Enquire via WhatsApp &rarr;</div>
+        <!-- Layer 2: Comparison Block -->
+        <section data-v4-reveal>
+            <div style="text-align:center; margin-bottom:60px;">
+                <h2 style="font-size: 3.5rem;">The Performance Standard.</h2>
+                <p style="opacity:0.6;">Compare a results-driven club to a generic 'Neighborhood Gym'.</p>
             </div>
-            <div class="p-card" data-aos onclick="location.href='https://wa.me/918137826016?text=Hi, I saw IronCore. I want to discuss the Body Recomp program.'">
-                <h4>Body Recomposition</h4>
-                <p>Precision fat loss and targeted hypertrophy using science-backed protocols for maximum aesthetic change.</p>
-                <div style="font-weight: 800; color: var(--primary); font-size: 0.8rem; letter-spacing: 2px;">Enquire via WhatsApp &rarr;</div>
+            <div class="comparison-grid">
+                <div class="comp-card neg" style="background:#111; color:rgba(255,255,255,0.4);">
+                    <h4>GENERIC GYMS</h4>
+                    <ul class="comp-list">
+                        <li>Cluttered, unmanaged space</li>
+                        <li>Generic, unsafe equipment</li>
+                        <li>Variable atmosphere / Crowding</li>
+                        <li>No performance tracking</li>
+                        <li>Amateur trainer support</li>
+                    </ul>
+                </div>
+                <div class="comp-card pos" style="background:#111; border-color:var(--accent);">
+                    <span class="badge-elite" style="background:var(--accent); color:black; border:none; margin-bottom:15px; font-size:0.6rem;">Master Performance</span>
+                    <h4 style="color:white;">IRONCORE ELITE</h4>
+                    <ul class="comp-list">
+                        <li style="color:white;">Immaculate, high-focus zones</li>
+                        <li style="color:white;">Industrial mirrorless-standards</li>
+                        <li style="color:white;">Capped membership exclusivity</li>
+                        <li style="color:white;">Full biometric data manifest</li>
+                        <li style="color:white;">Pro-level concierge coaching</li>
+                    </ul>
+                </div>
             </div>
-            <div class="p-card" data-aos onclick="location.href='https://wa.me/918137826016?text=Hi, I saw IronCore. I want to discuss Personal Coaching.'">
-                <h4>1-on-1 Elite Coaching</h4>
-                <p>Fully bespoke nutritional and training architecture with weekly performance audits and tactical adjustments.</p>
-                <div style="font-weight: 800; color: var(--primary); font-size: 0.8rem; letter-spacing: 2px;">Enquire via WhatsApp &rarr;</div>
-            </div>
-        </div>
+        </section>
 
-        <section class="perf-banner" data-aos>
-            <span style="text-transform:uppercase; letter-spacing:5px; font-weight:800; color:white; display:block; margin-bottom:30px; font-size:0.9rem;">The DevBridge Standard</span>
-            <h2>Power Your Brand <br>for ₹1000.</h2>
-            <p style="font-size: 1.5rem; opacity: 0.9; margin: 40px auto 70px; max-width: 650px;">Own a high-performance, dark-mode fitness engine for your gym today.</p>
-            <a href="https://wa.me/918137826016?text=Hi, I want a similar gym website like IronCore for ₹1000." class="btn btn-primary" style="background: white; color: var(--bg);">Claim Your Engine &rarr;</a>
+        <!-- Layer 14: Perception Maximization -->
+        <section style="background: white; color: black; padding: 140px 40px; border-radius: 100px; text-align: center; margin-bottom: 120px;" data-v4-reveal>
+            <span class="badge-elite" style="border-color:var(--accent); color:var(--accent);">The DevBridge Standard</span>
+            <h2 style="font-size: 4.5rem; margin-bottom: 30px;">Elevate Your Studio <br>Presence for ₹1000.</h2>
+            <p style="font-size: 1.5rem; opacity: 0.8; max-width: 800px; margin: 0 auto 60px;">Fitness Pros: Don't lose members to cheap franchise gyms. Own a high-end digital showroom that establishes master-level authority and captures trials instantly.</p>
+            <a href="https://wa.me/918137826016" class="btn-v4" style="background:var(--accent); color:#000; padding: 25px 80px;">Build My Fitness Club &rarr;</a>
         </section>
     </main>
 
-    <a href="https://wa.me/918137826016?text=Hi, I saw IronCore. Let's discuss my gym project." class="fab">
-        Book Your Session
+    <a href="https://wa.me/918137826016" class="wa-sticky">
+        Inquire Membership
     </a>
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
+    <div id="activity-toast"></div>
+    <div id="exit-capture"></div>
 
-        document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
-    </script>
+    <script src="v4-master.js"></script>
 </body>
 </html>

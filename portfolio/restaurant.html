@@ -3,175 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpiceRoute Luxe | Fine Dining Digital Menu Demo</title>
+    <title>SpiceRoute Luxe | Elite Fine-Dining Demo v4.0</title>
+    <meta name="business-type" content="Fine Dining Restaurant">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="v4-master.css">
+    
     <style>
+        /* Scenario Specific Theme: Deep Charcoal & Copper */
         :root {
-            --primary: #431407; 
-            --accent: #d4af37;
-            --bg: #fffbf5;
-            --glass: rgba(255, 255, 255, 0.9);
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Outfit', sans-serif;
-            --radius-lg: 32px;
-            --radius-md: 20px;
-            --transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            --primary: #121212; 
+            --accent: #b87333;  /* Copper */
+            --bg: #1a1a1a;      
         }
-
-        /* Base & Reset */
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
-        body { font-family: var(--font-body); background: var(--bg); color: var(--primary); overflow-x: hidden; scroll-behavior: smooth; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
-        
-        /* Demo Gate §v2.0 */
-        #demo-gate {
-            position: fixed; inset: 0; 
-            background: rgba(0,0,0,0.98); backdrop-filter: blur(30px);
-            z-index: 100000; display: flex; align-items: center; justify-content: center;
-            color: white; text-align: center; padding: 40px;
-        }
-        .gate-box h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 20px; color: var(--accent); }
-        .gate-box p { font-size: 1.1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 40px; }
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 22px 50px; border-radius: 50px; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 2px; cursor: pointer; border: none; text-decoration: none; transition: var(--transition);
-        }
-        .btn-primary { background: var(--accent); color: var(--primary); }
-
-        /* Hero Luxe §v2.0 */
-        .hero {
+        body { color: white; }
+        .hero-v4 { 
             height: 95vh; display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(rgba(67, 20, 7, 0.7), rgba(67, 20, 7, 0.7)), url('images/restaurant_hero.png');
-            background-size: cover; background-position: center; border-radius: 0 0 80px 80px;
-            color: white; text-align: center; position: relative;
-        }
-        .hero h1 { font-family: var(--font-display); font-size: clamp(3.5rem, 12vw, 7rem); font-style: italic; margin-bottom: 25px; line-height: 0.9; }
-
-        /* Menu System §v2.0 */
-        .menu-nav {
-            position: sticky; top: 0; background: var(--glass); backdrop-filter: blur(20px);
-            padding: 25px 0; z-index: 900; border-bottom: 1px solid rgba(67, 20, 7, 0.05);
-            display: flex; justify-content: center; gap: 40px;
-        }
-        .nav-item { text-transform: uppercase; letter-spacing: 2px; font-weight: 800; font-size: 0.8rem; cursor: pointer; transition: 0.3s; opacity: 0.5; }
-        .nav-item:hover { opacity: 1; color: var(--accent); }
-
-        .menu-section { padding: 120px 0; }
-        .category-title { font-family: var(--font-display); font-size: 4rem; margin-bottom: 60px; text-align: center; position: relative; }
-        .category-title::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 100px; height: 3px; background: var(--accent); }
-
-        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
-        .menu-item { 
-            display: flex; justify-content: space-between; align-items: start;
-            border-bottom: 1px dashed rgba(67, 20, 7, 0.1); padding-bottom: 30px; 
-            cursor: pointer; transition: var(--transition);
-        }
-        .menu-item:hover { transform: translateX(15px); }
-        .item-info h4 { font-size: 1.4rem; font-family: var(--font-display); margin-bottom: 8px; }
-        .item-info p { font-size: 0.9rem; opacity: 0.6; line-height: 1.5; }
-        .item-price { font-weight: 800; font-size: 1.25rem; color: var(--accent); }
-
-        /* Conversion Layer */
-        .reserve-cta {
-            background: #fff; padding: 120px 40px; border-radius: 80px;
-            text-align: center; margin: 120px auto; border: 1px solid rgba(67, 20, 7, 0.05);
-            max-width: 1000px;
-        }
-        .reserve-cta h2 { font-family: var(--font-display); font-size: 4rem; margin-bottom: 30px; font-style: italic; }
-
-        /* FAB */
-        .fab {
-            position: fixed; bottom: 30px; right: 30px; background: var(--accent); color: var(--primary);
-            padding: 20px 40px; border-radius: 50px; font-weight: 800; box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
-            z-index: 1000; text-decoration: none; display: flex; align-items: center; gap: 12px;
-            transition: var(--transition); border: 2px solid white; text-transform: uppercase; letter-spacing: 2px;
-        }
-        .fab:hover { transform: translateY(-10px) rotate(2deg); }
-
-        @media (max-width: 768px) {
-            .menu-grid { grid-template-columns: 1fr; }
-            .category-title { font-size: 2.8rem; }
-            .hero h1 { font-size: 4rem; }
-            .menu-nav { gap: 15px; overflow-x: auto; justify-content: start; padding-left: 5%; }
+            background: linear-gradient(rgba(18, 18, 18, 0.4), rgba(18, 18, 18, 0.4)), url('images/restaurant_hero.png');
+            background-size: cover; background-position: center; border-radius: 0 0 100px 100px;
+            color: white; text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div id="demo-gate">
-        <div class="gate-box">
-            <span style="text-transform:uppercase; letter-spacing:4px; font-weight:800; color:var(--accent); display:block; margin-bottom:20px; font-size:0.9rem;">Elite Scenario 03</span>
-            <h2>SpiceRoute Luxe.</h2>
-            <p>Experience ultra-luxury <strong>Digital Dining Architecture</strong>. Optimized for fine-dining estates and premium cafes. High-converting WhatsApp reservation flow.</p>
-            <button class="btn btn-primary" onclick="this.parentElement.parentElement.style.display='none'">Explore Menu</button>
+    <!-- Layer 1: Mandatory Entry Gate v4.0 -->
+    <div id="scenario-gate-v4">
+        <div class="gate-inner">
+            <span class="badge-elite" style="border-color:var(--warning); color:var(--warning);">Scenario 03 Benchmark</span>
+            <h2>SpiceRoute Luxe v4.0.</h2>
+            <p>Experience the highest conversion architecture for the hospitality industry. This demo showcases how we establish culinary authority and capture premium reservation/order manifestos in 24 hours.</p>
+            <button class="btn-v4" style="background:var(--warning); color:#000; width:100%;" onclick="unlockPortfolioV4()">Experience Scenario &rarr;</button>
         </div>
     </div>
 
-    <section class="hero">
-        <div class="container" style="max-width: 900px;">
-            <span style="text-transform:uppercase; letter-spacing:6px; font-weight:800; color:var(--accent); display:block; margin-bottom:30px; font-size:1rem;">Masterfully Curated Flavors</span>
-            <h1>The Art of <br>Fine Dining.</h1>
-            <p style="font-size: 1.4rem; margin-bottom: 50px; font-weight: 300; opacity: 0.9;">A sensory journey through heritage recipes, redefined for the modern palate.</p>
-            <a href="https://wa.me/918137826016?text=Hi, I saw the SpiceRoute Luxe Demo. I want a similar menu for my restaurant." class="btn btn-primary">Reserve Your Table</a>
+    <section class="hero-v4" data-v4-reveal>
+        <div class="container">
+            <span class="badge-elite" style="background:rgba(184, 115, 51, 0.2); color:white;">Global Spice Fusion</span>
+            <h1 style="font-size: clamp(3.5rem, 12vw, 7rem); margin-bottom: 30px;">SpiceRoute <br>Luxe Kitchen.</h1>
+            <p style="font-size: 1.5rem; font-weight: 300; opacity: 0.9; max-width: 800px; margin: 0 auto 50px;">A masterclass in culinary storytelling. Where ancient Kerala spices meet contemporary fine-dining artistry. Experience the luxury of pure flavor.</p>
+            <a href="https://wa.me/918137826016" class="btn-v4" style="background:var(--accent); color:white;">Book Your Private Table &rarr;</a>
         </div>
     </section>
 
-    <nav class="menu-nav">
-        <div class="nav-item">Chef's Selection</div>
-        <div class="nav-item">Signature Mains</div>
-        <div class="nav-item">Vintage Cellar</div>
-    </nav>
-
-    <main class="container">
-        <section class="menu-section">
-            <h2 class="category-title">Chef's Signature Selection</h2>
-            <div class="menu-grid">
-                <div class="menu-item" onclick="location.href='https://wa.me/918137826016?text=Hi, I want to reserve a table for the High-Altitude Biriyani experience.'">
-                    <div class="item-info">
-                        <h4>High-Altitude Lamb Biriyani</h4>
-                        <p>Slow-braised heritage lamb, saffron-infused ancient grains, finished with mountain-grown aromatic spices.</p>
-                    </div>
-                    <div class="item-price">₹1,250</div>
+    <main class="container" style="padding: 120px 0;">
+        
+        <!-- Layer 2: Decision Accelerator -->
+        <section data-v4-reveal>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 120px;">
+                <div class="glass-v4" style="padding: 40px; border-radius: var(--radius-md); text-align: center; background:rgba(255,255,255,0.03);">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🍷</div>
+                    <h3>Private Dining</h3>
+                    <p>Exclusive vaults for intimate celebrations. Bespoke menu planning for your most sacred moments.</p>
                 </div>
-                <div class="menu-item" onclick="location.href='https://wa.me/918137826016?text=Hi, I want to reserve a table for the Coastal Prawn Masala experience.'">
-                    <div class="item-info">
-                        <h4>Coastal King Prawn Roast</h4>
-                        <p>Tiger prawns crusted with black pepper and curry leaf, slow-roasted in hand-pressed coconut oil.</p>
-                    </div>
-                    <div class="item-price">₹1,480</div>
+                <div class="glass-v4" style="padding: 40px; border-radius: var(--radius-md); text-align: center; background:rgba(255,255,255,0.03);">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🍂</div>
+                    <h3>Hand-Ground Spices</h3>
+                    <p>No industrial powders. We source and grind our own spice blends from the Wayanad hills.</p>
                 </div>
-                <div class="menu-item" onclick="location.href='https://wa.me/918137826016?text=Hi, I want to reserve a table for the Truffle Malai Kebab experience.'">
-                    <div class="item-info">
-                        <h4>Truffle Malai Chicken Kebab</h4>
-                        <p>Tandoor-charred chicken thigh, cream and cardamom marinade, drizzled with white truffle oil.</p>
-                    </div>
-                    <div class="item-price">₹1,150</div>
-                </div>
-                <div class="menu-item" onclick="location.href='https://wa.me/918137826016?text=Hi, I want to reserve a table for the Sahyadri Paneer experience.'">
-                    <div class="item-info">
-                        <h4>Sahyadri Smoked Paneer</h4>
-                        <p>Handcrafted cottage cheese smoked with sandalwood, served in a velvet tomato reduction.</p>
-                    </div>
-                    <div class="item-price">₹850</div>
+                <div class="glass-v4" style="padding: 40px; border-radius: var(--radius-md); text-align: center; background:rgba(255,255,255,0.03);">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🕯️</div>
+                    <h3>Sensory Space</h3>
+                    <p>Art-directed lighting and soundscapes curated to enhance the taste spectrum of every dish.</p>
                 </div>
             </div>
         </section>
 
-        <section class="reserve-cta">
-            <span style="text-transform:uppercase; letter-spacing:5px; font-weight:800; color:var(--accent); display:block; margin-bottom:30px; font-size:0.9rem;">Elevate Your Establishment</span>
-            <h2>Digitize Your <br>Culinary Story.</h2>
-            <p style="font-size: 1.5rem; opacity: 0.7; margin: 30px auto 60px; max-width: 700px;">Own a premium, high-conversion digital menu engine for your restaurant today.</p>
-            <span style="font-size: 6rem; font-weight: 800; color: var(--primary); display: block; margin-bottom: 50px;">₹1000</span>
-            <a href="https://wa.me/918137826016?text=Hi, I want to build a premium restaurant menu like SpiceRoute Luxe." class="btn btn-primary" style="background: var(--primary); color: white;">Claim Your Solution &rarr;</a>
+        <!-- Layer 2: Comparison Block -->
+        <section data-v4-reveal>
+            <div style="text-align:center; margin-bottom:60px;">
+                <h2 style="font-size: 3.5rem;">The Fine-Dining Standard.</h2>
+                <p style="opacity:0.6;">Why elite foodies choose SpiceRoute over generic 'Multi-Cuisine' outlets.</p>
+            </div>
+            <div class="comparison-grid">
+                <div class="comp-card neg" style="background:#222; color:rgba(255,255,255,0.5);">
+                    <h4>GENERIC RESTAURANTS</h4>
+                    <ul class="comp-list">
+                        <li>Loud, chaotic environments</li>
+                        <li>Over-seasoned mass recipes</li>
+                        <li>Generic digital menus (PDF)</li>
+                        <li>Lack of allergen transparency</li>
+                        <li>Variable sanitation standards</li>
+                    </ul>
+                </div>
+                <div class="comp-card pos" style="background:#222; border-color:var(--accent);">
+                    <span class="badge-elite" style="background:var(--accent); color:white; border:none; margin-bottom:15px; font-size:0.6rem;">Master Culinary</span>
+                    <h4 style="color:white;">SPICEROUTE LUXE</h4>
+                    <ul class="comp-list">
+                        <li style="color:white;">Tranquil, art-directed space</li>
+                        <li style="color:white;">Chef-led artisanal creations</li>
+                        <li style="color:white;">Interactive high-end digital menu</li>
+                        <li style="color:white;">Full ingredient provenance</li>
+                        <li style="color:white;">Elite hygiene protocol & transparency</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Layer 14: Perception Maximization -->
+        <section style="background: white; color: black; padding: 140px 40px; border-radius: 100px; text-align: center; margin-bottom: 120px;" data-v4-reveal>
+            <span class="badge-elite" style="border-color:var(--accent); color:var(--accent);">The DevBridge Standard</span>
+            <h2 style="font-size: 4.5rem; margin-bottom: 30px;">Elevate Your Dining <br>Presence for ₹1000.</h2>
+            <p style="font-size: 1.5rem; opacity: 0.8; max-width: 800px; margin: 0 auto 60px;">Restaurateurs: Don't just send a PDF menu on WhatsApp. Own a high-end digital showroom that justifies your premium rates and captures reservations instantly.</p>
+            <a href="https://wa.me/918137826016" class="btn-v4" style="background:var(--accent); color:white; padding: 25px 80px;">Build My Digital Menu &rarr;</a>
         </section>
     </main>
 
-    <a href="https://wa.me/918137826016?text=Hi, I saw SpiceRoute Luxe. Let's discuss my project." class="fab">
-        Reserve via WhatsApp
+    <a href="https://wa.me/918137826016" class="wa-sticky">
+        Book Private Dining
     </a>
 
+    <div id="activity-toast"></div>
+    <div id="exit-capture"></div>
+
+    <script src="v4-master.js"></script>
 </body>
 </html>

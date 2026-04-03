@@ -3,162 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astra Realty | Luxury Real Estate Showcase Demo</title>
+    <title>Astra Realty | Luxury Real Estate Showcase v4.0</title>
+    <meta name="business-type" content="Luxury Realtor">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="v4-master.css">
+    
     <style>
+        /* Scenario Specific Theme: Modern White & Slate */
         :root {
-            --primary: #0C1E2D; 
-            --accent: #0ea5e9;
-            --bg: #ffffff;
-            --glass: rgba(255, 255, 255, 0.9);
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Outfit', sans-serif;
-            --radius-lg: 32px;
-            --radius-md: 20px;
-            --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            --primary: #0f172a; 
+            --accent: #64748b;  /* Slate */
+            --bg: #ffffff;      
         }
-
-        /* Base & Reset */
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
-        body { font-family: var(--font-body); background: var(--bg); color: var(--primary); overflow-x: hidden; scroll-behavior: smooth; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
-        
-        /* Demo Gate §v2.0 */
-        #demo-gate {
-            position: fixed; inset: 0; 
-            background: rgba(0,0,0,0.98); backdrop-filter: blur(30px);
-            z-index: 100000; display: flex; align-items: center; justify-content: center;
-            color: white; text-align: center; padding: 40px;
-        }
-        .gate-box h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 20px; color: var(--accent); }
-        .gate-box p { font-size: 1.1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 40px; }
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 22px 50px; border-radius: 50px; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 2px; cursor: pointer; border: none; text-decoration: none; transition: var(--transition);
-        }
-        .btn-primary { background: var(--accent); color: white; }
-
-        /* Hero Realty §v2.0 */
-        .hero {
+        .hero-v4 { 
             height: 95vh; display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(rgba(12, 30, 45, 0.6), rgba(12, 30, 45, 0.6)), url('images/realestate_hero.png');
-            background-size: cover; background-position: center; border-radius: 0 0 60px 60px;
-            color: white; text-align: center; position: relative;
-        }
-        .hero h1 { font-family: var(--font-display); font-size: clamp(3.5rem, 12vw, 7rem); margin-bottom: 25px; line-height: 0.9; }
-
-        /* Gallery Sections §v2.0 */
-        .section-title { text-align: center; padding-top: 100px; margin-bottom: 60px; }
-        .section-title h2 { font-family: var(--font-display); font-size: 3.5rem; margin-bottom: 15px; }
-        
-        .property-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 120px; }
-        .prop-card { 
-            background: #fff; border-radius: var(--radius-lg); overflow: hidden; 
-            border: 1px solid rgba(12, 30, 45, 0.05); transition: var(--transition);
-        }
-        .prop-card:hover { transform: translateY(-15px); box-shadow: 0 50px 100px rgba(12, 30, 45, 0.1); }
-        .prop-img { height: 400px; position: relative; overflow: hidden; }
-        .prop-img img { width: 100%; height: 100%; object-fit: cover; }
-        .prop-meta { padding: 40px; }
-        .prop-meta h3 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 15px; }
-        .prop-tag { display: inline-block; padding: 6px 15px; background: rgba(14, 165, 233, 0.1); color: var(--accent); border-radius: 50px; font-size: 0.7rem; text-transform: uppercase; font-weight: 800; margin-bottom: 15px; letter-spacing: 1px; }
-
-        /* Conversion Layer */
-        .view-cta {
-            background: var(--primary); color: white; border-radius: 60px; padding: 120px 40px;
-            text-align: center; margin-bottom: 120px;
-        }
-        .view-cta h2 { font-family: var(--font-display); font-size: 4rem; margin-bottom: 30px; line-height: 1.1; }
-
-        /* FAB */
-        .fab {
-            position: fixed; bottom: 30px; right: 30px; background: var(--accent); color: white;
-            padding: 20px 40px; border-radius: 50px; font-weight: 800; box-shadow: 0 20px 50px rgba(14, 165, 233, 0.3);
-            z-index: 1000; text-decoration: none; display: flex; align-items: center; gap: 12px;
-            transition: var(--transition); border: 2px solid white; text-transform: uppercase; letter-spacing: 2px;
-        }
-        .fab:hover { transform: translateY(-10px); }
-
-        [data-aos] { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        [data-aos].visible { opacity: 1; transform: translateY(0); }
-
-        @media (max-width: 768px) {
-            .property-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 4rem; }
-            .section-title h2 { font-size: 2.8rem; }
+            background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.2)), url('images/realestate_hero.png');
+            background-size: cover; background-position: center; border-radius: 0 0 100px 100px;
+            color: white; text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div id="demo-gate">
-        <div class="gate-box">
-            <span style="text-transform:uppercase; letter-spacing:4px; font-weight:800; color:var(--accent); display:block; margin-bottom:20px; font-size:0.9rem;">Elite Scenario 05</span>
-            <h2>Astra Realty.</h2>
-            <p>Experience the definitive <strong>Luxury Real Estate Showcase Architecture</strong>. Designed for high-ticket agents and premier developers. Optimized for viewing inquiries for ₹1000.</p>
-            <button class="btn btn-primary" onclick="this.parentElement.parentElement.style.display='none'">Explore Collection</button>
+    <!-- Layer 1: Mandatory Entry Gate v4.0 -->
+    <div id="scenario-gate-v4">
+        <div class="gate-inner">
+            <span class="badge-elite" style="border-color:var(--warning); color:var(--warning);">Scenario 05 Benchmark</span>
+            <h2>Astra Realty v4.0.</h2>
+            <p>Experience the highest conversion architecture for the real estate industry. This demo showcases how we establish investment-grade authority and capture premium villa/property inquiries in 24 hours.</p>
+            <button class="btn-v4" style="background:var(--warning); color:#000; width:100%;" onclick="unlockPortfolioV4()">Experience Scenario &rarr;</button>
         </div>
     </div>
 
-    <section class="hero">
-        <div class="container" style="max-width: 1000px;">
-            <span style="text-transform:uppercase; letter-spacing:6px; font-weight:800; color:var(--accent); display:block; margin-bottom:25px; font-size:1rem;">Defining Modern Luxury</span>
-            <h1>Exclusive Estates. <br>Exquisite Living.</h1>
-            <p style="font-size: 1.5rem; margin-bottom: 50px; font-weight: 300; opacity: 0.9;">A curated portfolio of the world's most breathtaking residential assets.</p>
-            <a href="https://wa.me/918137826016?text=Hi, I saw the Astra Realty Demo. I want a similar luxury real estate website." class="btn btn-primary">Book Private Viewing</a>
+    <section class="hero-v4" data-v4-reveal>
+        <div class="container">
+            <span class="badge-elite" style="background:rgba(255,255,255,0.2); color:white;">Exclusive Holdings</span>
+            <h1 style="font-size: clamp(3.5rem, 12vw, 7rem); margin-bottom: 30px;">Astra Realty.</h1>
+            <p style="font-size: 1.5rem; font-weight: 300; opacity: 0.9; max-width: 800px; margin: 0 auto 50px;">Architecting the luxury living spectrum in Kerala. From scenic backwater villas to elite Kochi sky-suites—discover the investment of a lifetime.</p>
+            <a href="https://wa.me/918137826016" class="btn-v4" style="background:white; color:var(--primary);">Explore Featured Villas &rarr;</a>
         </div>
     </section>
 
-    <main class="container">
-        <div class="section-title" data-aos>
-            <h2>Featured Assets.</h2>
-            <p style="opacity: 0.6; font-size: 1.2rem;">Architectural masterpieces available for global acquisition.</p>
-        </div>
-
-        <div class="property-grid">
-            <div class="prop-card" data-aos onclick="location.href='https://wa.me/918137826016?text=Hi, I want more details for the Azure Sky Villa experience.'">
-                <div class="prop-img"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=800" alt="Villa"></div>
-                <div class="prop-meta">
-                    <span class="prop-tag">Beachfront Luxe</span>
-                    <h3>Azure Sky Villa</h3>
-                    <p style="opacity: 0.6; margin-bottom: 25px;">6 Bedrooms | 8 Bathrooms | Infinity Pool | Private Beach Access</p>
-                    <div style="font-weight: 800; color: var(--accent); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Enquire via WhatsApp &rarr;</div>
+    <main class="container" style="padding: 120px 0;">
+        
+        <!-- Layer 2: Decision Accelerator -->
+        <section data-v4-reveal>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 120px;">
+                <div class="glass-v4" style="padding: 40px; border-radius: var(--radius-md); text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🏰</div>
+                    <h3>Curated Estates</h3>
+                    <p>Absolute focus on high-yield, aesthetically elite properties verified for 100% legal purity.</p>
+                </div>
+                <div class="glass-v4" style="padding: 40px; border-radius: var(--radius-md); text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🗺️</div>
+                    <h3>Strategic Prime</h3>
+                    <p>Exclusive access to Kerala's most coveted coordinates before they hit the mass market.</p>
+                </div>
+                <div class="glass-v4" style="padding: 40px; border-radius: var(--radius-md); text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">💎</div>
+                    <h3>Asset Mastery</h3>
+                    <p>We provide full white-glove support from site visits to tax-efficient registration.</p>
                 </div>
             </div>
-            <div class="prop-card" data-aos onclick="location.href='https://wa.me/918137826016?text=Hi, I want more details for the Onyx Penthouse experience.'">
-                <div class="prop-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800" alt="Penthouse"></div>
-                <div class="prop-meta">
-                    <span class="prop-tag">City Skyline</span>
-                    <h3>The Onyx Penthouse</h3>
-                    <p style="opacity: 0.6; margin-bottom: 25px;">4 Bedrooms | Sky Garden | 360 City View | Smart Automation</p>
-                    <div style="font-weight: 800; color: var(--accent); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Enquire via WhatsApp &rarr;</div>
+        </section>
+
+        <!-- Layer 2: Comparison Block -->
+        <section data-v4-reveal>
+            <div style="text-align:center; margin-bottom:60px;">
+                <h2 style="font-size: 3.5rem;">Why Astra Realty?</h2>
+                <p style="opacity:0.6;">Compare our property concierge to generic listing agents.</p>
+            </div>
+            <div class="comparison-grid">
+                <div class="comp-card neg">
+                    <h4>GENERIC REALTORS</h4>
+                    <ul class="comp-list">
+                        <li>Cluttered listing sites</li>
+                        <li>High pressure selling</li>
+                        <li>Unverified documentation</li>
+                        <li>Opaque pricing models</li>
+                        <li>Months of legal friction</li>
+                    </ul>
+                </div>
+                <div class="comp-card pos">
+                    <span class="badge-elite" style="background:var(--primary); color:white; border:none; margin-bottom:15px; font-size:0.6rem;">Concierge Logic</span>
+                    <h4>ASTRA REALTY SHOWCASE</h4>
+                    <ul class="comp-list">
+                        <li>Elite high-fidelity showroom</li>
+                        <li>Consultative investment approach</li>
+                        <li>100% Pre-verified titles</li>
+                        <li>Transparent direct valuation</li>
+                        <li>Instant WhatsApp liaison</li>
+                    </ul>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <section class="view-cta" data-aos>
-            <span style="text-transform:uppercase; letter-spacing:5px; font-weight:800; color:var(--accent); display:block; margin-bottom:30px; font-size:0.9rem;">The DevBridge Standard</span>
-            <h2>Showcase Billion Dollar <br>Assets for ₹1000.</h2>
-            <p style="font-size: 1.5rem; opacity: 0.7; margin: 40px auto 60px; max-width: 750px;">Own a premium, high-conversion real estate landing engine for your agency today.</p>
-            <a href="https://wa.me/918137826016?text=Hi, I want to build a luxury real estate showcase like Astra Realty for ₹1000." class="btn btn-primary" style="background: white; color: var(--primary);">Claim Your Engine &rarr;</a>
+        <!-- Layer 14: Perception Maximization -->
+        <section style="background: var(--primary); color: white; padding: 140px 40px; border-radius: 100px; text-align: center; margin-bottom: 120px;" data-v4-reveal>
+            <span class="badge-elite" style="border-color:var(--accent); color:var(--accent);">The DevBridge Standard</span>
+            <h2 style="font-size: 4.5rem; margin-bottom: 30px;">Own the Investment <br>Platform for ₹1000.</h2>
+            <p style="font-size: 1.5rem; opacity: 0.8; max-width: 800px; margin: 0 auto 60px;">Realtors: Don't lose leads to messy listing portals. Own a premium digital showroom that establishes local authority and captures high-ticket villa orders.</p>
+            <a href="https://wa.me/918137826016" class="btn-v4" style="background:var(--warning); color:#000; padding: 25px 80px;">Build My Property Elite Hub &rarr;</a>
         </section>
     </main>
 
-    <a href="https://wa.me/918137826016?text=Hi, I saw Astra Realty. Let's discuss my property project." class="fab">
-        Book Your Viewing
+    <a href="https://wa.me/918137826016" class="wa-sticky">
+        Request Villa Catalog
     </a>
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
+    <div id="activity-toast"></div>
+    <div id="exit-capture"></div>
 
-        document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
-    </script>
+    <script src="v4-master.js"></script>
 </body>
 </html>
