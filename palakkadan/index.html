@@ -161,11 +161,11 @@
         /* Cart Drawer UI §21 */
         #cart-drawer {
             position: fixed; top: 0; right: -600px; width: 100%; max-width: 600px; height: 100vh;
-            background: white; z-index: 4000; transition: var(--transition); padding: 60px;
+            background: white; z-index: 4500; transition: var(--transition); padding: 40px;
             display: flex; flex-direction: column; box-shadow: -40px 0 100px rgba(0,0,0,0.1);
         }
         #cart-drawer.active { right: 0; }
-        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); display: none; z-index: 3999; }
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); display: none; z-index: 4400; }
         .cart-overlay.active { display: block; }
         .cart-items { flex: 1; overflow-y: auto; margin: 40px 0; }
 
@@ -222,13 +222,23 @@
         /* Toast §21 */
         #toast { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; padding: 15px 30px; border-radius: 50px; z-index: 6000; transform: translateY(100px); opacity: 0; transition: var(--transition); display: flex; align-items: center; gap: 15px; box-shadow: var(--shadow-float); }
         #toast.active { transform: translateY(0); opacity: 1; }
-        .qty-label { font-size: 1rem; font-weight: 700; min-width: 20px; text-align: center; }
-        .remove-item { cursor: pointer; color: #ff4d4d; font-size: 0.8rem; text-decoration: underline; margin-left: auto; }
-
         /* Legacy Narrative §14.2 */
         .section-header { text-align: center; margin-bottom: 80px; max-width: 800px; margin-inline: auto; padding-inline: 20px; }
         .section-header h2 { font-size: 4rem; margin-bottom: 25px; }
         .section-header p { font-size: 1.2rem; color: #777; line-height: 1.8; }
+
+        .qty-btn { 
+            width: 35px; height: 35px; border: 1px solid rgba(0,0,0,0.2); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; cursor: pointer !important; 
+            font-weight: 700; transition: 0.2s; background: white; user-select: none; pointer-events: auto;
+        }
+        .qty-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        .qty-label { font-size: 1.1rem; font-weight: 700; min-width: 30px; text-align: center; }
+        .remove-item { 
+            cursor: pointer !important; color: #ff4d4d; font-size: 0.85rem; font-weight: 600; 
+            text-decoration: underline; margin-left: 20px; opacity: 0.7; transition: 0.3s; pointer-events: auto;
+        }
+        .remove-item:hover { opacity: 1; }
 
         .heritage-story { background: white; padding: 160px 0; border-radius: 60px; margin: 0 5%; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; padding: 0 10%; margin-top: 80px; }
@@ -238,6 +248,9 @@
         @media (max-width: 768px) {
             .grid-3 { grid-template-columns: 1fr; }
             .section-header h2 { font-size: 2.5rem; }
+            .modal-content { padding: 30px; }
+            .cart-close { top: 20px; right: 20px; }
+            #cart-drawer { padding: 20px; }
         }
     </style>
 </head>
@@ -558,14 +571,17 @@
             const totalEl = document.getElementById('cart-total');
             const countEl = document.getElementById('cart-count');
             
+            if (!list || !totalEl || !countEl) return;
+            
             if (cart.length === 0) {
                 list.innerHTML = '<div style="text-align:center; padding:100px 0; opacity:0.3;"><p>Empty selection.</p></div>';
-                totalEl.innerText = '₹0'; countEl.innerText = '0';
+                totalEl.innerText = '₹0';
+                countEl.innerText = '0';
                 return;
             }
             
             let total = 0;
-            list.innerHTML = cart.map((item) => {
+            const itemsHtml = cart.map((item) => {
                 total += item.p * item.qty;
                 return `
                     <div style="display:flex; gap:20px; align-items:center; padding:25px 0; border-bottom:1px solid rgba(0,0,0,0.05);">
@@ -584,6 +600,8 @@
                     </div>
                 `;
             }).join('');
+            
+            list.innerHTML = itemsHtml;
             totalEl.innerText = `₹${total}`;
             countEl.innerText = cart.length;
         }
