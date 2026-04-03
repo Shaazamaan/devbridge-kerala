@@ -125,8 +125,8 @@
         .btn-outline:hover { background: var(--primary); color: white; }
 
         /* eCommerce Container */
-        .shop-layout { display: grid; grid-template-columns: 320px 1fr; gap: 60px; padding: 120px 5%; max-width: 1600px; margin: 0 auto; }
-        .shop-sidebar { position: sticky; top: 120px; height: fit-content; }
+        .shop-layout { display: grid; grid-template-columns: 320px 1fr; gap: 60px; padding: 120px 5%; max-width: 1600px; margin: 0 auto; min-height: 100vh; }
+        .shop-sidebar { position: sticky; top: 120px; height: fit-content; z-index: 100; }
         .filter-group { margin-bottom: 50px; }
         .filter-group h4 { margin-bottom: 25px; font-size: 1.2rem; }
         .category-tabs { display: flex; flex-direction: column; gap: 10px; }
@@ -136,9 +136,15 @@
         }
         .tab:hover, .tab.active { background: white; border-color: var(--accent); color: var(--accent); box-shadow: var(--shadow-soft); }
 
+        @media (max-width: 1024px) {
+            .shop-layout { grid-template-columns: 1fr; padding-top: 40px; }
+            .shop-sidebar { position: static; margin-bottom: 40px; }
+            .category-tabs { flex-direction: row; flex-wrap: wrap; }
+        }
+
         /* Product Grid §5.8 */
-        .showcase-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; }
+        .showcase-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; gap: 30px; flex-wrap: wrap; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; width: 100%; }
         
         .p-card { 
             background: white; border-radius: var(--radius-md); padding: 25px; 
@@ -567,6 +573,9 @@
         }
 
         function updateCartUI() {
+            // Always sync with storage to prevent memory state drift
+            cart = JSON.parse(localStorage.getItem('p_cart') || '[]');
+            
             const list = document.getElementById('cart-list');
             const totalEl = document.getElementById('cart-total');
             const countEl = document.getElementById('cart-count');
@@ -574,7 +583,7 @@
             if (!list || !totalEl || !countEl) return;
             
             if (cart.length === 0) {
-                list.innerHTML = '<div style="text-align:center; padding:100px 0; opacity:0.3;"><p>Empty selection.</p></div>';
+                list.innerHTML = '<div style="text-align:center; padding:100px 0; opacity:0.3;"><p>Your heritage selection is empty.</p></div>';
                 totalEl.innerText = '₹0';
                 countEl.innerText = '0';
                 return;
@@ -582,21 +591,22 @@
             
             let total = 0;
             const itemsHtml = cart.map((item) => {
-                total += item.p * item.qty;
+                const itemTotal = (item.p || 0) * (item.qty || 0);
+                total += itemTotal;
                 return `
-                    <div style="display:flex; gap:20px; align-items:center; padding:25px 0; border-bottom:1px solid rgba(0,0,0,0.05);">
+                    <div class="cart-item-row" style="display:flex; gap:20px; align-items:center; padding:25px 0; border-bottom:1px solid rgba(0,0,0,0.05);">
                         <img src="${item.i}" style="width:70px; height:70px; border-radius:12px; object-fit:cover;">
                         <div style="flex:1;">
-                            <h4 style="font-weight:600; font-size:1.1rem;">${item.n}</h4>
-                            <p style="font-size:0.85rem; opacity:0.5;">${item.variant}</p>
-                            <div style="display:flex; align-items:center; gap:15px; margin-top:10px;">
-                                <div class="qty-btn" onclick="updateQty('${item.cartKey}', -1)">-</div>
+                            <h4 style="font-weight:600; font-size:1.1rem; margin:0;">${item.n}</h4>
+                            <p style="font-size:0.85rem; opacity:0.5; margin:5px 0 10px;">${item.variant}</p>
+                            <div style="display:flex; align-items:center; gap:15px;">
+                                <button class="qty-btn" onclick="updateQty('${item.cartKey}', -1)" aria-label="Decrease quantity">-</button>
                                 <span class="qty-label">${item.qty}</span>
-                                <div class="qty-btn" onclick="updateQty('${item.cartKey}', 1)">+</div>
-                                <span class="remove-item" onclick="removeFromCart('${item.cartKey}')">Delete</span>
+                                <button class="qty-btn" onclick="updateQty('${item.cartKey}', 1)" aria-label="Increase quantity">+</button>
+                                <span class="remove-item" onclick="removeFromCart('${item.cartKey}')">Remove</span>
                             </div>
                         </div>
-                        <div style="font-weight:700; font-size:1.1rem;">₹${item.p * item.qty}</div>
+                        <div style="font-weight:700; font-size:1.1rem;">₹${itemTotal}</div>
                     </div>
                 `;
             }).join('');
