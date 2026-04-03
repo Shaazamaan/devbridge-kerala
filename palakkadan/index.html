@@ -59,6 +59,14 @@
         body { font-family: var(--font-body); background: var(--bg); color: var(--primary); overflow-x: hidden; font-weight: 300; scroll-behavior: smooth; }
         h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.1; }
 
+        /* Skip-Link A11y §5.1 */
+        .skip-link { position: absolute; top: -100px; left: 0; background: var(--primary); color: white; padding: 10px 20px; z-index: 10000; transition: 0.3s; }
+        .skip-link:focus { top: 0; }
+
+        /* Skip-Link A11y §5.1 */
+        .skip-link { position: absolute; top: -100px; left: 0; background: var(--primary); color: white; padding: 10px 20px; z-index: 10000; transition: 0.3s; }
+        .skip-link:focus { top: 0; }
+
         /* Announcement Bar CMOS §5.1 */
         .promo-bar { background: var(--primary); color: var(--accent); text-align: center; padding: 12px 5%; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
         .promo-bar a { color: white; margin-left: 15px; text-decoration: underline; }
@@ -70,7 +78,7 @@
             z-index: 1000; transition: var(--transition);
         }
         nav.scrolled { top: 0; background: var(--glass); backdrop-filter: blur(25px); padding: 15px 5%; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .logo { font-size: 1.8rem; letter-spacing: -1.5px; opacity: 0.9; cursor: pointer; }
+        .logo { font-size: 1.8rem; letter-spacing: -1.5px; opacity: 0.9; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 
         .nav-actions { display: flex; gap: 20px; align-items: center; }
         
@@ -167,6 +175,13 @@
         }
         .fab:hover .fab-tooltip { opacity: 1; left: 90px; }
 
+        @media (max-width: 768px) {
+            .fab-container { left: auto; right: 30px; bottom: 30px; } /* Move to right for ergonomic thumb use §CPM */
+            .fab { width: 55px; height: 55px; }
+            .fab-tooltip { display: none; }
+            .showcase-header { padding-bottom: 60px; }
+        }
+
         /* Details Modal §5.9 */
         #product-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -195,9 +210,21 @@
             .modal-content { grid-template-columns: 1fr; padding: 40px; max-height: 90vh; overflow-y: auto; }
             .modal-img { height: 350px; }
         }
+
+        /* Toast §21 */
+        #toast { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; padding: 15px 30px; border-radius: 50px; z-index: 6000; transform: translateY(100px); opacity: 0; transition: var(--transition); display: flex; align-items: center; gap: 15px; box-shadow: var(--shadow-float); }
+        #toast.active { transform: translateY(0); opacity: 1; }
+        .qty-label { font-size: 1rem; font-weight: 700; min-width: 20px; text-align: center; }
+        .remove-item { cursor: pointer; color: #ff4d4d; font-size: 0.8rem; text-decoration: underline; margin-left: auto; }
     </style>
 </head>
-<body>
+<body id="top">
+    <a href="#shop" class="skip-link">Skip to Products &darr;</a>
+
+    <div id="toast">
+        <svg style="width:20px" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <span id="toast-msg">Item added to selection</span>
+    </div>
 
     <div class="promo-bar">
         Direct Heritage Sourcing Consultation Available. 
@@ -272,12 +299,25 @@
 
     <script>
         const _P = [
-            { id: '1', n: 'Aged Matta Rice', c: 'medicinal-rice', p: 380, i: 'images/matta-rice.png', d: 'The definitive Palakkad Red Rice. Double-boiled and aged.', v: ['1kg Trial', '5kg Family'], scarcity: 'Limited Seasonal Harvest' },
-            { id: '2', n: 'Healing Navara Rice', c: 'medicinal-rice', p: 850, i: 'images/navara.png', d: 'Ancient Ayurvedic grains. Heritage healing.', v: ['500g', '1kg'], scarcity: 'Rare Heirloom Batch' },
-            { id: '3', n: 'Scented Gandhakasala', c: 'medicinal-rice', p: 180, i: 'images/gandhakasala.png', d: 'Supreme aromatic rice.', v: ['1kg Regular'], scarcity: '' },
-            { id: '4', n: 'Heritage Jaggery', c: 'traditional-sweets', p: 90, i: 'images/jaggery-studio.png', d: 'Dark, chemical-free.', v: ['500g Block'], scarcity: '' }
+            { id: '1', n: 'Aged Matta Rice', c: 'medicinal-rice', p: 380, i: 'images/matta-rice.png', d: 'The definitive Palakkad Red Rice. Double-boiled and aged for perfect digestion.', v: ['1kg Trial', '5kg Family', '25kg Stock'], scarcity: 'Limited Seasonal Harvest' },
+            { id: '2', n: 'Healing Navara Rice', c: 'medicinal-rice', p: 850, i: 'images/navara.png', d: 'Ancient Ayurvedic grains from the banks of Bharatapuzha. Heritage healing.', v: ['500g Pack', '1kg Pack'], scarcity: 'Rare Heirloom Batch' },
+            { id: '3', n: 'Scented Gandhakasala', c: 'medicinal-rice', p: 180, i: 'images/gandhakasala.png', d: 'The supreme aromatic rice of Kerala. Short, creamy grains.', v: ['1kg Regular', '5kg Value'] },
+            { id: '4', n: 'Heritage Jaggery Blocks', c: 'traditional-sweets', p: 90, i: 'images/jaggery-studio.png', d: 'Dark, rich, chemical-free jaggery.', v: ['500g Block', '1kg Bucket'] },
+            { id: '5', n: 'Signature Fruit Cake', c: 'heritage-bakery', p: 600, i: 'images/cake.png', d: 'Hand-selected dry fruits and heritage honey.', v: ['500g Plum', '1kg Premium'] },
+            { id: '6', n: 'Desi Cattle Nutrients', c: 'organic-nutrients', p: 150, i: 'images/compost-studio.png', d: 'High-concentrate organic fertilizer from local Desi-cows.', v: ['2kg Bag', '5kg Bag'] }
         ];
-        for(let i=5; i<=228; i++) { _P.push({ id: i+'', n: 'Heritage Item '+i, c: ['medicinal-rice', 'heritage-bakery', 'traditional-sweets'][i%3], p: 100+(i*10), i: _P[i%4].i, d: 'Source-verified.', v: ['Standard Variety'] }); }
+
+        for(let i=7; i<=228; i++) {
+            _P.push({ 
+                id: i+'', 
+                n: ['Legacy', 'Heritage', 'Organic', 'Village'][i%4] + ' Item ' + i, 
+                c: ['medicinal-rice', 'heritage-bakery', 'organic-nutrients', 'traditional-sweets'][i%4], 
+                p: 100 + (i*10), 
+                i: _P[i%6].i,
+                d: 'Premium catalog extension. Source-verified.',
+                v: ['Small Pack', 'Standard Variety']
+            });
+        }
 
         let cart = JSON.parse(localStorage.getItem('p_cart') || '[]');
         let activeCat = 'all';
@@ -286,30 +326,50 @@
         function renderGrid() {
             const grid = document.getElementById('master-grid');
             const filtered = _P.filter(p => (activeCat === 'all' || p.c === activeCat) && p.n.toLowerCase().includes(searchQuery.toLowerCase()));
-            grid.innerHTML = filtered.slice(0, 30).map(p => `
-                <div class="p-card">
-                    <div class="p-img" onclick="openDetails('${p.id}')">
-                        <div class="p-tag">${p.c.replace('-', ' ')}</div>
-                        ${p.scarcity ? `<div class="p-badge-scarcity">${p.scarcity}</div>` : ''}
-                        <img src="${p.i}" alt="${p.n}">
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align:center; padding:100px 0; background:white; border-radius:var(--radius-md); border:1px dashed rgba(0,0,0,0.1);">
+                        <p style="font-size:1.2rem; opacity:0.5;">No heritage items match your search.</p>
+                        <button onclick="setCategory('all'); document.getElementById('catalog-search').value='';" style="margin-top:20px; color:var(--accent); border:none; background:none; text-decoration:underline; cursor:pointer;">Show All Products</button>
                     </div>
-                    <div class="p-info">
-                        <h3 onclick="openDetails('${p.id}')">${p.n}</h3>
-                        <p>${p.d}</p>
-                        <div class="p-footer">
-                            <span class="p-price">₹${p.p}</span>
-                            <div style="display:flex; gap:15px;">
-                                <span class="add-quick" onclick="directWhatsApp('${p.id}')" style="color:var(--accent); cursor:pointer">Know More &rarr;</span>
+                `;
+            } else {
+                grid.innerHTML = filtered.slice(0, 30).map(p => `
+                    <div class="p-card">
+                        <div class="p-img" onclick="openDetails('${p.id}')">
+                            <div class="p-tag">${p.c.replace('-', ' ')}</div>
+                            ${p.scarcity ? `<div class="p-badge-scarcity">${p.scarcity}</div>` : ''}
+                            <img src="${p.i}" alt="${p.n}" loading="lazy">
+                        </div>
+                        <div class="p-info">
+                            <h3 onclick="openDetails('${p.id}')">${p.n}</h3>
+                            <p>${p.d.substring(0, 60)}...</p>
+                            <div class="p-footer">
+                                <span class="p-price">₹${p.p}</span>
+                                <div style="display:flex; gap:15px;">
+                                    <span class="add-quick" onclick="directWhatsApp('${p.id}')" style="color:var(--accent); cursor:pointer">Know More &rarr;</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
+            }
             document.getElementById('result-count').innerText = `${filtered.length} Products Found`;
         }
 
-        function setCategory(cat) { activeCat = cat; renderGrid(); }
-        function handleSearch() { searchQuery = document.getElementById('catalog-search').value; renderGrid(); }
+        function setCategory(cat) {
+            activeCat = cat;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            const target = event ? event.currentTarget : document.querySelector('.tab');
+            if(target) target.classList.add('active');
+            renderGrid();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('catalog-search').value;
+            renderGrid();
+        }
 
         let selectedModalProd = null;
         let selectedVariant = '';
@@ -320,16 +380,19 @@
             const content = document.getElementById('modal-content');
             content.innerHTML = `
                 <div class="modal-close" onclick="closeModal()">&times;</div>
-                <div class="modal-img"><img src="${selectedModalProd.i}"></div>
+                <div class="modal-img">
+                    <img src="${selectedModalProd.i}" alt="${selectedModalProd.n}">
+                </div>
                 <div class="modal-details" style="padding:20px;">
-                    <p style="text-transform:uppercase; color:var(--accent);">${selectedModalProd.c.replace('-', ' ')}</p>
-                    <h2>${selectedModalProd.n}</h2>
-                    <p>${selectedModalProd.d}</p>
-                    <div class="variant-selector" style="margin:40px 0;">
-                        <span class="variant-label">Select Variety</span>
-                        <div class="variant-chips" style="display:flex; gap:10px;">${selectedModalProd.v.map(v => `<div class="v-chip ${v === selectedVariant ? 'active' : ''}" onclick="selectVariant('${v}', this)">${v}</div>`).join('')}</div>
+                    <p style="text-transform:uppercase; color:var(--accent); letter-spacing:3px; font-weight:600; margin-bottom:15px;">${selectedModalProd.c.replace('-', ' ')}</p>
+                    <h2 style="font-size:3rem; margin-bottom:25px;">${selectedModalProd.n}</h2>
+                    <p style="font-size:1.1rem; line-height:1.8; color:#555; margin-bottom:40px;">${selectedModalProd.d}</p>
+                    <div class="variant-selector" style="margin-bottom:40px;">
+                        <span class="variant-label" style="font-size:0.9rem; font-weight:600; text-transform:uppercase; margin-bottom:15px; display:block; opacity:0.5;">Select Variety/Size</span>
+                        <div class="variant-chips" style="display:flex; gap:15px;">${selectedModalProd.v.map(v => `<div class="v-chip ${v === selectedVariant ? 'active' : ''}" onclick="selectVariant('${v}', this)" style="padding:12px 28px; border:1px solid rgba(0,0,0,0.1); border-radius:50px; cursor:pointer; transition:0.3s; ${v === selectedVariant ? 'background:var(--primary); color:white;' : ''}">${v}</div>`).join('')}</div>
                     </div>
-                    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                    <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
+                        <span style="font-size:2.5rem; font-weight:800; margin-right:20px;">₹${selectedModalProd.p}</span>
                         <button class="btn btn-primary" onclick="addToCart()">Add to Selection</button>
                         <button class="btn btn-outline" onclick="directWhatsApp('${selectedModalProd.id}')">Know More via WhatsApp</button>
                     </div>
@@ -339,31 +402,112 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function selectVariant(v, el) { selectedVariant = v; }
-        function closeModal() { document.getElementById('product-modal').classList.remove('active'); document.body.style.overflow = 'auto'; }
-        function toggleCart(show) { document.getElementById('cart-drawer').classList.toggle('active', show); document.getElementById('cart-overlay').classList.toggle('active', show); }
+        function selectVariant(v, el) {
+            selectedVariant = v;
+            document.querySelectorAll('.v-chip').forEach(c => {
+                c.classList.remove('active');
+                c.style.background = 'transparent';
+                c.style.color = 'inherit';
+            });
+            el.classList.add('active');
+            el.style.background = 'var(--primary)';
+            el.style.color = 'white';
+        }
+
+        function closeModal() {
+            document.getElementById('product-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleCart(show) {
+            document.getElementById('cart-drawer').classList.toggle('active', show);
+            document.getElementById('cart-overlay').classList.toggle('active', show);
+        }
 
         function addToCart() {
-            const existing = cart.find(i => i.id === selectedModalProd.id && i.variant === selectedVariant);
-            if(existing) { existing.qty += 1; } else { cart.push({ ...selectedModalProd, variant: selectedVariant, qty: 1 }); }
+            const variantSlug = `${selectedModalProd.id}-${selectedVariant}`;
+            const existing = cart.find(i => i.cartKey === variantSlug);
+            
+            if(existing) { 
+                existing.qty += 1; 
+                showToast(`Quantity updated for ${selectedModalProd.n}`);
+            } else { 
+                cart.push({ ...selectedModalProd, variant: selectedVariant, qty: 1, cartKey: variantSlug }); 
+                showToast(`${selectedModalProd.n} added to selection`);
+            }
             localStorage.setItem('p_cart', JSON.stringify(cart));
-            updateCartUI(); closeModal(); toggleCart(true);
+            updateCartUI(); 
+            closeModal();
+            toggleCart(true); 
+        }
+
+        function removeFromCart(key) {
+            cart = cart.filter(i => i.cartKey !== key);
+            localStorage.setItem('p_cart', JSON.stringify(cart));
+            updateCartUI();
+            showToast("Item removed from selection");
+        }
+
+        function updateQty(key, delta) {
+            const item = cart.find(i => i.cartKey === key);
+            if(item) {
+                item.qty += delta;
+                if(item.qty <= 0) {
+                    removeFromCart(key);
+                } else {
+                    localStorage.setItem('p_cart', JSON.stringify(cart));
+                    updateCartUI();
+                }
+            }
         }
 
         function updateCartUI() {
             const list = document.getElementById('cart-list');
+            const totalEl = document.getElementById('cart-total');
+            const countEl = document.getElementById('cart-count');
+            
+            if (cart.length === 0) {
+                list.innerHTML = '<div style="text-align:center; padding:100px 0; opacity:0.3;"><p>Empty selection.</p></div>';
+                totalEl.innerText = '₹0'; countEl.innerText = '0';
+                return;
+            }
+            
             let total = 0;
-            list.innerHTML = cart.map((item, i) => {
+            list.innerHTML = cart.map((item) => {
                 total += item.p * item.qty;
-                return `<div style="padding:20px; border-bottom:1px solid #eee;">${item.n} (${item.variant}) x ${item.qty} - ₹${item.p*item.qty}</div>`;
+                return `
+                    <div style="display:flex; gap:20px; align-items:center; padding:25px 0; border-bottom:1px solid rgba(0,0,0,0.05);">
+                        <img src="${item.i}" style="width:70px; height:70px; border-radius:12px; object-fit:cover;">
+                        <div style="flex:1;">
+                            <h4 style="font-weight:600; font-size:1.1rem;">${item.n}</h4>
+                            <p style="font-size:0.85rem; opacity:0.5;">${item.variant}</p>
+                            <div style="display:flex; align-items:center; gap:15px; margin-top:10px;">
+                                <div class="qty-btn" onclick="updateQty('${item.cartKey}', -1)">-</div>
+                                <span class="qty-label">${item.qty}</span>
+                                <div class="qty-btn" onclick="updateQty('${item.cartKey}', 1)">+</div>
+                                <span class="remove-item" onclick="removeFromCart('${item.cartKey}')">Delete</span>
+                            </div>
+                        </div>
+                        <div style="font-weight:700; font-size:1.1rem;">₹${item.p * item.qty}</div>
+                    </div>
+                `;
             }).join('');
-            document.getElementById('cart-total').innerText = `₹${total}`;
-            document.getElementById('cart-count').innerText = cart.length;
+            totalEl.innerText = `₹${total}`;
+            countEl.innerText = cart.length;
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            t.classList.add('active');
+            setTimeout(() => t.classList.remove('active'), 3000);
         }
 
         function checkout() {
-            let m = "NEW HERITAGE SELECTION:%0A%0A";
+            if (cart.length === 0) return alert("Selection is empty.");
+            let m = "PALAKKADAN BATCH ORDER REQ:%0A%0A";
             cart.forEach(i => { m += `• *${i.n}* (${i.variant}) x ${i.qty}%0A`; });
+            m += "%0A---%0AOrder request for bulk fulfillment from palakkadan.in heritage stock.";
             window.location.href = `https://wa.me/918129144244?text=${m}`;
         }
 
@@ -373,6 +517,13 @@
             window.location.href = `https://wa.me/918129144244?text=${m}`;
         }
 
+        window.onscroll = () => {
+            const sc = window.scrollY > 50;
+            const nav = document.getElementById('navbar');
+            nav.classList.toggle('scrolled', sc);
+            nav.querySelector('.logo').style.color = sc ? 'var(--primary)' : 'white';
+            document.querySelectorAll('[data-aos]').forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight * 0.9) el.classList.add('visible'); });
+        };
         window.onload = () => { renderGrid(); updateCartUI(); };
     </script>
 </body>
