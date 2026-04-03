@@ -25,11 +25,49 @@ const v4_ActivityDatabase = [
 
 class AutonomousEngine {
     constructor() {
+        this.initThemeSelection();
         this.initReveal();
         this.initActivitySimulator();
         this.initExitCapture();
         this.initWhatsAppHydration();
         this.initScrollProgress();
+        this.initGlobalNav();
+    }
+
+    // Layer 0: Theme Hub Logic v4.2
+    initThemeSelection() {
+        const meta = document.querySelector('meta[name="business-type"]');
+        if (!meta) return;
+        const type = meta.getAttribute('content').toLowerCase();
+        let theme = "t-signal"; // Default
+
+        const themes = {
+            "t-onyx": ["legal", "tax", "estate", "architect", "agent", "jobs", "consultant", "realty", "blueprint", "elite", "lawyer", "notary", "advocate", "finance", "audit"],
+            "t-nature": ["organic", "yoga", "physio", "care", "abroad", "pet", "wellness", "natural", "bridal", "mua", "supplement", "holistic", "nursing", "home", "studio", "serene", "stay"],
+            "t-cyber": ["repair", "tech", "security", "detailing", "cyber", "automation", "lighting", "mobile", "flash", "sungrid", "server", "chipset", "diagnostic"],
+            "t-hearth": ["bakery", "restaurant", "mess", "saree", "heritage", "cake", "silk", "spice", "food", "kitchen", "traditional", "local"],
+            "t-signal": ["cleaning", "plumber", "mover", "rental", "logistic", "fast", "scrap", "fortress", "drive", "trade", "wash", "pest", "tank", "truck"]
+        };
+
+        for (const [key, keywords] of Object.entries(themes)) {
+            if (keywords.some(k => type.includes(k))) {
+                theme = key;
+                break;
+            }
+        }
+        document.body.classList.add(theme);
+    }
+
+    // Layer 9: Global Nav Logic v4.2
+    initGlobalNav() {
+        const meta = document.querySelector('meta[name="business-type"]');
+        if (meta && meta.getAttribute('content') === 'Portfolio Hub') return;
+
+        const nav = document.createElement('a');
+        nav.href = "index.html";
+        nav.className = "floating-hub-link";
+        nav.innerHTML = `<span>&larr;</span> Portfolio Hub`;
+        document.body.appendChild(nav);
     }
 
     // Layer 5: Reveal Engine
@@ -59,10 +97,11 @@ class AutonomousEngine {
     }
 
     showToast() {
+        // ... (existing showToast logic)
         const activity = v4_ActivityDatabase[Math.floor(Math.random() * v4_ActivityDatabase.length)];
         const toast = document.createElement('div');
         toast.id = 'activity-toast';
-        toast.className = 'visible'; // Ensure visibility via class
+        toast.className = 'visible';
         toast.innerHTML = `
             <div class="activity-avatar">${activity.city[0]}</div>
             <div class="activity-info">
@@ -72,7 +111,6 @@ class AutonomousEngine {
         `;
         document.body.appendChild(toast);
         
-        // Remove toast after 6 seconds
         setTimeout(() => {
             toast.style.opacity = '0';
             toast.style.transform = 'translateX(-200%)';
@@ -83,8 +121,6 @@ class AutonomousEngine {
     // Layer 4: Exit Capture Engine
     initExitCapture() {
         let captureTriggered = false;
-
-        // Bottom of page reveal
         window.addEventListener('scroll', () => {
             const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
             if (scrollPercent > 0.95 && !captureTriggered) {
@@ -93,7 +129,6 @@ class AutonomousEngine {
             }
         });
 
-        // Mouse out of window (Top exit)
         document.addEventListener('mouseleave', (e) => {
             if (e.clientY < 0 && !captureTriggered) {
                 this.triggerCapture();
@@ -107,18 +142,22 @@ class AutonomousEngine {
         modal.id = 'exit-capture';
         modal.innerHTML = `
             <div class="exit-box" data-v4-reveal>
-                <span class="badge-elite" style="color:var(--warning); border-color:var(--warning);">Decision Accelerator</span>
-                <h2>Still Thinking?</h2>
-                <p>Don't let your business stay invisible for another day. I can deliver your high-converting website within 24 hours. No advance needed—pay ONLY when satisfied.</p>
+                <span class="badge-elite" style="color:var(--accent); border-color:var(--accent);">Decision Accelerator</span>
+                <h2 style="color:white;">Still Thinking?</h2>
+                <p style="color:rgba(255,255,255,0.7);">Don't let your business stay invisible for another day. I can deliver your high-converting website within 24 hours. No advance needed—pay ONLY when satisfied.</p>
                 <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
                     <a href="https://wa.me/918137826016" class="btn-v4" style="background:var(--success); color:white;">Build My Site Today</a>
-                    <button class="btn-v4" id="close-exit" style="background:rgba(255,255,255,0.1); color:white;">I'll Browse More</button>
+                    <button class="btn-v4" id="close-exit" style="background:rgba(255,255,255,0.1); color:white;">Browse Full Hub</button>
                 </div>
             </div>
         `;
         document.body.appendChild(modal);
         modal.style.display = 'flex';
-        modal.querySelector('#close-exit').onclick = () => modal.remove();
+        modal.querySelector('#close-exit').onclick = () => {
+            const currentPath = window.location.pathname;
+            if(currentPath.includes('portfolio/')) window.location.href = "index.html";
+            else modal.remove();
+        };
         setTimeout(() => modal.querySelector('.exit-box').classList.add('visible'), 10);
     }
 
@@ -126,18 +165,12 @@ class AutonomousEngine {
     initWhatsAppHydration() {
         const businessMeta = document.querySelector('meta[name="business-type"]');
         const bType = businessMeta ? businessMeta.getAttribute('content') : 'Business';
-        
         const isHub = bType === 'Portfolio Hub';
-        
         const waLinks = document.querySelectorAll('a[href*="wa.me"]');
         waLinks.forEach(link => {
             const baseUrl = "https://wa.me/918137826016";
-            let message = "";
-            if(isHub) {
-                message = encodeURIComponent(`Hi, I'm exploring the DevBridge Kerala Portfolio Hub. I want to build a high-converting website for ₹1000. Can we talk?`);
-            } else {
-                message = encodeURIComponent(`Hi, I saw the ${bType} website demo on DevBridge Kerala. I want something similar for my business. Can we talk?`);
-            }
+            let message = encodeURIComponent(`Hi, I saw the ${bType} website demo on DevBridge Kerala. I want something similar for my business. Can we talk?`);
+            if(isHub) message = encodeURIComponent(`Hi, I'm exploring the DevBridge Kerala Portfolio Hub. I want to build a high-converting website for ₹1000. Can we talk?`);
             link.href = `${baseUrl}?text=${message}`;
         });
     }
@@ -146,34 +179,27 @@ class AutonomousEngine {
         const bar = document.createElement('div');
         bar.style.cssText = "position:fixed; top:0; left:0; height:4px; background:var(--accent); z-index:2000000; transition:width 0.1s linear;";
         document.body.appendChild(bar);
-        
         window.addEventListener('scroll', () => {
-            const h = document.documentElement, 
-                  b = document.body,
-                  st = 'scrollTop',
-                  sh = 'scrollHeight';
+            const h = document.documentElement, b = document.body, st = 'scrollTop', sh = 'scrollHeight';
             const percent = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
             bar.style.width = percent + "%";
         });
     }
 }
 
-// Global Unlock Logic v4.0
 function unlockPortfolioV4() {
     const gate = document.getElementById('scenario-gate-v4');
+    if(!gate) return;
     gate.style.opacity = '0';
-    gate.style.transition = 'opacity 0.8s ease';
+    gate.style.transition = 'opacity 0.6s ease';
     setTimeout(() => {
         gate.style.display = 'none';
         document.body.style.overflow = 'auto';
-        // Initialize Engine AFTER unlock to prevent pre-load noise
         window.DevBridge = new AutonomousEngine();
-    }, 800);
+    }, 600);
 }
 
-// Initial State
 document.body.style.overflow = 'hidden';
-// Auto-Init if gate doesn't exist (legacy fallback)
 if (!document.getElementById('scenario-gate-v4')) {
     window.onload = () => {
         window.DevBridge = new AutonomousEngine();
