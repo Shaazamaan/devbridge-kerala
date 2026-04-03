@@ -15,11 +15,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Palakkadan | The Definitive Heritage eCommerce</title>
-    <meta name="description" content="Discover Palakkad's heritage with 200+ premium products. Subcategories in Ancient Grains, Soil, and Artisan Sweets. WhatsApp-integrated cart system. CMO-grade authenticity.">
+    <meta name="description" content="Discover Palakkad's heritage with 200+ premium products. Subcategories in Ancient Grains, Soil, and Artisan Sweets. WhatsApp-integrated cart system. Supreme heritage authenticity.">
     
     <link rel="canonical" href="https://devbridgekerala.com/palakkadan/">
 
-    <!-- CMO Optimized Social Branding §4.7 -->
+    <!-- Heritage Optimized Social Branding §4.7 -->
     <meta property="og:title" content="Palakkadan | The Definitive Luxury of Authenticity">
     <meta property="og:description" content="Discover Palakkad's heritage with 200+ premium products. Subcategories in Ancient Grains, Soil, and Artisan Bakery.">
     <meta property="og:image" content="images/hero.png">
@@ -67,7 +67,7 @@
         .skip-link { position: absolute; top: -100px; left: 0; background: var(--primary); color: white; padding: 10px 20px; z-index: 10000; transition: 0.3s; }
         .skip-link:focus { top: 0; }
 
-        /* Announcement Bar CMOS §5.1 */
+        /* Announcement Bar §5.1 */
         .promo-bar { background: var(--primary); color: var(--accent); text-align: center; padding: 12px 5%; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
         .promo-bar a { color: white; margin-left: 15px; text-decoration: underline; }
 
@@ -80,7 +80,15 @@
         nav.scrolled { top: 0; background: var(--glass); backdrop-filter: blur(25px); padding: 15px 5%; border-bottom: 1px solid rgba(0,0,0,0.05); }
         .logo { font-size: 1.8rem; letter-spacing: -1.5px; opacity: 0.9; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 
+        .nav-menu { display: flex; gap: 40px; }
+        .nav-link { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; opacity: 0.6; }
+        .nav-link:hover { opacity: 1; color: var(--accent); }
+
         .nav-actions { display: flex; gap: 20px; align-items: center; }
+
+        @media (max-width: 1024px) {
+            .nav-menu { display: none; }
+        }
         
         /* Cart Toggle Button - CPM Optimized */
         .cart-toggle {
@@ -216,6 +224,21 @@
         #toast.active { transform: translateY(0); opacity: 1; }
         .qty-label { font-size: 1rem; font-weight: 700; min-width: 20px; text-align: center; }
         .remove-item { cursor: pointer; color: #ff4d4d; font-size: 0.8rem; text-decoration: underline; margin-left: auto; }
+
+        /* Legacy Narrative §14.2 */
+        .section-header { text-align: center; margin-bottom: 80px; max-width: 800px; margin-inline: auto; padding-inline: 20px; }
+        .section-header h2 { font-size: 4rem; margin-bottom: 25px; }
+        .section-header p { font-size: 1.2rem; color: #777; line-height: 1.8; }
+
+        .heritage-story { background: white; padding: 160px 0; border-radius: 60px; margin: 0 5%; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; padding: 0 10%; margin-top: 80px; }
+        .g-item h4 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; color: var(--accent); }
+        .g-item p { color: #555; line-height: 1.8; font-size: 1rem; }
+
+        @media (max-width: 768px) {
+            .grid-3 { grid-template-columns: 1fr; }
+            .section-header h2 { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body id="top">
@@ -233,6 +256,12 @@
 
     <nav id="navbar">
         <div class="logo" onclick="window.scrollTo(0,0)">PALAKKADAN</div>
+        <div class="nav-menu">
+            <a href="#about" class="nav-link">Our Heritage</a>
+            <a href="#shop" class="nav-link">Catalog</a>
+            <a href="#sourcing" class="nav-link">Sourcing</a>
+            <a href="#top" class="nav-link">Home</a>
+        </div>
         <div class="nav-actions">
             <div class="cart-toggle" onclick="toggleCart(true)">
                 <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
@@ -250,9 +279,68 @@
         <div class="hero-bg"></div>
         <div class="hero-content">
             <h1 class="hero-title" data-aos>Scaling Purity to Global Standards.</h1>
-            <div data-aos style="margin-top: 40px;"><a href="#shop" class="btn btn-primary">Discover the Catalog</a></div>
+            <div data-aos style="margin-top: 40px; display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+                <a href="#shop" class="btn btn-primary">Discover the Catalog</a>
+                <a href="#about" class="btn btn-outline" style="border-color:white; color:white;">The Heritage Story</a>
+            </div>
         </div>
     </div>
+
+    <section id="about" class="heritage-story" data-aos>
+        <div class="section-header">
+            <h2>Our Heritage.</h2>
+            <p>From the fertile plains of Palakkad, tucked between the Sahyadri ranges. We bring forth the wisdom of Bharatapuzha, rooted in a millennium of agrarian mastery.</p>
+        </div>
+        <div class="grid-3">
+            <div class="g-item"><h4>Ancient Provenance</h4><p>We source only from legacy groves where the soil has never touched a chemical shadow. Every grain tells a 1000-year-old story.</p></div>
+            <div class="g-item"><h4>Artisan Mastery</h4><p>Hand-pounded, double-boiled, and sun-dried. We follow the rhythm of nature, not the speed of industry.</p></div>
+            <div class="g-item"><h4>Traceable Harvest</h4><p>Every single batch in our catalog can be traced back to the specific farm coordinates and the month of harvest.</p></div>
+        </div>
+    </section>
+
+    <section id="sourcing" style="padding: 120px 10%; background: #111; color: white; border-radius: 60px; margin: 0 5% 120px;" data-aos>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:80px; align-items:center;">
+            <div>
+                <h2 style="font-family:var(--font-display); font-size:4rem; margin-bottom:40px;">The Sacred Sourcing.</h2>
+                <p style="font-size:1.2rem; line-height:1.8; opacity:0.7; margin-bottom:30px;">Our sourcing is a covenant of trust. We work with 228 legacy farming families in Palakkad who have preserved these heirloom seeds for generations. This isn't just supply chain; it's cultural preservation.</p>
+                <div style="display:flex; gap:40px; margin-top:50px;">
+                    <div><span style="font-size:2.5rem; font-weight:800; color:var(--accent); display:block;">228</span><span style="opacity:0.5; text-transform:uppercase; font-size:0.8rem; letter-spacing:2px;">Legacy Varieties</span></div>
+                    <div><span style="font-size:2.5rem; font-weight:800; color:var(--accent); display:block;">100%</span><span style="opacity:0.5; text-transform:uppercase; font-size:0.8rem; letter-spacing:2px;">Bhu-Identity Verified</span></div>
+                </div>
+            </div>
+            <div style="position:relative; height:500px; border-radius:var(--radius-lg); overflow:hidden;">
+                <img src="images/hero.png" alt="Sourcing Grounds" style="width:100%; height:100%; object-fit:cover; opacity:0.5;">
+                <div style="position:absolute; bottom:40px; left:40px; background:var(--glass); color:var(--primary); padding:20px; border-radius:var(--radius-md); backdrop-filter:blur(10px);">
+                    <p style="font-weight:600;">Sourcing Coordinates</p>
+                    <p style="opacity:0.7; font-size:0.9rem;">Palakkad Gap, Western Ghats</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="craft" style="padding: 120px 10%; background: var(--bg);" data-aos>
+        <div class="section-header" style="max-width:800px; margin-bottom:80px;">
+            <h2 style="font-size:3.5rem; margin-bottom:30px;">The Artisan Craft.</h2>
+            <p style="font-size:1.3rem; opacity:0.6;">We reject industrial speed. Our processes adhere to the lunar calendar and the physical rhythms of the human hand.</p>
+        </div>
+        <div class="grid-3">
+            <div class="g-item" style="background:white; padding:50px; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);">
+                <div style="font-size:3rem; margin-bottom:20px;">ॐ</div>
+                <h4>Hand-Pounded</h4>
+                <p>Retaining the nourishing bran and germ, our grains are pounded by hand to ensure zero heat-damage and maximum nutrient density.</p>
+            </div>
+            <div class="g-item" style="background:white; padding:50px; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);">
+                <div style="font-size:3rem; margin-bottom:20px;">☀</div>
+                <h4>Sun-Dried</h4>
+                <p>We use the direct energy of the sun on specialized clay beds to dry our harvest. This imparts a unique "Prana" that machines can't replicate.</p>
+            </div>
+            <div class="g-item" style="background:white; padding:50px; border-radius:var(--radius-lg); box-shadow:var(--shadow-soft);">
+                <div style="font-size:3rem; margin-bottom:20px;">⏳</div>
+                <h4>Slow-Aged</h4>
+                <p>Time is our secret ingredient. Our grains are aged in temperature-controlled traditional granaries for at least 12 months before cataloging.</p>
+            </div>
+        </div>
+    </section>
 
     <div id="product-modal">
         <div class="modal-overlay" onclick="closeModal()" style="position:fixed; width:100%; height:100%; z-index:-1;"></div>
@@ -290,12 +378,13 @@
         </div>
     </section>
 
-    <section class="provenance" data-aos>
+    <section class="provenance" id="provenance" data-aos>
         <h2>Absolute Provenance. Traceable to the Harvest.</h2>
+        <div style="max-width:800px; margin:40px auto; font-size:1.2rem; line-height:1.8; opacity:0.8;">Our sourcing centers operate on high-trust contracts with legacy farmers. 228 varieties currently in our heritage vault, each verified for purity and provenance.</div>
         <div class="coordinates"><span>Lat: 10.7852° N</span><span>Lon: 76.6548° E</span></div>
     </section>
 
-    <footer><div class="logo" style="color:white; margin-bottom:40px; font-size:2.5rem;">PALAKKADAN</div><p>© 2026 Palakkadan. CMO & CPM LEVEL DELIVERY.</p></footer>
+    <footer><div class="logo" style="color:white; margin-bottom:40px; font-size:2.5rem;">PALAKKADAN</div><p>© 2026 Palakkadan. Palakkad's Finest Heritage, Delivered.</p></footer>
 
     <script>
         const _P = [
@@ -335,7 +424,7 @@
                     </div>
                 `;
             } else {
-                grid.innerHTML = filtered.slice(0, 30).map(p => `
+                grid.innerHTML = filtered.slice(0, 60).map(p => `
                     <div class="p-card">
                         <div class="p-img" onclick="openDetails('${p.id}')">
                             <div class="p-tag">${p.c.replace('-', ' ')}</div>
@@ -347,8 +436,9 @@
                             <p>${p.d.substring(0, 60)}...</p>
                             <div class="p-footer">
                                 <span class="p-price">₹${p.p}</span>
-                                <div style="display:flex; gap:15px;">
-                                    <span class="add-quick" onclick="directWhatsApp('${p.id}')" style="color:var(--accent); cursor:pointer">Know More &rarr;</span>
+                                <div style="display:flex; gap:15px; align-items:center;">
+                                    <span onclick="directWhatsApp('${p.id}')" style="color:#25D366; cursor:pointer; font-weight:700; font-size:0.8rem; background:rgba(37,211,102,0.1); padding:8px 15px; border-radius:50px;">Know More &rarr;</span>
+                                    <span class="add-quick" onclick="openDetails('${p.id}')" style="color:var(--accent); cursor:pointer">Choice &rarr;</span>
                                 </div>
                             </div>
                         </div>
@@ -391,10 +481,12 @@
                         <span class="variant-label" style="font-size:0.9rem; font-weight:600; text-transform:uppercase; margin-bottom:15px; display:block; opacity:0.5;">Select Variety/Size</span>
                         <div class="variant-chips" style="display:flex; gap:15px;">${selectedModalProd.v.map(v => `<div class="v-chip ${v === selectedVariant ? 'active' : ''}" onclick="selectVariant('${v}', this)" style="padding:12px 28px; border:1px solid rgba(0,0,0,0.1); border-radius:50px; cursor:pointer; transition:0.3s; ${v === selectedVariant ? 'background:var(--primary); color:white;' : ''}">${v}</div>`).join('')}</div>
                     </div>
-                    <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
-                        <span style="font-size:2.5rem; font-weight:800; margin-right:20px;">₹${selectedModalProd.p}</span>
-                        <button class="btn btn-primary" onclick="addToCart()">Add to Selection</button>
-                        <button class="btn btn-outline" onclick="directWhatsApp('${selectedModalProd.id}')">Know More via WhatsApp</button>
+                    <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center; background:rgba(0,0,0,0.02); padding:30px; border-radius:var(--radius-md);">
+                        <span style="font-size:2.5rem; font-weight:800; margin-right:auto;">₹${selectedModalProd.p}</span>
+                        <div style="display:flex; gap:15px;">
+                            <button class="btn btn-primary" onclick="directWhatsApp('${selectedModalProd.id}')" style="background:#25D366; border-color:#25D366; box-shadow:0 10px 30px rgba(37,211,102,0.3);">Know More via WhatsApp</button>
+                            <button class="btn btn-outline" onclick="addToCart()" style="border-color:var(--primary); color:var(--primary);">Add to My Selection</button>
+                        </div>
                     </div>
                 </div>
             `;
