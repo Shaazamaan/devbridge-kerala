@@ -164,8 +164,9 @@
         .p-img { width: 100%; aspect-ratio: 1/1; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 25px; position: relative; }
         .p-img img { width: 100%; height: 100%; object-fit: cover; transition: scale 1s ease; }
         
-        .p-tag { position: absolute; top: 15px; left: 15px; background: var(--glass); padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
-        .p-badge-scarcity { position: absolute; top: 15px; right: 15px; background: #FF4D4D; color: white; padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; letter-spacing: 1px; }
+        .p-badges-left { position: absolute; top: 15px; left: 15px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; z-index: 10; }
+        .p-tag { background: var(--glass); padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.2); }
+        .p-badge-scarcity { position: absolute; top: 15px; right: 15px; background: #FF4D4D; color: white; padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; letter-spacing: 1px; z-index: 10; }
 
         .p-info h3 { font-size: 1.4rem; margin-bottom: 8px; font-family: var(--font-body); font-weight: 600; }
         .p-info p { font-size: 0.9rem; color: #777; margin-bottom: 20px; line-height: 1.6; }
@@ -261,7 +262,7 @@
         .g-item p { color: #555; line-height: 1.8; font-size: 1rem; }
 
         /* Seasonal Badging §15 */
-        .season-tag { background: #E6B800; color: #111; padding: 4px 10px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; display: inline-block; }
+        .season-tag { background: #E6B800; color: #111; padding: 4px 10px; border-radius: 4px; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; display: inline-block; margin: 0; }
 
         /* Mobile Overlap Fixes §15.1 */
         @media (max-width: 768px) {
@@ -276,11 +277,10 @@
             #cart-drawer { padding: 20px; width: 85%; }
             .p-footer { flex-direction: column; align-items: flex-start; gap: 15px; }
             .p-info h3 { font-size: 1.25rem; }
-            .p-tag { position: relative; display: inline-block; top: 0; left: 0; margin-right: 5px; margin-bottom: 5px; }
-            .p-badge-scarcity { position: relative; display: inline-block; top: 0; right: 0; margin-bottom: 5px; font-size: 0.6rem; }
-            .p-img { display: flex; flex-direction: column; gap: 5px; padding: 10px; height: auto; }
-            .p-img img { order: 2; height: 250px; border-radius: var(--radius-sm); }
-            .p-card { margin-bottom: 20px; transition: none; }
+            .p-badges-left { top: 10px; left: 10px; gap: 5px; }
+            .p-img { padding: 0; }
+            .p-img img { order: 1; height: 280px; width: 100%; border-radius: var(--radius-sm); }
+            .p-card { margin-bottom: 20px; transition: none; padding: 15px; }
             .fab-container { bottom: 20px; right: 20px; gap: 10px; }
             .fab { width: 50px; height: 50px; }
         }
@@ -526,11 +526,11 @@
                 grid.innerHTML = filtered.slice(0, 60).map(p => `
                     <div class="p-card">
                         <div class="p-img" onclick="openDetails('${p.id}')">
-                            <span class="season-tag">Season Limited heritage</span>
-                            <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px;">
+                            <div class="p-badges-left">
+                                <span class="season-tag">Season Limited heritage</span>
                                 <div class="p-tag">${p.c.replace('-', ' ')}</div>
-                                ${p.scarcity ? `<div class="p-badge-scarcity">${p.scarcity}</div>` : ''}
                             </div>
+                            ${p.scarcity ? `<div class="p-badge-scarcity">${p.scarcity}</div>` : ''}
                             <img src="${p.i}" alt="${p.n}" loading="lazy">
                         </div>
                         <div class="p-info">
