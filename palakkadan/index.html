@@ -251,13 +251,33 @@
         .g-item h4 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; color: var(--accent); }
         .g-item p { color: #555; line-height: 1.8; font-size: 1rem; }
 
+        /* Seasonal Badging §15 */
+        .season-tag { background: #E6B800; color: #111; padding: 4px 10px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; display: inline-block; }
+
+        /* Mobile Overlap Fixes §15.1 */
         @media (max-width: 768px) {
-            .grid-3 { grid-template-columns: 1fr; }
-            .section-header h2 { font-size: 2.5rem; }
-            .modal-content { padding: 30px; }
+            .grid-3 { grid-template-columns: 1fr; gap: 30px; }
+            .section-header h2 { font-size: 2.8rem; }
+            .modal-content { padding: 25px; grid-template-columns: 1fr; width: 95%; max-height: 95vh; overflow-y: auto; gap: 30px; }
+            .modal-img { height: 280px; }
             .cart-close { top: 20px; right: 20px; }
             #cart-drawer { padding: 20px; }
+            .p-footer { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .p-info h3 { font-size: 1.25rem; }
         }
+
+        /* Lead Modal §15.2 */
+        #lead-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(15px);
+            z-index: 10000; display: none; align-items: center; justify-content: center;
+        }
+        #lead-modal.active { display: flex; }
+        .lead-box {
+            background: var(--bg); padding: 50px; border-radius: var(--radius-lg); 
+            max-width: 500px; width: 90%; text-align: center; box-shadow: var(--shadow-float);
+        }
+        .lead-input { width: 100%; padding: 15px 25px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); margin-bottom: 15px; outline: none; font-family: var(--font-body); }
     </style>
 </head>
 <body id="top">
@@ -366,13 +386,31 @@
         <div class="modal-content" id="modal-content"></div>
     </div>
 
+    <!-- Lead Collection §15.2 -->
+    <div id="lead-modal">
+        <div class="lead-box">
+            <h2 style="margin-bottom:20px;">Welcome to the Heritage Circle</h2>
+            <p style="margin-bottom:30px; opacity:0.6;">To provide you with personalized provenance details and seasonal availability, please share your contact preference.</p>
+            <input type="text" id="lead-name" class="lead-input" placeholder="Your Name">
+            <input type="text" id="lead-phone" class="lead-input" placeholder="WhatsApp Number">
+            <input type="email" id="lead-email" class="lead-input" placeholder="Email Address">
+            <button class="btn btn-primary" onclick="captureLead()" style="width:100%;">Access Full Catalog Details</button>
+        </div>
+    </div>
+
     <div class="cart-overlay" id="cart-overlay" onclick="toggleCart(false)"></div>
     <div id="cart-drawer">
-        <div style="display:flex; justify-content:space-between; align-items:center;"><h2>Your Selection</h2><div onclick="toggleCart(false)" style="cursor:pointer; font-size:2rem; opacity:0.3">&times;</div></div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2>Selection</h2>
+            <div style="display:flex; gap:15px; align-items:center;">
+                <button onclick="shareCart()" style="background:none; border:none; cursor:pointer;" title="Share Selection"><svg width="20" fill="var(--primary)" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
+                <div onclick="toggleCart(false)" style="cursor:pointer; font-size:2rem; opacity:0.3">&times;</div>
+            </div>
+        </div>
         <div class="cart-items" id="cart-list"></div>
         <div class="cart-footer">
             <div style="display:flex; justify-content:space-between; font-size:1.8rem; font-weight:700; margin-bottom:40px;"><span>Total</span><span id="cart-total">₹0</span></div>
-            <button class="btn btn-primary" style="width:100%; background:#25D366" onclick="checkout()">Inquiry & Checkout via WhatsApp</button>
+            <button class="btn btn-primary" style="width:100%; background:#25D366" onclick="checkout()">Fulfillment Inquiry (WhatsApp)</button>
         </div>
     </div>
 
@@ -437,15 +475,16 @@
             
             if (filtered.length === 0) {
                 grid.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align:center; padding:100px 0; background:white; border-radius:var(--radius-md); border:1px dashed rgba(0,0,0,0.1);">
+                    <div style="grid-column: 1/-1; text-align:center; padding:80px 0; background:white; border-radius:var(--radius-md); border:1px dashed rgba(0,0,0,0.1);">
                         <p style="font-size:1.2rem; opacity:0.5;">No heritage items match your search.</p>
-                        <button onclick="setCategory('all'); document.getElementById('catalog-search').value='';" style="margin-top:20px; color:var(--accent); border:none; background:none; text-decoration:underline; cursor:pointer;">Show All Products</button>
+                        <button onclick="setCategory('all'); document.getElementById('catalog-search').value='';" style="margin-top:20px; color:var(--accent); border:none; background:none; text-decoration:underline; cursor:pointer;">Reset Search</button>
                     </div>
                 `;
             } else {
                 grid.innerHTML = filtered.slice(0, 60).map(p => `
                     <div class="p-card">
                         <div class="p-img" onclick="openDetails('${p.id}')">
+                            <span class="season-tag">Season Limited heritage</span>
                             <div class="p-tag">${p.c.replace('-', ' ')}</div>
                             ${p.scarcity ? `<div class="p-badge-scarcity">${p.scarcity}</div>` : ''}
                             <img src="${p.i}" alt="${p.n}" loading="lazy">
@@ -455,9 +494,9 @@
                             <p>${p.d.substring(0, 60)}...</p>
                             <div class="p-footer">
                                 <span class="p-price">₹${p.p}</span>
-                                <div style="display:flex; gap:15px; align-items:center;">
-                                    <span onclick="directWhatsApp('${p.id}')" style="color:#25D366; cursor:pointer; font-weight:700; font-size:0.8rem; background:rgba(37,211,102,0.1); padding:8px 15px; border-radius:50px;">Know More &rarr;</span>
-                                    <span class="add-quick" onclick="openDetails('${p.id}')" style="color:var(--accent); cursor:pointer">Choice &rarr;</span>
+                                <div style="display:flex; gap:10px; align-items:center; width:100%; border-top:1px solid rgba(0,0,0,0.05); padding-top:15px; margin-top:5px;">
+                                    <span onclick="directWhatsApp('${p.id}')" style="color:#25D366; cursor:pointer; font-weight:700; font-size:0.75rem; background:rgba(37,211,102,0.05); padding:10px 15px; border-radius:50px; flex:1; text-align:center;">Know More</span>
+                                    <span class="add-quick" onclick="openDetails('${p.id}')" style="color:var(--accent); cursor:pointer; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; flex:1; text-align:center;">Select &rarr;</span>
                                 </div>
                             </div>
                         </div>
@@ -484,6 +523,14 @@
         let selectedVariant = '';
 
         function openDetails(id) {
+            // Lead Capture §15.2
+            const captured = localStorage.getItem('lead_captured');
+            if (!captured) {
+                document.getElementById('lead-modal').classList.add('active');
+                selectedModalProd = _P.find(p => p.id === id); // Queue it
+                return;
+            }
+
             selectedModalProd = _P.find(p => p.id === id);
             selectedVariant = selectedModalProd.v[0];
             const content = document.getElementById('modal-content');
@@ -494,17 +541,20 @@
                 </div>
                 <div class="modal-details" style="padding:20px;">
                     <p style="text-transform:uppercase; color:var(--accent); letter-spacing:3px; font-weight:600; margin-bottom:15px;">${selectedModalProd.c.replace('-', ' ')}</p>
-                    <h2 style="font-size:3rem; margin-bottom:25px;">${selectedModalProd.n}</h2>
-                    <p style="font-size:1.1rem; line-height:1.8; color:#555; margin-bottom:40px;">${selectedModalProd.d}</p>
-                    <div class="variant-selector" style="margin-bottom:40px;">
-                        <span class="variant-label" style="font-size:0.9rem; font-weight:600; text-transform:uppercase; margin-bottom:15px; display:block; opacity:0.5;">Select Variety/Size</span>
-                        <div class="variant-chips" style="display:flex; gap:15px;">${selectedModalProd.v.map(v => `<div class="v-chip ${v === selectedVariant ? 'active' : ''}" onclick="selectVariant('${v}', this)" style="padding:12px 28px; border:1px solid rgba(0,0,0,0.1); border-radius:50px; cursor:pointer; transition:0.3s; ${v === selectedVariant ? 'background:var(--primary); color:white;' : ''}">${v}</div>`).join('')}</div>
+                    <h2 style="font-size:3rem; margin-bottom:15px;">${selectedModalProd.n}</h2>
+                    <div style="display:flex; gap:15px; margin-bottom:25px;">
+                        <button class="btn btn-outline" style="padding:8px 15px; font-size:0.8rem;" onclick="shareProd('${id}')">Share Product</button>
                     </div>
-                    <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center; background:rgba(0,0,0,0.02); padding:30px; border-radius:var(--radius-md);">
-                        <span style="font-size:2.5rem; font-weight:800; margin-right:auto;">₹${selectedModalProd.p}</span>
-                        <div style="display:flex; gap:15px;">
-                            <button class="btn btn-primary" onclick="directWhatsApp('${selectedModalProd.id}')" style="background:#25D366; border-color:#25D366; box-shadow:0 10px 30px rgba(37,211,102,0.3);">Know More via WhatsApp</button>
-                            <button class="btn btn-outline" onclick="addToCart()" style="border-color:var(--primary); color:var(--primary);">Add to My Selection</button>
+                    <p style="font-size:1.1rem; line-height:1.8; color:#555; margin-bottom:30px;">${selectedModalProd.d}</p>
+                    <div class="variant-selector" style="margin-bottom:40px;">
+                        <span class="variant-label" style="font-size:0.9rem; font-weight:600; text-transform:uppercase; margin-bottom:15px; display:block; opacity:0.5;">Heritage Variety</span>
+                        <div class="variant-chips" style="display:flex; gap:10px; flex-wrap:wrap;">${selectedModalProd.v.map(v => `<div class="v-chip ${v === selectedVariant ? 'active' : ''}" onclick="selectVariant('${v}', this)" style="padding:10px 20px; border:1px solid rgba(0,0,0,0.1); border-radius:50px; cursor:pointer; transition:0.3s; font-size:0.85rem; ${v === selectedVariant ? 'background:var(--primary); color:white;' : ''}">${v}</div>`).join('')}</div>
+                    </div>
+                    <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center; background:rgba(0,0,0,0.02); padding:25px; border-radius:var(--radius-md);">
+                        <span style="font-size:2rem; font-weight:800; margin-right:auto;">₹${selectedModalProd.p}</span>
+                        <div style="display:flex; gap:10px;">
+                            <button class="btn btn-primary" onclick="directWhatsApp('${selectedModalProd.id}')" style="background:#25D366; border-color:#25D366; padding:15px 25px; font-size:0.9rem;">WhatsApp Inquiry</button>
+                            <button class="btn btn-outline" onclick="addToCart()" style="border-color:var(--primary); color:var(--primary); padding:15px 25px; font-size:0.9rem;">Add Selected</button>
                         </div>
                     </div>
                 </div>
@@ -512,6 +562,49 @@
             document.getElementById('product-modal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
+
+        function captureLead() {
+            const n = document.getElementById('lead-name').value;
+            const p = document.getElementById('lead-phone').value;
+            const e = document.getElementById('lead-email').value;
+            if(!n || !p) return alert("Please share name and number for provenance access.");
+            
+            localStorage.setItem('lead_captured', 'true');
+            localStorage.setItem('user_info', JSON.stringify({n, p, e}));
+            document.getElementById('lead-modal').classList.remove('active');
+            if(selectedModalProd) openDetails(selectedModalProd.id);
+        }
+
+        function shareProd(id) {
+            const p = _P.find(i => i.id === id);
+            const text = `Check out this heritage find from Palakkadan: ${p.n}. Absolutely authentic. https://devbridgekerala.com/palakkadan/`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+        }
+
+        function shareCart() {
+            if(cart.length === 0) return alert("Add items to share your selection.");
+            let text = "My curated Palakkadan Heritage Selection:\n\n";
+            cart.forEach(i => { text += `• ${i.n} (${i.variant})\n`; });
+            text += "\nDiscover Palakkad's finest at https://devbridgekerala.com/palakkadan/";
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+        }
+
+        function checkSession() {
+            const last = localStorage.getItem('last_visited');
+            const now = Date.now();
+            if (last && (now - last > 24 * 60 * 60 * 1000)) {
+                localStorage.clear();
+                window.location.reload();
+            }
+            localStorage.setItem('last_visited', now);
+        }
+
+        window.onload = () => {
+            checkSession();
+            renderGrid();
+            updateCartUI();
+            setTimeout(() => document.getElementById('hero').classList.add('loaded'), 500);
+        };
 
         function selectVariant(v, el) {
             selectedVariant = v;
