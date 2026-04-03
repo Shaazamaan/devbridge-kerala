@@ -60,9 +60,13 @@
             position: relative; overflow: hidden; display: flex; flex-direction: column; min-height: 400px;
         }
         .s-card:hover { transform: translateY(-15px); box-shadow: 0 50px 100px rgba(15, 23, 42, 0.1); border-color: var(--accent); }
-        .s-card h3 { font-family: var(--font-display); font-size: 2rem; margin-bottom: 15px; }
+        .s-card .s-tag { opacity: 0.4; font-weight: 800; margin-bottom: 15px; display: block; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; }
+        .s-card h3 { font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 15px; }
         .s-card p { font-size: 1.05rem; line-height: 1.6; opacity: 0.6; margin-bottom: 30px; }
         .s-card .cta { margin-top: auto; color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1.5px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+
+        [data-aos] { opacity: 0; transform: translateY(30px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        [data-aos].visible { opacity: 1; transform: translateY(0); }
 
         /* Value Frame §v1.0 */
         .value-frame { 
@@ -98,31 +102,52 @@
         </header>
 
         <section class="scenario-grid">
-            <a href="../palakkadan/index.html" class="s-card" style="text-decoration: none; color: inherit;">
-                <span style="opacity: 0.4; font-weight: 800; margin-bottom: 15px; display: block;">Scenario 01</span>
-                <h3>Heritage Agriculture.</h3>
+            <a href="../palakkadan/index.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
+                <span class="s-tag">Scenario 01</span>
+                <h3>Heritage Legacy.</h3>
                 <p>A premium eCommerce showcase for 200+ heritage products. Optimized for bulk selection and high-trust storytelling.</p>
                 <div class="cta">Explore Demo &rarr;</div>
             </a>
 
-            <a href="local-shop.html" class="s-card" style="text-decoration: none; color: inherit;">
-                <span style="opacity: 0.4; font-weight: 800; margin-bottom: 15px; display: block;">Scenario 02</span>
-                <h3>Local Retailer & Shop.</h3>
-                <p>Dynamic neighborhood grocery or product store. Features fast searching and direct WhatsApp order manifests.</p>
+            <a href="local-shop.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
+                <span class="s-tag">Scenario 02</span>
+                <h3>FreshRoute Pro.</h3>
+                <p>Luxury organic grocery mart. Features fast searching, glassmorphism UI, and direct WhatsApp order manifests.</p>
                 <div class="cta">Explore Demo &rarr;</div>
             </a>
 
-            <a href="restaurant.html" class="s-card" style="text-decoration: none; color: inherit;">
-                <span style="opacity: 0.4; font-weight: 800; margin-bottom: 15px; display: block;">Scenario 03</span>
-                <h3>Restaurant & Cafe.</h3>
-                <p>Digital menu with tactile category navigation. Optimized for quick food orders and reservation inquiries.</p>
+            <a href="restaurant.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
+                <span class="s-tag">Scenario 03</span>
+                <h3>SpiceRoute Luxe.</h3>
+                <p>Elite fine-dining digital menu. Optimized for boutique restaurants and premium café booking flows.</p>
                 <div class="cta">Explore Demo &rarr;</div>
             </a>
 
-            <a href="consultant.html" class="s-card" style="text-decoration: none; color: inherit;">
-                <span style="opacity: 0.4; font-weight: 800; margin-bottom: 15px; display: block;">Scenario 04</span>
-                <h3>Professional Consultant.</h3>
-                <p>High-conversion landing page for freelancers and consultants. Focused on establishing authority and booking calls.</p>
+            <a href="consultant.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
+                <span class="s-tag">Scenario 04</span>
+                <h3>ExpertFlow Elite.</h3>
+                <p>Corporate-standard authority vault for consultants and advisors. Focused on elite lead capture and trust.</p>
+                <div class="cta">Explore Demo &rarr;</div>
+            </a>
+
+            <a href="realty.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
+                <span class="s-tag">Scenario 05</span>
+                <h3>Astra Realty.</h3>
+                <p>High-end property showcase for luxury realtors. Features immersive villa galleries and private viewing hooks.</p>
+                <div class="cta">Explore Demo &rarr;</div>
+            </a>
+
+            <a href="vibe.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
+                <span class="s-tag">Scenario 06</span>
+                <h3>VibeCheck.</h3>
+                <p>Vibrant personal brand hub for influencers and creators. Optimized for Link-in-Bio alternatives and brand collabs.</p>
+                <div class="cta">Explore Demo &rarr;</div>
+            </a>
+
+            <a href="iron.html" class="s-card" style="text-decoration: none; color: inherit;" data-aos>
+                <span class="s-tag">Scenario 07</span>
+                <h3>IronCore.</h3>
+                <p>Performance-driven dark mode gym engine. Designed for personal trainers and industrial fitness centers.</p>
                 <div class="cta">Explore Demo &rarr;</div>
             </a>
         </section>
@@ -132,7 +157,7 @@
                 <h2>The DevBridge Value.</h2>
                 <span class="price">₹1000</span>
                 <p style="font-size: 1.5rem; opacity: 0.8; max-width: 800px; margin: 0 auto 50px;">We build single-page active commerce engines that look and perform like professional ₹1,00,000+ custom solutions.</p>
-                <a href="https://wa.me/918129144244?text=Hi, I saw your portfolio. I want a similar high-converting demo for my business." class="btn btn-primary" style="background: #fbbf24; color: var(--primary);">Claim Your Site &rarr;</a>
+                <a href="https://wa.me/918137826016?text=Hi, I saw your portfolio. I want a similar high-converting demo for my business." class="btn btn-primary" style="background: #fbbf24; color: var(--primary);">Claim Your Site &rarr;</a>
             </div>
         </section>
     </main>
@@ -145,6 +170,12 @@
         function unlockPortfolio() {
             document.getElementById('master-gate').style.display = 'none';
         }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>

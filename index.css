@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=JetBrains+Mono:wght@400;700&display=swap');
 
 :root {
     /* Color Palette - Modern HSL */
@@ -124,7 +124,7 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading, 'Outfit'), sans-serif;
+    font-family: var(--font-heading, 'Playfair Display'), serif;
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -263,8 +263,13 @@ h3 { font-size: 1.75rem; }
 }
 
 .fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+.fade-in[data-delay="1"] { animation-delay: 0.2s; }
+.fade-in[data-delay="2"] { animation-delay: 0.4s; }
+.fade-in[data-delay="3"] { animation-delay: 0.6s; }
 
 /* Custom Utilities */
 .live-dot {

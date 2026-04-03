@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeCheck | Personal Brand & Influencer Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6; 
+            --accent: #ec4899;
+            --bg: #0f172a;
+            --font-body: 'Outfit', sans-serif;
+            --radius-lg: 32px;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--font-body); background: var(--bg); color: white; overflow-x: hidden; scroll-behavior: smooth; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 5%; }
+        
+        /* Demo Gate §v2.0 */
+        #demo-gate {
+            position: fixed; inset: 0; 
+            background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(30px);
+            z-index: 100000; display: flex; align-items: center; justify-content: center;
+            color: white; text-align: center; padding: 40px;
+        }
+        .gate-box h2 { font-size: 3rem; margin-bottom: 20px; font-weight: 800; background: linear-gradient(45deg, var(--primary), var(--accent)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .gate-box p { font-size: 1.1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 40px; }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 20px 45px; border-radius: 50px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 2px; cursor: pointer; border: none; text-decoration: none; transition: var(--transition);
+        }
+        .btn-primary { background: linear-gradient(45deg, var(--primary), var(--accent)); color: white; }
+
+        /* Hero Influencer §v2.0 */
+        .hero {
+            height: 90vh; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.5)), url('images/vibe_hero.png');
+            background-size: cover; background-position: center; border-radius: 0 0 60px 60px;
+            text-align: center; position: relative; border-bottom: 4px solid var(--primary);
+        }
+        .hero h1 { font-size: clamp(3rem, 12vw, 6rem); margin-bottom: 20px; font-weight: 800; line-height: 1; text-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+
+        /* Link-in-Bio Grid §v2.0 */
+        .link-grid { display: flex; flex-direction: column; gap: 20px; padding: 80px 0; }
+        .link-card { 
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 30px; border-radius: var(--radius-lg); text-decoration: none; color: white;
+            display: flex; justify-content: space-between; align-items: center; transition: var(--transition);
+        }
+        .link-card:hover { background: var(--primary); transform: scale(1.02); }
+        .link-card h3 { font-size: 1.4rem; font-weight: 800; }
+        
+        /* Stats Section */
+        .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 80px; }
+        .stat-box { background: rgba(139, 92, 246, 0.1); padding: 40px; border-radius: var(--radius-lg); text-align: center; border: 1px solid var(--primary); }
+        .stat-box .num { font-size: 3rem; font-weight: 800; display: block; margin-bottom: 5px; color: var(--accent); }
+        .stat-box .label { opacity: 0.6; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 800; }
+
+        /* Conversion Layer */
+        .collab-cta {
+            background: linear-gradient(45deg, var(--primary), var(--accent)); padding: 100px 40px; border-radius: 60px;
+            text-align: center; margin-bottom: 120px;
+        }
+        .collab-cta h2 { font-size: 3.5rem; margin-bottom: 25px; font-weight: 800; }
+
+        /* FAB */
+        .fab {
+            position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white;
+            padding: 18px 35px; border-radius: 50px; font-weight: 800; box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
+            z-index: 1000; text-decoration: none; display: flex; align-items: center; gap: 12px;
+            transition: var(--transition); border: 2px solid white;
+        }
+        .fab:hover { transform: scale(1.1); }
+
+        @media (max-width: 600px) {
+            .stats { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="demo-gate">
+        <div class="gate-box">
+            <span style="text-transform:uppercase; letter-spacing:4px; font-weight:800; color:var(--accent); display:block; margin-bottom:20px; font-size:0.9rem;">Elite Scenario 06</span>
+            <h2>VibeCheck.</h2>
+            <p>Experience the definitive <strong>Personal Brand & Creator Architecture</strong>. Optimized for Link-in-bio alternatives and high-conversion collab bookings for ₹1000.</p>
+            <button class="btn btn-primary" onclick="this.parentElement.parentElement.style.display='none'">Enter Studio</button>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <span style="text-transform:uppercase; letter-spacing:6px; font-weight:800; color:var(--accent); display:block; margin-bottom:20px; font-size:1rem;">Verified Authority Creator</span>
+            <h1>Fuel Your <br>Presence.</h1>
+            <p style="font-size: 1.3rem; margin-bottom: 40px; opacity: 0.8; font-weight: 300;">Authentic Storytelling. Global Engagement. Direct Collab Access.</p>
+            <a href="https://wa.me/918137826016?text=Hi, I saw the VibeCheck Creator Demo. I want a similar influencer landing page." class="btn btn-primary">Book Collaboration</a>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="link-grid">
+            <a href="https://wa.me/918137826016?text=Hi, I saw VibeCheck. I want to discuss a Brand Sponsorship." class="link-card">
+                <h3>Brand Sponsorships</h3>
+                <span style="font-size: 1.5rem;">&rarr;</span>
+            </a>
+            <a href="https://wa.me/918137826016?text=Hi, I saw VibeCheck. I want to book a Speaking Gig." class="link-card">
+                <h3>Speaking & Events</h3>
+                <span style="font-size: 1.5rem;">&rarr;</span>
+            </a>
+            <a href="https://wa.me/918137826016?text=Hi, I saw VibeCheck. I want to discuss Exclusive Content." class="link-card">
+                <h3>Exclusive Community</h3>
+                <span style="font-size: 1.5rem;">&rarr;</span>
+            </a>
+        </section>
+
+        <section class="stats">
+            <div class="stat-box">
+                <span class="num">1.2M+</span>
+                <span class="label">Monthly Reach</span>
+            </div>
+            <div class="stat-box">
+                <span class="num">85+</span>
+                <span class="label">Brands Served</span>
+            </div>
+        </section>
+
+        <section class="collab-cta">
+            <span style="text-transform:uppercase; letter-spacing:5px; font-weight:800; color:white; display:block; margin-bottom:25px; font-size:0.9rem;">The DevBridge Standard</span>
+            <h2>Build Your Legacy <br>for ₹1000.</h2>
+            <p style="font-size: 1.4rem; opacity: 0.9; margin: 30px auto 60px; max-width: 600px;">Own a high-performance, premium personal brand hub today.</p>
+            <a href="https://wa.me/918137826016?text=Hi, I want a similar influencer website like VibeCheck for ₹1000." class="btn btn-primary" style="background: white; color: var(--bg);">Launch My Brand &rarr;</a>
+        </section>
+    </main>
+
+    <a href="https://wa.me/918137826016?text=Hi, I saw VibeCheck. Let's discuss my brand project." class="fab">Collab via WhatsApp</a>
+
+</body>
+</html>

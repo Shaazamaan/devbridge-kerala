@@ -3,91 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExpertFlow | Consultant Demo | DevBridge Kerala</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
+    <title>ExpertFlow Elite | Professional Strategic Consultant Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #1e1b4b; --accent: #6366f1; --bg: #f8fafc; --font: 'Outfit', sans-serif; --radius: 20px; }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: var(--font); background: var(--bg); color: #1e293b; line-height: 1.7; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 5%; }
+        :root {
+            --primary: #0f172a; 
+            --accent: #6366f1;
+            --bg: #f8fafc;
+            --glass: rgba(15, 23, 42, 0.9);
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Outfit', sans-serif;
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Base & Reset */
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--font-body); background: var(--bg); color: var(--primary); overflow-x: hidden; scroll-behavior: smooth; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
         
-        /* Demo Gate */
-        #demo-gate { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); z-index: 100000; display: flex; align-items: center; justify-content: center; color: white; text-align: center; padding: 40px; }
-        .gate-box h2 { font-size: 2.5rem; margin-bottom: 20px; }
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 18px 45px; border-radius: 50px; font-weight: 800; cursor: pointer; border: none; text-decoration: none; transition: 0.3s; }
+        /* Demo Gate §v2.0 */
+        #demo-gate {
+            position: fixed; inset: 0; 
+            background: var(--primary); backdrop-filter: blur(30px);
+            z-index: 100000; display: flex; align-items: center; justify-content: center;
+            color: white; text-align: center; padding: 40px;
+        }
+        .gate-box h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 20px; color: var(--accent); }
+        .gate-box p { font-size: 1.15rem; line-height: 1.8; opacity: 0.8; margin-bottom: 40px; }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 22px 55px; border-radius: 50px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 2px; cursor: pointer; border: none; text-decoration: none; transition: var(--transition);
+        }
         .btn-primary { background: var(--accent); color: white; }
 
-        /* Sections */
-        section { padding: 100px 0; }
-        .hero { text-align: center; padding: 140px 0 80px; }
-        .hero h1 { font-size: clamp(3rem, 10vw, 5rem); margin-bottom: 25px; line-height: 1; color: var(--primary); }
-        .hero p { font-size: 1.25rem; max-width: 700px; margin: 0 auto 40px; opacity: 0.7; }
+        /* Hero Elite §v2.0 */
+        .hero {
+            height: 90vh; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('images/consultant_hero.png');
+            background-size: cover; background-position: center; border-radius: 0 0 60px 60px;
+            color: white; text-align: center; position: relative;
+        }
+        .hero h1 { font-family: var(--font-display); font-size: clamp(3.5rem, 12vw, 6.5rem); margin-bottom: 25px; line-height: 1; }
 
-        .problem-frame { background: #e0e7ff; padding: 80px; border-radius: 40px; text-align: center; }
-        .problem-frame h2 { color: #3730a3; margin-bottom: 20px; }
+        /* Strategy Blocks §v2.0 */
+        .title-block { text-align: center; padding: 120px 0 60px; }
+        .title-block h2 { font-family: var(--font-display); font-size: 4rem; margin-bottom: 20px; }
+        .strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding-bottom: 120px; }
+        .s-card { 
+            background: #fff; padding: 60px; border-radius: var(--radius-lg); 
+            border: 1px solid rgba(0,0,0,0.05); transition: var(--transition);
+            position: relative; overflow: hidden;
+        }
+        .s-card:hover { transform: translateY(-15px); border-color: var(--accent); box-shadow: 0 40px 80px rgba(99, 102, 241, 0.1); }
+        .s-card h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--primary); }
+        .s-card p { opacity: 0.7; font-size: 1.1rem; line-height: 1.7; margin-bottom: 30px; }
+        .s-card .cta { color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; }
 
-        .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 50px; }
-        .s-card { background: white; padding: 40px; border-radius: var(--radius); border: 1px solid rgba(0,0,0,0.05); transition: 0.3s; }
-        .s-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); border-color: var(--accent); }
-        .s-card h3 { margin-bottom: 15px; color: var(--primary); }
+        /* Social Proof Banner */
+        .proof-banner { 
+            background: var(--primary); color: white; padding: 100px 0; 
+            border-radius: 60px; text-align: center; margin-bottom: 120px;
+        }
+        .proof-banner h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 25px; }
 
-        .sticky-cta { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 15px 30px; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        /* Conversion Block */
+        .conversion-box {
+            background: #eef2ff; border-radius: 60px; padding: 120px 40px;
+            text-align: center; margin-bottom: 120px; border: 1px solid var(--accent);
+        }
+        .conversion-box h2 { font-family: var(--font-display); font-size: 4.5rem; margin-bottom: 30px; color: var(--accent); }
 
-        @media (max-width: 760px) { .service-grid { grid-template-columns: 1fr; } }
+        /* FAB */
+        .fab {
+            position: fixed; bottom: 30px; right: 30px; background: var(--accent); color: white;
+            padding: 20px 40px; border-radius: 50px; font-weight: 800; box-shadow: 0 20px 50px rgba(99, 102, 241, 0.4);
+            z-index: 1000; text-decoration: none; display: flex; align-items: center; gap: 12px;
+            transition: var(--transition); border: 2px solid white; text-transform: uppercase; letter-spacing: 2px;
+        }
+        .fab:hover { transform: translateY(-10px) rotate(-1deg); }
+
+        [data-aos] { opacity: 0; transform: translateY(30px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        [data-aos].visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .strategy-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 4rem; }
+            .title-block h2 { font-size: 3rem; }
+        }
     </style>
 </head>
 <body>
 
     <div id="demo-gate">
         <div class="gate-box">
-            <h2>Scenario: Consultant.</h2>
-            <p>This is a <strong>High-Conversion Consultant Demo</strong>. Authority-focused lead generation for ₹1000.</p>
-            <button class="btn btn-primary" onclick="this.parentElement.parentElement.style.display='none'">Continue to Demo</button>
+            <span style="text-transform:uppercase; letter-spacing:4px; font-weight:800; color:var(--accent); display:block; margin-bottom:20px; font-size:0.9rem;">Elite Scenario 04</span>
+            <h2>ExpertFlow Elite.</h2>
+            <p>High-conversion <strong>Authority Landing Architecture</strong>. Optimized for consultants, freelancers, and strategy agencies. Global-standard lead generation flow for ₹1000.</p>
+            <button class="btn btn-primary" onclick="this.parentElement.parentElement.style.display='none'">Unlock Authority Demo</button>
         </div>
     </div>
 
+    <section class="hero">
+        <div class="container" style="max-width: 900px;">
+            <span style="text-transform:uppercase; letter-spacing:5px; font-weight:800; color:var(--accent); display:block; margin-bottom:25px; font-size:1rem;">Strategic Authority Hub</span>
+            <h1>Scale with <br>Expert Direction.</h1>
+            <p style="font-size: 1.4rem; margin-bottom: 45px; font-weight: 300; opacity: 0.9;">We bridge the gap between where your business is and where it needs to be. Data-driven advisor for Elite Scale.</p>
+            <a href="https://wa.me/918137826016?text=Hi, I saw the ExpertFlow Elite Demo. I want a similar consultant landing page." class="btn btn-primary">Book Strategy Session</a>
+        </div>
+    </section>
+
     <main class="container">
-        <section class="hero">
-            <h1>Expert Advice. <br>Scale Your Success.</h1>
-            <p>We help businesses navigate complex growth challenges through data-driven advisory and strategic execution.</p>
-            <a href="https://wa.me/918129144244?text=Hi, I saw the Consultant Demo. I'm looking for strategic advice." class="btn btn-primary">Book Strategy Call</a>
-        </section>
+        <div class="title-block" data-aos>
+            <h2>Proven Strategic Frameworks.</h2>
+            <p style="opacity: 0.6; font-size: 1.25rem;">Built for maximum authority and friction-free lead capture.</p>
+        </div>
 
-        <section class="problem-frame">
-            <h2>Struggling to Scale?</h2>
-            <p>Most businesses hit a ceiling because of outdated processes or lack of clear strategy. We built this demo to show how an expert can showcase their authority and capture high-value leads for just ₹1000.</p>
-        </section>
+        <div class="strategy-grid">
+            <div class="s-card" data-aos onclick="location.href='https://wa.me/918137826016?text=Hi, I saw ExpertFlow. I want to discuss Growth Strategy.'">
+                <h3>Revenue Architecture</h3>
+                <p>Systemically increase your bottom line through optimized pricing, funnel engineering, and market expansion strategies.</p>
+                <div class="cta">Enquire via WhatsApp &rarr;</div>
+            </div>
+            <div class="s-card" data-aos onclick="location.href='https://wa.me/918137826016?text=Hi, I saw ExpertFlow. I want to discuss Operational Efficiency.'">
+                <h3>Operation Excellence</h3>
+                <p>Maximize output and reduce operational drag by implementing lean processes and high-efficiency workflow automation.</p>
+                <div class="cta">Enquire via WhatsApp &rarr;</div>
+            </div>
+            <div class="s-card" data-aos onclick="location.href='https://wa.me/918137826016?text=Hi, I saw ExpertFlow. I want to discuss Digital Transformation.'">
+                <h3>Digital Dominance</h3>
+                <p>Leverage cutting-edge technological infrastructure to outpace competitors and create lasting market moats.</p>
+                <div class="cta">Enquire via WhatsApp &rarr;</div>
+            </div>
+            <div class="s-card" data-aos onclick="location.href='https://wa.me/918137826016?text=Hi, I saw ExpertFlow. I want to discuss Team Leadership coaching.'">
+                <h3>Elite Leadership</h3>
+                <p>Develop a high-performance executive culture that aligns your human capital with your long-term success roadmap.</p>
+                <div class="cta">Enquire via WhatsApp &rarr;</div>
+            </div>
+        </div>
 
-        <section>
-            <h2 style="text-align: center; margin-bottom: 40px;">Our Services</h2>
-            <div class="service-grid">
-                <div class="s-card" onclick="location.href='https://wa.me/918129144244?text=Hi, I want to discuss Growth Strategy for my business.'">
-                    <h3>Growth Strategy</h3>
-                    <p>Comprehensive roadmap for business expansion and revenue optimization across all channels.</p>
-                </div>
-                <div class="s-card" onclick="location.href='https://wa.me/918129144244?text=Hi, I want to discuss Operational Efficiency for my business.'">
-                    <h3>Operational Efficiency</h3>
-                    <p>Streamline your workflows and reduce overhead with precision-engineered operational systems.</p>
-                </div>
-                <div class="s-card" onclick="location.href='https://wa.me/918129144244?text=Hi, I want to discuss Team Leadership training.'">
-                    <h3>Team Leadership</h3>
-                    <p>High-performance leadership coaching to align your team with your long-term vision.</p>
-                </div>
-                <div class="s-card" onclick="location.href='https://wa.me/918129144244?text=Hi, I want to discuss Digital Transformation.'">
-                    <h3>Digital Transformation</h3>
-                    <p>Leverage cutting-edge technology to automate your business and dominate the market.</p>
+        <section class="proof-banner" data-aos>
+            <div class="container">
+                <h2>Trusted by High-Performance <br>Teams Worldwide.</h2>
+                <p style="opacity: 0.6; font-size: 1.2rem; max-width: 700px; margin: 0 auto 50px;">We built this demo to showcase how you can project professional authority at a ₹100,000+ level for just ₹1000.</p>
+                <div style="display: flex; gap: 40px; justify-content: center; opacity: 0.5; flex-wrap: wrap;">
+                    <div style="font-weight: 800; font-size: 1.4rem; letter-spacing: 3px;">MACKENZY</div>
+                    <div style="font-weight: 800; font-size: 1.4rem; letter-spacing: 3px;">STRATEX</div>
+                    <div style="font-weight: 800; font-size: 1.4rem; letter-spacing: 3px;">PRIMEDGE</div>
+                    <div style="font-weight: 800; font-size: 1.4rem; letter-spacing: 3px;">VANTAGE</div>
                 </div>
             </div>
         </section>
 
-        <section style="background: var(--primary); color: white; padding: 100px 50px; border-radius: 40px; text-align: center; margin-bottom: 120px;">
-            <h2 style="font-size: 2.5rem; margin-bottom: 30px;">Build Your Authority.</h2>
-            <p style="margin-bottom: 40px; opacity: 0.8;">Premium Aesthetic. Lead Generation Focus. Fully Static. ₹1000.</p>
-            <a href="https://wa.me/918129144244?text=Hi, I want a similar consultant landing page for my business." class="btn btn-primary">Launch My Site &rarr;</a>
+        <section class="conversion-box" data-aos>
+            <span style="text-transform:uppercase; letter-spacing:5px; font-weight:800; color:var(--primary); display:block; margin-bottom:30px; font-size:0.9rem;">The DevBridge Standard</span>
+            <h2>Elite Authority. <br>₹1000 Total.</h2>
+            <p style="font-size: 1.4rem; opacity: 0.8; margin: 40px auto 60px; max-width: 650px;">Own a professional, high-conversion authority hub for your consulting business today.</p>
+            <a href="https://wa.me/918137826016?text=Hi, I want to build a consultant landing page like ExpertFlow Elite for ₹1000." class="btn btn-primary" style="background: var(--primary); color: white;">Begin Your Upgrade &rarr;</a>
         </section>
     </main>
 
-    <a href="https://wa.me/918129144244?text=Hi, I saw your Consultant Demo. I have a question about my business." class="sticky-cta">Consult via WhatsApp</a>
+    <a href="https://wa.me/918137826016?text=Hi, I saw ExpertFlow Elite. Let's discuss my project." class="fab">
+        Book Your Consultation
+    </a>
 
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
